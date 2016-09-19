@@ -23,9 +23,10 @@
     "arrow-parens": ["error", "always"],
     "comma-dangle": "off",
     "func-names": "off",
-    "max-len": "off",
+    "max-len" : "off",
     "new-cap": ["error", { "properties": false }],
     "no-console": "off",
-    "strict": ["error", "safe"]
+    "strict": ["error", "safe"],
+    "react/require-extension": [0, { "extensions": [".js", ".jsx"] }]
   }
 }
