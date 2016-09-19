@@ -1,22 +1,28 @@
 {
   "name": "tradersquare",
   "version": "1.0.0",
-  "description": "",
+  "description": "Making stock analysis accessible to everyone!",
   "main": "index.js",
   "scripts": {
     "start": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
     "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js --recursive ./test",
-    "test:watch": "npm run test -- --watch"
+    "test:watch": "npm run test -- --watch",
+    "lint": "eslint --fix public server" //need to adjust later for correct folders
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tradersquare/tradersquare.git"
+    "url": "git+https://github.com/traderquare/tradersquare.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "stock",
+    "analysis",
+    "market",
+    "strategies"
+  ],
+  "author": "Angelina May, Cindy Sun, Chris Battenfield, Akul Aggarwal",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/tradersquare/tradersquare/issues"
+    "url": "https://github.com/tradesquare/tradersquare/issues"
   },
   "homepage": "https://tradersquare.io",
   "devDependencies": {
@@ -35,6 +41,13 @@
     "webpack-dev-server": "^1.14.0"
   },
   "dependencies": {
+    "express": "4.14.0",
+    "request": "2.75.0",
+    "eslint": "3.4.0",
+    "eslint-config-airbnb": "11.0.0",
+    "eslint-plugin-import": "1.8.1",
+    "eslint-plugin-jsx-a11y": "2.2.2",
+    "eslint-plugin-react": "^6.2.0",
     "axios": "^0.14.0",
     "babel-preset-stage-1": "^6.1.18",
     "lodash": "^3.10.1",
