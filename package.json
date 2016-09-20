@@ -45,6 +45,7 @@
     "babel-preset-stage-1": "^6.13.0",
     "bluebird": "^3.4.6",
     "body-parser": "^1.15.2",
+    "dotenv": "^2.0.0",
     "eslint": "^3.5.0",
     "eslint-config-airbnb": "^11.1.0",
     "eslint-plugin-import": "^1.15.0",
@@ -60,6 +61,7 @@
     "redux-form": "^6.0.5",
     "redux-promise": "^0.5.3",
     "request": "^2.75.0",
-    "restler": "^3.4.0"
+    "restler": "^3.4.0",
+    "webpack-env": "^0.8.0"
   }
 }
