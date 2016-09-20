@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const GET_DATA = 'GET_DATA';
 
-export function fetchPosts() {
+export function getData() {
   // const request = axios.get(`${ROOT_URL}/posts${API_KEY}`)
 
   return {

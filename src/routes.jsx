@@ -7,7 +7,7 @@ import StockView from './components/stock_view';
 
 export default (
   <Route path="/" component={App} >
-    <IndexRoute component={SearchBar} />
-    <Route path="stocksView" component={StockView} />
+    {/* <IndexRoute component={SearchBar} /> */}
+    <Route path="stockview" component={StockView} />
   </Route>
 );
