@@ -7,6 +7,7 @@ export default class App extends Component {
       <div>
         TraderSquare
         <SearchBar />
+        {this.props.children}
       </div>
     );
   }
