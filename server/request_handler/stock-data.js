@@ -35,7 +35,6 @@ const datapointPromise = (ticker) => {
       .on('error', (error) => {
         reject(error);
       })
-    }
   });
 };
 
