@@ -10,3 +10,4 @@ describe('SearchBar', function () {
     const wrapper = shallow(<SearchBar />);
     expect(wrapper.find('Link')).to.have.length(1);
   });
+})
