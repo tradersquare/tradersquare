@@ -8,7 +8,6 @@ const path             = require('path');
 //REQUEST HANDLER MODULES
 const stockPrices      = require('./request_handler/stock-prices')
 
-
 const app = module.exports = express();
 
 app.use(bodyParser.json());
@@ -31,4 +30,3 @@ app.get('/test', function(req, res){
 app.listen(3000, function(){
   console.log('Server started, listening on port:', 3000);
 });
-

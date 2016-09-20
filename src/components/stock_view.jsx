@@ -5,12 +5,11 @@ import {GetData} from '../actions/index.jsx';
 class StockView extends Component {
 
   render() {
-    console.log('mapStateToProps rerender: ', this.props.stockData)
+    console.log('mapStateToProps rerender: ', this.props.stockData);
     return (
       <div>
         Google is doin' just fine yo.
-        {this.props.stockData[0].title }
-
+        {this.props.stockData[0].title}
       </div>
     )
   }
