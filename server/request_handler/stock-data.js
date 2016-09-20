@@ -14,36 +14,41 @@ const statementPromise = (ticker) => {
         for(let i of results){
           element[i.tag] = i.value;
         }
-        console.log(element);
         resolve(element);
       })
       .on('error', (error) => {
         reject(error);
       })
-  })
-}
+  });
+};
 
+const datapointPromise = (ticker) => {
+  return new Promise((resolve, reject) => {
+    intrinio.data_point(ticker, "string, string, string")
+      .on('complete', (data, response) => {
+        const results = data.data;
+        for(let i of results){
+          element[i.tag] = i.value;
+        }
+        resolve(element);
+      })
+      .on('error', (error) => {
+        reject(error);
+      })
+    }
+  });
+};
 
 
 module.exports = (ticker, res) => {
 
   Promise.all([
-    statementPromise(ticker)
+    statementPromise(ticker), datapointPromise(ticker)
     ])
-  .then((something)=>{
-
-    // const results = data.data;
-    // for(let i of results){
-    //   element[i.tag] = i.value;
-    // }
-    console.log(something);
-    res.send(something);
-
+  .then((data) => {
+    res.send(data);
   })
   .catch(err => {
     throw err;
   })
-
-  
-
-}
+};
