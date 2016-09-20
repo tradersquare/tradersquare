@@ -1,15 +1,20 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import {getData} from '../actions/index';
 import {Link} from 'react-router';
+import {searchStockData} from '../actions/index';
 
-export default function() {
-  return (
-    <div>
-      <input placeholder="Enter a Ticker here"></input>
-      <Link to="/stockview" className="btn btn-primary">
-            Results
-          </Link>
-    </div>
-  )
+class SearchBar extends Component {
+  render() {
+
+    return (
+      <div>
+        <input placeholder="Enter a Ticker here"></input>
+        <Link to="/stockview" onClick={this.props.searchStockData} className="btn btn-primary">
+              Results
+        </Link>
+      </div>
+    )
+  }
 }
+
+export default connect(null, {searchStockData})(SearchBar);
