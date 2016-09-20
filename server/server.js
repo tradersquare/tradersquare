@@ -29,9 +29,11 @@ app.use(bodyParser.urlencoded({
 
 // var intrinio = require(path.resolve( __dirname, "intrinio"))(username, password)
 
+
+
 app.post('/stockData', function(req, res){
   const ticker = req.body.ticker;
-  stockPrices(ticker);
+  stockPrices(ticker, res);  
 })
 
 app.post('/statementData', function(req, res){
