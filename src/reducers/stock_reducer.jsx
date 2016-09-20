@@ -11,6 +11,10 @@ export default function(state = INITIAL_STATE, action) {
         {title: 'PY'}
       ];
     default:
-      return state;
+      return [
+        {title: 'HP'},
+        {title: 'JS'},
+        {title: 'PY'}
+      ];
   }
 }
