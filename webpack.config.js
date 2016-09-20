@@ -1,13 +1,11 @@
 const webpack = require('webpack')
 module.exports = {
   entry: [
-    'webpack/hot/dev-server',
-    'webpack-hot-middleware/client',
     './src/index.js'
   ],
   output: {
     path: '/',
-    publicPath: 'http://localhost:3000/scripts/',
+    publicPath: 'http://localhost:3000/',
     filename: 'bundle.js'
   },
   externals: {
