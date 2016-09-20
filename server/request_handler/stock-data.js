@@ -1,4 +1,4 @@
-const path = require('path')
+dataconst path = require('path')
 const restler = require('restler')
 const username = process.env.INTRINIO_USER;
 const password = process.env.INTRINIO_PASSWORD;
@@ -24,11 +24,11 @@ const statementPromise = (ticker) => {
 
 const datapointPromise = (ticker) => {
   return new Promise((resolve, reject) => {
-    intrinio.data_point(ticker, "string, string, string")
+    intrinio.data_point(ticker, "52_week_high,52_week_low,marketcap,pricetoearnings,basiceps,volume,average_daily_volume")
       .on('complete', (data, response) => {
         const results = data.data;
         for(let i of results){
-          element[i.tag] = i.value;
+          element[i.item] = i.value;
         }
         resolve(element);
       })
@@ -45,7 +45,7 @@ module.exports = (ticker, res) => {
     statementPromise(ticker), datapointPromise(ticker)
     ])
   .then((data) => {
-    res.send(data);
+    res.send(element);
   })
   .catch(err => {
     throw err;
