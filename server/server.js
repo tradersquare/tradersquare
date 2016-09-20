@@ -1,17 +1,17 @@
 require('dotenv').config();
 
 //NODE MODULES
-const express          = require('express');
-const request          = require('request');
-const bodyParser       = require('body-parser');
-const path             = require('path');
-const webpack = require 'webpack';
-const webpackDevMiddleware = require 'webpack-dev-middleware';
-const webpackHotMiddleware = require 'webpack-hot-middleware';
+const express                 = require('express');
+const request                 = require('request');
+const bodyParser              = require('body-parser');
+const path                    = require('path');
+const webpack                 = require('webpack');
+const webpackDevMiddleware    = require('webpack-dev-middleware');
+const webpackHotMiddleware    = require('webpack-hot-middleware');
 
 
 //REQUEST HANDLER MODULES
-const stockPrices      = require('./request_handler/stock-prices');
+const stockPrices             = require('./request_handler/stock-prices');
 
 const db = require('../db/config');
 
@@ -29,9 +29,14 @@ app.use(bodyParser.urlencoded({
 
 // var intrinio = require(path.resolve( __dirname, "intrinio"))(username, password)
 
-app.get('/test', function(req, res){
-  stockPrices();
-  res.send("success")
+app.post('/stockData', function(req, res){
+  const ticker = req.body.ticker;
+  stockPrices(ticker);
+})
+
+app.post('/statementData', function(req, res){
+  // const ticker = req.body.ticker;
+  // statementData(ticker);
 })
 
 app.listen(3000, function(){
