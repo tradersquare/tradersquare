@@ -62,6 +62,8 @@
     "redux-promise": "^0.5.3",
     "request": "^2.75.0",
     "restler": "^3.4.0",
-    "webpack-env": "^0.8.0"
+    "webpack-dev-middleware": "^1.8.1",
+    "webpack-env": "^0.8.0",
+    "webpack-hot-middleware": "^2.12.2"
   }
 }
