@@ -1,4 +1,4 @@
-// require('dotenv').config();
+require('dotenv').config();
 
 //NODE MODULES
 const express                 = require('express');
