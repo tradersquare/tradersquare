@@ -10,6 +10,11 @@ module.exports = {
     publicPath: 'http://localhost:3000/scripts/',
     filename: 'bundle.js'
   },
+  externals: {
+    'cheerio': 'window',
+    'react/lib/ExecutionEnvironment': true,
+    'react/lib/ReactContext': true,
+  },
   module: {
     loaders: [{
       exclude: /node_modules/,
