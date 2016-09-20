@@ -1,4 +1,4 @@
-// require('dotenv').config();
+require('dotenv').config();
 
 //NODE MODULES
 const express                 = require('express');
@@ -12,7 +12,7 @@ const config                  = require('../webpack.config.js');
 
 
 //REQUEST HANDLER MODULES
-// const stockPrices             = require('./request_handler/stock-prices');
+const stockData             = require('./request_handler/stock-data');
 
 // const db = require('../db/config');
 
@@ -47,7 +47,7 @@ app.use(express.static(path.join(__dirname, '../public')));
 
 app.post('/stockData', function(req, res){
   const ticker = req.body.ticker;
-  stockPrices(ticker, res);
+  stockData(ticker, res);
 })
 
 
