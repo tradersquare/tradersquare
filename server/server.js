@@ -1,12 +1,15 @@
+require('dotenv').config();
+
 //NODE MODULES
-// require('dotenv').config();
 const express          = require('express');
 const request          = require('request');
 const bodyParser       = require('body-parser');
 const path             = require('path');
 
 //REQUEST HANDLER MODULES
-const stockPrices      = require('./request_handler/stock-prices')
+const stockPrices      = require('./request_handler/stock-prices');
+
+const db = require('../db/config');
 
 const app = module.exports = express();
 
