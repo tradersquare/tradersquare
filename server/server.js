@@ -5,6 +5,10 @@ const express          = require('express');
 const request          = require('request');
 const bodyParser       = require('body-parser');
 const path             = require('path');
+const webpack = require 'webpack';
+const webpackDevMiddleware = require 'webpack-dev-middleware';
+const webpackHotMiddleware = require 'webpack-hot-middleware';
+
 
 //REQUEST HANDLER MODULES
 const stockPrices      = require('./request_handler/stock-prices');
