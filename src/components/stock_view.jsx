@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {GetData} from '../actions/index.jsx';
+import {watchlistAdd} from '../actions/watchlist_Add';
 
 class StockView extends Component {
 
