@@ -10,10 +10,10 @@ const INITIAL_STATE = { all: [], post: null};
 export default function(state = INITIAL_STATE, action) {
   switch(action.type) {
     case GET_DATA:
-      console.log('in GET_DATA', action.payload);
-      console.log('dataaaa', action.payload.data);
+    // console.log('in GET_DATA', action.payload);
+      console.log('dataaaa', action.payload.data.basiceps2014);
       return [
-        {title: action.payload},
+        {title: action.payload.data.basiceps2014},
         {title: 'JS'},
         {title: 'PY'}
       ];
