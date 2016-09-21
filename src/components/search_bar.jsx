@@ -23,8 +23,8 @@ class SearchBar extends Component {
   }
 }
 
-function mapDispatchtoProps(dispatch) {
+function mapDispatchToProps(dispatch) {
   return bindActionCreators({searchStockData}, dispatch)
 }
 
-export default connect(null, {mapDispatchtoProps})(SearchBar);
+export default connect(null, mapDispatchToProps)(SearchBar);

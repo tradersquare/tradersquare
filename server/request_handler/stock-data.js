@@ -63,9 +63,10 @@ module.exports = (ticker, res) => {
     // statementPromise(ticker, "cash_flow_statement", "2015", "FY"),
     // statementPromise(ticker, "calculations", "2014", "FY"),
     // statementPromise(ticker, "calculations", "2015", "FY"),
-    dataPointPromise(ticker)
+    // dataPointPromise(ticker)
     ])
   .then((data) => {
+    // console.log(data)
     res.send(element);
   })
   .catch(err => {
