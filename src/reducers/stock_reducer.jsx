@@ -10,14 +10,16 @@ const INITIAL_STATE = { all: [], post: null};
 export default function(state = INITIAL_STATE, action) {
   switch(action.type) {
     case GET_DATA:
+      console.log('in GET_DATA', action.payload);
+      console.log('dataaaa', action.payload.data);
       return [
-        {title: 'HP'},
+        {title: action.payload},
         {title: 'JS'},
         {title: 'PY'}
       ];
     default:
       return [
-        {title: 'HP'},
+        {title: 'HPd'},
         {title: 'JS'},
         {title: 'PY'}
       ];

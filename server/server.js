@@ -44,9 +44,9 @@ app.use(express.static(path.join(__dirname, '../public')));
 // uncomment after we figure out what the client folder will be
 
 // var intrinio = require(path.resolve( __dirname, "intrinio"))(username, password)
-
-app.post('/stockData', function(req, res){
-  const ticker = req.body.ticker;
+//'{"ticker": "FB"}'
+app.get('/stockData/*', function(req, res){
+  const ticker = req.url.slice(11);
   stockData(ticker, res);
 })
 
