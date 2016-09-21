@@ -56,9 +56,9 @@ export function searchStockData() {
 
 
 
-export function searchStockData() {
+export function searchStockData(ticker) {
 
-  let serverReq = axios.get(`/stockData/FB`)
+  let serverReq = axios.get(`/stockData/${ticker}`)
 
   console.log('search my nodes', serverReq);
 
