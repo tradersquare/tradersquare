@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router';
-import {searchStockData} from '../actions/index';
+import {searchStockData as SearchStockData} from '../actions/stock_search';
 import {bindActionCreators} from 'redux';
 
 
 class SearchBar extends Component {
-  // componentWillMount() {
-  //   this.props.searchStockData();
-  // }
 
   constructor(props) {
     super(props);
@@ -22,7 +19,7 @@ class SearchBar extends Component {
   }
 
   handleSubmit() {
-    this.props.searchStockData(this.state.ticker);
+    this.props.SearchStockData(this.state.ticker);
     this.setState({ticker: ''});
   }
 
@@ -42,8 +39,4 @@ class SearchBar extends Component {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({searchStockData}, dispatch)
-}
-
-export default connect(null, mapDispatchToProps)(SearchBar);
+export default connect(null, {SearchStockData})(SearchBar);
