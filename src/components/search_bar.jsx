@@ -2,8 +2,14 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router';
 import {searchStockData} from '../actions/index';
+import {bindActionCreators} from 'redux';
+
 
 class SearchBar extends Component {
+  // componentWillMount() {
+  //   this.props.searchStockData();
+  // }
+
   render() {
 
     return (
@@ -17,4 +23,8 @@ class SearchBar extends Component {
   }
 }
 
-export default connect(null, {searchStockData})(SearchBar);
+function mapDispatchtoProps(dispatch) {
+  return bindActionCreators({searchStockData}, dispatch)
+}
+
+export default connect(null, {mapDispatchtoProps})(SearchBar);

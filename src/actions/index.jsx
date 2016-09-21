@@ -60,7 +60,7 @@ export function searchStockData() {
 
   let serverReq = axios.get(`/stockData/FB`)
 
-  // console.log('search my nodes', serverReq);
+  console.log('search my nodes', serverReq);
 
   return {
     type: GET_DATA,
