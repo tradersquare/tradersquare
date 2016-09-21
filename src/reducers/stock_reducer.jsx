@@ -15,7 +15,7 @@ export default function(state = INITIAL_STATE, action) {
       let stockState = [];
 
       for (let key in action.payload.data) {
-        stockState.push({[key]: action.payload.data[key]});
+        stockState.push([[key], action.payload.data[key]]);
       }
       console.log('stockState: ', stockState);
       // return [{"ok": "ok"},{'hi': 'hi'}];
