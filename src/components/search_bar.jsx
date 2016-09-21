@@ -10,12 +10,31 @@ class SearchBar extends Component {
   //   this.props.searchStockData();
   // }
 
-  render() {
+  constructor(props) {
+    super(props);
 
+    this.state = {
+      ticker: 'TSLA'
+    };
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.setTicker = this.setTicker.bind(this);
+  }
+
+  handleSubmit() {
+    this.props.searchStockData(this.state.ticker);
+    this.setState({ticker: ''});
+  }
+
+  setTicker(ev) {
+    this.setState({ticker: ev.target.value});
+  }
+
+  render() {
     return (
       <div>
-        <input placeholder="Enter a Ticker here"></input>
-        <Link to="/stockview" onClick={this.props.searchStockData} className="btn btn-primary">
+        <input value={this.state.ticker} onChange={this.setTicker} placeholder="Enter a Ticker here"></input>
+        <Link to="/stockview" onClick={this.handleSubmit} className="btn btn-primary">
               Results
         </Link>
       </div>
