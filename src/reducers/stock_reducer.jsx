@@ -1,4 +1,4 @@
-import { GET_DATA } from '../actions/index';
+import { GET_DATA } from '../actions/stock_search';
 
 const INITIAL_STATE = { all: [], post: null};
 
@@ -10,18 +10,19 @@ const INITIAL_STATE = { all: [], post: null};
 export default function(state = INITIAL_STATE, action) {
   switch(action.type) {
     case GET_DATA:
-      console.log('in GET_DATA', action.payload);
+    // console.log('in GET_DATA', action.payload);
       console.log('dataaaa', action.payload.data);
-      return [
-        {title: action.payload},
-        {title: 'JS'},
-        {title: 'PY'}
-      ];
+      let stockState = [];
+
+      for (let key in action.payload.data) {
+        stockState.push([[key], action.payload.data[key]]);
+      }
+      console.log('stockState: ', stockState);
+      // return [{"ok": "ok"},{'hi': 'hi'}];
+      return stockState;
     default:
       return [
-        {title: 'HPd'},
-        {title: 'JS'},
-        {title: 'PY'}
+        'hello'
       ];
   }
 }

@@ -1,21 +1,37 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router';
-import {searchStockData} from '../actions/index';
+import {searchStockData as SearchStockData} from '../actions/stock_search';
 import {bindActionCreators} from 'redux';
 
 
 class SearchBar extends Component {
-  // componentWillMount() {
-  //   this.props.searchStockData();
-  // }
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      ticker: 'TSLA'
+    };
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.setTicker = this.setTicker.bind(this);
+  }
+
+  handleSubmit() {
+    this.props.SearchStockData(this.state.ticker);
+    this.setState({ticker: ''});
+  }
+
+  setTicker(ev) {
+    this.setState({ticker: ev.target.value});
+  }
 
   render() {
-
     return (
       <div>
-        <input placeholder="Enter a Ticker here"></input>
-        <Link to="/stockview" onClick={this.props.searchStockData} className="btn btn-primary">
+        <input value={this.state.ticker} onChange={this.setTicker} placeholder="Enter a Ticker here"></input>
+        <Link to="/stockview" onClick={this.handleSubmit} className="btn btn-primary">
               Results
         </Link>
       </div>
@@ -23,8 +39,4 @@ class SearchBar extends Component {
   }
 }
 
-function mapDispatchtoProps(dispatch) {
-  return bindActionCreators({searchStockData}, dispatch)
-}
-
-export default connect(null, {mapDispatchtoProps})(SearchBar);
+export default connect(null, {SearchStockData})(SearchBar);
