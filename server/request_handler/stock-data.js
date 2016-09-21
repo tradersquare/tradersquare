@@ -6,13 +6,13 @@ const intrinio = require(path.resolve( __dirname, "intrinio"))(username, passwor
 
 let element = {};
 
-const statementPromise = (ticker) => {
+const statementPromise = (ticker, statement, year, period) => {
   return new Promise((resolve, reject) => {
-    intrinio.statement(ticker, 'income_statement', '2014', 'FY')
+    intrinio.statement(ticker, statement, year, period)
       .on('complete', (data, response) => {
         const results = data.data;
         for(let i of results){
-          element[i.tag] = i.value;
+          element[i.tag+year] = i.value;
         }
         resolve(element);
       })
@@ -22,9 +22,9 @@ const statementPromise = (ticker) => {
   });
 };
 
-const datapointPromise = (ticker) => {
+const dataPointPromise = (ticker) => {
   return new Promise((resolve, reject) => {
-    intrinio.data_point(ticker, "52_week_high,52_week_low,marketcap,pricetoearnings,basiceps,volume,average_daily_volume")
+    intrinio.data_point(ticker, "52_week_high,52_week_low,marketcap,pricetoearnings,basiceps,volume,average_daily_volume,open_price,close_price,change,beta")
       .on('complete', (data, response) => {
         const results = data.data;
         for(let i of results){
@@ -38,11 +38,32 @@ const datapointPromise = (ticker) => {
   });
 };
 
+const historicalPricePromise = (ticker) => {
+  return new Promise((resolve, reject) => {
+    intrinio.historical_data(ticker, "close_price")
+      .on('complete', (data, response) => {
+        element.historicalPrice = data.data;
+        resolve(element);
+      })
+      .on('error', (error) => {
+        reject(error);
+      })
+  });
+};
+
 
 module.exports = (ticker, res) => {
 
   Promise.all([
-    statementPromise(ticker), datapointPromise(ticker)
+    statementPromise(ticker, "income_statement", "2014", "FY"),
+    statementPromise(ticker, "income_statement", "2015", "FY"),
+    statementPromise(ticker, "balance_sheet", "2014", "FY"),
+    statementPromise(ticker, "balance_sheet", "2015", "FY"),
+    statementPromise(ticker, "cash_flow_statement", "2014", "FY"),
+    statementPromise(ticker, "cash_flow_statement", "2015", "FY"),
+    statementPromise(ticker, "calculations", "2014", "FY"),
+    statementPromise(ticker, "calculations", "2015", "FY"),
+    dataPointPromise(ticker)
     ])
   .then((data) => {
     res.send(element);

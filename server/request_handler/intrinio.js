@@ -89,9 +89,9 @@ module.exports = function (username, password) {
     prices: function(ticker) {
       return this.get('https://www.intrinio.com/api/prices?ticker='+ticker);
     },
-    historical_data: function(ticker) {
-      return this.get('https://www.intrinio.com/api/historical_data?ticker='+ticker);
-    },
+    // historical_data: function(ticker) {
+    //   return this.get('https://www.intrinio.com/api/historical_data?identifier='+ticker);
+    // },
     companies: function(ticker) {
       return this.get('https://www.intrinio.com/api/companies?ticker='+ticker);
     },
@@ -106,7 +106,7 @@ module.exports = function (username, password) {
       return this.get('https://www.intrinio.com/api/data_point?identifier='+ticker+"&item="+item);
     },
     historical_data: function(ticker, item) {
-      return this.get('https://www.intrinio.com/api/historical_data?ticker='+ticker+"&item="+item);
+      return this.get('https://www.intrinio.com/api/historical_data?identifier='+ticker+"&item="+item);
     },
     news: function(ticker) {
       return this.get('https://www.intrinio.com/api/news?ticker='+ticker);
