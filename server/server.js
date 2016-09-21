@@ -46,7 +46,7 @@ app.use(express.static(path.join(__dirname, '../public')));
 // var intrinio = require(path.resolve( __dirname, "intrinio"))(username, password)
 //'{"ticker": "FB"}'
 app.get('/stockData/*', function(req, res){
-  const ticker = req.url.slice(11);
+  const ticker = req.url.slice(11).toUpperCase();
   stockData(ticker, res);
 })
 

@@ -55,7 +55,7 @@ const historicalPricePromise = (ticker) => {
 module.exports = (ticker, res) => {
 
   Promise.all([
-    statementPromise(ticker, "income_statement", "2014", "FY"),
+    // statementPromise(ticker, "income_statement", "2014", "FY"),
     // statementPromise(ticker, "income_statement", "2015", "FY"),
     // statementPromise(ticker, "balance_sheet", "2014", "FY"),
     // statementPromise(ticker, "balance_sheet", "2015", "FY"),
@@ -63,7 +63,7 @@ module.exports = (ticker, res) => {
     // statementPromise(ticker, "cash_flow_statement", "2015", "FY"),
     // statementPromise(ticker, "calculations", "2014", "FY"),
     // statementPromise(ticker, "calculations", "2015", "FY"),
-    // dataPointPromise(ticker)
+    dataPointPromise(ticker)
     ])
   .then((data) => {
     // console.log(data)
