@@ -11,12 +11,16 @@ const webpack                 = require('webpack');
 const webpackDevMiddleware    = require('webpack-dev-middleware');
 const webpackHotMiddleware    = require('webpack-hot-middleware');
 const config                  = require('../webpack.config.js');
-
+const db                      = require('../db/config');
+const pg                      = require('pg');
+const dbURL                   = process.env.DATABASE_URL;
 
 //REQUEST HANDLER MODULES
 const stockData               = require('./request_handler/stock-data');
 
-// const db = require('../db/config');
+
+pg.defaults.ssl = true;
+pg.connect(dbURL, db);
 
 const app = module.exports = express();
 // const router = express.Router();
