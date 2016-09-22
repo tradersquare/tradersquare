@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import AddToWatchList from '../actions/watchlist_add';
+// import AddToWatchList from '../actions/watchlist_add';
 import {Link} from 'react-router';
 
 class StockView extends Component {
