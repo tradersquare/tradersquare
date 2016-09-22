@@ -15,7 +15,7 @@ class StockView extends Component {
       <div>
         Google is doin' just fine yo.
         {stockData}
-        <button onSubmit={this.props.AddToWatchList}>Add to Watch List </button>
+        {/* <button onSubmit={this.props.AddToWatchList}>Add to Watch List </button> */}
       </div>
     )
   }
@@ -28,4 +28,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, {AddToWatchList})(StockView);
+export default connect(mapStateToProps)(StockView);
