@@ -1,10 +1,13 @@
-import {GET_STRAT} from '../actions/stock_search';
+import {GET_STRAT_DATA} from '../actions/watchlist_Add';
 
-export default function(state, action) {
+const INITIAL_STRAT_STATE = { all: [], post: null};
+
+export default function(state = INITIAL_STRAT_STATE, action) {
   switch(action.type) {
-    case(GET_STRAT):
-      return([
-        {title: 'HP'},
+    case GET_STRAT_DATA:
+      console.log(action.payload, 'strat data')
+      return ([
+        {title: action.payload},
         {title: 'JS'},
         {title: 'PY'}
       ])

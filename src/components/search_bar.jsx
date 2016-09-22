@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router';
 import {searchStockData as SearchStockData} from '../actions/stock_search';
 import {bindActionCreators} from 'redux';
-
+import getStratData from '../actions/watchlist_Add';
 
 class SearchBar extends Component {
 
@@ -11,10 +11,11 @@ class SearchBar extends Component {
     super(props);
 
     this.state = {
-      ticker: 'TSLA'
+      ticker: ''
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleClick = this.handleClick.bind(this);
     this.setTicker = this.setTicker.bind(this);
   }
 
@@ -27,6 +28,11 @@ class SearchBar extends Component {
     this.setState({ticker: ev.target.value});
   }
 
+  handleClick(){
+    console.log('handleClick')
+    this.props.getStratData();
+  }
+
   render() {
     return (
       <div>
@@ -34,9 +40,12 @@ class SearchBar extends Component {
         <Link to="/stockview" onClick={this.handleSubmit} className="btn btn-primary">
               Results
         </Link>
+        <Link to="/strategyview" onClick={this.handleClick} className="btn btn-primary">
+              Watch List
+        </Link>
       </div>
     )
   }
 }
 
-export default connect(null, {SearchStockData})(SearchBar);
+export default connect(null, {SearchStockData, getStratData})(SearchBar);
