@@ -56,6 +56,18 @@ app.get('/stockData/*', function(req, res){
   stockData(ticker, res);
 })
 
+app.get('/stockDataTmp/*', function(req, res){
+  const ticker = req.url.slice(14).toUpperCase();
+  const dummy = {
+    data: {
+    ticker: ticker,
+    altmanzscore: Math.random(),
+    name: `${ticker}, inc.`
+    }
+  }
+  res.send(dummy)
+})
+
 
 app.use(function(req, res, next) {
   res.sendFile(path.join(__dirname, '../public/index.html'));
