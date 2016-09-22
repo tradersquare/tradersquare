@@ -38,6 +38,22 @@ const dataPointPromise = (ticker) => {
   });
 };
 
+const zscorePromise = (ticker) => {
+  return new Promise((resolve, reject) => {
+    intrinio.data_point(ticker, "ticker,name,altmanzscore")
+      .on('complete', (data, response) => {
+        const results = data.data;
+        for(let i of results){
+          element[i.item] = i.value;
+        }
+        resolve(element);
+      })
+      .on('error', (error) => {
+        reject(error);
+      })
+  });
+};
+
 const historicalPricePromise = (ticker) => {
   return new Promise((resolve, reject) => {
     intrinio.historical_data(ticker, "close_price")
@@ -63,7 +79,8 @@ module.exports = (ticker, res) => {
     // statementPromise(ticker, "cash_flow_statement", "2015", "FY"),
     // statementPromise(ticker, "calculations", "2014", "FY"),
     // statementPromise(ticker, "calculations", "2015", "FY"),
-    dataPointPromise(ticker)
+    dataPointPromise(ticker),
+    zscorePromise(ticker)
     ])
   .then((data) => {
     // console.log(data)
