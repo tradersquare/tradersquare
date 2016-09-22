@@ -5,7 +5,7 @@ module.exports = {
   ],
   output: {
     path: '/',
-    publicPath: 'http://localhost:3000/',
+    publicPath: '/public/',
     filename: 'bundle.js'
   },
   externals: {

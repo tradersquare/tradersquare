@@ -12,7 +12,7 @@ const config                  = require('../webpack.config.js');
 
 
 //REQUEST HANDLER MODULES
-const stockData             = require('./request_handler/stock-data');
+const stockData               = require('./request_handler/stock-data');
 
 // const db = require('../db/config');
 
@@ -55,6 +55,6 @@ app.use(function(req, res, next) {
   res.sendFile(path.join(__dirname, '../public/index.html'));
 })
 
-app.listen(3000, function(){
+app.listen(process.env.PORT || 3000, function(){
   console.log('Server started, listening on port:', 3000);
 });
