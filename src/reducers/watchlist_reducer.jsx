@@ -6,11 +6,7 @@ export default function(state = INITIAL_STRAT_STATE, action) {
   switch(action.type) {
     case GET_STRAT_DATA:
       console.log(action.payload, 'strat data')
-      return ([
-        {title: action.payload},
-        {title: 'JS'},
-        {title: 'PY'}
-      ])
+      return action.payload;
   }
 
   return ([
