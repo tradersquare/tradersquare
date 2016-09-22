@@ -81,8 +81,7 @@ module.exports.stockData = (ticker, res) => {
     statementPromise(ticker, "cash_flow_statement", "2015", "FY"),
     statementPromise(ticker, "calculations", "2014", "FY"),
     statementPromise(ticker, "calculations", "2015", "FY"),
-    dataPointPromise(ticker),
-    zscorePromise(ticker)
+    dataPointPromise(ticker)
     ])
   .then((data) => {
     let indexedElements = [];
