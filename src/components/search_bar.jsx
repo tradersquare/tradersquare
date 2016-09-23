@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router';
 import {searchStockData as SearchStockData} from '../actions/stock_search';
 import {bindActionCreators} from 'redux';
-import getStratData from '../actions/watchlist_Add';
+import getStratData from '../actions/get_strat_data';
 
 class SearchBar extends Component {
 
@@ -41,7 +41,7 @@ class SearchBar extends Component {
               Results
         </Link>
         <Link to="/strategyview" onClick={this.handleClick} className="btn btn-primary">
-              Watch List
+               Strategies
         </Link>
       </div>
     )
