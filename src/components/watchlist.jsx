@@ -28,11 +28,12 @@ class WatchList extends Component {
 
     stratData = this.props.strategyData.map((stock) => {
       stockKey++;
+      let val = typeof stock[currentStrat] === "number" ? stock[currentStrat].toFixed(3) : "N/A"
       return (
       <tr key={stockKey}>
           <td>{stock.ticker}</td>
           <td>{stock.name}</td>
-          <td>{stock[currentStrat].toFixed(3)}</td>
+          <td>{val}</td>
           <td>{100-(Math.round((stockKey/this.props.strategyData.length)*100))}%</td>
       </tr>)
     })
@@ -49,7 +50,7 @@ class WatchList extends Component {
             <option value="currentratio">Current Ratio</option>
             <option value="epsgrowth">EPS Growth</option>
           </select>
-          <table>
+          <table className="tablr">
           <tr>
             <th>Ticker</th>
             <th>Name</th>

@@ -17,6 +17,7 @@ const dbURL                   = process.env.DATABASE_URL;
 
 //REQUEST HANDLER MODULES
 const StockData               = require('./request_handler/stock-data');
+const stratData               = require('./request_handler/strat-data');
 
 const app = module.exports = express();
 // const router = express.Router();
@@ -54,20 +55,20 @@ app.get('/stockData/*', function(req, res){
 
 app.get('/stockDataTmp/*', function(req, res){
   const ticker = req.url.slice(14).toUpperCase();
-  const dummy = {
-    data: {
-    ticker: ticker,
-    altmanzscore: Math.random(),
-    assetturnover: Math.random(),
-    grossmargin: Math.random(),
-    pricetoearnings: Math.random(),
-    currentratio: Math.random(),
-    epsgrowth: Math.random(),
-    name: `${ticker}, inc.`
-    }
-  }
-  console.log(dummy);
-  res.send(dummy)
+  // const dummy = {
+  //   data: {
+  //   ticker: ticker,
+  //   altmanzscore: Math.random(),
+  //   assetturnover: Math.random(),
+  //   grossmargin: Math.random(),
+  //   pricetoearnings: Math.random(),
+  //   currentratio: Math.random(),
+  //   epsgrowth: Math.random(),
+  //   name: `${ticker}, inc.`
+  //   }
+  // }
+  // res.send(dummy)
+  stratData(ticker, res);
 })
 
 app.use(function(req, res, next) {
