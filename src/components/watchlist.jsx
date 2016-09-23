@@ -8,25 +8,37 @@ class WatchList extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {selectValue: 'altmanzscore'}
+    this.state = {selectValue: 'altmanzscore', items: 5}
 
     this.handleChange = this.handleChange.bind(this);
+    this.viewMore = this.viewMore.bind(this);
 
   }
+
   handleChange(event) {
-    this.setState({selectValue: event.target.value})
+    this.setState({selectValue: event.target.value, items: 5})
+  }
+
+  viewMore(){
+    this.setState({items: this.state.items + 5})
   }
 
   render(){
     let currentStrat = this.state.selectValue;
-    console.log('straaaaaaat', this.props.strategyData);
+    // console.log('straaaaaaat', this.props.strategyData);
     let stratData = this.props.strategyData.sort((a,b) => {
       if(a[currentStrat] > b[currentStrat]) return -1;
       if(a[currentStrat] < b[currentStrat]) return 1;
     })
+
     let stockKey = 0;
 
+    let that = this;
+
     stratData = this.props.strategyData.map((stock) => {
+      if(stockKey >= that.state.items){
+        return;
+      }
       stockKey++;
       let val = typeof stock[currentStrat] === "number" ? stock[currentStrat].toFixed(3) : "N/A"
       return (
@@ -37,6 +49,7 @@ class WatchList extends Component {
           <td>{100-(Math.round((stockKey/this.props.strategyData.length)*100))}%</td>
       </tr>)
     })
+
     return (
         <div>
           <select
@@ -49,6 +62,12 @@ class WatchList extends Component {
             <option value="pricetoearnings">P/E</option>
             <option value="currentratio">Current Ratio</option>
             <option value="epsgrowth">EPS Growth</option>
+            <option value="divpayoutratio">Dividend Payout Ratio</option>
+            <option value="debttoequity">Debt To Equity</option>
+            <option value="enterprisevalue">Enterprise Value</option>
+            <option value="earningsyield">Earnings Yield</option>
+            <option value="netincomegrowth">Net Income Growth</option>
+            <option value="roe">Return on Equity</option>
           </select>
           <table className="tablr">
           <tr>
@@ -59,6 +78,7 @@ class WatchList extends Component {
           </tr>
           {stratData}
           </table>
+          <a onClick={this.viewMore}>...more</a>
         </div>
 
       )
@@ -66,7 +86,6 @@ class WatchList extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log('mapStateToProps state: ', state);
   return {
     strategyData: state.watchlist
   }
