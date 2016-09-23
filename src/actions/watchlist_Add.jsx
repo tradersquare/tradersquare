@@ -5,7 +5,24 @@ export const ADD = "ADD";
 export const GET_STRAT_DATA = "GET_STRAT_DATA"
 
 export default function() {
-  const tmpStock = ['FB', 'GOOG', 'TWTR', 'AMZN', 'TSLA', 'SCTY', 'F', 'NOK', 'SBUX', 'YHOO', 'AAPL', 'JPM'];
+  const tmpStock = [ 'MMM',
+  'ABT',
+  'ABBV',
+  'ACN',
+  'ATVI',
+  'AYI',
+  'ADBE',
+  'AAP',
+  'AES',
+  'AET',
+  'AFL',
+  'AMG',
+  'A',
+  'APD',
+  'AKAM',
+  'ALK',
+  'ALB',
+  'AA'];
   return axios.all(tmpStock.map((ticker) => axios.get(`/stockDataTmp/${ticker}`)))
     .then(axios.spread((...data) => {
       console.log(".then", data[0].data.data)
