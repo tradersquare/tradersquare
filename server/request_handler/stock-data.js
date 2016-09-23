@@ -99,8 +99,12 @@ module.exports.stockData = (ticker, res) => {
 
     inputCols = dtCols.slice(0, dtCols.length - 2);
 
-    console.log(inputCols);
+    // console.log(inputCols);
 
+    db.query(`CREATE TABLE IF NOT EXISTS productionschema.stockdatatable(id SERIAL PRIMARY KEY, ${inputCols});`)
+      .on('end', function(){
+        console.log("created")
+      })
     // db.query('SELECT * from productionschema.stockdatatable;')
     // .on('row', function(row) {
     //   console.log("row", row);
