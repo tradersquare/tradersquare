@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node ./server/server.js",
+    "dev": "nodemon ./server/server.js",
     "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js --recursive ./test",
     "testClient": "mocha -w test/helpers/browser.js test/*.spec.js",
     "test:watch": "npm run test -- --watch",

@@ -83,37 +83,37 @@ module.exports = function (username, password) {
         }
       }
     },
-    // ticker: function(ticker) {
-    //   return this.get('https://www.intrinio.com/api/companies?ticker='+ticker);
-    // },
-    // prices: function(ticker) {
-    //   return this.get('https://www.intrinio.com/api/prices?ticker='+ticker);
-    // },
-    // historical_data: function(ticker) {
-    //   return this.get('https://www.intrinio.com/api/historical_data?identifier='+ticker);
-    // },
-    // companies: function(ticker) {
-    //   return this.get('https://www.intrinio.com/api/companies?ticker='+ticker);
-    // },
-    // securities: function(ticker) {
-    //   return this.get('https://www.intrinio.com/api/securities?ticker='+ticker);
-    // },
-    // indices: function(ticker) {
-    //   // Is returning an empty object.
-    //   return this.get('https://www.intrinio.com/api/indices?ticker='+ticker);
-    // },
+    ticker: function(ticker) {
+      return this.get('https://www.intrinio.com/api/companies?ticker='+ticker);
+    },
+    prices: function(ticker) {
+      return this.get('https://www.intrinio.com/api/prices?ticker='+ticker);
+    },
+    historical_data: function(ticker) {
+      return this.get('https://www.intrinio.com/api/historical_data?identifier='+ticker);
+    },
+    companies: function(ticker) {
+      return this.get('https://www.intrinio.com/api/companies?ticker='+ticker);
+    },
+    securities: function(ticker) {
+      return this.get('https://www.intrinio.com/api/securities?ticker='+ticker);
+    },
+    indices: function(ticker) {
+      // Is returning an empty object.
+      return this.get('https://www.intrinio.com/api/indices?ticker='+ticker);
+    },
     data_point: function(ticker, item) {
       return this.get('https://www.intrinio.com/api/data_point?identifier='+ticker+"&item="+item);
-    }//,
-    // historical_data: function(ticker, item) {
-    //   return this.get('https://www.intrinio.com/api/historical_data?identifier='+ticker+"&item="+item);
-    // },
-    // news: function(ticker) {
-    //   return this.get('https://www.intrinio.com/api/news?ticker='+ticker);
-    // },
-    // statement: function(ticker, statement, year, period){
-    //   return this.get('https://api.intrinio.com/financials/standardized?ticker='+ticker+'&statement='+statement+'&fiscal_year='+year+'&fiscal_period='+period)
-    // }
+    },
+    historical_data: function(ticker, item) {
+      return this.get('https://www.intrinio.com/api/historical_data?identifier='+ticker+"&item="+item);
+    },
+    news: function(ticker) {
+      return this.get('https://www.intrinio.com/api/news?ticker='+ticker);
+    },
+    statement: function(ticker, statement, year, period){
+      return this.get('https://api.intrinio.com/financials/standardized?ticker='+ticker+'&statement='+statement+'&fiscal_year='+year+'&fiscal_period='+period)
+    }
   });
   if(!username || !password){
     console.log("No password provided. Using intrinio Dev Account Limit 500 req / day");
