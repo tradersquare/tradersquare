@@ -3,8 +3,9 @@ const restler = require('restler');
 const username = process.env.INTRINIO_USER;
 const password = process.env.INTRINIO_PASSWORD;
 const intrinio = require(path.resolve( __dirname, "intrinio"))(username, password);
+const db = require('../../db/config.js');
 
-let element = {};
+const element = {};
 
 const statementPromise = (ticker, statement, year, period) => {
   return new Promise((resolve, reject) => {
@@ -68,7 +69,7 @@ const historicalPricePromise = (ticker) => {
 };
 
 
-module.exports = (ticker, res) => {
+module.exports.stockData = (ticker, res) => {
 
   Promise.all([
     // statementPromise(ticker, "income_statement", "2014", "FY"),
@@ -83,7 +84,10 @@ module.exports = (ticker, res) => {
     zscorePromise(ticker)
     ])
   .then((data) => {
-    // console.log(data)
+    db.query('SELECT * from productionschema.stockdatatable;')
+    .on('row', function(row) {
+      console.log("row", row);
+    });
     res.send(element);
   })
   .catch(err => {
