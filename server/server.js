@@ -62,12 +62,17 @@ app.get('/stockDataTmp/*', function(req, res){
     data: {
     ticker: ticker,
     altmanzscore: Math.random(),
+    assetturnover: Math.random(),
+    grossmargin: Math.random(),
+    pricetoearnings: Math.random(),
+    currentratio: Math.random(),
+    epsgrowth: Math.random(),
     name: `${ticker}, inc.`
     }
   }
+  console.log(dummy);
   res.send(dummy)
 })
-
 
 app.use(function(req, res, next) {
   res.sendFile(path.join(__dirname, '../public/index.html'));
