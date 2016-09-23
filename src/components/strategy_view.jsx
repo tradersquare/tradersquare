@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router';
 import {bindActionCreators} from 'redux';
-import getStratData from '../actions/watchlist_Add'
+import getStratData from '../actions/get_strat_data'
 
-class WatchList extends Component {
+class StrategyView extends Component {
   constructor(props) {
     super(props);
 
@@ -26,14 +26,10 @@ class WatchList extends Component {
     let currentStrat = this.state.selectValue;
     // console.log('straaaaaaat', this.props.strategyData);
     let stratData = this.props.strategyData.sort((a,b) => {
-      let x = typeof a[currentStrat] === 'number' ? a[currentStrat] : Number.NEGATIVE_INFINITY;
-      let y = typeof b[currentStrat] === 'number' ? b[currentStrat] : Number.NEGATIVE_INFINITY;
-      // 
-      // if(typeof a[currentStrat] !== 'number' || typeof a[currentStrat] !== 'number') {
-      //   return -1
-      // }
-      if(x > y) return -1;
-      if(x < y) return 1;
+      let newA = typeof a[currentStrat] === 'number' ? a[currentStrat] : Number.NEGATIVE_INFINITY;
+      let newB = typeof b[currentStrat] === 'number' ? b[currentStrat] : Number.NEGATIVE_INFINITY;
+      if(newA > newB) return -1;
+      if(newA < newB) return 1;
     })
 
     let stockKey = 0;
@@ -92,8 +88,8 @@ class WatchList extends Component {
 
 function mapStateToProps(state) {
   return {
-    strategyData: state.watchlist
+    strategyData: state.stratData
   }
 }
 
-export default connect(mapStateToProps, {})(WatchList)
+export default connect(mapStateToProps, {})(StrategyView)
