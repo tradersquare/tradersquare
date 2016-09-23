@@ -12,7 +12,6 @@ class WatchList extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.viewMore = this.viewMore.bind(this);
-
   }
 
   handleChange(event) {
@@ -27,8 +26,14 @@ class WatchList extends Component {
     let currentStrat = this.state.selectValue;
     // console.log('straaaaaaat', this.props.strategyData);
     let stratData = this.props.strategyData.sort((a,b) => {
-      if(a[currentStrat] > b[currentStrat]) return -1;
-      if(a[currentStrat] < b[currentStrat]) return 1;
+      let x = typeof a[currentStrat] === 'number' ? a[currentStrat] : Number.NEGATIVE_INFINITY;
+      let y = typeof b[currentStrat] === 'number' ? b[currentStrat] : Number.NEGATIVE_INFINITY;
+      // 
+      // if(typeof a[currentStrat] !== 'number' || typeof a[currentStrat] !== 'number') {
+      //   return -1
+      // }
+      if(x > y) return -1;
+      if(x < y) return 1;
     })
 
     let stockKey = 0;
