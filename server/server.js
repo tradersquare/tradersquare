@@ -16,11 +16,7 @@ const pg                      = require('pg');
 const dbURL                   = process.env.DATABASE_URL;
 
 //REQUEST HANDLER MODULES
-const stockData               = require('./request_handler/stock-data');
-
-
-pg.defaults.ssl = true;
-pg.connect(dbURL, db);
+const StockData               = require('./request_handler/stock-data');
 
 const app = module.exports = express();
 // const router = express.Router();
@@ -53,7 +49,7 @@ app.use(express.static(path.join(__dirname, '../public')));
 //'{"ticker": "FB"}'
 app.get('/stockData/*', function(req, res){
   const ticker = req.url.slice(11).toUpperCase();
-  stockData(ticker, res);
+  StockData.stockData(ticker, res);
 })
 
 app.get('/stockDataTmp/*', function(req, res){
