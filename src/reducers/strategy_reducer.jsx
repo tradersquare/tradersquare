@@ -1,4 +1,4 @@
-import {GET_STRAT_DATA} from '../actions/watchlist_Add';
+import {GET_STRAT_DATA} from '../actions/get_strat_data';
 
 const INITIAL_STRAT_STATE = { all: [], post: null};
 
