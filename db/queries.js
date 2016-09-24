@@ -45,27 +45,31 @@ function sortQuery(element) {
 module.exports.sortQuery = sortQuery;
 
 module.exports.insertRow = elements => {
-    //
-    const sortedArr = sortQuery(elements);
+  for(let key in elements) {
+    if(!key in callAll.tableColumns) {
+      delete elements[key];
+    }
+  }
+  console.log('testing insertRow');
+  let sortedArr = sortQuery(elements);
+  let colsPure ='';
 
-    let colsPure ='';
+  sortedArr.map( val => {
+    colsPure = colsPure + val + ', ';
+  })
+  colsPure = colsPure.slice(0, colsPure.length - 2);
 
-    sortedArr.map( val => {
-      colsPure = colsPure + val + ', ';
-    })
-    colsPure = colsPure.slice(0, colsPure.length - 2);
+  let values = '';
 
-    let values = '';
+  sortedArr.map( key => {
+    let val = elements[key];
+    values = `${values} '${val}',`;
+  });
 
-    sortedArr.map( key => {
-      let val = elements[key];
-      values = `${values} '${val}',`;
+  values = values.slice(0, values.length - 1);
+
+  db.query(`INSERT INTO productionschema.stockdatatable (${colsPure}) values(${values});`)
+    .on('end', function(){
+      console.log("inserted into productionschema.stockdatatable")
     });
-
-    values = values.slice(0, values.length - 1);
-
-    db.query(`INSERT INTO productionschema.stockdatatable (${colsPure}) values(${values});`)
-      .on('end', function(){
-        console.log("inserted into productionschema.stockdatatable")
-      });
 }

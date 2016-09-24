@@ -5,8 +5,8 @@ const queries = require('../../db/queries.js');
 
 let allCompsData = [];
 
-module.exports.sortedElements;
-
+module.exports.tableColumns;
+let tableColumns = {};
 module.exports.getReq = (res) => {
   // console.log(companiesList);
   for (let i = 0; i < companiesList.length; i++) {
@@ -19,18 +19,17 @@ module.exports.consolidate = (data) => {
   console.log('allCompsData: ', data);
   console.log(data.length);
 
-  let finalObj = {};
 
   for (let i = 1; i < data.length; i++) {
     let obj = data[i];
     for (let key in obj) {
-      if (!finalObj[key]) {
-        finalObj[key] = true;
+      if (!tableColumns[key]) {
+        tableColumns[key] = true;
       }
     }
   }
-  // console.log(finalObj);
+  // console.log(tableColumns);
 
-  sortedElements = queries.sortQuery(finalObj);
+  sortedElements = queries.sortQuery(tableColumns);
   queries.createSchema(sortedElements);
 }

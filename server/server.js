@@ -51,11 +51,16 @@ app.use(express.static(path.join(__dirname, '../public')));
 //'{"ticker": "FB"}'
 app.get('/stockData/*', function(req, res){
   const ticker = req.url.slice(11).toUpperCase();
-  // StockData.stockData(ticker, res);
+  StockData.stockData(ticker, res);
+})
 
-  //following for creating table || populating table
-  //DONT DELETE
-  callAll.getReq(res);
+/**
+ * use schema endpoint for dev only
+ * not connected to client
+ * use in postman with env headers
+ */
+app.get('/schema/', function(req, res) {
+  call.getReq(res);
 })
 
 app.get('/stockDataTmp/*', function(req, res){
