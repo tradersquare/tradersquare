@@ -4,6 +4,9 @@ const username = process.env.INTRINIO_USER;
 const password = process.env.INTRINIO_PASSWORD;
 const intrinio = require(path.resolve( __dirname, "intrinio"))(username, password);
 const db = require('../../db/config.js');
+const query = require('../../db/queries.js');
+const callAll = require('./all-companies.js');
+const companiesList = require('../../db/spCompanies.js');
 
 const element = {};
 
@@ -68,7 +71,10 @@ const historicalPricePromise = (ticker) => {
   });
 };
 
-module.exports.inputCols;
+//used to populate database
+//DON'T DELETE:
+let allCompsData = [];
+//
 
 module.exports.stockData = (ticker, res) => {
 
@@ -84,30 +90,22 @@ module.exports.stockData = (ticker, res) => {
     dataPointPromise(ticker)
     ])
   .then((data) => {
-    let indexedElements = [];
-    for (let key in element) {
-      indexedElements.push(key);
+
+    //used to create/populate db schemase/tables
+    //DONT DELETE:
+    // query.createSchema(element);
+    // query.insertRow(element);
+    //
+
+    //used to populate postgres table
+    //DON'T DELETE:
+    allCompsData.push(element);
+
+    if (allCompsData.length === companiesList.sp500.length) {
+      callAll.consolidate(allCompsData);
     }
-    const sortedElements = indexedElements.sort();
+    //
 
-    let dtCols = '';
-    const varChar = 'varchar(20)';
-    sortedElements.forEach((val) => {
-      dtCols = dtCols + val+' '+varChar + ', ';
-    });
-
-    inputCols = dtCols.slice(0, dtCols.length - 2);
-
-    // console.log(inputCols);
-
-    db.query(`CREATE TABLE IF NOT EXISTS productionschema.stockdatatable(id SERIAL PRIMARY KEY, ${inputCols});`)
-      .on('end', function(){
-        console.log("created")
-      })
-    // db.query('SELECT * from productionschema.stockdatatable;')
-    // .on('row', function(row) {
-    //   console.log("row", row);
-    // });
     res.send(element);
   })
   .catch(err => {

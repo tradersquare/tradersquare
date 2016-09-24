@@ -14,6 +14,7 @@ const config                  = require('../webpack.config.js');
 const db                      = require('../db/config');
 const pg                      = require('pg');
 const dbURL                   = process.env.DATABASE_URL;
+const callAll                 = require('./request_handler/all-companies.js');
 
 //REQUEST HANDLER MODULES
 const StockData               = require('./request_handler/stock-data');
@@ -50,7 +51,8 @@ app.use(express.static(path.join(__dirname, '../public')));
 //'{"ticker": "FB"}'
 app.get('/stockData/*', function(req, res){
   const ticker = req.url.slice(11).toUpperCase();
-  StockData.stockData(ticker, res);
+  // StockData.stockData(ticker, res);
+  callAll.getReq(res);
 })
 
 app.get('/stockDataTmp/*', function(req, res){

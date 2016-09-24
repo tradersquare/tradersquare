@@ -1,5 +1,5 @@
 var rest = require('restler');
-var Promise = require("bluebird");
+// var Promise = require("bluebird");
 
 const EventEmitter = require('events');
 const util = require('util');
