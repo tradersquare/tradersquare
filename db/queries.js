@@ -50,6 +50,7 @@ module.exports.insertRow = elements => {
       delete elements[key];
     }
   }
+  console.log('testing insertRow');
   let sortedArr = sortQuery(elements);
   let colsPure ='';
 
