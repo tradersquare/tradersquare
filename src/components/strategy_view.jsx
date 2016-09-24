@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router';
 import {bindActionCreators} from 'redux';
 import getStratData from '../actions/get_strat_data';
+import SearchBar from './search_bar';
 
 
 class StrategyView extends Component {
@@ -68,7 +69,7 @@ class StrategyView extends Component {
 
     return (
         <div >
-          <h1>this is the strategy view</h1>
+        <SearchBar />
           <select
             value={this.state.selectValue}
             onChange={this.handleChange}
