@@ -51,8 +51,11 @@ app.use(express.static(path.join(__dirname, '../public')));
 //'{"ticker": "FB"}'
 app.get('/stockData/*', function(req, res){
   const ticker = req.url.slice(11).toUpperCase();
-  // StockData.stockData(ticker, res);
-  callAll.getReq(res);
+  StockData.stockData(ticker, res);
+
+  //following for creating table || populating table
+  //DONT DELETE
+  // callAll.getReq(res);
 })
 
 app.get('/stockDataTmp/*', function(req, res){
