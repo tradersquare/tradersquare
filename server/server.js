@@ -54,6 +54,11 @@ app.get('/stockData/*', function(req, res){
   StockData.stockData(ticker, res);
 })
 
+/**
+ * use schema endpoint for dev only
+ * not connected to client
+ * use in postman with env headers
+ */
 app.get('/schema/', function(req, res) {
   call.getReq(res);
 })
