@@ -94,16 +94,16 @@ module.exports.stockData = (ticker, res) => {
     //used to create/populate db schemase/tables
     //DONT DELETE:
     // query.createSchema(element);
-    // query.insertRow(element);
+    query.insertRow(element);
     //
 
     //used to populate postgres table
     //DON'T DELETE:
-    allCompsData.push(element);
-
-    if (allCompsData.length === companiesList.sp500.length) {
-      callAll.consolidate(allCompsData);
-    }
+    // allCompsData.push(element);
+    //
+    // if (allCompsData.length === companiesList.sp500.length) {
+    //   callAll.consolidate(allCompsData);
+    // }
     //
 
     res.send(element);
