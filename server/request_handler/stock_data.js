@@ -5,7 +5,7 @@ const password = process.env.INTRINIO_PASSWORD;
 const intrinio = require(path.resolve( __dirname, "intrinio"))(username, password);
 const db = require('../../db/config.js');
 const query = require('../../db/queries.js');
-const callAll = require('./all-companies.js');
+const callAll = require('./all_companies.js');
 const companiesList = require('../../db/spCompanies.js');
 
 const element = {};
@@ -93,18 +93,17 @@ module.exports.stockData = (ticker, res) => {
 
     //used to create/populate db schemase/tables
     //DONT DELETE:
-    // query.createSchema(element);
     query.insertRow(element);
     //
 
-    //used to populate postgres table
-    //DON'T DELETE:
+    // used to populate postgres table
+    // DON'T DELETE:
     // allCompsData.push(element);
-    //
+
     // if (allCompsData.length === companiesList.sp500.length) {
     //   callAll.consolidate(allCompsData);
     // }
-    //
+
 
     res.send(element);
   })

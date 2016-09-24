@@ -1,9 +1,11 @@
-const StockData = require('./stock-data');
+const StockData = require('./stock_data');
 const companiesObj = require('../../db/spCompanies.js');
 const companiesList = companiesObj.sp500;
 const queries = require('../../db/queries.js');
 
 let allCompsData = [];
+
+module.exports.sortedElements;
 
 module.exports.getReq = (res) => {
   // console.log(companiesList);
@@ -29,6 +31,6 @@ module.exports.consolidate = (data) => {
   }
   // console.log(finalObj);
 
-  const sortedElements = queries.sortQuery(finalObj);
-  // queries.createSchema(sortedElements);
+  sortedElements = queries.sortQuery(finalObj);
+  queries.createSchema(sortedElements);
 }

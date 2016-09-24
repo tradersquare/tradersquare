@@ -14,11 +14,11 @@ const config                  = require('../webpack.config.js');
 const db                      = require('../db/config');
 const pg                      = require('pg');
 const dbURL                   = process.env.DATABASE_URL;
-const callAll                 = require('./request_handler/all-companies.js');
+const callAll                 = require('./request_handler/all_companies.js');
 
 //REQUEST HANDLER MODULES
-const StockData               = require('./request_handler/stock-data');
-const stratData               = require('./request_handler/strat-data');
+const StockData               = require('./request_handler/stock_data');
+const stratData               = require('./request_handler/strat_data');
 
 const app = module.exports = express();
 // const router = express.Router();
@@ -51,28 +51,15 @@ app.use(express.static(path.join(__dirname, '../public')));
 //'{"ticker": "FB"}'
 app.get('/stockData/*', function(req, res){
   const ticker = req.url.slice(11).toUpperCase();
-  StockData.stockData(ticker, res);
+  // StockData.stockData(ticker, res);
 
   //following for creating table || populating table
   //DONT DELETE
-  // callAll.getReq(res);
+  callAll.getReq(res);
 })
 
 app.get('/stockDataTmp/*', function(req, res){
   const ticker = req.url.slice(14).toUpperCase();
-  // const dummy = {
-  //   data: {
-  //   ticker: ticker,
-  //   altmanzscore: Math.random(),
-  //   assetturnover: Math.random(),
-  //   grossmargin: Math.random(),
-  //   pricetoearnings: Math.random(),
-  //   currentratio: Math.random(),
-  //   epsgrowth: Math.random(),
-  //   name: `${ticker}, inc.`
-  //   }
-  // }
-  // res.send(dummy)
   stratData(ticker, res);
 })
 
