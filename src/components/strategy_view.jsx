@@ -4,7 +4,7 @@ import {Link} from 'react-router';
 import {bindActionCreators} from 'redux';
 import getStratData from '../actions/get_strat_data';
 import SearchBar from './search_bar';
-
+import StratNav from './strategy_nav';
 
 class StrategyView extends Component {
   constructor(props) {
@@ -69,7 +69,15 @@ class StrategyView extends Component {
 
     return (
         <div >
-        <SearchBar />
+          <div className="row header">
+            <h1 className="heading col-md-7"><Link to="/">TraderSquare</Link></h1>
+            <div className="col-md-3 top-padding">
+              <SearchBar/>
+            </div>
+            <div className="col-md-2 top-padding">
+              <StratNav/>
+            </div>
+          </div>
           <select
             value={this.state.selectValue}
             onChange={this.handleChange}
