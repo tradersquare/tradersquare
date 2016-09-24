@@ -7,7 +7,6 @@ import SearchBar from './search_bar';
 class StockView extends Component {
 
   render() {
-    <SearchBar />
     console.log('mapStateToProps rerender: ', this.props.stockData);
     let stockData = this.props.stockData.map((val) => {
       return (<div key={val}><span>{val[0]}</span> : <span>{val[1]}</span></div>);
@@ -15,7 +14,7 @@ class StockView extends Component {
 
     return (
       <div>
-        Google is doin' just fine yo.
+      <SearchBar />
         {stockData}
       </div>
     )
