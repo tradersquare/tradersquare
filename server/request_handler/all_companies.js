@@ -1,6 +1,6 @@
 const StockData = require('./stock_data');
-// const companiesObj = require('../../db/spCompanies.js');
-// const companiesList = companiesObj.sp500;
+const companiesObj = process.env.companies;
+const companiesList = companiesObj.sp500;
 const queries = require('../../db/queries.js');
 
 let allCompsData = [];
