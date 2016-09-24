@@ -1,5 +1,5 @@
 const StockData = require('./stock_data');
-const companiesObj = require('../../db/spCompanies.js') || process.env.companies;
+const companiesObj = process.env.companies;
 const companiesList = companiesObj.sp500;
 >>>>>>> [bug-fix](deploy): add companies env conditional
 const queries = require('../../db/queries.js');
