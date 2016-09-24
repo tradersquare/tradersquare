@@ -9,7 +9,7 @@ export default (
   <Route path="/" component={App} >
     {/* following in case don't want search bar on every page  */}
     {/* <IndexRoute component={SearchBar} /> */}
-    <Route path="stockview" component={StockView} />
+    <Route path="/stockview" component={StockView} />
     <Route path="/strategyview" component={StrategyView}/>
   </Route>
 );

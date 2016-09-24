@@ -2,16 +2,23 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router';
 import {bindActionCreators} from 'redux';
-import getStratData from '../actions/get_strat_data'
+import getStratData from '../actions/get_strat_data';
+
 
 class StrategyView extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {selectValue: 'altmanzscore', items: 5}
+    this.state = {selectValue: 'altmanzscore', items: 5, flag: false}
 
     this.handleChange = this.handleChange.bind(this);
     this.viewMore = this.viewMore.bind(this);
+    this.componentWillMount = this.componentWillMount.bind(this);
+  }
+
+  componentWillMount(){
+    this.props.getStratData();
+    this.setState({flag: true})
   }
 
   handleChange(event) {
@@ -23,6 +30,14 @@ class StrategyView extends Component {
   }
 
   render(){
+    if(!this.state.flag){
+      return (
+        <div>
+        <h3>loading...</h3>
+        </div>
+        )
+    }
+    else{
     let currentStrat = this.state.selectValue;
     // console.log('straaaaaaat', this.props.strategyData);
     let stratData = this.props.strategyData.sort((a,b) => {
@@ -52,7 +67,8 @@ class StrategyView extends Component {
     })
 
     return (
-        <div>
+        <div >
+          <h1>this is the strategy view</h1>
           <select
             value={this.state.selectValue}
             onChange={this.handleChange}
@@ -83,7 +99,9 @@ class StrategyView extends Component {
         </div>
 
       )
+    }
   }
+
 }
 
 function mapStateToProps(state) {
@@ -92,4 +110,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, {})(StrategyView)
+export default connect(mapStateToProps, {getStratData})(StrategyView)
