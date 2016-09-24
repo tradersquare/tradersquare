@@ -7,7 +7,7 @@ let allCompsData = [];
 
 module.exports.getReq = (res) => {
   // console.log(companiesList);
-  for (let i = 0; i < /*companiesList.length*/1; i++) {
+  for (let i = 0; i < companiesList.length; i++) {
     let ticker = companiesList[i];
     StockData.stockData(ticker, res);
   }
@@ -30,5 +30,5 @@ module.exports.consolidate = (data) => {
   // console.log(finalObj);
 
   const sortedElements = queries.sortQuery(finalObj);
-  queries.createSchema(sortedElements);
+  // queries.createSchema(sortedElements);
 }
