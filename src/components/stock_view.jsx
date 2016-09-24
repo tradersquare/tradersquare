@@ -8,9 +8,9 @@ class StockView extends Component {
 
   render() {
     console.log('mapStateToProps rerender: ', this.props.stockData);
-    // let stockData = this.props.stockData.map((val) => {
-    //   return (<div key={val}><span>{val[0]}</span> : <span>{val[1]}</span></div>);
-    // }) put back in!!!!!
+    let stockData = this.props.stockData.map((val) => {
+      return (<div key={val}><span>{val[0]}</span> : <span>{val[1]}</span></div>);
+    })
 
     return (
       <div>
