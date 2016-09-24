@@ -93,7 +93,7 @@ module.exports.stockData = (ticker, res) => {
 
     //used to create/populate db schemase/tables
     //DONT DELETE:
-    query.insertRow(element);
+    // query.insertRow(element);
     //
 
     // used to populate postgres table
@@ -104,7 +104,7 @@ module.exports.stockData = (ticker, res) => {
     //   callAll.consolidate(allCompsData);
     // }
 
-
+    console.log(element);
     res.send(element);
   })
   .catch(err => {

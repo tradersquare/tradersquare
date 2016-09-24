@@ -6,6 +6,9 @@ import StratNav from './strategy_nav';
 
 
 class StockView extends Component {
+    // constructor(props) {
+    //   this.state
+    // }
 
   render() {
     console.log('mapStateToProps rerender: ', this.props.stockData);
@@ -31,10 +34,10 @@ class StockView extends Component {
         <div className="col-md-12">{stockData}</div>
         </div>
         <div className="col-md-6"><span>strat data goes here</span></div>
-          
-        
+
+
       </div>
-        
+
 
       </div>
     )
