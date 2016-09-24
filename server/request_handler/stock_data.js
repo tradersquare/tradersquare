@@ -6,7 +6,7 @@ const intrinio = require(path.resolve( __dirname, "intrinio"))(username, passwor
 const db = require('../../db/config.js');
 const query = require('../../db/queries.js');
 const callAll = require('./all_companies.js');
-// const companiesList = require('../../db/spCompanies.js');
+const companiesList = require('../../db/spCompanies.js') || process.env.companies;
 
 const element = {};
 
