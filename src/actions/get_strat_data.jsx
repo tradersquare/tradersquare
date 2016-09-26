@@ -1,8 +1,7 @@
 import axios from 'axios';
 
 export const ADD = "ADD";
-
-export const GET_STRAT_DATA = "GET_STRAT_DATA"
+export const GET_STRAT_DATA = "GET_STRAT_DATA";
 
 export default function() {
   const tmpStock = [ 'MMM',
@@ -23,6 +22,7 @@ export default function() {
   'ALK',
   'ALB',
   'AA'];
+
   return axios.all(tmpStock.map((ticker) => axios.get(`/stockDataTmp/${ticker}`)))
     .then(axios.spread((...data) => {
       console.log(".then", data[0].data.data)
