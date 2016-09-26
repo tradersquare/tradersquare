@@ -15,6 +15,7 @@ const db                      = require('../db/config');
 const pg                      = require('pg');
 const dbURL                   = process.env.DATABASE_URL;
 const callAll                 = require('./request_handler/all_companies.js');
+const GrabDataDB              = require('../db/db_grab_data.js');
 
 //REQUEST HANDLER MODULES
 const StockData               = require('./request_handler/stock_data');
@@ -64,7 +65,8 @@ app.get('/schema/', function(req, res) {
 });
 
 app.get('/getDataDB/', function(req, res) {
-  //some function
+  let results = [];
+  GrabDataDB(res, results);
 });
 
 app.get('/stockDataTmp/*', function(req, res){
