@@ -52,7 +52,7 @@ app.use(express.static(path.join(__dirname, '../public')));
 app.get('/stockData/*', function(req, res){
   const ticker = req.url.slice(11).toUpperCase();
   StockData.stockData(ticker, res);
-})
+});
 
 /**
  * use schema endpoint for dev only
@@ -61,7 +61,11 @@ app.get('/stockData/*', function(req, res){
  */
 app.get('/schema/', function(req, res) {
   call.getReq(res);
-})
+});
+
+app.get('/getDataDB/', function(req, res) {
+  //some function
+});
 
 app.get('/stockDataTmp/*', function(req, res){
   const ticker = req.url.slice(14).toUpperCase();
