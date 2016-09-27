@@ -5,7 +5,7 @@ export const GET_STRAT = 'GET_STRAT';
 
 export function searchStockData(ticker) {
 
-  let serverReq = axios.get(`/stockData/${ticker}`)
+  let serverReq = axios.get(`/stockDataTmp/${ticker}`)
 
   console.log('search my nodes', serverReq);
 
