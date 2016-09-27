@@ -62,23 +62,22 @@ module.exports.stockData = (ticker, res) => {
     dataPointPromise('data_point', ticker)
     ])
   .then((data) => {
-    console.log('DATA: ', data);
+    // console.log('DATA: ', data);
+    let flatData = data.reduce( (prev, curr) => Object.assign(prev, curr));
+    console.log(flatData);
     //used to create/populate db schemase/tables
     //DONT DELETE:
-    // query.insertRow(element);
+    // query.insertRow(flatData);
     //
 
     // used to populate postgres table
     // DON'T DELETE:
-    // allCompsData.push(element);
+    // allCompsData.push(flatData);
 
     // if (allCompsData.length === companiesList.sp500.length) {
     //   callAll.consolidate(allCompsData);
     // }
 
-    let flatData = data.reduce( (prev, curr) => Object.assign(prev, curr));
-
-    console.log(flatData);
     res.send(flatData);
   })
   .catch(err => {
