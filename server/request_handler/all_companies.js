@@ -7,16 +7,16 @@ module.exports.tableColumns;
 let tableColumns = {};
 module.exports.getReq = (res) => {
   // console.log(companiesList);
+  let allCompsData = [];
   for (let i = 0; i < companiesList.length; i++) {
     let ticker = companiesList[i];
-    StockData.stockData(ticker, res);
+    StockData.stockData(ticker, res 'getReq', allCompsData);
   }
 }
 
 module.exports.consolidate = (data) => {
   console.log('allCompsData: ', data);
   console.log(data.length);
-
 
   for (let i = 1; i < data.length; i++) {
     let obj = data[i];
