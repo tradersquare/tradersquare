@@ -1,4 +1,4 @@
-if(process.env.NODE_ENV !== "production") {
+if (process.env.NODE_ENV !== "production") {
   require('dotenv').config();
 }
 
@@ -17,9 +17,10 @@ const dbURL                   = process.env.DATABASE_URL;
 const callAll                 = require('./request_handler/all_companies.js');
 const GrabDataDB              = require('../db/db_grab_data.js');
 
+
 //REQUEST HANDLER MODULES
-const StockData               = require('./request_handler/stock_data');
-const stratData               = require('./request_handler/strat_data');
+const StockData = require('./request_handler/stock_data');
+const stratData = require('./request_handler/strat_data');
 
 const app = module.exports = express();
 // const router = express.Router();
@@ -31,18 +32,20 @@ const app = module.exports = express();
 // app.use(router);
 const compiler = webpack(config);
 app.use(webpackDevMiddleware(compiler, {
-  publicPath: config.output.publicPath,
-  stats: {colors:true}
-}))
-// app.use(webpackHotMiddleware(compiler, {
-//   log: console.log
-// }))
+    publicPath: config.output.publicPath,
+    stats: {
+      colors: true
+    }
+  }))
+  // app.use(webpackHotMiddleware(compiler, {
+  //   log: console.log
+  // }))
 
 
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
-    extended: true
+  extended: true
 }));
 
 app.use(express.static(path.join(__dirname, '../public')));
@@ -50,7 +53,7 @@ app.use(express.static(path.join(__dirname, '../public')));
 
 // var intrinio = require(path.resolve( __dirname, "intrinio"))(username, password)
 //'{"ticker": "FB"}'
-app.get('/stockData/*', function(req, res){
+app.get('/stockData/*', function(req, res) {
   const ticker = req.url.slice(11).toUpperCase();
   StockData.stockData(ticker, res);
 });
@@ -59,6 +62,7 @@ app.get('/stockData/*', function(req, res){
  * use schema endpoint for dev only
  * not connected to client
  * use in postman with env headers
+ * invokes getReq() in allCompanies.js
  */
 app.get('/schema/', function(req, res) {
   callAll.getReq(res);
@@ -69,7 +73,8 @@ app.get('/getDataDB/', function(req, res) {
   GrabDataDB(res, results);
 });
 
-app.get('/stockDataTmp/*', function(req, res){
+
+app.get('/stockDataTmp/*', function(req, res) {
   const ticker = req.url.slice(14).toUpperCase();
   stratData(ticker, res);
 })
@@ -78,6 +83,6 @@ app.use(function(req, res, next) {
   res.sendFile(path.join(__dirname, '../public/index.html'));
 })
 
-app.listen(process.env.PORT || 3000, function(){
+app.listen(process.env.PORT || 3000, function() {
   console.log('Server started, listening on port:', 3000);
 });

@@ -5,10 +5,6 @@ import StockView from './stock_view';
 import {Link} from 'react-router';
 import StratNav from './strategy_nav';
 
-
-
-
-
 export default class Landing extends Component {
   render() {
     return (

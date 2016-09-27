@@ -1,19 +1,28 @@
 const StockData = require('./stock_data');
-const companiesObj = process.env.companies;
-const companiesList = companiesObj.sp500;
 const queries = require('../../db/queries.js');
+const companiesList = process.env.companies;
 
-//let tableColumns = {};
-// module.exports.tableColumns; //not sure why this is here... what is it doing...?
+// Called from server.js "getReq"
 module.exports.getReq = (res) => {
   // console.log(companiesList);
   let allCompsData = [];
-  for (let i = 0; i < companiesList.length; i++) {
-    let ticker = companiesList[i];
+  // companiesList: arr from .env
+  let parsedCompaniesList = JSON.parse(companiesList);
+  // console.log("allcompsData: ", allCompsData);
+  console.log("parsedCompaniesList: ", parsedCompaniesList);
+  for (let i = 0; i < parsedCompaniesList.length; i++) {
+    let ticker = parsedCompaniesList[i];
+    console.log('before StockData.StockData');
     StockData.stockData(ticker, res, 'getReq', allCompsData);
   }
-}
+};
 
+/**
+ * Called from stock_data: StockData.then
+ * [make sures unique company properties (keys) are included in schema]
+ * @param  {[array]} data [each val is an object with vals]
+ * @return {[null]}      [calls other funcs]
+ */
 module.exports.consolidate = data => {
   console.log('allCompsData: ', data);
   console.log(data.length);
@@ -27,8 +36,16 @@ module.exports.consolidate = data => {
       }
     }
   }
-  // console.log(tableColumns);
 
+  /**
+   * [calls queries.js: sortQuery() to put in ASCII order]
+   * @type {[array]}         [ASCII ordered array of properties]
+   */
   sortedElements = queries.sortQuery(tableColumns);
+
+  /**
+   * [actually creates schema]
+   * sortedElements type: [array]
+   */
   queries.createSchema(sortedElements);
 }

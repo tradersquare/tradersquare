@@ -13,7 +13,7 @@ export default function(state = INITIAL_STATE, action) {
       return action.payload.data.data;
     default:
       return [
-        'hello'
+        ''
       ];
   }
 }
