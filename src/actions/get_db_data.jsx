@@ -7,6 +7,6 @@ export default function() {
 
   return {
     type: GET_DB_DATA,
-    payload: DB_DATA
+    payload: dbStock
   }
 }
