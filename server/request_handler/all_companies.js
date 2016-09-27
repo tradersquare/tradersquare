@@ -3,8 +3,8 @@ const companiesObj = process.env.companies;
 const companiesList = companiesObj.sp500;
 const queries = require('../../db/queries.js');
 
-module.exports.tableColumns;
-let tableColumns = {};
+//let tableColumns = {};
+// module.exports.tableColumns; //not sure why this is here... what is it doing...?
 module.exports.getReq = (res) => {
   // console.log(companiesList);
   let allCompsData = [];
@@ -14,10 +14,11 @@ module.exports.getReq = (res) => {
   }
 }
 
-module.exports.consolidate = (data) => {
+module.exports.consolidate = data => {
   console.log('allCompsData: ', data);
   console.log(data.length);
 
+  let tableColumns = {};
   for (let i = 1; i < data.length; i++) {
     let obj = data[i];
     for (let key in obj) {
