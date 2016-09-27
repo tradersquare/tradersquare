@@ -10,7 +10,7 @@ module.exports.getReq = (res) => {
   let allCompsData = [];
   for (let i = 0; i < companiesList.length; i++) {
     let ticker = companiesList[i];
-    StockData.stockData(ticker, res 'getReq', allCompsData);
+    StockData.stockData(ticker, res, 'getReq', allCompsData);
   }
 }
 
