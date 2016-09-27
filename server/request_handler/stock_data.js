@@ -48,7 +48,7 @@ const dataPointPromise = (type, ticker) => {
 let allCompsData = [];
 //
 
-module.exports.stockData = (ticker, res) => {
+module.exports.stockData = (ticker, res, dbStuff) => {
 
   Promise.all([
     apiReq('statement', ticker, "income_statement", "2014", "FY"),
@@ -65,6 +65,7 @@ module.exports.stockData = (ticker, res) => {
     // console.log('DATA: ', data);
     let flatData = data.reduce( (prev, curr) => Object.assign(prev, curr));
     console.log(flatData);
+    //note: fix following to not be commented out (add conditional)
     //used to create/populate db schemase/tables
     //DONT DELETE:
     // query.insertRow(flatData);
@@ -72,11 +73,13 @@ module.exports.stockData = (ticker, res) => {
 
     // used to populate postgres table
     // DON'T DELETE:
-    // allCompsData.push(flatData);
+    if (dbStuff === 'getReq') {
+      allCompsData.push(flatData);
 
-    // if (allCompsData.length === companiesList.sp500.length) {
-    //   callAll.consolidate(allCompsData);
-    // }
+      if (allCompsData.length === companiesList.sp500.length) {
+        callAll.consolidate(allCompsData);
+      }
+    }
 
     res.send(flatData);
   })
