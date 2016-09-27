@@ -3,8 +3,6 @@ const companiesObj = process.env.companies;
 const companiesList = companiesObj.sp500;
 const queries = require('../../db/queries.js');
 
-let allCompsData = [];
-
 module.exports.tableColumns;
 let tableColumns = {};
 module.exports.getReq = (res) => {

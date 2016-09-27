@@ -61,7 +61,7 @@ app.get('/stockData/*', function(req, res){
  * use in postman with env headers
  */
 app.get('/schema/', function(req, res) {
-  call.getReq(res);
+  callAll.getReq(res);
 });
 
 app.get('/getDataDB/', function(req, res) {
