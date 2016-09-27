@@ -18,7 +18,7 @@ module.exports = (type, ticker, statement, year, period) => {
   console.log('inside apiReq: ');
   console.log('TICKER: ', ticker);
   return new Promise((resolve, reject) => {
-    intrinio[type](ticker, statement, year, period)
+    intrinio[type]("ALL", statement, year, period)
       .on('complete', (data, response) => {
         const results = data.data;
         console.log("results = data.data:", data);
