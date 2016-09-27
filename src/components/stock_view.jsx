@@ -6,11 +6,8 @@ import StratNav from './strategy_nav';
 
 
 class StockView extends Component {
-    // constructor(props) {
-    //   this.state
-    // }
-
   render() {
+
     const stockData = this.props.stockData;
     console.log('asdfsdff', stockData);
 

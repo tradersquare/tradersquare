@@ -1,6 +1,14 @@
 const webpack = require('webpack')
 const path = require('path');
 
+const plugins = [
+  new webpack.ProvidePlugin({
+    $: "jquery",
+    jQuery: "jquery",
+    "window.jQuery": "jquery"
+  })
+]
+
 module.exports = {
   entry: [
     './src/index.js'
@@ -30,5 +38,6 @@ module.exports = {
     historyApiFallback: true,
     contentBase: './'
   },
-  devtool: 'source-map'
+  devtool: 'source-map',
+  plugins: plugins
 };

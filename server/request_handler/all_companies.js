@@ -1,6 +1,5 @@
 const StockData = require('./stock_data');
-const companiesObj = process.env.companies;
-const companiesList = companiesObj.sp500;
+const companiesList = process.env.companies;
 const queries = require('../../db/queries.js');
 
 //let tableColumns = {};
@@ -8,11 +7,12 @@ const queries = require('../../db/queries.js');
 module.exports.getReq = (res) => {
   // console.log(companiesList);
   let allCompsData = [];
-  for (let i = 0; i < companiesList.length; i++) {
-    let ticker = companiesList[i];
+  let parsedCompaniesList = JSON.parse(companiesList);
+  for (let i = 0; i < parsedCompaniesList.length; i++) {
+    let ticker = parsedCompaniesList[i];
     StockData.stockData(ticker, res, 'getReq', allCompsData);
   }
-}
+};
 
 module.exports.consolidate = data => {
   console.log('allCompsData: ', data);

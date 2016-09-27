@@ -2,7 +2,7 @@ const path = require('path');
 const restler = require('restler');
 const username = process.env.INTRINIO_USER;
 const password = process.env.INTRINIO_PASSWORD;
-const intrinio = require(path.resolve( __dirname, "intrinio"))(username, password);
+const intrinio = require(path.resolve(__dirname, "intrinio"))(username, password);
 const db = require('../../db/config.js');
 const query = require('../../db/queries.js');
 const callAll = require('./all_companies.js');
@@ -15,8 +15,8 @@ const statementPromise = (ticker, statement, year, period, type) => {
     intrinio.statement(ticker, statement, year, period)
       .on('complete', (data, response) => {
         const results = data.data;
-        for(let i of results){
-          element[i.tag+year] = i.value;
+        for (let i of results) {
+          element[i.tag + year] = i.value;
         }
         resolve(element);
       })
@@ -26,14 +26,19 @@ const statementPromise = (ticker, statement, year, period, type) => {
   });
 };
 
-const dataPointPromise = (type, ticker) => {
+const dataPointPromise = (type, ticker, items) => {
   return new Promise((resolve, reject) => {
-    intrinio[type](ticker, "fiftytwo_week_high,fiftytwo_week_low,marketcap,pricetoearnings,basiceps,volume,average_daily_volume,open_price,close_price,change,beta")
+    intrinio[type](ticker, items)
       .on('complete', (data, response) => {
         const results = data.data;
-        const element = {};
-        for(let i of results){
-          element[i.item] = i.value;
+        for (let i of results) {
+          if (i.item === "52_week_high") {
+            element["fiftytwo_week_high"] = i.value;
+          } else if (i.item === "52_week_low") {
+            element["fiftytwo_week_low"] = i.value;
+          } else {
+            element[i.item] = i.value;
+          }
         }
         resolve(element);
       })
@@ -58,7 +63,7 @@ module.exports.stockData = (ticker, res, dbStuff, allCompsData) => {
     apiReq('statement', ticker, "cash_flow_statement", "2015", "FY"),
     apiReq('statement', ticker, "calculations", "2014", "FY"),
     apiReq('statement', ticker, "calculations", "2015", "FY"),
-    dataPointPromise('data_point', ticker)
+    dataPointPromise('data_point', ticker, "ticker,name,52_week_high,52_week_low,marketcap,pricetoearnings,basiceps,volume,average_daily_volume,open_price,close_price,change,beta")
     ])
   .then((data) => {
     // console.log('DATA: ', data);
@@ -80,7 +85,9 @@ module.exports.stockData = (ticker, res, dbStuff, allCompsData) => {
     if (dbStuff === 'getReq') {
       allCompsData.push(flatData);
 
-      if (allCompsData.length === companiesList.sp500.length) {
+      let parsedCompaniesList = JSON.parse(companiesList);
+
+      if (allCompsData.length === parsedCompaniesList.length) {
         callAll.consolidate(allCompsData);
       }
     }
