@@ -8,6 +8,7 @@ module.exports = function(type, ticker, statement, year, period) {
     intrinio[type](ticker, statement, year, period)
       .on('complete', (data, response) => {
         const results = data.data;
+        const element = {};
         for(let i of results){
           element[i.tag+year] = i.value;
         }
