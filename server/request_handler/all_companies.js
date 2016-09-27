@@ -1,12 +1,13 @@
 const StockData = require('./stock_data');
-const companiesList = process.env.companies;
 const queries = require('../../db/queries.js');
+const companiesList = process.env.companies;
 
 //let tableColumns = {};
 // module.exports.tableColumns; //not sure why this is here... what is it doing...?
 module.exports.getReq = (res) => {
   // console.log(companiesList);
   let allCompsData = [];
+  // companiesList: arr from .env
   let parsedCompaniesList = JSON.parse(companiesList);
   for (let i = 0; i < parsedCompaniesList.length; i++) {
     let ticker = parsedCompaniesList[i];
@@ -27,7 +28,6 @@ module.exports.consolidate = data => {
       }
     }
   }
-  // console.log(tableColumns);
 
   sortedElements = queries.sortQuery(tableColumns);
   queries.createSchema(sortedElements);

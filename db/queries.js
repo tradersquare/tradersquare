@@ -11,23 +11,20 @@ module.exports = function() {
 
 module.exports.createSchema = sortedElements => {
   // const sortedElements = sortQuery(element);
+  const varChar = ' varchar(40), ';
+  const tableCols = sortedElements.join(varChar);
+  const dummyCols = '';
 
-  const tableCols = sortedElements.join(' varchar(40), ');
-  console.log(tableCols);
+  for (let i = 0; i < 20; i++) {
+    dummyCols = dummyCols + `Equation${i}${varChar}`;
+  }
 
-  // db.query('DROP TABLE productionschema.stockdatatable')
-  // .on('end', () => console.log('table dropped'))
-  // .then( () => {
-  /*return*/
-  db.query(`CREATE TABLE IF NOT EXISTS productionschema.stockdatatable(id SERIAL PRIMARY KEY, ${tableCols} varchar(40));`)
+  dummyCols = dummyCols.slice(0, dummyCols.length - 2);
+  console.log("TABLECOLS:", tableCols, "DUMMYCOLS:", dummyCols);
+  db.query(`CREATE TABLE IF NOT EXISTS productionschema.stockdatatable1 (id SERIAL PRIMARY KEY, ${tableCols} varchar(40), ${dummyCols});`)
     .on('end', function() {
       console.log("created")
     })
-    //   console.log('tableCols: ', tableCols);
-    // })
-    // .on('error', console.error);
-    // .then(console.log)
-    // })
     .catch(console.error)
 }
 
@@ -77,3 +74,6 @@ module.exports.insertRow = elements => {
       console.log("inserted into productionschema.stockdatatable")
     });
 }
+
+  // DROP TABLE command
+  // 'DROP TABLE productionschema.stockdatatable'
