@@ -5,6 +5,7 @@ const intrinio = require(path.resolve( __dirname, "intrinio"))(username, passwor
 
 /**
  * [main Func, called from different places]
+ * [primarily called from stock_data.js: stockData]
  * @param  {[string]} type      [finds which "intrinio.js" method to call]
  * @param  {[string]} ticker    [company ticker passed in]
  * @param  {[string]} statement [things API call should get back], optional
@@ -15,14 +16,16 @@ const intrinio = require(path.resolve( __dirname, "intrinio"))(username, passwor
  */
 module.exports = (type, ticker, statement, year, period) => {
   console.log('inside apiReq: ');
+  console.log('TICKER: ', ticker);
   return new Promise((resolve, reject) => {
     intrinio[type](ticker, statement, year, period)
       .on('complete', (data, response) => {
         const results = data.data;
-        // console.log("results = data.data:", results);
+        console.log("results = data.data:", data);
         const element = {};
-        // console.log("results:", results);
+
         for(let i of results){
+          // console.log("YEAR:", year);
           // console.log('this is i: ', i);
           // called below
           check52Week(i, element, year);
@@ -53,8 +56,9 @@ const check52Week = (i, element, year) => {
   } else if (property === "52_week_low") {
     element["fiftytwo_week_low"] = i.value;
   } else {
-    year = 'undefined' ? '' : year;
     // console.log('year', year);
-    element[property + year] = i.value;
+    date = (year === undefined) ? '' : year;
+    // console.log("DATE: ", date);
+    element[property + date] = i.value;
   }
 }

@@ -11,28 +11,30 @@ const apiReq = require('./api_req.js');
 
 module.exports.stockData = (ticker, res, dbStuff, allCompsData) => {
   Promise.all([
-    // apiReq('statement', ticker, "income_statement", "2014", "FY"),
-    // apiReq('statement', ticker, "income_statement", "2015", "FY"),
-    // apiReq('statement', ticker, "balance_sheet", "2014", "FY"),
-    // apiReq('statement', ticker, "balance_sheet", "2015", "FY"),
-    // apiReq('statement', ticker, "cash_flow_statement", "2014", "FY"),
-    // apiReq('statement', ticker, "cash_flow_statement", "2015", "FY"),
-    // apiReq('statement', ticker, "calculations", "2014", "FY"),
-    // apiReq('statement', ticker, "calculations", "2015", "FY"),
-    apiReq('data_point', ticker, "ticker,name,52_week_high,52_week_low,marketcap,pricetoearnings,basiceps,volume,average_daily_volume,open_price,close_price,change,beta")
+    apiReq('statement', ticker, "income_statement", "2014", "FY"),
+    apiReq('statement', ticker, "income_statement", "2015", "FY"),
+    apiReq('statement', ticker, "balance_sheet", "2014", "FY"),
+    apiReq('statement', ticker, "balance_sheet", "2015", "FY"),
+    apiReq('statement', ticker, "cash_flow_statement", "2014", "FY"),
+    apiReq('statement', ticker, "cash_flow_statement", "2015", "FY"),
+    apiReq('statement', ticker, "calculations", "2014", "FY"),
+    apiReq('statement', ticker, "calculations", "2015", "FY"),
+    apiReq('data_point', ticker, "ticker,name,52_week_high,52_week_low,marketcap,pricetoearnings,basiceps,volume,average_daily_volume,open_price,close_price,change,beta"),
+    apiReq('financials', ticker)
     ])
   .then((data) => {
 
     let flatData = data.reduce( (prev, curr) => Object.assign(prev, curr));
     // console.log("DATA FROM PROMISE:", data);
     // console.log("FLATDATA FROM PROMISE:", flatData);
+
     //note: fix following to not be commented out (add conditional)
     //condition: should check if already in DB
     //used to create/populate db schemase/tables
     //DONT DELETE:
     // use check_db.js in db folder to verify
     // query.insertRow(flatData);
-    //
+
     // used to populate postgres table
     // DON'T DELETE:
     /**

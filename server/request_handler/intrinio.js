@@ -112,7 +112,10 @@ module.exports = function (username, password) {
       return this.get('https://www.intrinio.com/api/news?ticker='+ticker);
     },
     statement: function(ticker, statement, year, period){
-      return this.get('https://api.intrinio.com/financials/standardized?ticker='+ticker+'&statement='+statement+'&fiscal_year='+year+'&fiscal_period='+period)
+      return this.get('https://api.intrinio.com/financials/standardized?='+ticker+'&statement='+statement+'&fiscal_year='+year+'&fiscal_period='+period)
+    },
+    financials: function(ticker){
+      return this.get('https://api.intrinio.com/financials/standardized?identifier=FB&statement=calculations&sequence=0&type=TTM')
     }
   });
   if(!username || !password){

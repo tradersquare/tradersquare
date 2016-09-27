@@ -1,7 +1,7 @@
 const db = require('./config.js');
 
 
-module.exports = function(res, results) {
+module.exports = (res, results) => {
   db.query(`SELECT * FROM productionschema.stockdatatable;`)
   .on('row', row => {
     results.push(row);
