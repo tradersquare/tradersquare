@@ -43,35 +43,6 @@ const dataPointPromise = (type, ticker) => {
   });
 };
 
-const zscorePromise = (ticker) => {
-  return new Promise((resolve, reject) => {
-    intrinio.data_point(ticker, "ticker,name,altmanzscore")
-      .on('complete', (data, response) => {
-        const results = data.data;
-        for(let i of results){
-          element[i.item] = i.value;
-        }
-        resolve(element);
-      })
-      .on('error', (error) => {
-        reject(error);
-      })
-  });
-};
-
-const historicalPricePromise = (ticker) => {
-  return new Promise((resolve, reject) => {
-    intrinio.historical_data(ticker, "close_price")
-      .on('complete', (data, response) => {
-        element.historicalPrice = data.data;
-        resolve(element);
-      })
-      .on('error', (error) => {
-        reject(error);
-      })
-  });
-};
-
 //used to populate database
 //DON'T DELETE:
 let allCompsData = [];
@@ -105,8 +76,10 @@ module.exports.stockData = (ticker, res) => {
     //   callAll.consolidate(allCompsData);
     // }
 
-    console.log(data);
-    res.send(data);
+    let flatData = data.reduce( (prev, curr) => Object.assign(prev, curr));
+
+    console.log(flatData);
+    res.send(flatData);
   })
   .catch(err => {
     throw err;
