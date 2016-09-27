@@ -8,7 +8,7 @@ let element = {};
 
 const calculationPromise = (ticker) => {
   return new Promise((resolve, reject) => {
-    intrinio.data_point(ticker, "ticker,name,altmanzscore,assetturnover,grossmargin,pricetoearnings,currentratio,epsgrowth,divpayoutratio,debttoequity,enterprisevalue,earningsyield,netincomegrowth,roe")
+    intrinio.data_point(ticker, "ticker,name,altmanzscore,assetturnover,grossmargin,pricetoearnings,currentratio,epsgrowth,divpayoutratio,debttoequity,enterprisevalue,earningsyield,netincomegrowth,roe,52_week_high,52_week_low,marketcap,pricetoearnings,basiceps,volume,average_daily_volume,open_price,close_price,change,beta,short_description")
       .on('complete', (data, response) => {
         const results = data.data;
         for(let i of results){
