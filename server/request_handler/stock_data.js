@@ -76,7 +76,6 @@ module.exports.stockData = (ticker, res, dbStuff, allCompsData) => {
     // use check_db.js in db folder to verify
     // query.insertRow(flatData);
     //
-
     // used to populate postgres table
     // DON'T DELETE:
     /**

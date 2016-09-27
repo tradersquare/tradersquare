@@ -6,6 +6,13 @@ import getStratData from '../actions/get_strat_data';
 import SearchBar from './search_bar';
 import StratNav from './strategy_nav';
 
+// import { DropdownButton } from 'react-bootstrap';
+// import Bootstrap from 'react-bootstrap';
+// import Select from 'react-bootstrap-select';
+
+// const React.Bootstrap = Bootstrap;
+// const React.Bootstrap.Select = Select;
+
 class StrategyView extends Component {
   constructor(props) {
     super(props);

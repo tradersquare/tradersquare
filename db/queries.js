@@ -1,5 +1,7 @@
 const db = require('./config.js');
 const callAll = require('../server/request_handler/all_companies')
+const columnsList = require('./columns.js');
+
 module.exports = function() {
   db.query(`INSERT INTO productionschema.stockdatatable();`)
     .on('end', function() {
@@ -10,15 +12,14 @@ module.exports = function() {
 module.exports.createSchema = sortedElements => {
   // const sortedElements = sortQuery(element);
 
-  const varChar = 'varchar(20)';
-  const tableCols = sortedElements.join(' varchar(20), ');
+  const tableCols = sortedElements.join(' varchar(40), ');
   console.log(tableCols);
 
   // db.query('DROP TABLE productionschema.stockdatatable')
   // .on('end', () => console.log('table dropped'))
   // .then( () => {
   /*return*/
-  db.query(`CREATE TABLE IF NOT EXISTS productionschema.stockdatatable(id SERIAL PRIMARY KEY, ${tableCols} varchar(20));`)
+  db.query(`CREATE TABLE IF NOT EXISTS productionschema.stockdatatable(id SERIAL PRIMARY KEY, ${tableCols} varchar(40));`)
     .on('end', function() {
       console.log("created")
     })
@@ -47,8 +48,9 @@ function sortQuery(element) {
 module.exports.sortQuery = sortQuery;
 
 module.exports.insertRow = elements => {
+  console.log(columnsList);
   for (let key in elements) {
-    if (!key in callAll.tableColumns) {
+    if (columnsList.columns.indexOf(key) === -1) {
       delete elements[key];
     }
   }
