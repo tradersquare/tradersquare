@@ -48,18 +48,48 @@ class StockView extends Component {
             <p className="col-md-12">{stockData.short_description}</p>
           </div>
         </div>
-        <div className="col-md-6">
-        <div className="col-md-12">Altman's Z-Score: {stockData.altmanzscore}</div>
-        <div className="col-md-12">Asset Turnover: {stockData.assetturnover}</div>
-        <div className="col-md-12">Gross Margin: {stockData.grossmargin}</div>
-        <div className="col-md-12">Price to Earnings: {stockData.pricetoearnings}</div>
-        <div className="col-md-12">Current Ratio: {stockData.currentratio}</div>
-        <div className="col-md-12">Debt to Equity: {stockData.debttoequity}</div>
-        <div className="col-md-12">Enterprise Value: {stockData.eterprisevalue}</div>
-        <div className="col-md-12">Earnings Yield: {stockData.earningsyield}</div>
-        <div className="col-md-12">Net Income Growth: {stockData.netincomegrowth}</div>
-        <div className="col-md-12">Return on Equity: {stockData.roe}</div>
-        </div>
+        <table className="col-md-6">
+          <tr>
+            <td className="col-md-12">Altman's Z-Score</td>
+            <td>{stockData.altmanzscore}</td>
+          </tr>
+          <tr>
+            <td className="col-md-12">Asset Turnover</td>
+            <td>{stockData.assetturnover}</td>
+          </tr>
+          <tr>
+            <td className="col-md-12">Gross Margin</td>
+            <td>{stockData.grossmargin}</td>
+          </tr>
+          <tr>
+            <td className="col-md-12">Price to Earnings</td>
+            <td>{stockData.pricetoearnings}</td>
+          </tr>
+          <tr>
+            <td className="col-md-12">Current Ratio</td>
+            <td>{stockData.currentratio}</td>
+          </tr>
+          <tr>
+            <td className="col-md-12">Debt to Equity</td>
+            <td>{stockData.debttoequity}</td>
+          </tr>
+          <tr>
+            <td className="col-md-12">Enterprise Value</td>
+            <td>{stockData.eterprisevalue}</td>
+          </tr>
+          <tr>
+            <td className="col-md-12">Earnings Yield</td>
+            <td>{stockData.earningsyield}</td>
+          </tr>
+          <tr>
+            <td className="col-md-12">Net Income Growth</td>
+            <td>{stockData.netincomegrowth}</td>
+          </tr>
+          <tr>
+            <td className="col-md-12">Return on Equity</td>
+            <td>{stockData.roe}</td>
+          </tr>
+        </table>
 
       </div>
       <div>
