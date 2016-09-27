@@ -42,9 +42,6 @@ class StockView extends Component {
             <div className="col-md-6">Open Price: {stockData.open_price}</div>
             <div className="col-md-6">Close Price: {stockData.close_price}</div>
             <div className="col-md-6">Beta: {stockData.beta}</div>
-            {/* <div></div>
-            <div></div>
-            <div></div> */}
             <p className="col-md-12">{stockData.short_description}</p>
           </div>
         </div>
@@ -90,7 +87,6 @@ class StockView extends Component {
             <td>{stockData.roe}</td>
           </tr>
         </table>
-
       </div>
       <div>
       </div>

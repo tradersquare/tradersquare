@@ -62,6 +62,7 @@ class StrategyView extends Component {
       <tr key={stockKey}>
           <td>{stock.ticker}</td>
           <td>{stock.name}</td>
+          <td>{stock.close_price}</td>
           <td>{val}</td>
           <td>{100-(Math.round((stockKey/this.props.strategyData.length)*100))}%</td>
       </tr>)
@@ -99,6 +100,7 @@ class StrategyView extends Component {
           <tr>
             <th>Ticker</th>
             <th>Name</th>
+            <th>Price</th>
             <th>Value</th>
             <th>Percentile</th>
           </tr>
