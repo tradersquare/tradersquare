@@ -24,7 +24,8 @@ module.exports.stockData = (ticker, res, dbStuff, allCompsData) => {
   .then((data) => {
 
     let flatData = data.reduce( (prev, curr) => Object.assign(prev, curr));
-    console.log("FLATDATA FROM PROMISE:", flatData);
+    // console.log("DATA FROM PROMISE:", data);
+    // console.log("FLATDATA FROM PROMISE:", flatData);
     //note: fix following to not be commented out (add conditional)
     //condition: should check if already in DB
     //used to create/populate db schemase/tables
@@ -41,8 +42,11 @@ module.exports.stockData = (ticker, res, dbStuff, allCompsData) => {
       allCompsData.push(flatData);
 
       let parsedCompaniesList = JSON.parse(companiesList);
-
       if (allCompsData.length === parsedCompaniesList.length) {
+        // console.log('parsedCompaniesList: ', parsedCompaniesList);
+        /**
+         * calls all_companies: consolidate
+         */
         callAll.consolidate(allCompsData);
       }
     }

@@ -9,11 +9,17 @@ module.exports = function() {
     })
 }
 
+/**
+ * Called from all_companies.js: consolidate
+ * [creates Schema]
+ * @param  {[array]} sortedElements [array of keys, in ASCII order]
+ * @return {[null]}                []
+ */
 module.exports.createSchema = sortedElements => {
-  // const sortedElements = sortQuery(element);
+  // console.log('inside createSchema function: sortedElements: ', sortedElements);
   const varChar = ' varchar(40), ';
   const tableCols = sortedElements.join(varChar);
-  const dummyCols = '';
+  let dummyCols = '';
 
   for (let i = 0; i < 20; i++) {
     dummyCols = dummyCols + `Equation${i}${varChar}`;

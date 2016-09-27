@@ -62,11 +62,10 @@ app.get('/stockData/*', function(req, res) {
  * use schema endpoint for dev only
  * not connected to client
  * use in postman with env headers
- *
+ * invokes getReq() in allCompanies.js
  */
 app.get('/schema/', function(req, res) {
   callAll.getReq(res);
-
 });
 
 app.get('/getDataDB/', function(req, res) {
