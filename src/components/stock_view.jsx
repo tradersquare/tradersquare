@@ -27,7 +27,7 @@ class StockView extends Component {
       </div>
 
       <div>
-        <h3>{stockData.ticker} : {stockData.name} {stockData.price}</h3>
+        <h3>{stockData.ticker} : {stockData.name}     {stockData.close_price}</h3>
       </div>
 
       <div className="row">
