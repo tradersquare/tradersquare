@@ -14,6 +14,23 @@ module.exports = function() {
  * @param  {[array]} sortedElements [array of keys, in ASCII order]
  * @return {[null]}                []
  */
+
+/**
+ * [sortQuery description]
+ * @param  {[object]} element [description]
+ * @return {[array]}         [description]
+ */
+module.exports.sortQuery = sortQuery;
+
+function sortQuery(element) {
+  let indexedElements = [];
+  for (let key in element) {
+    indexedElements.push(key);
+  }
+  const sortedElements = indexedElements.sort();
+  return sortedElements;
+}
+
 module.exports.createSchema = sortedElements => {
 
   const varChar = ' varchar(40), ';
@@ -31,23 +48,6 @@ module.exports.createSchema = sortedElements => {
       console.log("created")
     })
     .catch(console.error)
-}
-
-/**
- * [sortQuery description]
- * @param  {[object]} element [description]
- * @return {[array]}         [description]
- */
-
-module.exports.sortQuery = sortQuery;
-
-function sortQuery(element) {
-  let indexedElements = [];
-  for (let key in element) {
-    indexedElements.push(key);
-  }
-  const sortedElements = indexedElements.sort();
-  return sortedElements;
 }
 
 module.exports.insertRow = (data, elements) => {
@@ -79,5 +79,7 @@ module.exports.insertRow = (data, elements) => {
       console.log("inserted into productionschema.stockdatatable")
     });
 }
-  // DROP TABLE command
-  // 'DROP TABLE productionschema.stockdatatable'
+
+// module.exports.updateRow = (element) => {
+//   db.query(`UPDATE productionschema.stockdatatable SET `)
+// }

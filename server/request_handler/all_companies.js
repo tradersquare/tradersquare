@@ -29,8 +29,8 @@ module.exports.populate = (res) => {
           let ticker = parsedCompaniesList[i];
           StockData.stockData(ticker, res, 'populate', allCompsData, data);
           i++;
+          setTimeout(autoPopulate, 45000);
         }
-        setTimeout(autoPopulate, 120000);
       })();
       // for (let i = 0; i < parsedCompaniesList.length; i++) {
 
