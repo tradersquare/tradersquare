@@ -9,7 +9,7 @@ const callAll = require('./all_companies.js');
 const companiesList = process.env.companies;
 const apiReq = require('./api_req.js');
 
-module.exports.stockData = (ticker, res, dbStuff, allCompsData) => {
+module.exports.stockData = (ticker, res, dbStuff, allCompsData, columns) => {
   Promise.all([
     apiReq('statement', ticker, "income_statement", "2014", "FY"),
     apiReq('statement', ticker, "income_statement", "2015", "FY"),
@@ -27,16 +27,6 @@ module.exports.stockData = (ticker, res, dbStuff, allCompsData) => {
     let flatData = data.reduce( (prev, curr) => Object.assign(prev, curr));
     // console.log("DATA FROM PROMISE:", data);
     // console.log("FLATDATA FROM PROMISE:", flatData);
-
-    //note: fix following to not be commented out (add conditional)
-    //condition: should check if already in DB
-    //used to create/populate db schemase/tables
-    //DONT DELETE:
-    // use check_db.js in db folder to verify
-    // query.insertRow(flatData);
-
-    // used to populate postgres table
-    // DON'T DELETE:
     /**
     * called from server file: get('schema'):
     */
@@ -53,7 +43,7 @@ module.exports.stockData = (ticker, res, dbStuff, allCompsData) => {
       }
     }
     if (dbStuff === 'populate') {
-      query.insertRow(flatData);
+      query.insertRow(columns, flatData);
     }
 
     res.send(flatData);

@@ -17,14 +17,25 @@ module.exports.getReq = (res) => {
 module.exports.populate = (res) => {
   let allCompsData = [];
   let results = [];
-  grabRowsFromDB(res, results);
-  console.log("RESULTS: ", res);
-  // companiesList: arr from .env
-  let parsedCompaniesList = JSON.parse(companiesList);
-  // for (let i = 0; i < parsedCompaniesList.length; i++) {
-  //   let ticker = parsedCompaniesList[i];
-  //   StockData.stockData(ticker, res, 'populate', allCompsData);
-  //}
+  return new Promise((resolve, reject) => {
+    grabRowsFromDB(res, results, resolve);
+  })
+    .then((data) => {
+      // companiesList: arr from .env
+      let parsedCompaniesList = JSON.parse(companiesList);
+      let i = 0;
+      (function autoPopulate() {
+        if (i < parsedCompaniesList.length) {
+          let ticker = parsedCompaniesList[i];
+          StockData.stockData(ticker, res, 'populate', allCompsData, data);
+          i++;
+        }
+        setTimeout(autoPopulate, 120000);
+      })();
+      // for (let i = 0; i < parsedCompaniesList.length; i++) {
+
+      // }
+    })
 };
 
 /**

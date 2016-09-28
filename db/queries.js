@@ -1,6 +1,5 @@
 const db = require('./config.js');
 const callAll = require('../server/request_handler/all_companies')
-const columnsList = require('./columns.js');
 
 module.exports = function() {
   db.query(`INSERT INTO productionschema.stockdatatable();`)
@@ -51,10 +50,9 @@ function sortQuery(element) {
   return sortedElements;
 }
 
-module.exports.insertRow = elements => {
-  // console.log(columnsList);
+module.exports.insertRow = (data, elements) => {
   for (let key in elements) {
-    if (columnsList.columns.indexOf(key) === -1) {
+    if (data.indexOf(key) === -1) {
       delete elements[key];
     }
   }
@@ -76,11 +74,10 @@ module.exports.insertRow = elements => {
 
   values = values.slice(0, values.length - 1);
 
-  db.query(`INSERT INTO productionschema.stockdatatable (${colsPure}) values(${values});`)
+  db.query(`INSERT INTO productionschema.stockdatatable (${colsPure}) values(${values})`)
     .on('end', function() {
       console.log("inserted into productionschema.stockdatatable")
     });
 }
-
   // DROP TABLE command
   // 'DROP TABLE productionschema.stockdatatable'
