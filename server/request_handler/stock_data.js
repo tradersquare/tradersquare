@@ -56,6 +56,7 @@ module.exports.stockData = (ticker, res, dbStuff, allCompsData) => {
     res.send(flatData);
   })
   .catch(err => {
-    throw err;
+    console.log("***ERROR***")
+    res.send({});
   })
 };
