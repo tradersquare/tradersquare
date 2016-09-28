@@ -1,20 +1,30 @@
 const StockData = require('./stock_data');
 const queries = require('../../db/queries.js');
+const grabRowsFromDB = require('../../db/check_columns.js')
 const companiesList = process.env.companies;
 
 // Called from server.js "getReq"
 module.exports.getReq = (res) => {
-  // console.log(companiesList);
   let allCompsData = [];
   // companiesList: arr from .env
   let parsedCompaniesList = JSON.parse(companiesList);
-  // console.log("allcompsData: ", allCompsData);
-  console.log("parsedCompaniesList: ", parsedCompaniesList);
   for (let i = 0; i < parsedCompaniesList.length; i++) {
     let ticker = parsedCompaniesList[i];
-    console.log('before StockData.StockData');
     StockData.stockData(ticker, res, 'getReq', allCompsData);
   }
+};
+
+module.exports.populate = (res) => {
+  let allCompsData = [];
+  let results = [];
+  grabRowsFromDB(res, results);
+  console.log("RESULTS: ", res);
+  // companiesList: arr from .env
+  let parsedCompaniesList = JSON.parse(companiesList);
+  // for (let i = 0; i < parsedCompaniesList.length; i++) {
+  //   let ticker = parsedCompaniesList[i];
+  //   StockData.stockData(ticker, res, 'populate', allCompsData);
+  //}
 };
 
 /**
@@ -24,7 +34,6 @@ module.exports.getReq = (res) => {
  * @return {[null]}      [calls other funcs]
  */
 module.exports.consolidate = data => {
-
   let tableColumns = {};
   for (let i = 0; i < data.length; i++) {
     let obj = data[i];
@@ -39,7 +48,6 @@ module.exports.consolidate = data => {
    * @type {[array]}         [ASCII ordered array of properties]
    */
   sortedElements = queries.sortQuery(tableColumns);
-
   /**
    * [actually creates schema]
    * sortedElements type: [array]

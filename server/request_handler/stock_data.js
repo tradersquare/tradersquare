@@ -52,6 +52,9 @@ module.exports.stockData = (ticker, res, dbStuff, allCompsData) => {
         callAll.consolidate(allCompsData);
       }
     }
+    if (dbStuff === 'populate') {
+      query.insertRow(flatData);
+    }
 
     res.send(flatData);
   })
