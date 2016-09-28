@@ -43,7 +43,7 @@ module.exports.createSchema = sortedElements => {
 
   dummyCols = dummyCols.slice(0, dummyCols.length - 2);
 
-  db.query(`CREATE TABLE IF NOT EXISTS productionschema.stockdatatable (id SERIAL PRIMARY KEY, ${tableCols} varchar(40), ${dummyCols});`)
+  db.query(`CREATE TABLE IF NOT EXISTS productionschema.realdata (id SERIAL PRIMARY KEY, ${tableCols} varchar(40), ${dummyCols});`)
     .on('end', function() {
       console.log("created")
     })
@@ -74,7 +74,7 @@ module.exports.insertRow = (data, elements) => {
 
   values = values.slice(0, values.length - 1);
 
-  db.query(`INSERT INTO productionschema.stockdatatable (${colsPure}) values(${values})`)
+  db.query(`INSERT INTO productionschema.realdata (${colsPure}) values(${values})`)
     .on('end', function() {
       console.log("inserted into productionschema.stockdatatable")
     });
