@@ -12,8 +12,6 @@ class StockView extends Component {
 
   render() {
     const stockData = this.props.stockData;
-    console.log('asdfsdff', stockData);
-
     return (
       <div>
         <div className="row header">
@@ -33,26 +31,28 @@ class StockView extends Component {
         <div className="row">
           <img className="col-md-6" src="http://i.stack.imgur.com/OxwLO.png"/>
           <div className="col-md-6">
-            <div className="col-md-12">{stockData.short_description}</div>
-            <div className="col-md-12">Key Stats:</div>
+            <div className="card col-md-12"><p>{stockData.short_description}</p></div>
+            <div className="card col-md-12">Key Stats:</div>
           </div>
         </div>
 
-        <div className="row">
-          <div className="col-md-4">52 week low: {stockData['52_week_low']}</div>
-          <div className="col-md-4">52 week high: {stockData['52_week_high']}</div>
-          <div className="col-md-4">Basic EPS: {stockData.basiceps}</div>
-        </div>
+        <div className="card-deck-wrapper">
+          <div className="card-deck">
+            <div className="card">52 week low: {stockData['52_week_low']}</div>
+            <div className="card">52 week high: {stockData['52_week_high']}</div>
+            <div className="card">Basic EPS: {stockData.basiceps}</div>
+          </div>
 
-        <div className="row">
-          <div className="col-md-4">Market Cap: {stockData.marketcap}</div>
-          <div className="col-md-4">Volume: {stockData.volume}</div>
-          <div className="col-md-4">Open Price: {stockData.open_price}</div>
-        </div>
+          <div className="card-deck">
+            <div className="card">Market Cap: {stockData.marketcap}</div>
+            <div className="card">Volume: {stockData.volume}</div>
+            <div className="card">Open Price: {stockData.open_price}</div>
+          </div>
 
-        <div className="row">
-          <div className="col-md-4">Close Price: {stockData.close_price}</div>
-          <div className="col-md-4">Beta: {stockData.beta}</div>
+          <div className="card-deck">
+            <div className="card">Close Price: {stockData.close_price}</div>
+            <div className="card">Beta: {stockData.beta}</div>
+          </div>
         </div>
 
       </div>
@@ -61,7 +61,6 @@ class StockView extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log('mapStateToProps state: ', state);
   return {
     stockData: state.stock
   }
