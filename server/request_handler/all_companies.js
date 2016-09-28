@@ -24,11 +24,9 @@ module.exports.getReq = (res) => {
  * @return {[null]}      [calls other funcs]
  */
 module.exports.consolidate = data => {
-  console.log('allCompsData: ', data);
-  console.log(data.length);
 
   let tableColumns = {};
-  for (let i = 1; i < data.length; i++) {
+  for (let i = 0; i < data.length; i++) {
     let obj = data[i];
     for (let key in obj) {
       if (!tableColumns[key]) {
@@ -36,7 +34,6 @@ module.exports.consolidate = data => {
       }
     }
   }
-
   /**
    * [calls queries.js: sortQuery() to put in ASCII order]
    * @type {[array]}         [ASCII ordered array of properties]

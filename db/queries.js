@@ -16,7 +16,7 @@ module.exports = function() {
  * @return {[null]}                []
  */
 module.exports.createSchema = sortedElements => {
-  // console.log('inside createSchema function: sortedElements: ', sortedElements);
+  console.log('inside createSchema function: sortedElements: ', sortedElements);
   const varChar = ' varchar(40), ';
   const tableCols = sortedElements.join(varChar);
   let dummyCols = '';
@@ -27,7 +27,7 @@ module.exports.createSchema = sortedElements => {
 
   dummyCols = dummyCols.slice(0, dummyCols.length - 2);
   console.log("TABLECOLS:", tableCols, "DUMMYCOLS:", dummyCols);
-  db.query(`CREATE TABLE IF NOT EXISTS productionschema.stockdatatable1 (id SERIAL PRIMARY KEY, ${tableCols} varchar(40), ${dummyCols});`)
+  db.query(`CREATE TABLE IF NOT EXISTS productionschema.stockdatatable (id SERIAL PRIMARY KEY, ${tableCols} varchar(40), ${dummyCols});`)
     .on('end', function() {
       console.log("created")
     })
@@ -51,13 +51,13 @@ function sortQuery(element) {
 module.exports.sortQuery = sortQuery;
 
 module.exports.insertRow = elements => {
-  console.log(columnsList);
+  // console.log(columnsList);
   for (let key in elements) {
     if (columnsList.columns.indexOf(key) === -1) {
       delete elements[key];
     }
   }
-  console.log('testing insertRow');
+  // console.log('testing insertRow');
   let sortedArr = sortQuery(elements);
   let colsPure = '';
 
