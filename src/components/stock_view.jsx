@@ -7,6 +7,7 @@ import StratNav from './strategy_nav';
 
 class StockView extends Component {
   render() {
+    console.log('inside stock_view: ', this.props.graphData);
 
     const stockData = this.props.stockData;
     return (
@@ -59,7 +60,8 @@ class StockView extends Component {
 
 function mapStateToProps(state) {
   return {
-    stockData: state.stock
+    stockData: state.stock,
+    graphData: state.graphData
   }
 }
 
