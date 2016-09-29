@@ -85,8 +85,9 @@ app.get('/stockDataTmp/*', function(req, res) {
   stratData(ticker, res);
 });
 
-app.get('/getGraphData/', function(req, res) {
-  ticker = 'FB';
+app.get('/getGraphData/*', function(req, res) {
+  ticker = req.url.slice(14).toUpperCase();
+  console.log('sliced: ', ticker);
   getGraphData(res, ticker);
 })
 

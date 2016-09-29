@@ -4,6 +4,7 @@ import {Link} from 'react-router';
 import {searchStockData as SearchStockData} from '../actions/stock_search';
 import {bindActionCreators} from 'redux';
 import getStratData from '../actions/get_strat_data';
+import {getGraphData as GetGraphData} from '../actions/get_graph_data';
 
 class SearchBar extends Component {
 
@@ -20,6 +21,7 @@ class SearchBar extends Component {
 
   handleSubmit() {
     this.props.SearchStockData(this.state.ticker);
+    this.props.GetGraphData(this.state.ticker);
     this.setState({ticker: ''});
   }
 
@@ -40,4 +42,4 @@ class SearchBar extends Component {
   }
 }
 
-export default connect(null, {SearchStockData, getStratData})(SearchBar);
+export default connect(null, {SearchStockData, getStratData, GetGraphData})(SearchBar);
