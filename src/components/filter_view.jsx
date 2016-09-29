@@ -19,6 +19,16 @@ class FilterView extends Component {
           <StratNav/>
         </div>
       </div>
+      <div className="row">
+        <div className="col-md-6 filter">
+
+        </div>
+
+        <div className="col-md-6 results">
+
+        </div>
+
+      </div>
       </div>
     )
 
