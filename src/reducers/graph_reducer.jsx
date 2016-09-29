@@ -7,7 +7,6 @@ export default function(state = [], action) {
       // console.log('graph payload: ', action.payload.data);
       return action.payload.data.data;
     default:
-      console.log('did it work? (myDefault): ', myDefault);
       return state;
   }
 }
