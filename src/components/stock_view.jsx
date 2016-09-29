@@ -14,7 +14,7 @@ class StockView extends Component {
 
   renderPrices() {
     // console.log('top of renderPrices(): ', this.props.graphData)
-    if (this.props.graphData[0] === '') {
+    if (this.props.graphData.length === 0) {
       return (<div> no data yet</div>)
     }
     else {
@@ -24,7 +24,7 @@ class StockView extends Component {
       // console.log('state.graphData.i.close: ', this.props.graphData[i].close);
       for (let i = 0; i < 10; i++) {
         // console.log(this.props.graphData[i]);
-        // data.push(this.props.graphData[i].close);
+        data.push(this.props.graphData[i].close);
       }
       // console.log('100: ', data);
       return (
