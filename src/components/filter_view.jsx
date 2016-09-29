@@ -11,7 +11,7 @@ class FilterView extends Component {
     super(props);
 
     // this.state = {selectValue: 'altmanzscore', items: 10, flag: false}
-
+    // this.handleClick = this.handleClick.bind(this);
     this.componentWillMount = this.componentWillMount.bind(this);
   }
 
@@ -19,8 +19,26 @@ class FilterView extends Component {
     this.props.getDBDataFiltered();
   }
 
+  renderFilterList() {
+    let counter = 0;
+    return this.props.filterData.map((stock) => {
+      counter++;
+      return (
+        <tbody key={counter}>
+          <tr>
+            <td>{stock.ticker}</td>
+            <td>{stock.close_price}</td>
+            <td>{stock.pricetoearnings}</td>
+          </tr>
+        </tbody>
+        )
+    })
+  }
+
 
   render() {
+
+
     return (
       <div >
       <div className="row header">
@@ -34,16 +52,20 @@ class FilterView extends Component {
       </div>
       <div className="row">
         <div className="col-md-6 filter">
-
+        <h2> Filters </h2>
+          <button className = "btn btn-secondary">
+            TEST
+          </button>
         </div>
 
         <div className="col-md-6 results">
+        <h2> Results </h2>
           <table className="tablr">
           <tbody><tr>
             <th>Ticker</th>
             <th>Price</th>
           </tr></tbody>
-          {filterData}
+          {this.renderFilterList()}
           </table>
         </div>
 
