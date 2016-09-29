@@ -29,7 +29,6 @@ class StockView extends Component {
       // console.log('100: ', data);
       return (
         <div>
-        graph should go here
           <PriceChart data={data} color="green" />
         </div>
       )
@@ -65,12 +64,8 @@ class StockView extends Component {
           <h3 className="price">${stockData.open_price}  {stockData.change}% {change}</h3>
           </div>
         </div>
-
         {this.renderPrices()}
-
-
         <div className="row">
-          <img className="col-md-6" src="http://i.stack.imgur.com/OxwLO.png"/>
           <div className="col-md-6">
             <div className="card col-md-12">
               <h3>About {stockData.name}:</h3>
@@ -96,12 +91,12 @@ class StockView extends Component {
             <div className="card">
               <h3 className="center">EARNINGS</h3>
               <h4>{(stockData.earningsyield*100)}%</h4>
-              <p>*how much the stock is earning per share</p>            
+              <p>*how much the stock is earning per share</p>
             </div>
             <div className="card">
               <h3 className="center">DIVIDENDS</h3>
               <h4>{stockData.dividendyield}</h4>
-              <p>*how much you are getting paid per share</p>            
+              <p>*how much you are getting paid per share</p>
             </div>
           </div>
 
