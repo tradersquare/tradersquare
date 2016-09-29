@@ -20,9 +20,10 @@ class SearchBar extends Component {
   }
 
   handleSubmit() {
+    console.log('i was clicked');
     this.props.SearchStockData(this.state.ticker);
     this.props.GetGraphData(this.state.ticker);
-    this.setState({ticker: ''});
+    // this.setState({ticker: ''});
   }
 
   setTicker(ev) {
