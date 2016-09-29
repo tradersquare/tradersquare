@@ -27,17 +27,17 @@ module.exports = function (username, password) {
 
             function getUpdate(){
               var watcher = setTimeout(function(){
-                console.log("Watching ticker"+ ticker + " " +frequency+" "+reqCounter)
+                console.log("Watching ticker" + ticker + " " +frequency+" "+reqCounter)
                 rest.get(url, {username:username, password:password})
                 .on('complete', function(data, response) {
-                  if(response.statusCode==200){
+                  if(response.statusCode === 200){
                     resEmitter.emit('update', data, response);
                   }else{
                     resEmitter.emit('error', data, response);
                   }
                 })
 
-                if(reqCounter<numberOfRequests-1){
+                if(reqCounter<numberOfRequests - 1){
                   getUpdate();
                   reqCounter++
                 }
@@ -51,11 +51,11 @@ module.exports = function (username, password) {
 
             rest.get(url, {username:username, password:password})
             .on('complete', function(data, response) {
-              if(response.statusCode==200){
+              if(response.statusCode === 200){
                 resolve(resEmitter)
                 resEmitter.emit('update', data, response);
               }else{
-                resolve(resEmitter)
+                resolve(resEmitter);
                 resEmitter.emit('error', data, response);
               }
             })
@@ -65,7 +65,7 @@ module.exports = function (username, password) {
                 console.log("Watching ticker"+ ticker + " " +frequency+" "+reqCounter)
                 rest.get(url, {username:username, password:password})
                 .on('complete', function(data, response) {
-                  if(response.statusCode==200){
+                  if(response.statusCode === 200){
                     resEmitter.emit('update', data, response);
                   }else{
                     resEmitter.emit('error', data, response);
@@ -116,13 +116,16 @@ module.exports = function (username, password) {
     },
     financials: function(ticker){
       return this.get('https://api.intrinio.com/financials/standardized?identifier='+ticker+'&statement=calculations&sequence=0&type=TTM')
+    },
+    prices: function() {
+      return this.get(`https://api.intrinio.com/prices?identifier=${ticker}`)
     }
   });
   if(!username || !password){
     console.log("No password provided. Using intrinio Dev Account Limit 500 req / day");
-    var username = ""
-    var password = ""
+    var username = "";
+    var password = "";
   }
-  var client = new Intrinio(username, password);
+  var client = new ;Intrinio(username, password);
   return client
 }

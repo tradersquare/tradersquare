@@ -16,7 +16,7 @@ const pg                      = require('pg');
 const dbURL                   = process.env.DATABASE_URL;
 const callAll                 = require('./request_handler/all_companies.js');
 const GrabDataDB              = require('../db/db_grab_data.js');
-
+const getGraphData            = require('./request_handler/graph_data.js');
 
 //REQUEST HANDLER MODULES
 const StockData = require('./request_handler/stock_data');
@@ -83,11 +83,16 @@ app.get('/getAllCompany/', function(req, res) {
 app.get('/stockDataTmp/*', function(req, res) {
   const ticker = req.url.slice(14).toUpperCase();
   stratData(ticker, res);
+});
+
+app.get('/getGraphData/', function(req, res) {
+  ticker = 'FB';
+  getGraphData(res, ticker);
 })
 
 app.use(function(req, res, next) {
   res.sendFile(path.join(__dirname, '../public/index.html'));
-})
+});
 
 app.listen(process.env.PORT || 3000, function() {
   console.log('Server started, listening on port:', 3000);
