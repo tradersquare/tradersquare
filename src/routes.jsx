@@ -5,6 +5,7 @@ import SearchBar from './components/search_bar';
 import StockView from './components/stock_view';
 import StrategyView from './components/strategy_view';
 import Landing from './components/landing';
+import FilterView from './components/filter_view';
 
 
 export default (
@@ -13,5 +14,6 @@ export default (
     <IndexRoute component={Landing} />
     <Route path="/stockview" component={StockView} />
     <Route path="/strategyview" component={StrategyView}/>
+    <Route path="/filterview" component={FilterView}/>
   </Route>
 );
