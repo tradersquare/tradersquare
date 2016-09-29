@@ -16,6 +16,7 @@ const pg                      = require('pg');
 const dbURL                   = process.env.DATABASE_URL;
 const callAll                 = require('./request_handler/all_companies.js');
 const GrabDataDB              = require('../db/db_grab_data.js');
+const GrabFilteredDataDB      = require('../db/db_filter_data.js');
 const getGraphData            = require('./request_handler/graph_data.js');
 
 //REQUEST HANDLER MODULES
@@ -74,6 +75,11 @@ app.get('/getDataDB/', function(req, res) {
   let results = [];
   GrabDataDB(res, results);
 });
+
+app.get('/getFilteredDataDB', function(req, res) {
+  let results = [];
+  GrabFilteredDataDB(res, results);
+})
 
 app.get('/getAllCompany/', function(req, res) {
   let results = [];

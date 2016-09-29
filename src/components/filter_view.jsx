@@ -4,8 +4,21 @@ import {Link} from 'react-router';
 import {bindActionCreators} from 'redux';
 import SearchBar from './search_bar';
 import StratNav from './strategy_nav';
+import getDBDataFiltered from '../actions/get_db_data_filtered';
 
 class FilterView extends Component {
+  constructor(props) {
+    super(props);
+
+    // this.state = {selectValue: 'altmanzscore', items: 10, flag: false}
+
+    this.componentWillMount = this.componentWillMount.bind(this);
+  }
+
+  componentWillMount(){
+    this.props.getDBDataFiltered();
+  }
+
 
   render() {
     return (
@@ -25,13 +38,13 @@ class FilterView extends Component {
         </div>
 
         <div className="col-md-6 results">
-        <table className="tablr">
-        <tbody><tr>
-          <th>Ticker</th>
-          <th>Price</th>
-        </tr></tbody>
-        {filterData}
-        </table>
+          <table className="tablr">
+          <tbody><tr>
+            <th>Ticker</th>
+            <th>Price</th>
+          </tr></tbody>
+          {filterData}
+          </table>
         </div>
 
       </div>
@@ -43,8 +56,8 @@ class FilterView extends Component {
 }
 function mapStateToProps(state) {
   return {
-    filterData: {}
+    filterData: state.filterData
   }
 }
 
-export default connect(mapStateToProps)(FilterView)
+export default connect(mapStateToProps, {getDBDataFiltered})(FilterView)
