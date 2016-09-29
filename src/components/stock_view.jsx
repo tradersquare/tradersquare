@@ -10,6 +10,8 @@ class StockView extends Component {
     console.log('inside stock_view: ', this.props.graphData);
 
     const stockData = this.props.stockData;
+    console.log("***STOCKDATA***", stockData)
+    const change = stockData.change > 0 ? "↑" : "↡"
     return (
       <div>
         <div className="row header">
@@ -23,22 +25,49 @@ class StockView extends Component {
         </div>
 
         <div className="row">
-          <h3>  {stockData.ticker} : {stockData.name} {stockData.open_price}</h3>
+          <div className="col-md-4">
+            <h3>  {stockData.ticker} : {stockData.name}</h3>
+          </div>
+          <div className="col-md-4"></div>
+          <div className="col-md-4">
+          <h3 className="price">${stockData.open_price}  {stockData.change}% {change}</h3>
+          </div>
         </div>
 
         <div className="row">
           <img className="col-md-6" src="http://i.stack.imgur.com/OxwLO.png"/>
           <div className="col-md-6">
-            <div className="card col-md-12"><p>{stockData.short_description}</p></div>
-            <div className="card col-md-12">Key Stats:</div>
+            <div className="card col-md-12">
+              <h3>About {stockData.name}:</h3>
+              <p>{stockData.short_description}</p>
+            </div>
+            <div className="card col-md-12">
+              <h3>Key Statistics:</h3>
+                <span>52 week high/low: {stockData['fiftytwo_week_high']}/{stockData['fiftytwo_week_low']}</span><br/>
+                <span>Market Cap: {stockData.marketcap}</span><br/>
+                <span>Volume: {stockData.volume}</span><br/>
+                <span>Open/Close: {stockData.open_price}/{stockData.close_price}</span><br/>
+            </div>
           </div>
         </div>
 
         <div className="card-deck-wrapper">
           <div className="card-deck">
-            <div className="card">52 week low: {stockData['52_week_low']}</div>
-            <div className="card">52 week high: {stockData['52_week_high']}</div>
-            <div className="card">Basic EPS: {stockData.basiceps}</div>
+            <div className="card">
+              <h3 className="center">COST</h3>
+              <h4>{stockData.pricetoearnings}</h4>
+              <p>*P/E ratio represents how much investors are willing to pay (market price) per dollar of earnings</p>
+            </div>
+            <div className="card">
+              <h3 className="center">EARNINGS</h3>
+              <h4>{(stockData.earningsyield*100)}%</h4>
+              <p>*how much the stock is earning per share</p>            
+            </div>
+            <div className="card">
+              <h3 className="center">DIVIDENDS</h3>
+              <h4>{stockData.dividendyield}</h4>
+              <p>*how much you are getting paid per share</p>            
+            </div>
           </div>
 
           <div className="card-deck">

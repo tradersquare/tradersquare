@@ -47,18 +47,18 @@ class StrategyView extends Component {
     }
     else{
     let currentStrat = this.state.selectValue + "2015";
-    // console.log('straaaaaaat', this.props.strategyData);
-    let count = 0;
+    let filteredStocks = [];
 
     for(let n of this.props.strategyData){
       if(!isNaN(parseFloat(n[currentStrat]))){
-        count++
+        n[currentStrat] = parseFloat(n[currentStrat]);
+        filteredStocks.push(n);
       }
     }
 
-    let stratData = this.props.strategyData.sort((a,b) => {
-      let newA = !isNaN(parseFloat(a[currentStrat])) ? parseFloat(a[currentStrat]) : Number.NEGATIVE_INFINITY;
-      let newB = !isNaN(parseFloat(b[currentStrat])) ? parseFloat(b[currentStrat]) : Number.NEGATIVE_INFINITY;
+    let stratData = filteredStocks.sort((a,b) => {
+      let newA = a[currentStrat];
+      let newB = b[currentStrat];
       if(newA > newB) return -1;
       if(newA < newB) return 1;
     })
@@ -67,21 +67,22 @@ class StrategyView extends Component {
 
     let that = this;
 
-    stratData = this.props.strategyData.map((stock) => {
-      if(stockKey >= that.state.items || isNaN(parseFloat(stock[currentStrat]))){
+    stratData = filteredStocks.map((stock) => {
+      if(stockKey >= that.state.items){
         return;
       }
       stockKey++;
-      let val = !isNaN(parseFloat(stock[currentStrat])) ? parseFloat(stock[currentStrat]) : "N/A"
-      console.log(val)
+      let val = stock[currentStrat];
       return (
-      <tr key={stockKey}>
-          <td>{stock.ticker}</td>
-          <td>{stock.name}</td>
-          <td>{stock.close_price}</td>
-          <td>{val}</td>
-          <td>{100-(Math.round((stockKey/count)*100))}%</td>
-      </tr>)
+      <tbody key={stockKey}>
+        <tr>
+            <td>{stock.ticker}</td>
+            <td>{stock.name}</td>
+            <td>{stock.close_price}</td>
+            <td>{val}</td>
+            <td>{100-(Math.round((stockKey/filteredStocks.length)*100))}%</td>
+        </tr>
+      </tbody>)
     })
 
     return (
@@ -115,13 +116,13 @@ class StrategyView extends Component {
           </select>
           </div>
           <table className="tablr">
-          <tr>
+          <tbody><tr>
             <th>Ticker</th>
             <th>Name</th>
             <th>Price</th>
             <th>Value</th>
             <th>Percentile</th>
-          </tr>
+          </tr></tbody>
           {stratData}
           </table>
           <a onClick={this.viewMore}>...more</a>
