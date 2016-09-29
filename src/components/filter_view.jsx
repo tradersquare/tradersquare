@@ -25,7 +25,13 @@ class FilterView extends Component {
         </div>
 
         <div className="col-md-6 results">
-
+        <table className="tablr">
+        <tbody><tr>
+          <th>Ticker</th>
+          <th>Price</th>
+        </tr></tbody>
+        {filterData}
+        </table>
         </div>
 
       </div>
