@@ -5,8 +5,8 @@ const INITIAL_STRAT_STATE = { all: [], post: null};
 export default function(state = INITIAL_STRAT_STATE, action) {
   switch(action.type) {
     case GET_STRAT_DATA:
-      console.log(action.payload, 'strat data')
-      return action.payload;
+      console.log(action.payload.data, 'strat data')
+      return action.payload.data;
   }
 
   return ([

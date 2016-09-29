@@ -75,6 +75,10 @@ app.get('/getDataDB/', function(req, res) {
   GrabDataDB(res, results);
 });
 
+app.get('/getAllCompany/', function(req, res) {
+  let results = [];
+  GrabDataDB(res, results);
+});
 
 app.get('/stockDataTmp/*', function(req, res) {
   const ticker = req.url.slice(14).toUpperCase();

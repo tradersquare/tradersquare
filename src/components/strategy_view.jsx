@@ -46,11 +46,19 @@ class StrategyView extends Component {
         )
     }
     else{
-    let currentStrat = this.state.selectValue;
+    let currentStrat = this.state.selectValue + "2015";
     // console.log('straaaaaaat', this.props.strategyData);
+    let count = 0;
+
+    for(let n of this.props.strategyData){
+      if(!isNaN(parseFloat(n[currentStrat]))){
+        count++
+      }
+    }
+
     let stratData = this.props.strategyData.sort((a,b) => {
-      let newA = typeof a[currentStrat] === 'number' ? a[currentStrat] : Number.NEGATIVE_INFINITY;
-      let newB = typeof b[currentStrat] === 'number' ? b[currentStrat] : Number.NEGATIVE_INFINITY;
+      let newA = !isNaN(parseFloat(a[currentStrat])) ? parseFloat(a[currentStrat]) : Number.NEGATIVE_INFINITY;
+      let newB = !isNaN(parseFloat(b[currentStrat])) ? parseFloat(b[currentStrat]) : Number.NEGATIVE_INFINITY;
       if(newA > newB) return -1;
       if(newA < newB) return 1;
     })
@@ -60,18 +68,19 @@ class StrategyView extends Component {
     let that = this;
 
     stratData = this.props.strategyData.map((stock) => {
-      if(stockKey >= that.state.items){
+      if(stockKey >= that.state.items || isNaN(parseFloat(stock[currentStrat]))){
         return;
       }
       stockKey++;
-      let val = typeof stock[currentStrat] === "number" ? stock[currentStrat].toFixed(3) : "N/A"
+      let val = !isNaN(parseFloat(stock[currentStrat])) ? parseFloat(stock[currentStrat]) : "N/A"
+      console.log(val)
       return (
       <tr key={stockKey}>
           <td>{stock.ticker}</td>
           <td>{stock.name}</td>
           <td>{stock.close_price}</td>
           <td>{val}</td>
-          <td>{100-(Math.round((stockKey/this.props.strategyData.length)*100))}%</td>
+          <td>{100-(Math.round((stockKey/count)*100))}%</td>
       </tr>)
     })
 
