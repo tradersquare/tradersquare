@@ -41,8 +41,6 @@ app.use(webpackDevMiddleware(compiler, {
   //   log: console.log
   // }))
 
-
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
@@ -66,6 +64,10 @@ app.get('/stockData/*', function(req, res) {
  */
 app.get('/schema/', function(req, res) {
   callAll.getReq(res);
+});
+
+app.get('/populate/', function(req, res) {
+  callAll.populate(res);
 });
 
 app.get('/getDataDB/', function(req, res) {
