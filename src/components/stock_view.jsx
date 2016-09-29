@@ -29,7 +29,7 @@ class StockView extends Component {
       // console.log('100: ', data);
       return (
         <div>
-          <PriceChart data={data} color="green" />
+          <PriceChart data={data} color="#0353A4" />
         </div>
       )
     }
@@ -48,6 +48,7 @@ class StockView extends Component {
     const stockData = this.props.stockData;
     console.log("***STOCKDATA***", stockData)
     const change = stockData.change > 0 ? "↑" : "↡"
+    const earningsyield = stockData.earningsyield;
     return (
       <div>
         <div className="row header">
@@ -69,8 +70,10 @@ class StockView extends Component {
           <h3 className="price">${stockData.open_price}  {stockData.change}% {change}</h3>
           </div>
         </div>
-        {this.renderPrices()}
         <div className="row">
+          <div className="col-md-6">        
+            {this.renderPrices()}
+          </div>
           <div className="col-md-6">
             <div className="card col-md-12">
               <h3 className="centerheading">About {stockData.name}:</h3>
@@ -95,7 +98,7 @@ class StockView extends Component {
             </div>
             <div className="card">
               <h3 className="centerheading">EARNINGS</h3>
-              <h4 className="centertext">{(stockData.earningsyield*100)}%</h4>
+              <h4 className="centertext">{(earningsyield*100)}%</h4>
               <p>*how much the stock is earning per share</p>            
             </div>
             <div className="card">
