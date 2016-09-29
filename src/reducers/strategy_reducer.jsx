@@ -1,6 +1,6 @@
 import {GET_STRAT_DATA} from '../actions/get_strat_data';
 
-const INITIAL_STRAT_STATE = { all: [], post: null};
+const INITIAL_STRAT_STATE = { all: [], post: null };
 
 export default function(state = INITIAL_STRAT_STATE, action) {
   switch(action.type) {
