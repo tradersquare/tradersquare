@@ -47,7 +47,7 @@ class StrategyView extends Component {
   }
 
   render(){
-    if(!this.state.flag){
+    if(!this.props.strategyData){
       return (
         <div>
         <h3>loading...</h3>
@@ -124,16 +124,16 @@ class StrategyView extends Component {
             <option value="roe">Return on Equity</option>
           </select>
           </div>
-          <table className="tablr">
-          <tbody><tr>
-            <th>Ticker</th>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Value</th>
-            <th>Percentile</th>
-          </tr></tbody>
-          {stratData}
-          </table>
+            <table className="tablr">
+            <tbody><tr>
+              <th>Ticker</th>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Value</th>
+              <th>Percentile</th>
+            </tr></tbody>
+            {stratData}
+            </table>
           <a onClick={this.viewMore}>...more</a>
         </div>
 
