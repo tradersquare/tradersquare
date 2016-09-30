@@ -10,20 +10,22 @@ class FilterView extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {selectValue: 'altmanzscore'};
+    this.state = {
+      selectValue: 'altmanzscore'
+    };
+
     this.handleChange = this.handleChange.bind(this);
+    this.handleFinalSubmit = this.handleFinalSubmit.bind(this);
     this.renderFilterList = this.renderFilterList.bind(this);
-    this.componentWillMount = this.componentWillMount.bind(this);
 
-  }
-
-  componentWillMount(){
-    this.props.getDBDataFiltered();
   }
 
   handleChange(event) {
     this.setState({selectValue: event.target.value});
+  }
 
+  handleFinalSubmit() {
+    this.props.getDBDataFiltered(this.state.selectValue);
   }
 
   renderFilterList() {
@@ -79,7 +81,7 @@ class FilterView extends Component {
           </select>
           <br/>
           <br/>
-          <input type="submit" className="btn btn-secondary" />
+          <input type="submit" className="btn btn-secondary" onClick={this.handleFinalSubmit}/>
         </form>
         </div>
 

@@ -76,9 +76,11 @@ app.get('/getDataDB/', function(req, res) {
   GrabDataDB(res, results);
 });
 
-app.get('/getFilteredDataDB', function(req, res) {
+app.get('/getFilteredDataDB/*', function(req, res) {
   let results = [];
-  GrabFilteredDataDB(res, results);
+  const params = req.url.slice(19).toLowerCase();
+  console.log("PARAMS: ", params);
+  GrabFilteredDataDB(res, results, params);
 })
 
 app.get('/getAllCompany/', function(req, res) {
