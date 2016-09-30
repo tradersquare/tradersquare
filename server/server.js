@@ -17,6 +17,7 @@ const dbURL                   = process.env.DATABASE_URL;
 const callAll                 = require('./request_handler/all_companies.js');
 const GrabDataDB              = require('../db/db_grab_data.js');
 const GrabFilteredDataDB      = require('../db/db_filter_data.js');
+const getPercentiles          = require('../db/percentile_query.js');
 const getGraphData            = require('./request_handler/graph_data.js');
 
 //REQUEST HANDLER MODULES
@@ -81,6 +82,12 @@ app.get('/getFilteredDataDB/*', function(req, res) {
   let params = req.query.filter;
   console.log('here in getFilteredDataDB', params);
   GrabFilteredDataDB(res, results, params);
+})
+
+app.get('/getPercentiles/*', function(req, res) {
+  let results = [];
+  const ticker = req.url.slice(14).toUpperCase();
+  getPercentiles(res, results, ticker);
 })
 
 app.get('/getAllCompany/', function(req, res) {

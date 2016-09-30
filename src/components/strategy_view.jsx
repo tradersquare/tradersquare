@@ -84,7 +84,7 @@ class StrategyView extends Component {
       return (
       <tbody key={stockKey}>
         <tr>
-            <Link to="/stockview" onClick={()=>{this.handleSubmit(stock.ticker)}}><td>{stock.ticker}</td></Link>
+            <td><Link to="/stockview" onClick={()=>{this.handleSubmit(stock.ticker)}}>{stock.ticker}</Link></td>
             <td>{stock.name}</td>
             <td>{stock.close_price}</td>
             <td>{val}</td>

@@ -4,8 +4,9 @@ import {Link} from 'react-router';
 import SearchBar from './search_bar';
 import StratNav from './strategy_nav';
 import PriceChart from './price_chart';
-import Loading from './loading'
-import Header from './header'
+import Loading from './loading';
+import Header from './header';
+import Numeral from 'numeral'
 
 class StockView extends Component {
   constructor(props) {
@@ -87,7 +88,7 @@ class StockView extends Component {
             <div className="card col-md-12">
               <h3 className="centerheading">KEY STATISTICS</h3>
                 <h4 className="centertext">52 week high/low: {stockData['fiftytwo_week_high']}/{stockData['fiftytwo_week_low']}</h4>
-                <h4 className="centertext">Market Cap: {stockData.marketcap}</h4>
+                <h4 className="centertext">Market Cap: {Numeral(parseFloat(stockData.marketcap)).format('0,0')}</h4>
                 <h4 className="centertext">Volume: {stockData.volume}</h4>
                 <h4 className="centertext">Open/Close: {stockData.open_price}/{stockData.close_price}</h4>
             </div>
