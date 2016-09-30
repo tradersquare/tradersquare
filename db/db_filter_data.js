@@ -1,8 +1,9 @@
 const db = require('./config.js');
 
 
-module.exports = (res, results) => {
-  db.query(`select ticker, close_price, pricetoearnings
+module.exports = (res, results, params) => {
+  console.log(params);
+    db.query(`select ticker, close_price, pricetoearnings
     from productionschema.realdata
     where pricetoearnings is distinct from 'nm'
     and cast(pricetoearnings as decimal) > 30
