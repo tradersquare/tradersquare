@@ -20,17 +20,28 @@ class StockView extends Component {
     else {
       let data = [];
       // console.log('state.graphData: ', this.props.graphData[0]);
-      let i = 0;
+      // let i = 0;
       // console.log('state.graphData.i.close: ', this.props.graphData[i].close);
-      for (let i of this.props.graphData) {
-        // console.log(this.props.graphData[i]);
-        data.push(i.close);
-      }
+
+      // for (let i = 0; i < this.props.graphData.length; i++) {
+      //   // console.log(this.props.graphData[i]);
+      //   data.push(this.props.graphData[i].close);
+      // }
       // console.log('100: ', data);
+
+      const params = {
+        width: 500,
+        height: 500,
+        axisMargin: 20,
+        topMargin: 20,
+        bottomMargin: 20,
+        fullWidth: 500,
+      }
+
       return (
-        <div>
-          <PriceChart data={data} color="#0353A4" />
-        </div>
+        <svg width={ params.fullWidth } height={ params.height }>
+          <PriceChart { ...params } data={ this.props.graphData } />
+        </svg>
       )
     }
   }
@@ -72,7 +83,7 @@ class StockView extends Component {
           </div>
         </div>
         <div className="row">
-          <div className="col-md-6">        
+          <div className="col-md-6">
             {this.renderPrices()}
           </div>
           <div className="col-md-6">
@@ -100,12 +111,12 @@ class StockView extends Component {
             <div className="card">
               <h3 className="centerheading">EARNINGS</h3>
               <h4 className="centertext">{(earningsyield*100)}%</h4>
-              <p>*how much the stock is earning per share</p>            
+              <p>*how much the stock is earning per share</p>
             </div>
             <div className="card">
               <h3 className="centerheading">DIVIDENDS</h3>
               <h4 className="centertext">{stockData.dividendyield}</h4>
-              <p>*how much you are getting paid per share</p>            
+              <p>*how much you are getting paid per share</p>
             </div>
           </div>
 
@@ -119,12 +130,12 @@ class StockView extends Component {
               <h3 className="centerheading">LIQUIDITY</h3>
               <h4 className="centertext">current ratio: {stockData.currentratio}</h4>
               <h4 className="centertext">quick ratio: {stockData.quickratio}</h4>
-              <p>*these two ratios measure the liquidity of a company</p>            
+              <p>*these two ratios measure the liquidity of a company</p>
             </div>
             <div className="card">
               <h3 className="centerheading">LEVERAGE</h3>
               <h4 className="centertext">{stockData.leverageratio}</h4>
-              <p>*measures how much capital comes from debt</p>            
+              <p>*measures how much capital comes from debt</p>
             </div>
           </div>
 
@@ -139,12 +150,12 @@ class StockView extends Component {
               <h4 className="centertext">return on invested capital: {stockData.roic}</h4>
               <h4 className="centertext">return on asset: {stockData.roa}</h4>
               <h4 className="centertext">return on equity: {stockData.roe}</h4>
-              <p>*</p>            
+              <p>*</p>
             </div>
             <div className="card">
               <h3 className="centerheading">VALUE</h3>
               <h4 className="centertext">book to market ratio: {booktomarket}</h4>
-              <p>*undervalued if above 1, overvalued if below 1</p>            
+              <p>*undervalued if above 1, overvalued if below 1</p>
             </div>
           </div>
         </div>
