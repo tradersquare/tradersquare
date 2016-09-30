@@ -8,6 +8,7 @@ module.exports = (res, results) => {
   })
   .on('end', function(){
     console.log("created");
+    console.log(results);
     res.json(results);
   })
 }

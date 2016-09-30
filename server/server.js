@@ -76,9 +76,10 @@ app.get('/getDataDB/', function(req, res) {
   GrabDataDB(res, results);
 });
 
-app.get('/getFilteredDataDB/', function(req, res) {
+app.get('/getFilteredDataDB/*', function(req, res) {
   let results = [];
   let params = req.query.filter;
+  console.log('here in getFilteredDataDB', params);
   GrabFilteredDataDB(res, results, params);
 })
 

@@ -11,51 +11,27 @@ class FilterView extends Component {
     super(props);
 
     this.state = {
-      selectValue: 'altmanzscore',
+      strat: 'altmanzscore',
       counter: 0
     };
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleFinalSubmit = this.handleFinalSubmit.bind(this);
-    this.renderFilterList = this.renderFilterList.bind(this);
-    this.filterDataCheck = this.filterDataCheck.bind(this);
+    // this.handleChange = this.handleChange.bind(this);
+    // this.handleFinalSubmit = this.handleFinalSubmit.bind(this);
+    // this.componentWillMount = this.componentWillMount.bind(this);
+    this.onFormSubmit = this.onFormSubmit.bind(this);
+    this.onSelectChange = this.onSelectChange.bind(this);
+    // this.renderFilterList = this.renderFilterList.bind(this);
+    // this.filterDataCheck = this.filterDataCheck.bind(this);
   }
 
-  filterDataCheck() {
-    console.log('in fdc');
-    if(this.props.filterData) {
-      this.props.filterData.map(this.renderFilterList)
-    } else {
-      return (
-        <div>
-          <p>Please Select your Filters</p>
-        </div>
-      )
-    }
+  onFormSubmit() {
+    console.log('insideo onFormSubmit', this.state.strat);
+    this.props.getDBDataFiltered(this.state.strat)
   }
 
-  handleChange(event) {
-    this.setState({selectValue: event.target.value});
+  onSelectChange() {
+    this.setState({strat: event.target.value})
   }
-
-  handleFinalSubmit() {
-    this.props.getDBDataFiltered(this.state.selectValue);
-  }
-
-  renderFilterList(stock) {
-    var curCount = this.state.counter;
-    this.setState({counter: curCount++});
-    return (
-      <tbody key={this.state.counter}>
-        <tr>
-          <td>{stock.ticker}</td>
-          <td>{stock.close_price}</td>
-          <td>{stock.pricetoearnings}</td>
-        </tr>
-      </tbody>
-      )
-  }
-
 
   render() {
 
@@ -73,10 +49,10 @@ class FilterView extends Component {
       <div className="row">
         <div className="col-md-6 filter">
         <h2> Filters </h2>
-        <form>
+        <form onSubmit={this.onFormSubmit}>
           <select
-            value={this.state.selectValue}
-            onChange={this.handleChange}
+            value={this.state.strat}
+            onChange={this.onSelectChange}
           >
             <option value="altmanzscore">Z-Score</option>
             <option value="assetturnover">Asset Turnover</option>
@@ -91,9 +67,7 @@ class FilterView extends Component {
             <option value="netincomegrowth">Net Income Growth</option>
             <option value="roe">Return on Equity</option>
           </select>
-          <br/>
-          <br/>
-          <input type="submit" className="btn btn-secondary" onClick={this.handleFinalSubmit}/>
+            <button type="submit">Submit</button>
         </form>
         </div>
 
@@ -104,7 +78,6 @@ class FilterView extends Component {
           <th>Ticker</th>
           <th>Price</th>
           </tr></tbody>
-            {this.filterDataCheck}
           </table>
         </div>
 
