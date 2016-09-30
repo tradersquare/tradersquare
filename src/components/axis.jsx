@@ -15,7 +15,10 @@ export default class Axis extends Component {
     let dates = this.props.dates;
     this.scale
       .range([ this.props.axisMargin, this.props.fullWidth - this.props.axisMargin ])
-      .domain([ 24, 0 ]);
+      .domain([ d3.min(dates), d3.max(dates) ]);
+
+    this.axis
+      .ticks(3)
   }
 
   componentDidMount() {
