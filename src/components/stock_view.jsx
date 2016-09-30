@@ -4,6 +4,7 @@ import {Link} from 'react-router';
 import SearchBar from './search_bar';
 import StratNav from './strategy_nav';
 import PriceChart from './price_chart';
+import Loading from './loading'
 
 class StockView extends Component {
   constructor(props) {
@@ -52,7 +53,7 @@ class StockView extends Component {
     console.log('this.props.graphData: ', this.props.graphData);
     if(this.props.stockData === null){
       return (<div>
-          <h1 className="centerheading landing-container">...LOADING</h1>
+        <Loading />
       </div>)
     }
 

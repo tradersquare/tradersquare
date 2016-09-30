@@ -7,6 +7,7 @@ import SearchBar from './search_bar';
 import StratNav from './strategy_nav';
 import {searchStockData as SearchStockData} from '../actions/stock_search';
 import {getGraphData as GetGraphData} from '../actions/get_graph_data';
+import Loading from './loading';
 
 
 // import { DropdownButton } from 'react-bootstrap';
@@ -49,9 +50,7 @@ class StrategyView extends Component {
   render(){
     if(!this.props.strategyData){
       return (
-        <div>
-        <h3>loading...</h3>
-        </div>
+        <Loading />
         )
     }
     else{
