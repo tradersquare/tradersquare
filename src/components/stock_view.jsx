@@ -30,12 +30,12 @@ class StockView extends Component {
       // console.log('100: ', data);
 
       const params = {
-        width: 450,
+        width: 300,
         height: 500,
         axisMargin: 10,
         topMargin: 20,
         bottomMargin: 20,
-        fullWidth: 450,
+        fullWidth: 350,
       }
 
       return (
