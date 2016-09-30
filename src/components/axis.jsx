@@ -37,6 +37,11 @@ export default class Axis extends Component {
     this.renderAxis();
   }
 
+  componentDidUpdate() {
+    console.log('update plz');
+    this.renderAxis();
+  }
+
   renderAxis() {
     let node = ReactDOM.findDOMNode(this);
     d3.select(node).call(this.axis);

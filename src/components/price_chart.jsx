@@ -12,7 +12,7 @@ export default (props) => {
   //   </div>
   // )
 
-  const data = props.data;
+  let data = props.data;
   console.log('props.data', data);
 
   //consider monentjs library for dates
@@ -63,6 +63,4 @@ export default (props) => {
         <Axis orientation="left" {...props} closingPrices={closingPrices}/>
       </g>
     )
-
-    // return <div>nada</div>
 }
