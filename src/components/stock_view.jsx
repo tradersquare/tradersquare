@@ -22,9 +22,9 @@ class StockView extends Component {
       // console.log('state.graphData: ', this.props.graphData[0]);
       let i = 0;
       // console.log('state.graphData.i.close: ', this.props.graphData[i].close);
-      for (let i = 0; i < 10; i++) {
+      for (let i of this.props.graphData) {
         // console.log(this.props.graphData[i]);
-        data.push(this.props.graphData[i].close);
+        data.push(i.close);
       }
       // console.log('100: ', data);
       return (
@@ -48,7 +48,8 @@ class StockView extends Component {
     const stockData = this.props.stockData;
     console.log("***STOCKDATA***", stockData)
     const change = stockData.change > 0 ? "↑" : "↡"
-    const earningsyield = stockData.earningsyield;
+    const earningsyield = parseFloat(stockData.earningsyield);
+    const booktomarket = (parseFloat(stockData.bookvaluepershare) / parseFloat(stockData.close_price)).toFixed(3);
     return (
       <div>
         <div className="row header">
@@ -76,15 +77,15 @@ class StockView extends Component {
           </div>
           <div className="col-md-6">
             <div className="card col-md-12">
-              <h3 className="centerheading">About {stockData.name}:</h3>
+              <h3 className="centerheading">ABOUT</h3>
               <p>{stockData.short_description}</p>
             </div>
             <div className="card col-md-12">
-              <h3 className="centerheading">Key Statistics:</h3>
-                <span>52 week high/low: {stockData['fiftytwo_week_high']}/{stockData['fiftytwo_week_low']}</span><br/>
-                <span>Market Cap: {stockData.marketcap}</span><br/>
-                <span>Volume: {stockData.volume}</span><br/>
-                <span>Open/Close: {stockData.open_price}/{stockData.close_price}</span><br/>
+              <h3 className="centerheading">KEY STATISTICS</h3>
+                <h4 className="centertext">52 week high/low: {stockData['fiftytwo_week_high']}/{stockData['fiftytwo_week_low']}</h4>
+                <h4 className="centertext">Market Cap: {stockData.marketcap}</h4>
+                <h4 className="centertext">Volume: {stockData.volume}</h4>
+                <h4 className="centertext">Open/Close: {stockData.open_price}/{stockData.close_price}</h4>
             </div>
           </div>
         </div>
@@ -109,14 +110,42 @@ class StockView extends Component {
           </div>
 
           <div className="card-deck">
-            <div className="card">Market Cap: {stockData.marketcap}</div>
-            <div className="card">Volume: {stockData.volume}</div>
-            <div className="card">Open Price: {stockData.open_price}</div>
+            <div className="card">
+              <h3 className="centerheading">CREDIT STRENGTH</h3>
+              <h4 className="centertext">Beta: {stockData.altmanzscore}</h4>
+              <p>*measures the likelihood of a company going bankrupt</p>
+            </div>
+            <div className="card">
+              <h3 className="centerheading">LIQUIDITY</h3>
+              <h4 className="centertext">current ratio: {stockData.currentratio}</h4>
+              <h4 className="centertext">quick ratio: {stockData.quickratio}</h4>
+              <p>*these two ratios measure the liquidity of a company</p>            
+            </div>
+            <div className="card">
+              <h3 className="centerheading">LEVERAGE</h3>
+              <h4 className="centertext">{stockData.leverageratio}</h4>
+              <p>*measures how much capital comes from debt</p>            
+            </div>
           </div>
 
           <div className="card-deck">
-            <div className="card">Close Price: {stockData.close_price}</div>
-            <div className="card">Beta: {stockData.beta}</div>
+            <div className="card">
+              <h3 className="centerheading">VOLATILITY</h3>
+              <h4 className="centertext">Beta: {stockData.beta}</h4>
+              <p>*beta less than 1 means that the stock is less volatile than the market, and vice versa for value over 1</p>
+            </div>
+            <div className="card">
+              <h3 className="centerheading">PROFITABILITY</h3>
+              <h4 className="centertext">return on invested capital: {stockData.roic}</h4>
+              <h4 className="centertext">return on asset: {stockData.roa}</h4>
+              <h4 className="centertext">return on equity: {stockData.roe}</h4>
+              <p>*</p>            
+            </div>
+            <div className="card">
+              <h3 className="centerheading">VALUE</h3>
+              <h4 className="centertext">book to market ratio: {booktomarket}</h4>
+              <p>*undervalued if above 1, overvalued if below 1</p>            
+            </div>
           </div>
         </div>
 

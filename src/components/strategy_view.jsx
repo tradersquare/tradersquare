@@ -5,6 +5,9 @@ import {bindActionCreators} from 'redux';
 import getStratData from '../actions/get_strat_data';
 import SearchBar from './search_bar';
 import StratNav from './strategy_nav';
+import {searchStockData as SearchStockData} from '../actions/stock_search';
+import {getGraphData as GetGraphData} from '../actions/get_graph_data';
+
 
 // import { DropdownButton } from 'react-bootstrap';
 // import Bootstrap from 'react-bootstrap';
@@ -20,6 +23,7 @@ class StrategyView extends Component {
     this.state = {selectValue: 'altmanzscore', items: 10, flag: false}
 
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
     this.viewMore = this.viewMore.bind(this);
     this.componentWillMount = this.componentWillMount.bind(this);
   }
@@ -33,12 +37,17 @@ class StrategyView extends Component {
     this.setState({selectValue: event.target.value, items: 10})
   }
 
+  handleSubmit(ticker) {
+    this.props.SearchStockData(ticker);
+    this.props.GetGraphData(ticker);
+  }
+
   viewMore(){
     this.setState({items: this.state.items + 10})
   }
 
   render(){
-    if(!this.state.flag){
+    if(!this.props.strategyData){
       return (
         <div>
         <h3>loading...</h3>
@@ -76,7 +85,7 @@ class StrategyView extends Component {
       return (
       <tbody key={stockKey}>
         <tr>
-            <td>{stock.ticker}</td>
+            <Link to="/stockview" onClick={()=>{this.handleSubmit(stock.ticker)}}><td>{stock.ticker}</td></Link>
             <td>{stock.name}</td>
             <td>{stock.close_price}</td>
             <td>{val}</td>
@@ -115,16 +124,16 @@ class StrategyView extends Component {
             <option value="roe">Return on Equity</option>
           </select>
           </div>
-          <table className="tablr">
-          <tbody><tr>
-            <th>Ticker</th>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Value</th>
-            <th>Percentile</th>
-          </tr></tbody>
-          {stratData}
-          </table>
+            <table className="tablr">
+            <tbody><tr>
+              <th>Ticker</th>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Value</th>
+              <th>Percentile</th>
+            </tr></tbody>
+            {stratData}
+            </table>
           <a onClick={this.viewMore}>...more</a>
         </div>
 
@@ -140,4 +149,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, {getStratData})(StrategyView)
+export default connect(mapStateToProps, {SearchStockData, getStratData, GetGraphData})(StrategyView)

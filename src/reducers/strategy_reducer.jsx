@@ -9,9 +9,5 @@ export default function(state = INITIAL_STRAT_STATE, action) {
       return action.payload.data;
   }
 
-  return ([
-    {title: 'HP'},
-    {title: 'JS'},
-    {title: 'PY'}
-  ])
+  return null;
 }
