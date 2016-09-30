@@ -5,6 +5,7 @@ import SearchBar from './search_bar';
 import StratNav from './strategy_nav';
 import PriceChart from './price_chart';
 import Loading from './loading'
+import Header from './header'
 
 class StockView extends Component {
   constructor(props) {
@@ -64,16 +65,7 @@ class StockView extends Component {
     const booktomarket = (parseFloat(stockData.bookvaluepershare) / parseFloat(stockData.close_price)).toFixed(3);
     return (
       <div>
-        <div className="row header">
-          <h1 className="heading col-md-7"><Link to="/">TraderSquare</Link></h1>
-          <div className="col-md-3 top-padding">
-            <SearchBar/>
-          </div>
-          <div className="col-md-2 top-padding">
-            <StratNav/>
-          </div>
-        </div>
-
+        <Header />
         <div className="row">
           <div className="col-md-4">
             <h3>  {stockData.ticker} : {stockData.name}</h3>
