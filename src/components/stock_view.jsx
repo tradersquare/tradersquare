@@ -64,6 +64,7 @@ class StockView extends Component {
     const change = stockData.change > 0 ? "↑" : "↡"
     const earningsyield = parseFloat(stockData.earningsyield);
     const booktomarket = (parseFloat(stockData.bookvaluepershare) / parseFloat(stockData.close_price)).toFixed(3);
+    
     return (
       <div>
         <Header />

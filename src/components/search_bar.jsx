@@ -5,6 +5,7 @@ import {searchStockData as SearchStockData} from '../actions/stock_search';
 import {bindActionCreators} from 'redux';
 import getStratData from '../actions/get_strat_data';
 import {getGraphData as GetGraphData} from '../actions/get_graph_data';
+import getPercentile from '../actions/get_percentile';
 
 class SearchBar extends Component {
 
@@ -23,7 +24,7 @@ class SearchBar extends Component {
     console.log('i was clicked');
     this.props.SearchStockData(this.state.ticker);
     this.props.GetGraphData(this.state.ticker);
-    // this.setState({ticker: ''});
+    this.props.getPercentile(this.state.ticker);
   }
 
   setTicker(ev) {
@@ -43,4 +44,4 @@ class SearchBar extends Component {
   }
 }
 
-export default connect(null, {SearchStockData, getStratData, GetGraphData})(SearchBar);
+export default connect(null, {SearchStockData, getStratData, GetGraphData, getPercentile})(SearchBar);
