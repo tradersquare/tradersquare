@@ -15,7 +15,7 @@ class StockView extends Component {
   renderPrices() {
     // console.log('top of renderPrices(): ', this.props.graphData)
     if (this.props.graphData.length === 0) {
-      return (<div> no data yet</div>)
+      return (<div>Graph loading...</div>)
     }
     else {
       let data = [];
@@ -32,7 +32,7 @@ class StockView extends Component {
       const params = {
         width: 300,
         height: 500,
-        axisMargin: 10,
+        axisMargin: 83,
         topMargin: 20,
         bottomMargin: 20,
         fullWidth: 350,

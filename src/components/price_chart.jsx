@@ -1,5 +1,6 @@
 import React from 'react';
 import {Sparklines, SparklinesLine} from 'react-sparklines';
+import Axis from './axis';
 // import d3 from 'd3';
 
 export default (props) => {
@@ -23,11 +24,11 @@ export default (props) => {
     i++;
   });
   console.log(dates);
-  let closingPrice = data.map(d => d.adj_close);
-  console.log(closingPrice);
+  let closingPrices = data.map(d => d.adj_close);
+  console.log(closingPrices);
 
   //test throws error when not a num:
-  closingPrice.forEach( v => {
+  closingPrices.forEach( v => {
     if (typeof v !== 'number') {
       console.error("ITS NOT A NUMBER");
     }
@@ -47,7 +48,7 @@ export default (props) => {
 
   let y = d3.scale.linear()
     .range([ props.height - props.bottomMargin, props.topMargin ])
-    .domain([ d3.min(closingPrice) - 10, d3.max(closingPrice) + 10 ]);
+    .domain([ d3.min(closingPrices) - 10, d3.max(closingPrices) + 10 ]);
 
   let line = d3.svg.line()
     .x(function(d) {return x(d.date)})
@@ -58,6 +59,7 @@ export default (props) => {
     return (
       <g className='line-chart'>
         <path stroke="blue" fill="none" strokeWidth="2" d={ lineChart }></path>
+        <Axis orientation="bottom" { ...props } dates={dates}  />
       </g>
     )
 
