@@ -11,13 +11,27 @@ class FilterView extends Component {
     super(props);
 
     this.state = {
-      selectValue: 'altmanzscore'
+      selectValue: 'altmanzscore',
+      counter: 0
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleFinalSubmit = this.handleFinalSubmit.bind(this);
     this.renderFilterList = this.renderFilterList.bind(this);
+    this.filterDataCheck = this.filterDataCheck.bind(this);
+  }
 
+  filterDataCheck() {
+    console.log('in fdc');
+    if(this.props.filterData) {
+      this.props.filterData.map(this.renderFilterList)
+    } else {
+      return (
+        <div>
+          <p>Please Select your Filters</p>
+        </div>
+      )
+    }
   }
 
   handleChange(event) {
@@ -28,20 +42,18 @@ class FilterView extends Component {
     this.props.getDBDataFiltered(this.state.selectValue);
   }
 
-  renderFilterList() {
-    let counter = 0;
-    return this.props.filterData.map((stock) => {
-      counter++;
-      return (
-        <tbody key={counter}>
-          <tr>
-            <td>{stock.ticker}</td>
-            <td>{stock.close_price}</td>
-            <td>{stock.pricetoearnings}</td>
-          </tr>
-        </tbody>
-        )
-    })
+  renderFilterList(stock) {
+    var curCount = this.state.counter;
+    this.setState({counter: curCount++});
+    return (
+      <tbody key={this.state.counter}>
+        <tr>
+          <td>{stock.ticker}</td>
+          <td>{stock.close_price}</td>
+          <td>{stock.pricetoearnings}</td>
+        </tr>
+      </tbody>
+      )
   }
 
 
@@ -87,12 +99,12 @@ class FilterView extends Component {
 
         <div className="col-md-6 results">
         <h2> Results </h2>
-          <table className="tablr">
+        <table className="tablr">
           <tbody><tr>
-            <th>Ticker</th>
-            <th>Price</th>
+          <th>Ticker</th>
+          <th>Price</th>
           </tr></tbody>
-          {this.renderFilterList()}
+            {this.filterDataCheck}
           </table>
         </div>
 

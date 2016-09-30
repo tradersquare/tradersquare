@@ -2,7 +2,7 @@ const db = require('./config.js');
 
 
 module.exports = (res, results, params) => {
-  console.log(params);
+  console.log('indb!!!!!, ',params);
     db.query(`select ticker, close_price, pricetoearnings
     from productionschema.realdata
     where pricetoearnings is distinct from 'nm'
