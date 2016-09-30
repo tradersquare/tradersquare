@@ -10,13 +10,20 @@ class FilterView extends Component {
   constructor(props) {
     super(props);
 
-    // this.state = {selectValue: 'altmanzscore', items: 10, flag: false}
-    // this.handleClick = this.handleClick.bind(this);
+    this.state = {selectValue: 'altmanzscore'};
+    this.handleChange = this.handleChange.bind(this);
+    this.renderFilterList = this.renderFilterList.bind(this);
     this.componentWillMount = this.componentWillMount.bind(this);
+
   }
 
   componentWillMount(){
     this.props.getDBDataFiltered();
+  }
+
+  handleChange(event) {
+    this.setState({selectValue: event.target.value});
+
   }
 
   renderFilterList() {
@@ -38,7 +45,6 @@ class FilterView extends Component {
 
   render() {
 
-
     return (
       <div >
       <div className="row header">
@@ -53,9 +59,28 @@ class FilterView extends Component {
       <div className="row">
         <div className="col-md-6 filter">
         <h2> Filters </h2>
-          <button className = "btn btn-secondary">
-            TEST
-          </button>
+        <form>
+          <select
+            value={this.state.selectValue}
+            onChange={this.handleChange}
+          >
+            <option value="altmanzscore">Z-Score</option>
+            <option value="assetturnover">Asset Turnover</option>
+            <option value="grossmargin">Gross Margin</option>
+            <option value="pricetoearnings">P/E</option>
+            <option value="currentratio">Current Ratio</option>
+            <option value="epsgrowth">EPS Growth</option>
+            <option value="divpayoutratio">Dividend Payout Ratio</option>
+            <option value="debttoequity">Debt To Equity</option>
+            <option value="enterprisevalue">Enterprise Value</option>
+            <option value="earningsyield">Earnings Yield</option>
+            <option value="netincomegrowth">Net Income Growth</option>
+            <option value="roe">Return on Equity</option>
+          </select>
+          <br/>
+          <br/>
+          <input type="submit" className="btn btn-secondary" />
+        </form>
         </div>
 
         <div className="col-md-6 results">
