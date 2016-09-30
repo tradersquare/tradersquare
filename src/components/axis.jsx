@@ -38,7 +38,6 @@ export default class Axis extends Component {
   }
 
   componentDidUpdate() {
-    console.log('update plz');
     this.renderAxis();
   }
 
