@@ -12,13 +12,25 @@ export default class Axis extends Component {
   }
 
   updateAxis() {
-    let dates = this.props.dates;
-    this.scale
-      .range([ this.props.axisMargin, this.props.fullWidth - this.props.axisMargin ])
-      .domain([ d3.min(dates), d3.max(dates) ]);
+    if (this.props.dates) {
+      let dates = this.props.dates;
+      this.scale
+        .range([ this.props.axisMargin, this.props.fullWidth - this.props.axisMargin ])
+        .domain([ d3.min(dates), d3.max(dates) ]);
 
-    this.axis
-      .ticks(3)
+      this.axis
+        .ticks(3)
+    }
+
+    if (this.props.closingPrices) {
+      let closingPrices = this.props.closingPrices;
+      this.scale
+        .range([ this.props.height - this.props.bottomMargin, this.props.topMargin ])
+        .domain([ d3.min(closingPrices), d3.max(closingPrices) ]);
+
+        this.axis
+          .ticks(8)
+    }
   }
 
   componentDidMount() {
@@ -32,12 +44,19 @@ export default class Axis extends Component {
 
   render() {
     this.updateAxis();
+    let translate;
+    if (this.props.dates) {
+      console.log('this.props.dates');
+      translate = `translate(0, ${this.props.height - this.props.bottomMargin})`;
+    }
 
-    const translate = `translate(0, ${this.props.height - this.props.bottomMargin})`;
+    if (this.props.closingPrices) {
+      console.log('this.props.closingPrices');
+      translate = `translate(${this.props.axisMargin}, 0)`;
+    }
 
     return(
       <g className="axis" transform={translate}></g>
     )
-
   }
 }

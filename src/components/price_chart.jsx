@@ -59,7 +59,8 @@ export default (props) => {
     return (
       <g className='line-chart'>
         <path stroke="blue" fill="none" strokeWidth="2" d={ lineChart }></path>
-        <Axis orientation="bottom" { ...props } dates={dates}  />
+        <Axis orientation="bottom" {...props} dates={dates}  />
+        <Axis orientation="left" {...props} closingPrices={closingPrices}/>
       </g>
     )
 
