@@ -12,7 +12,14 @@ class FilterView extends Component {
     super(props);
 
     this.state = {
-      strat: 'altmanzscore',
+      allFilters: [
+        {
+          strat: 'altmanzscore',
+          sign: '<',
+          input: 30,
+          type: "value"
+        }
+      ],
       counter: 0,
       results: []
     };
@@ -43,12 +50,13 @@ class FilterView extends Component {
   onFormSubmit(event) {
     event.preventDefault();
 
-    this.setState({counter: 0});
-    this.props.getDBDataFiltered(this.state.strat);
+    this.props.getDBDataFiltered(this.state.allFilters);
   }
 
   onSelectChange(event) {
-    this.setState({strat: event.target.value})
+    let allFiltersNew = this.state.allFilters.slice();
+    allFiltersNew[0].strat = event.target.value;
+    this.setState({allFilters: allFiltersNew})
   }
 
   render() {
@@ -61,7 +69,7 @@ class FilterView extends Component {
         <h2> Filters </h2>
         <form onSubmit={this.onFormSubmit}>
           <select
-            value={this.state.strat}
+            value={this.state.allFilters[0].strat}
             onChange={this.onSelectChange}
           >
             <option value="altmanzscore">Z-Score</option>
@@ -87,6 +95,7 @@ class FilterView extends Component {
           <tbody><tr>
           <th>Ticker</th>
           <th>Price</th>
+          <th> ??? </th>
           </tr></tbody>
           {this.state.results}
           </table>
