@@ -21,12 +21,27 @@ class FilterView extends Component {
         }
       ],
       counter: 0,
-      results: []
+      results: [],
+      values: {
+        altmanzscore: 'Z-Score',
+        assetturnover: 'Asset Turnover',
+        grossmargin: 'Gross Margin',
+        pricetoearnings: 'P/E',
+        currentratio: 'Current Ratio',
+        epsgrowth: 'EPS Growth',
+        divpayoutratio: 'Dividend Payout Ratio',
+        debttoequity: 'Debt To Equity',
+        enterprisevalue: 'Enterprise Value',
+        earningsyield: 'Earnings Yield',
+        netincomegrowth: 'Net Income Growth',
+        roe: 'Return on Equity',
+      }
     };
 
     this.onFormSubmit = this.onFormSubmit.bind(this);
     this.onSelectChange = this.onSelectChange.bind(this);
     this.handleSignClick = this.handleSignClick.bind(this);
+    this.onInputChange = this.onInputChange.bind(this);
   }
 
   componentDidUpdate() {
@@ -71,6 +86,12 @@ class FilterView extends Component {
     this.setState({allFilters: allFiltersNew});
   }
 
+  onInputChange(event) {
+    let allFiltersNew = this.state.allFilters.slice();
+    allFiltersNew[0].input = event.target.value;
+    this.setState({allFilters: allFiltersNew});
+  }
+
   render() {
 
     return (
@@ -96,9 +117,13 @@ class FilterView extends Component {
             <option value="earningsyield">Earnings Yield</option>
             <option value="netincomegrowth">Net Income Growth</option>
             <option value="roe">Return on Equity</option>
-          </select> <button type = "button" className="btn btn-secondary" onClick={this.handleSignClick}> {this.state.allFilters[0].sign} </button>
+          </select>
+          <button type = "button" className="btn btn-secondary" onClick={this.handleSignClick}> {this.state.allFilters[0].sign} </button>
+          <input type="text"
+                 value={this.state.allFilters[0].input}
+                 onChange={this.onInputChange} />
           <br/><br/>
-            <button type="submit">Submit</button>
+            <button type="submit" className="btn btn-secondary">Submit</button>
         </form>
         </div>
         <div className="col-md-6 results">
@@ -107,7 +132,7 @@ class FilterView extends Component {
           <tbody><tr>
           <th>Ticker</th>
           <th>Price</th>
-          <th> ??? </th>
+          <th> {this.state.values[this.state.allFilters[0].strat]}</th>
           </tr></tbody>
           {this.state.results}
           </table>
