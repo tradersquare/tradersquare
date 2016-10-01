@@ -28,8 +28,11 @@ export default class Axis extends Component {
         .domain([ d3.min(dates), d3.max(dates) ]);
 
       this.axis
-        .tickFormat(d3.time.format("%Y-%m-%d"))
-        .ticks(2)
+        // .attr("class", "xaxis")
+        .tickFormat(d3.time.format("%Y"))
+        .ticks(5);
+
+
     }
 
     if (this.props.closingPrices) {
@@ -39,12 +42,18 @@ export default class Axis extends Component {
         .domain([ d3.min(closingPrices), d3.max(closingPrices) ]);
 
         this.axis
-          .ticks(8)
+          .ticks(10)
     }
   }
 
   componentDidMount() {
     this.renderAxis();
+
+    //Following for angling x-axis dates by 45 deg
+    // d3.selectAll(".xaxis text")
+    //   .attr("transform", function(d) {
+    //         return "translate(" + this.getBBox().height*-2 + "," + this.getBBox().height + ")rotate(-45)";
+    //   });
   }
 
   componentDidUpdate() {
@@ -59,18 +68,21 @@ export default class Axis extends Component {
   render() {
     this.updateAxis();
     let translate;
+    let classes;
     if (this.props.dates) {
       console.log('this.props.dates');
       translate = `translate(0, ${this.props.height - this.props.bottomMargin})`;
+      classes = 'axis xaxis'
     }
 
     if (this.props.closingPrices) {
       console.log('this.props.closingPrices');
       translate = `translate(${this.props.axisMargin}, 0)`;
+      classes = 'axis'
     }
 
     return(
-      <g className="axis" transform={translate}></g>
+      <g className={classes} transform={translate}></g>
     )
   }
 }
