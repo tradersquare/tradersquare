@@ -30,6 +30,13 @@ class StockView extends Component {
     this.state = {chartWidth: 500}
   }
 
+  componentDidUpdate() {
+  }
+
+  componentDidUpdate() {
+    window.addEventListener('resize', this.handleResize);
+  }
+
   renderPrices() {
     if (this.props.graphData.length === 0) {
       return (<div></div>)
@@ -44,6 +51,7 @@ class StockView extends Component {
         topMargin: 20,
         bottomMargin: 60,
         fullWidth: thisWidth
+
       }
 
       return (
@@ -115,7 +123,6 @@ class StockView extends Component {
     return (
       <div>
         <Header />
-
         <div className="row">
           <div className="col-md-4">
             <h3>  {stockData.ticker} : {stockData.name}</h3>
