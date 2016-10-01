@@ -12,7 +12,7 @@ module.exports = (res, results, params) => {
     results.push(row);
   })
   .on('end', function(){
-    console.log('results!!!', JSON.stringify(results));
+    console.log('results!!!', results);
     res.send(results);
   })
 }

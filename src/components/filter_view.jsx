@@ -23,8 +23,8 @@ class FilterView extends Component {
     // this.renderFilterList = this.renderFilterList.bind(this);
     // this.filterDataCheck = this.filterDataCheck.bind(this);
   }
-
-  onFormSubmit() {
+  onFormSubmit(event) {
+    event.preventDefault();
     console.log('insideo onFormSubmit', this.state.strat);
     this.props.getDBDataFiltered(this.state.strat)
   }
