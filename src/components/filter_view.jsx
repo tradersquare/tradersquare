@@ -17,7 +17,7 @@ class FilterView extends Component {
           strat: 'altmanzscore',
           sign: '<',
           input: 30,
-          type: "value"
+          type: "Value"
         }
       ],
       counter: 0,
@@ -41,6 +41,7 @@ class FilterView extends Component {
     this.onFormSubmit = this.onFormSubmit.bind(this);
     this.onSelectChange = this.onSelectChange.bind(this);
     this.handleSignClick = this.handleSignClick.bind(this);
+    this.handleTypeClick = this.handleTypeClick.bind(this);
     this.onInputChange = this.onInputChange.bind(this);
   }
 
@@ -77,7 +78,6 @@ class FilterView extends Component {
 
   handleSignClick(event) {
     let allFiltersNew = this.state.allFilters.slice();
-    console.log("this.state.allfilters: ", this.state.allFilters);
     if (allFiltersNew[0].sign === ">") {
       allFiltersNew[0].sign = "<";
     } else {
@@ -85,6 +85,17 @@ class FilterView extends Component {
     }
     this.setState({allFilters: allFiltersNew});
   }
+
+  handleTypeClick(event) {
+    let allFiltersNew = this.state.allFilters.slice();
+    if (allFiltersNew[0].type === "Value") {
+      allFiltersNew[0].type = "Percentile";
+    } else {
+      allFiltersNew[0].type = "Value";
+    }
+    this.setState({allFilters: allFiltersNew});
+    console.log(this.state.allFilters);
+    }
 
   onInputChange(event) {
     let allFiltersNew = this.state.allFilters.slice();
@@ -122,6 +133,7 @@ class FilterView extends Component {
           <input type="text"
                  value={this.state.allFilters[0].input}
                  onChange={this.onInputChange} />
+          <button type = "button" className="btn btn-secondary" onClick={this.handleTypeClick}> {this.state.allFilters[0].type} </button>
           <br/><br/>
             <button type="submit" className="btn btn-secondary">Submit</button>
         </form>
