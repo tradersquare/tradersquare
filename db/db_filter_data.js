@@ -2,7 +2,7 @@ const db = require('./config.js');
 
 
 module.exports = (res, results, params) => {
-  console.log(params);
+    console.log('in DB_FILTER_DATA!!!!');
     db.query(`select ticker, close_price, pricetoearnings
     from productionschema.realdata
     where pricetoearnings is distinct from 'nm'
@@ -12,7 +12,7 @@ module.exports = (res, results, params) => {
     results.push(row);
   })
   .on('end', function(){
-    console.log("created");
-    res.json(results);
+    console.log('results!!!', results);
+    res.send(results);
   })
 }

@@ -11,39 +11,27 @@ class FilterView extends Component {
     super(props);
 
     this.state = {
-      selectValue: 'altmanzscore'
+      strat: 'altmanzscore',
+      counter: 0
     };
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleFinalSubmit = this.handleFinalSubmit.bind(this);
-    this.renderFilterList = this.renderFilterList.bind(this);
-
+    // this.handleChange = this.handleChange.bind(this);
+    // this.handleFinalSubmit = this.handleFinalSubmit.bind(this);
+    // this.componentWillMount = this.componentWillMount.bind(this);
+    this.onFormSubmit = this.onFormSubmit.bind(this);
+    this.onSelectChange = this.onSelectChange.bind(this);
+    // this.renderFilterList = this.renderFilterList.bind(this);
+    // this.filterDataCheck = this.filterDataCheck.bind(this);
+  }
+  onFormSubmit(event) {
+    event.preventDefault();
+    console.log('insideo onFormSubmit', this.state.strat);
+    this.props.getDBDataFiltered(this.state.strat)
   }
 
-  handleChange(event) {
-    this.setState({selectValue: event.target.value});
+  onSelectChange() {
+    this.setState({strat: event.target.value})
   }
-
-  handleFinalSubmit() {
-    this.props.getDBDataFiltered(this.state.selectValue);
-  }
-
-  renderFilterList() {
-    let counter = 0;
-    return this.props.filterData.map((stock) => {
-      counter++;
-      return (
-        <tbody key={counter}>
-          <tr>
-            <td>{stock.ticker}</td>
-            <td>{stock.close_price}</td>
-            <td>{stock.pricetoearnings}</td>
-          </tr>
-        </tbody>
-        )
-    })
-  }
-
 
   render() {
 
@@ -61,10 +49,10 @@ class FilterView extends Component {
       <div className="row">
         <div className="col-md-6 filter">
         <h2> Filters </h2>
-        <form>
+        <form onSubmit={this.onFormSubmit}>
           <select
-            value={this.state.selectValue}
-            onChange={this.handleChange}
+            value={this.state.strat}
+            onChange={this.onSelectChange}
           >
             <option value="altmanzscore">Z-Score</option>
             <option value="assetturnover">Asset Turnover</option>
@@ -79,20 +67,17 @@ class FilterView extends Component {
             <option value="netincomegrowth">Net Income Growth</option>
             <option value="roe">Return on Equity</option>
           </select>
-          <br/>
-          <br/>
-          <input type="submit" className="btn btn-secondary" onClick={this.handleFinalSubmit}/>
+            <button type="submit">Submit</button>
         </form>
         </div>
 
         <div className="col-md-6 results">
         <h2> Results </h2>
-          <table className="tablr">
+        <table className="tablr">
           <tbody><tr>
-            <th>Ticker</th>
-            <th>Price</th>
+          <th>Ticker</th>
+          <th>Price</th>
           </tr></tbody>
-          {this.renderFilterList()}
           </table>
         </div>
 

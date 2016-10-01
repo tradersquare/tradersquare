@@ -78,8 +78,8 @@ app.get('/getDataDB/', function(req, res) {
 
 app.get('/getFilteredDataDB/*', function(req, res) {
   let results = [];
-  const params = req.url.slice(19).toLowerCase();
-  console.log("PARAMS: ", params);
+  let params = req.query.filter;
+  console.log('here in getFilteredDataDB', params);
   GrabFilteredDataDB(res, results, params);
 })
 
