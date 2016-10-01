@@ -112,6 +112,12 @@ app.get('/getGraphData/*', function(req, res) {
   getGraphData(res, ticker);
 })
 
+app.get('/getTwitterData/*', function(req, res) {
+  tweet = req.url.slice(16).toUpperCase();
+  console.log('twitterslice', ticker);
+  // getTweets(res, tweet);
+})
+
 app.use(function(req, res, next) {
   res.sendFile(path.join(__dirname, '../public/index.html'));
 });
