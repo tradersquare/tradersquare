@@ -10,6 +10,7 @@ import Numeral from 'numeral'
 
 //stock view cards
 import PE from './stock-view-components/pe'
+import Earnings from './stock-view-components/earnings'
 
 class StockView extends Component {
   constructor(props) {
@@ -104,12 +105,7 @@ class StockView extends Component {
         <div className="card-deck-wrapper">
           <div className="card-deck">
               <PE />
-
-            <div className="card">
-              <h3 className="centerheading">EARNINGS</h3>
-              <h4 className="centertext">{(earningsyield*100)}%</h4>
-              <p>*how much the stock is earning per share</p>
-            </div>
+              <Earnings />
             <div className="card">
               <h3 className="centerheading">DIVIDENDS</h3>
               <h4 className="centertext">{stockData.dividendyield}</h4>

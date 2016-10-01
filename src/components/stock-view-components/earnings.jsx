@@ -14,24 +14,26 @@ class PE extends Component {
         </div>
         )
     }
+    
+    const earningsyield = parseFloat(this.props.percentileData.earningsyield.value);
 
-
-    let color = Util.cardColor(-1, 50, this.props.percentileData, "pricetoearnings")
+    let color = Util.cardColor(1, 50, this.props.percentileData, "earningsyield")
 
     return (
       <div className={"card " + color}>
-        <h1>{}</h1>
-        <h3 className="centerheading">COST</h3>
-        <h4 className="centertext">{this.props.percentileData.pricetoearnings.value}</h4>
-        <h4 className="centertext">percentile: {this.props.percentileData.pricetoearnings.percentile}%</h4>
+        <h3 className="centerheading">EARNINGS</h3>
+        <h4 className="centertext">{(earningsyield*100)}%</h4>
+        <h4 className="centertext">percentile: {this.props.percentileData.earningsyield.percentile}%</h4>
+
       </div>
     )
   }
 
 }
 
-// description for P/E
-//         <p>*P/E ratio represents how much investors are willing to pay (market price) per dollar of earnings</p>
+// description for earnings
+// <p>*how much the stock is earning per share</p>
+
 
 
 function mapStateToProps(state) {
