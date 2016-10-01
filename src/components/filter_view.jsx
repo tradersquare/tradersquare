@@ -5,6 +5,7 @@ import {bindActionCreators} from 'redux';
 import SearchBar from './search_bar';
 import StratNav from './strategy_nav';
 import getDBDataFiltered from '../actions/get_db_data_filtered';
+import Header from './header';
 
 class FilterView extends Component {
   constructor(props) {
@@ -12,24 +13,41 @@ class FilterView extends Component {
 
     this.state = {
       strat: 'altmanzscore',
-      counter: 0
+      counter: 0,
+      results: []
     };
 
-    // this.handleChange = this.handleChange.bind(this);
-    // this.handleFinalSubmit = this.handleFinalSubmit.bind(this);
-    // this.componentWillMount = this.componentWillMount.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
     this.onSelectChange = this.onSelectChange.bind(this);
-    // this.renderFilterList = this.renderFilterList.bind(this);
-    // this.filterDataCheck = this.filterDataCheck.bind(this);
-  }
-  onFormSubmit(event) {
-    event.preventDefault();
-    console.log('insideo onFormSubmit', this.state.strat);
-    this.props.getDBDataFiltered(this.state.strat)
   }
 
-  onSelectChange() {
+  componentDidUpdate() {
+    if (this.state.results.length !== this.props.filterData.length){
+      let counter = 0;
+      let mapFilterData = this.props.filterData.map((stock) => {
+        counter++;
+        return (
+        <tbody key={counter}>
+          <tr>
+            <td>{stock.ticker}</td>
+            <td>{stock.pricetoearnings}</td>
+            <td>{stock.close_price}</td>
+          </tr>
+        </tbody>
+        )
+      })
+      this.setState({results: mapFilterData})
+    }
+  }
+
+  onFormSubmit(event) {
+    event.preventDefault();
+
+    this.setState({counter: 0});
+    this.props.getDBDataFiltered(this.state.strat);
+  }
+
+  onSelectChange(event) {
     this.setState({strat: event.target.value})
   }
 
@@ -37,15 +55,7 @@ class FilterView extends Component {
 
     return (
       <div >
-      <div className="row header">
-        <h1 className="heading col-md-7"><Link to="/">TraderSquare</Link></h1>
-        <div className="col-md-3 top-padding">
-          <SearchBar/>
-        </div>
-        <div className="col-md-2 top-padding">
-          <StratNav/>
-        </div>
-      </div>
+      <Header />
       <div className="row">
         <div className="col-md-6 filter">
         <h2> Filters </h2>
@@ -67,10 +77,10 @@ class FilterView extends Component {
             <option value="netincomegrowth">Net Income Growth</option>
             <option value="roe">Return on Equity</option>
           </select>
+          <br/><br/>
             <button type="submit">Submit</button>
         </form>
         </div>
-
         <div className="col-md-6 results">
         <h2> Results </h2>
         <table className="tablr">
@@ -78,20 +88,17 @@ class FilterView extends Component {
           <th>Ticker</th>
           <th>Price</th>
           </tr></tbody>
+          {this.state.results}
           </table>
         </div>
-
       </div>
       </div>
     )
-
   }
-
 }
-function mapStateToProps(state) {
-  return {
-    filterData: state.filterData
-  }
+
+function mapStateToProps({filterData}) {
+  return {filterData};
 }
 
 export default connect(mapStateToProps, {getDBDataFiltered})(FilterView)
