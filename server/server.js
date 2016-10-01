@@ -86,7 +86,7 @@ app.get('/getFilteredDataDB/*', function(req, res) {
 
 app.get('/getPercentile/*', function(req, res) {
   const parsed = req.url.slice(14).split("/")
-  const ticker = parsed[1];
+  const ticker = parsed[1].toUpperCase();
   const metric = parsed[2];
   console.log(parsed)
   let results = [];

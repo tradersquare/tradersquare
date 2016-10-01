@@ -2,22 +2,17 @@ import axios from 'axios';
 
 export const GET_PERCENTILE = 'GET_PERCENTILE';
 
-export function searchStockData(ticker) {
+export default function (ticker) {
+  
   const metrics = ['pricetoearnings', 'earningsyield', 'dividendyield', 'altmanzscore', 'currentratio', 'quickratio', 'leverageratio', 'beta', 'roic', 'roa', 'roe'];
-  return axios.all(tmpStock.map((ticker) => axios.get(`/stockDataTmp/${ticker}`)))
+  
+  return axios.all(metrics.map((metric) => axios.get(`/getPercentile/${ticker}/${metric}`)))
     .then(axios.spread((...data) => {
-     console.log(".then", data[0].data.data)
-     let stockInfo = data.map((stock) => stock.data.data)
+     // let percentiles = data.map((stock) => stock)
+     console.log(data)
      return {
-       type: GET_STRAT_DATA,
-       payload: stockInfo
+       type: GET_PERCENTILE,
+       payload: percentiles
      }
    }));
-  let percentile = axios.get(`/getPercentile/${ticker}/${metric}`);
-  console.log('action: percentile query', percentile);
-
-  return {
-    type: GET_PERCENTILE,
-    payload: percentile
-  };
 }
