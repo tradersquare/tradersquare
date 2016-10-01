@@ -80,7 +80,6 @@ app.get('/getDataDB/', function(req, res) {
 app.get('/getFilteredDataDB/*', function(req, res) {
   let results = [];
   let params = req.query.filter;
-  console.log('here in getFilteredDataDB', params);
   GrabFilteredDataDB(res, results, params);
 })
 
@@ -88,7 +87,6 @@ app.get('/getPercentile/*', function(req, res) {
   const parsed = req.url.slice(14).split("/")
   const ticker = parsed[1].toUpperCase();
   const metric = parsed[2];
-  console.log(parsed)
   let results = [];
   getPercentile(res, results, ticker, metric);
 })
@@ -105,7 +103,6 @@ app.get('/stockDataTmp/*', function(req, res) {
 
 app.get('/getGraphData/*', function(req, res) {
   ticker = req.url.slice(14).toUpperCase();
-  console.log('sliced: ', ticker);
   getGraphData(res, ticker);
 })
 

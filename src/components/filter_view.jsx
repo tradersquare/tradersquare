@@ -12,13 +12,37 @@ class FilterView extends Component {
     super(props);
 
     this.state = {
-      strat: 'altmanzscore',
+      allFilters: [
+        {
+          strat: 'altmanzscore',
+          sign: '<',
+          input: 30,
+          type: "Value"
+        }
+      ],
       counter: 0,
-      results: []
+      results: [],
+      values: {
+        altmanzscore: 'Z-Score',
+        assetturnover: 'Asset Turnover',
+        grossmargin: 'Gross Margin',
+        pricetoearnings: 'P/E',
+        currentratio: 'Current Ratio',
+        epsgrowth: 'EPS Growth',
+        divpayoutratio: 'Dividend Payout Ratio',
+        debttoequity: 'Debt To Equity',
+        enterprisevalue: 'Enterprise Value',
+        earningsyield: 'Earnings Yield',
+        netincomegrowth: 'Net Income Growth',
+        roe: 'Return on Equity',
+      }
     };
 
     this.onFormSubmit = this.onFormSubmit.bind(this);
     this.onSelectChange = this.onSelectChange.bind(this);
+    this.handleSignClick = this.handleSignClick.bind(this);
+    this.handleTypeClick = this.handleTypeClick.bind(this);
+    this.onInputChange = this.onInputChange.bind(this);
   }
 
   componentDidUpdate() {
@@ -30,8 +54,8 @@ class FilterView extends Component {
         <tbody key={counter}>
           <tr>
             <td>{stock.ticker}</td>
-            <td>{stock.pricetoearnings}</td>
             <td>{stock.close_price}</td>
+            <td>{stock[this.state.allFilters[0].strat]}</td>
           </tr>
         </tbody>
         )
@@ -43,12 +67,40 @@ class FilterView extends Component {
   onFormSubmit(event) {
     event.preventDefault();
 
-    this.setState({counter: 0});
-    this.props.getDBDataFiltered(this.state.strat);
+    this.props.getDBDataFiltered(this.state.allFilters);
   }
 
   onSelectChange(event) {
-    this.setState({strat: event.target.value})
+    let allFiltersNew = this.state.allFilters.slice();
+    allFiltersNew[0].strat = event.target.value;
+    this.setState({allFilters: allFiltersNew});
+  }
+
+  handleSignClick(event) {
+    let allFiltersNew = this.state.allFilters.slice();
+    if (allFiltersNew[0].sign === ">") {
+      allFiltersNew[0].sign = "<";
+    } else {
+      allFiltersNew[0].sign = ">";
+    }
+    this.setState({allFilters: allFiltersNew});
+  }
+
+  handleTypeClick(event) {
+    let allFiltersNew = this.state.allFilters.slice();
+    if (allFiltersNew[0].type === "Value") {
+      allFiltersNew[0].type = "Percentile";
+    } else {
+      allFiltersNew[0].type = "Value";
+    }
+    this.setState({allFilters: allFiltersNew});
+    console.log(this.state.allFilters);
+    }
+
+  onInputChange(event) {
+    let allFiltersNew = this.state.allFilters.slice();
+    allFiltersNew[0].input = event.target.value;
+    this.setState({allFilters: allFiltersNew});
   }
 
   render() {
@@ -61,7 +113,7 @@ class FilterView extends Component {
         <h2> Filters </h2>
         <form onSubmit={this.onFormSubmit}>
           <select
-            value={this.state.strat}
+            value={this.state.allFilters[0].strat}
             onChange={this.onSelectChange}
           >
             <option value="altmanzscore">Z-Score</option>
@@ -77,8 +129,13 @@ class FilterView extends Component {
             <option value="netincomegrowth">Net Income Growth</option>
             <option value="roe">Return on Equity</option>
           </select>
+          <button type = "button" className="btn btn-secondary" onClick={this.handleSignClick}> {this.state.allFilters[0].sign} </button>
+          <input type="text"
+                 value={this.state.allFilters[0].input}
+                 onChange={this.onInputChange} />
+          <button type = "button" className="btn btn-secondary" onClick={this.handleTypeClick}> {this.state.allFilters[0].type} </button>
           <br/><br/>
-            <button type="submit">Submit</button>
+            <button type="submit" className="btn btn-secondary">Submit</button>
         </form>
         </div>
         <div className="col-md-6 results">
@@ -87,6 +144,7 @@ class FilterView extends Component {
           <tbody><tr>
           <th>Ticker</th>
           <th>Price</th>
+          <th> {this.state.values[this.state.allFilters[0].strat]}</th>
           </tr></tbody>
           {this.state.results}
           </table>
