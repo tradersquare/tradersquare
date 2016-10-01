@@ -12,18 +12,21 @@ export default (props) => {
   //   </div>
   // )
 
-  const data = props.data;
+  let data = props.data;
   console.log('props.data', data);
 
   //consider monentjs library for dates
   // let dates = data.map(d => d.date);
-  let dates = [];
-  let i = 0;
-  data.map( val => {
-    dates.push(i);
-    i++;
-  });
-  console.log(dates);
+  // let dates = [];
+  // let i = 0;
+  // data.map( val => {
+  //   dates.push(i);
+  //   i++;
+  // });
+  // console.log(dates);
+
+
+
   let closingPrices = data.map(d => d.adj_close);
   console.log(closingPrices);
 
@@ -34,15 +37,23 @@ export default (props) => {
     }
   });
 
-  let j = -1;
-  let dumbData = [];
-  dumbData = data.map( v => {
-    j++;
-    return {date: j, adj_close: v.adj_close}
-  })
+  // let j = -1;
+  // let dumbData = [];
+  let dumbData = data.map( (v, i) => {
+    // j++;
+    let oldDate = v.date;
+    let y = Number(oldDate.slice(0, 4));
+    let m = Number(oldDate.slice(5, 7));
+    let d = Number(oldDate.slice(8));
+    let date = new Date(y, m, d);
+    // console.log('give me the date:', date);
+    return {date, adj_close: v.adj_close}
+  });
+
+  let dates = dumbData.map(d => d.date);
 
   console.log('dumbData: ', dumbData);
-  let x = d3.scale.linear()
+  let x = d3.time.scale()
     .range([ props.fullWidth - props.axisMargin, props.axisMargin ])
     .domain([ d3.min(dates), d3.max(dates) ])
 
@@ -59,10 +70,8 @@ export default (props) => {
     return (
       <g className='line-chart'>
         <path stroke="blue" fill="none" strokeWidth="2" d={ lineChart }></path>
-        <Axis orientation="bottom" {...props} dates={dates}  />
-        <Axis orientation="left" {...props} closingPrices={closingPrices}/>
+        <Axis orientation="bottom" {...props} dates={dates}  scale={x}/>
+        <Axis orientation="left" {...props} closingPrices={closingPrices} scale={y}/>
       </g>
     )
-
-    // return <div>nada</div>
 }
