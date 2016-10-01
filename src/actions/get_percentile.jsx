@@ -8,8 +8,19 @@ export default function (ticker) {
   
   return axios.all(metrics.map((metric) => axios.get(`/getPercentile/${ticker}/${metric}`)))
     .then(axios.spread((...data) => {
-     // let percentiles = data.map((stock) => stock)
-     console.log(data)
+     let percentiles = data.reduce((r, obj) => {
+      const item = obj.data;
+      console.log("item", item)
+      console.log("metric", item.metric)
+
+      r[item.metric] ={
+        percentile: item.percentile,
+        value: item[item.metric]
+      };
+      console.log("result", r)
+        return r;
+    }, {})
+     console.log("PERCENTILE DATA", percentiles)
      return {
        type: GET_PERCENTILE,
        payload: percentiles
