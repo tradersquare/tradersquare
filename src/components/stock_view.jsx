@@ -59,7 +59,7 @@ class StockView extends Component {
     console.log('this.props.graphData: ', this.props.graphData);
     console.log('this.props.percentileData: ', this.props.percentileData);
 
-    if(this.props.stockData === null){
+    if(!this.props.stockData || !this.props.percentileData){
       return (<div>
         <Loading />
       </div>)

@@ -1,3 +1,7 @@
+import React, { Component } from 'react';
+import {connect} from 'react-redux';
+import {Link} from 'react-router';
+
 export default {
   /**
    * { determines the color of the card based on percentile }
@@ -16,7 +20,18 @@ export default {
         return direction === -1 ? "green" : "red"
       }
     }
+  },
+
+  testfunc(){
+    console.log("called")
+    return (
+      <div>
+      <h1>something</h1>
+      </div>
+      )
   }
+
+
 
 
 }

@@ -8,13 +8,6 @@ class PE extends Component {
     super(props);
   }
   render() {
-    if(!this.props.percentileData){
-      return (<div className="card">
-        <h1 className="centerheading">loading...</h1>
-        </div>
-        )
-    }
-    
     const earningsyield = parseFloat(this.props.percentileData.earningsyield.value);
 
     let color = Util.cardColor(1, 50, this.props.percentileData, "earningsyield")

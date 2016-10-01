@@ -2,20 +2,13 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router';
 import Util from '../component-helpers';
+import CardLoading from './card-loading';
 
 class PE extends Component {
   constructor(props) {
     super(props);
   }
   render() {
-    if(!this.props.percentileData){
-      return (<div className="card">
-        <h1 className="centerheading">loading...</h1>
-        </div>
-        )
-    }
-
-
     let color = Util.cardColor(-1, 50, this.props.percentileData, "pricetoearnings")
 
     return (
