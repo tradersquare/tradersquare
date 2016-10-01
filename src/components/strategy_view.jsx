@@ -9,6 +9,8 @@ import {searchStockData as SearchStockData} from '../actions/stock_search';
 import {getGraphData as GetGraphData} from '../actions/get_graph_data';
 import Loading from './loading';
 import Header from './header';
+import getPercentile from '../actions/get_percentile';
+
 
 // import { DropdownButton } from 'react-bootstrap';
 // import Bootstrap from 'react-bootstrap';
@@ -41,6 +43,8 @@ class StrategyView extends Component {
   handleSubmit(ticker) {
     this.props.SearchStockData(ticker);
     this.props.GetGraphData(ticker);
+    this.props.getPercentile(ticker);
+
   }
 
   viewMore(){
@@ -140,4 +144,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, {SearchStockData, getStratData, GetGraphData})(StrategyView)
+export default connect(mapStateToProps, {SearchStockData, getStratData, GetGraphData, getPercentile})(StrategyView)

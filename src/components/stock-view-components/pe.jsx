@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router';
 import Util from '../component-helpers';
-import CardLoading from './card-loading';
 
 class PE extends Component {
   constructor(props) {
