@@ -5,7 +5,7 @@ import {searchStockData as SearchStockData} from '../actions/stock_search';
 import {bindActionCreators} from 'redux';
 import getStratData from '../actions/get_strat_data';
 
-class StratNav extends Component {
+class Loading extends Component {
 
   render() {
     return (
@@ -23,4 +23,4 @@ class StratNav extends Component {
   }
 }
 
-export default connect(null, {})(StratNav);
+export default connect(null, {})(Loading);

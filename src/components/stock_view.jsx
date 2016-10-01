@@ -8,6 +8,10 @@ import Loading from './loading';
 import Header from './header';
 import Numeral from 'numeral'
 
+//stock view cards
+import PE from './stock-view-components/pe'
+import Earnings from './stock-view-components/earnings'
+
 class StockView extends Component {
   constructor(props) {
     super(props);
@@ -53,7 +57,9 @@ class StockView extends Component {
     console.log('inside stock_view Render');
     console.log('this.props.stockData: ', this.props.stockData);
     console.log('this.props.graphData: ', this.props.graphData);
-    if(this.props.stockData === null){
+    console.log('this.props.percentileData: ', this.props.percentileData);
+
+    if(!this.props.stockData || !this.props.percentileData){
       return (<div>
         <Loading />
       </div>)
@@ -98,16 +104,8 @@ class StockView extends Component {
 
         <div className="card-deck-wrapper">
           <div className="card-deck">
-            <div className="card">
-              <h3 className="centerheading">COST</h3>
-              <h4 className="centertext">{stockData.pricetoearnings}</h4>
-              <p>*P/E ratio represents how much investors are willing to pay (market price) per dollar of earnings</p>
-            </div>
-            <div className="card">
-              <h3 className="centerheading">EARNINGS</h3>
-              <h4 className="centertext">{(earningsyield*100)}%</h4>
-              <p>*how much the stock is earning per share</p>
-            </div>
+              <PE />
+              <Earnings />
             <div className="card">
               <h3 className="centerheading">DIVIDENDS</h3>
               <h4 className="centertext">{stockData.dividendyield}</h4>
@@ -163,7 +161,8 @@ class StockView extends Component {
 function mapStateToProps(state) {
   return {
     stockData: state.stock,
-    graphData: state.graphData
+    graphData: state.graphData,
+    percentileData: state.percentileData
   }
 }
 
