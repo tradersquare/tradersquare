@@ -5,6 +5,7 @@ import {bindActionCreators} from 'redux';
 import SearchBar from './search_bar';
 import StratNav from './strategy_nav';
 import getDBDataFiltered from '../actions/get_db_data_filtered';
+import Header from './header';
 
 class FilterView extends Component {
   constructor(props) {
@@ -18,7 +19,6 @@ class FilterView extends Component {
 
     this.onFormSubmit = this.onFormSubmit.bind(this);
     this.onSelectChange = this.onSelectChange.bind(this);
-    // this.filteredStrategyData = this.filteredStrategyData.bind(this);
   }
 
   componentDidUpdate() {
@@ -53,19 +53,9 @@ class FilterView extends Component {
 
   render() {
 
-
-
     return (
       <div >
-      <div className="row header">
-        <h1 className="heading col-md-7"><Link to="/">TraderSquare</Link></h1>
-        <div className="col-md-3 top-padding">
-          <SearchBar/>
-        </div>
-        <div className="col-md-2 top-padding">
-          <StratNav/>
-        </div>
-      </div>
+      <Header />
       <div className="row">
         <div className="col-md-6 filter">
         <h2> Filters </h2>
@@ -87,10 +77,10 @@ class FilterView extends Component {
             <option value="netincomegrowth">Net Income Growth</option>
             <option value="roe">Return on Equity</option>
           </select>
+          <br/><br/>
             <button type="submit">Submit</button>
         </form>
         </div>
-
         <div className="col-md-6 results">
         <h2> Results </h2>
         <table className="tablr">
@@ -101,14 +91,12 @@ class FilterView extends Component {
           {this.state.results}
           </table>
         </div>
-
       </div>
       </div>
     )
-
   }
-
 }
+
 function mapStateToProps({filterData}) {
   return {filterData};
 }
