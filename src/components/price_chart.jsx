@@ -27,7 +27,7 @@ export default (props) => {
 
 
 
-  let closingPrices = data.map(d => d.adj_close);
+  let closingPrices = data.map(d => d.close);
   console.log(closingPrices);
 
   //test throws error when not a num:
@@ -47,7 +47,7 @@ export default (props) => {
     let d = Number(oldDate.slice(8));
     let date = new Date(y, m, d);
     // console.log('give me the date:', date);
-    return {date, adj_close: v.adj_close}
+    return {date, close: v.close}
   });
 
   let dates = dumbData.map(d => d.date);
@@ -63,7 +63,7 @@ export default (props) => {
 
   let line = d3.svg.line()
     .x(function(d) {return x(d.date)})
-    .y(function(d) {return y(d.adj_close)})
+    .y(function(d) {return y(d.close)})
 
   let lineChart = line(dumbData);
 
