@@ -10,14 +10,12 @@ export default function (ticker) {
     .then(axios.spread((...data) => {
      let percentiles = data.reduce((r, obj) => {
       const item = obj.data;
-      console.log("item", item)
-      console.log("metric", item.metric)
-
-      r[item.metric] ={
-        percentile: item.percentile,
-        value: item[item.metric]
-      };
-      console.log("result", r)
+      if(obj.data){
+        r[item.metric] = {
+          percentile: item.percentile,
+          value: item[item.metric]
+        };
+      }
         return r;
     }, {})
      console.log("PERCENTILE DATA", percentiles)

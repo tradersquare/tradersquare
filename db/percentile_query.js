@@ -11,7 +11,9 @@ module.exports = (res, results, ticker, metric) => {
     const percentile = results.find((obj) => {
       return obj.ticker === ticker
     })
-    percentile.metric = metric;
-    res.json(percentile);
+    if(percentile){
+      percentile.metric = metric;
+    }
+    res.json(percentile || null);
   })
 }
