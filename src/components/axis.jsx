@@ -5,13 +5,15 @@ export default class Axis extends Component {
   constructor(props) {
     super();
 
-    if (props.dates){
-      this.scale = d3.time.scale();
-    }
+    this.scale = props.scale;
 
-    if (props.closingPrices) {
-      this.scale = d3.scale.linear();
-    }
+    // if (props.dates){
+    //   this.scale = d3.time.scale();
+    // }
+    //
+    // if (props.closingPrices) {
+    //   this.scale = d3.scale.linear();
+    // }
 
     this.axis  = d3.svg.axis()
      .scale(this.scale)
