@@ -30,13 +30,6 @@ class StockView extends Component {
     this.state = {chartWidth: 500}
   }
 
-  componentDidUpdate() {
-  }
-
-  componentDidUpdate() {
-    window.addEventListener('resize', this.handleResize);
-  }
-
   renderPrices() {
     if (this.props.graphData.length === 0) {
       return (<div></div>)
@@ -90,7 +83,6 @@ class StockView extends Component {
     console.log('this.props.stockData: ', this.props.stockData);
     console.log('this.props.graphData: ', this.props.graphData);
     console.log('this.props.percentileData: ', this.props.percentileData);
-
     console.log('equal? ', this.state.chartWidth, this.refs.chartDivRef);
     let priceChart = this.renderPrices();
 
