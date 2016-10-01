@@ -26,6 +26,7 @@ class FilterView extends Component {
 
     this.onFormSubmit = this.onFormSubmit.bind(this);
     this.onSelectChange = this.onSelectChange.bind(this);
+    this.handleSignClick = this.handleSignClick.bind(this);
   }
 
   componentDidUpdate() {
@@ -56,7 +57,18 @@ class FilterView extends Component {
   onSelectChange(event) {
     let allFiltersNew = this.state.allFilters.slice();
     allFiltersNew[0].strat = event.target.value;
-    this.setState({allFilters: allFiltersNew})
+    this.setState({allFilters: allFiltersNew});
+  }
+
+  handleSignClick(event) {
+    let allFiltersNew = this.state.allFilters.slice();
+    console.log("this.state.allfilters: ", this.state.allFilters);
+    if (allFiltersNew[0].sign === ">") {
+      allFiltersNew[0].sign = "<";
+    } else {
+      allFiltersNew[0].sign = ">";
+    }
+    this.setState({allFilters: allFiltersNew});
   }
 
   render() {
@@ -84,7 +96,7 @@ class FilterView extends Component {
             <option value="earningsyield">Earnings Yield</option>
             <option value="netincomegrowth">Net Income Growth</option>
             <option value="roe">Return on Equity</option>
-          </select>
+          </select> <button type = "button" className="btn btn-secondary" onClick={this.handleSignClick}> {this.state.allFilters[0].sign} </button>
           <br/><br/>
             <button type="submit">Submit</button>
         </form>
