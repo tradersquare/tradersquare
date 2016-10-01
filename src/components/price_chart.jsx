@@ -28,7 +28,7 @@ export default (props) => {
 
 
   let closingPrices = data.map(d => d.close);
-  console.log(closingPrices);
+  console.log('closingPrices arr: ', closingPrices);
 
   //test throws error when not a num:
   closingPrices.forEach( v => {
@@ -55,7 +55,7 @@ export default (props) => {
   console.log('dumbData: ', dumbData);
   let x = d3.time.scale()
     .range([ props.fullWidth - props.axisMargin, props.axisMargin ])
-    .domain([ d3.min(dates), d3.max(dates) ])
+    .domain([ d3.max(dates), d3.min(dates) ])
 
   let y = d3.scale.linear()
     .range([ props.height - props.bottomMargin, props.topMargin ])
