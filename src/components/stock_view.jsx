@@ -4,6 +4,9 @@ import {Link} from 'react-router';
 import SearchBar from './search_bar';
 import StratNav from './strategy_nav';
 import PriceChart from './price_chart';
+import Loading from './loading';
+import Header from './header';
+import Numeral from 'numeral'
 
 class StockView extends Component {
   constructor(props) {
@@ -52,7 +55,7 @@ class StockView extends Component {
     console.log('this.props.graphData: ', this.props.graphData);
     if(this.props.stockData === null){
       return (<div>
-          <h1 className="centerheading landing-container">...LOADING</h1>
+        <Loading />
       </div>)
     }
 
@@ -61,18 +64,10 @@ class StockView extends Component {
     const change = stockData.change > 0 ? "↑" : "↡"
     const earningsyield = parseFloat(stockData.earningsyield);
     const booktomarket = (parseFloat(stockData.bookvaluepershare) / parseFloat(stockData.close_price)).toFixed(3);
+    
     return (
       <div>
-        <div className="row header">
-          <h1 className="heading col-md-7"><Link to="/">TraderSquare</Link></h1>
-          <div className="col-md-3 top-padding">
-            <SearchBar/>
-          </div>
-          <div className="col-md-2 top-padding">
-            <StratNav/>
-          </div>
-        </div>
-
+        <Header />
         <div className="row">
           <div className="col-md-4">
             <h3>  {stockData.ticker} : {stockData.name}</h3>
@@ -94,7 +89,7 @@ class StockView extends Component {
             <div className="card col-md-12">
               <h3 className="centerheading">KEY STATISTICS</h3>
                 <h4 className="centertext">52 week high/low: {stockData['fiftytwo_week_high']}/{stockData['fiftytwo_week_low']}</h4>
-                <h4 className="centertext">Market Cap: {stockData.marketcap}</h4>
+                <h4 className="centertext">Market Cap: {Numeral(parseFloat(stockData.marketcap)).format('0,0')}</h4>
                 <h4 className="centertext">Volume: {stockData.volume}</h4>
                 <h4 className="centertext">Open/Close: {stockData.open_price}/{stockData.close_price}</h4>
             </div>

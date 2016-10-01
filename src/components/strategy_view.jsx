@@ -7,7 +7,8 @@ import SearchBar from './search_bar';
 import StratNav from './strategy_nav';
 import {searchStockData as SearchStockData} from '../actions/stock_search';
 import {getGraphData as GetGraphData} from '../actions/get_graph_data';
-
+import Loading from './loading';
+import Header from './header';
 
 // import { DropdownButton } from 'react-bootstrap';
 // import Bootstrap from 'react-bootstrap';
@@ -49,9 +50,7 @@ class StrategyView extends Component {
   render(){
     if(!this.props.strategyData){
       return (
-        <div>
-        <h3>loading...</h3>
-        </div>
+        <Loading />
         )
     }
     else{
@@ -85,7 +84,7 @@ class StrategyView extends Component {
       return (
       <tbody key={stockKey}>
         <tr>
-            <Link to="/stockview" onClick={()=>{this.handleSubmit(stock.ticker)}}><td>{stock.ticker}</td></Link>
+            <td><Link to="/stockview" onClick={()=>{this.handleSubmit(stock.ticker)}}>{stock.ticker}</Link></td>
             <td>{stock.name}</td>
             <td>{stock.close_price}</td>
             <td>{val}</td>
@@ -96,15 +95,7 @@ class StrategyView extends Component {
 
     return (
         <div >
-          <div className="row header">
-            <h1 className="heading col-md-7"><Link to="/">TraderSquare</Link></h1>
-            <div className="col-md-3 top-padding">
-              <SearchBar/>
-            </div>
-            <div className="col-md-2 top-padding">
-              <StratNav/>
-            </div>
-          </div>
+          <Header />
           <div className="col-md-3">
           <select
             value={this.state.selectValue}
