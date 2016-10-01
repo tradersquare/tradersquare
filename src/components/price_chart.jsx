@@ -18,7 +18,7 @@ export default (props) => {
   //consider monentjs library for dates
   // let dates = data.map(d => d.date);
   // let dates = [];
-  let i = 0;
+  // let i = 0;
   // data.map( val => {
   //   dates.push(i);
   //   i++;
@@ -37,10 +37,10 @@ export default (props) => {
     }
   });
 
-  let j = -1;
-  let dumbData = [];
-  dumbData = data.map( (v, i) => {
-    j++;
+  // let j = -1;
+  // let dumbData = [];
+  let dumbData = data.map( (v, i) => {
+    // j++;
     let oldDate = v.date;
     let y = Number(oldDate.slice(0, 4));
     let m = Number(oldDate.slice(5, 7));
@@ -70,7 +70,7 @@ export default (props) => {
     return (
       <g className='line-chart'>
         <path stroke="blue" fill="none" strokeWidth="2" d={ lineChart }></path>
-        {/* <Axis orientation="bottom" {...props} dates={dates}  /> */}
+        <Axis orientation="bottom" {...props} dates={dates}  />
         <Axis orientation="left" {...props} closingPrices={closingPrices}/>
       </g>
     )

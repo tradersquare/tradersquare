@@ -4,7 +4,14 @@ import ReactDOM from 'react-dom';
 export default class Axis extends Component {
   constructor(props) {
     super();
-    this.scale = d3.scale.linear();
+
+    if (props.dates){
+      this.scale = d3.time.scale();
+    }
+
+    if (props.closingPrices) {
+      this.scale = d3.scale.linear();
+    }
 
     this.axis  = d3.svg.axis()
      .scale(this.scale)
@@ -19,7 +26,8 @@ export default class Axis extends Component {
         .domain([ d3.min(dates), d3.max(dates) ]);
 
       this.axis
-        .ticks(3)
+        .tickFormat(d3.time.format("%Y-%m-%d"))
+        .ticks(2)
     }
 
     if (this.props.closingPrices) {
