@@ -31,7 +31,7 @@ class StockView extends Component {
       return (<div>Graph loading...</div>)
     }
     else {
-      let data = [];
+      // let data = [];
       // console.log('state.graphData: ', this.props.graphData[0]);
       // let i = 0;
       // console.log('state.graphData.i.close: ', this.props.graphData[i].close);
@@ -42,7 +42,7 @@ class StockView extends Component {
       // }
       // console.log('100: ', data);
 
-      console.log('chartDivRef clientwidth: ', this.refs.chartDivRef.clientWidth);
+      // console.log('chartDivRef clientwidth: ', this.refs.chartDivRef.clientWidth);
 
       const params = {
         // width: 550,
@@ -68,6 +68,8 @@ class StockView extends Component {
   handleResize(e) {
     if (this.refs.chartDivRef) {
       // console.log('chartDivRef clientwidth: ', (this.refs.chartDivRef.clientWidth));
+      //following forces a re-render, which forces chart to reset its width
+      //the state.chartWidth is not actually used, but smt like following is needed...
       this.setState({
         chartWidth: this.refs.chartDivRef.clientWidth
       })

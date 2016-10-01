@@ -4,28 +4,10 @@ import Axis from './axis';
 // import d3 from 'd3';
 
 export default (props) => {
-  // return (
-  //   <div>
-  //     <Sparklines height={120} axis={true} width={180} data={props.data}>
-  //       <SparklinesLine color={props.color} />
-  //     </Sparklines>
-  //   </div>
-  // )
-
   let data = props.data;
   console.log('props.data', data);
 
   //consider monentjs library for dates
-  // let dates = data.map(d => d.date);
-  // let dates = [];
-  // let i = 0;
-  // data.map( val => {
-  //   dates.push(i);
-  //   i++;
-  // });
-  // console.log(dates);
-
-
 
   let closingPrices = data.map(d => d.close);
   console.log('closingPrices arr: ', closingPrices);
@@ -37,10 +19,7 @@ export default (props) => {
     }
   });
 
-  // let j = -1;
-  // let dumbData = [];
   let dumbData = data.map( (v, i) => {
-    // j++;
     let oldDate = v.date;
     let y = Number(oldDate.slice(0, 4));
     let m = Number(oldDate.slice(5, 7));
