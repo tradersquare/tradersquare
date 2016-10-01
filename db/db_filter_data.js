@@ -2,12 +2,13 @@ const db = require('./config.js');
 
 
 module.exports = (res, results, params) => {
-    console.log('params in db query: ', params);
-    db.query(`select ticker, close_price, pricetoearnings
+    console.log('params in db query: ', JSON.parse(params));
+    let parsedParams = JSON.parse(params);
+    db.query(`select ticker, close_price, ${parsedParams.strat}
     from productionschema.realdata
-    where pricetoearnings is distinct from 'nm'
-    and cast(pricetoearnings as decimal) > 30
-    order by pricetoearnings;`)
+    where ${parsedParams.strat} is distinct from 'nm'
+    and cast(${parsedParams.strat} as decimal) ${parsedParams.sign} ${parsedParams.input}
+    order by ${parsedParams.strat};`)
   .on('row', row => {
     results.push(row);
   })

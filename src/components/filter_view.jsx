@@ -37,8 +37,8 @@ class FilterView extends Component {
         <tbody key={counter}>
           <tr>
             <td>{stock.ticker}</td>
-            <td>{stock.pricetoearnings}</td>
             <td>{stock.close_price}</td>
+            <td>{stock[this.state.allFilters[0].strat]}</td>
           </tr>
         </tbody>
         )
