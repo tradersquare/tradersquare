@@ -12,28 +12,48 @@ class FilterView extends Component {
 
     this.state = {
       strat: 'altmanzscore',
-      counter: 0
+      counter: 0,
+      results: []
     };
 
-    // this.handleChange = this.handleChange.bind(this);
-    // this.handleFinalSubmit = this.handleFinalSubmit.bind(this);
-    // this.componentWillMount = this.componentWillMount.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
     this.onSelectChange = this.onSelectChange.bind(this);
-    // this.renderFilterList = this.renderFilterList.bind(this);
-    // this.filterDataCheck = this.filterDataCheck.bind(this);
-  }
-  onFormSubmit(event) {
-    event.preventDefault();
-    console.log('insideo onFormSubmit', this.state.strat);
-    this.props.getDBDataFiltered(this.state.strat)
+    // this.filteredStrategyData = this.filteredStrategyData.bind(this);
   }
 
-  onSelectChange() {
+  componentDidUpdate() {
+    if (this.state.results.length !== this.props.filterData.length){
+      let counter = 0;
+      let mapFilterData = this.props.filterData.map((stock) => {
+        counter++;
+        return (
+        <tbody key={counter}>
+          <tr>
+            <td>{stock.ticker}</td>
+            <td>{stock.pricetoearnings}</td>
+            <td>{stock.close_price}</td>
+          </tr>
+        </tbody>
+        )
+      })
+      this.setState({results: mapFilterData})
+    }
+  }
+
+  onFormSubmit(event) {
+    event.preventDefault();
+
+    this.setState({counter: 0});
+    this.props.getDBDataFiltered(this.state.strat);
+  }
+
+  onSelectChange(event) {
     this.setState({strat: event.target.value})
   }
 
   render() {
+
+
 
     return (
       <div >
@@ -78,6 +98,7 @@ class FilterView extends Component {
           <th>Ticker</th>
           <th>Price</th>
           </tr></tbody>
+          {this.state.results}
           </table>
         </div>
 
@@ -88,10 +109,8 @@ class FilterView extends Component {
   }
 
 }
-function mapStateToProps(state) {
-  return {
-    filterData: state.filterData
-  }
+function mapStateToProps({filterData}) {
+  return {filterData};
 }
 
 export default connect(mapStateToProps, {getDBDataFiltered})(FilterView)
