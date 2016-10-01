@@ -37,6 +37,7 @@ class StockView extends Component {
     else {
       let thisWidth = (this.refs.chartDivRef) ? this.refs.chartDivRef.clientWidth : 400;
       console.log('thisWidth', thisWidth);
+
       const params = {
         // width: 550,
         height: 400,
