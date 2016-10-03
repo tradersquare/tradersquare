@@ -1,4 +1,5 @@
 const db = require('../../db/config.js');
+const apireq = require('./api_req')
 const companies = process.env.tickersInDB;
 const metrics = ['pricetoearnings', 'earningsyield', 'dividendyield', 'altmanzscore', 'currentratio', 'quickratio', 'leverageratio', 'beta', 'roic', 'roa', 'roe'];
 
@@ -22,7 +23,7 @@ module.exports = (ticker, res) => {
 			      percentile.value = percentile[metric]
 			    }
 
-			    console.log(percentile)
+			    
 			    resolve(percentile || "at DB end");
 			  })
 			  .on('error', err => {
@@ -33,13 +34,30 @@ module.exports = (ticker, res) => {
 		
 		Promise.all(datapromises)
 			.then((data, ...rest) => {
-				res.send(data)
+				const results = data.reduce((final, obj) => {
+					final[obj.metric] = {
+						percentile: obj.percentile,
+						value: obj.value
+					}
+					return final;
+				}, {})
+				res.send(results)
 			})
 			.catch(err => {
 				res.send("error")
 			})
 	}
 	else{
-		res.send("wrong")
+		apireq('financials', ticker)
+		.then((data)=>{
+			const results = {}
+			for(let key in data){
+				results[key] = {
+					percentile: null,
+					value: data[key]
+				}
+			}
+			res.send(results)
+		})
 	}
 }
