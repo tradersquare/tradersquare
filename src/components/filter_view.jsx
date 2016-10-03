@@ -13,13 +13,7 @@ class FilterView extends Component {
 
     this.state = {
       allFilters: [
-        {
-          strat: 'altmanzscore',
-          sign: '<',
-          input: 30,
-          type: "Value"
-        }
-      ],
+          ],
       counter: 0,
       results: [],
       values: {
@@ -43,6 +37,12 @@ class FilterView extends Component {
     this.handleSignClick = this.handleSignClick.bind(this);
     this.handleTypeClick = this.handleTypeClick.bind(this);
     this.onInputChange = this.onInputChange.bind(this);
+    this.generateNewFilter = this.generateNewFilter.bind(this);
+
+  }
+
+  componentWillMount() {
+    this.generateNewFilter();
   }
 
   componentDidUpdate() {
@@ -64,9 +64,26 @@ class FilterView extends Component {
     }
   }
 
+  generateNewFilter() {
+    let template =  {
+          strat: 'altmanzscore',
+          sign: '<',
+          input: 0,
+          type: "Value",
+          index: this.state.counter
+      }
+    let copy = this.state.allFilters.slice();
+    copy.push(template);
+    this.setState({
+      allFilters: copy,
+      counter: this.state.counter + 1
+    });
+  }
+
+
   onFormSubmit(event) {
     event.preventDefault();
-
+    console.log(event.target);
     this.props.getDBDataFiltered(this.state.allFilters);
   }
 
@@ -105,15 +122,12 @@ class FilterView extends Component {
 
   render() {
 
-    return (
-      <div >
-      <Header />
-      <div className="row">
-        <div className="col-md-6 filter">
-        <h2> Filters </h2>
-        <form onSubmit={this.onFormSubmit}>
-          <select
-            value={this.state.allFilters[0].strat}
+    let filterInputs = this.state.allFilters.map((obj) => {
+      let key = obj.index;
+      return (
+        <div key={key}>
+            <select
+            value={this.state.allFilters[key].strat}
             onChange={this.onSelectChange}
           >
             <option value="altmanzscore">Z-Score</option>
@@ -129,14 +143,30 @@ class FilterView extends Component {
             <option value="netincomegrowth">Net Income Growth</option>
             <option value="roe">Return on Equity</option>
           </select>
-          <button type = "button" className="btn btn-secondary" onClick={this.handleSignClick}> {this.state.allFilters[0].sign} </button>
+          <button type = "button" className="btn btn-secondary" onClick={this.handleSignClick}> {this.state.allFilters[key].sign} </button>
           <input type="text"
-                 value={this.state.allFilters[0].input}
+                 value={this.state.allFilters[key].input}
                  onChange={this.onInputChange} />
-          <button type = "button" className="btn btn-secondary" onClick={this.handleTypeClick}> {this.state.allFilters[0].type} </button>
+          <button type = "button" className="btn btn-secondary" onClick={this.handleTypeClick}> {this.state.allFilters[key].type} </button>
+        </div>
+      )
+    })
+
+
+    return (
+      <div >
+      <Header />
+      <div className="row">
+        <div className="col-md-6 filter">
+        <h2> Filters </h2>
+        <form onSubmit={this.onFormSubmit}>
+          {filterInputs}
           <br/><br/>
-            <button type="submit" className="btn btn-secondary">Submit</button>
+            <button type="submit" className="btn btn-secondary">Submit
+            </button>
         </form>
+          <button className="btn btn-secondary" onClick={this.generateNewFilter}>+
+            </button>
         </div>
         <div className="col-md-6 results">
         <h2> Results </h2>
@@ -144,7 +174,7 @@ class FilterView extends Component {
           <tbody><tr>
           <th>Ticker</th>
           <th>Price</th>
-          <th> {this.state.values[this.state.allFilters[0].strat]}</th>
+          <th> </th>
           </tr></tbody>
           {this.state.results}
           </table>
