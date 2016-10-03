@@ -21,15 +21,19 @@ module.exports = (type, ticker, statement, year, period) => {
         const results = data.data;
         console.log("results = data.data:", data);
         const element = {};
-
-        for(let i of results){
-          // console.log("YEAR:", year);
-          // console.log('this is i: ', i);
-          // called below
-          check52Week(i, element, year);
+        if(data.data){
+          for(let i of results){
+            // console.log("YEAR:", year);
+            // console.log('this is i: ', i);
+            // called below
+            check52Week(i, element, year);
+          }
+        resolve(element);
+        }
+        else{
+          resolve("invalid ticker")
         }
         // console.log('before resolving element, element is: ', element);
-        resolve(element);
       })
       .on('error', (error) => {
         console.log('follwing error from api_req.js: module.exports');

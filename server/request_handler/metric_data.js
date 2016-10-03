@@ -50,14 +50,20 @@ module.exports = (ticker, res) => {
 	else{
 		apireq('financials', ticker)
 		.then((data)=>{
+			console.log("*****", data);
 			const results = {}
-			for(let key in data){
-				results[key] = {
-					percentile: null,
-					value: data[key]
+			if(typeof data === "object"){
+				for(let key in data){
+					results[key] = {
+						percentile: null,
+						value: data[key]
+					}
 				}
+				res.send(results)
 			}
-			res.send(results)
+			else{
+				res.send(data)
+			}
 		})
 	}
 }
