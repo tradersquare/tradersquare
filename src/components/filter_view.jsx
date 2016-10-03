@@ -87,28 +87,28 @@ class FilterView extends Component {
     this.props.getDBDataFiltered(this.state.allFilters);
   }
 
-  onSelectChange(event) {
+  onSelectChange(event,key) {
     let allFiltersNew = this.state.allFilters.slice();
-    allFiltersNew[0].strat = event.target.value;
+    allFiltersNew[key].strat = event.target.value;
     this.setState({allFilters: allFiltersNew});
   }
 
-  handleSignClick(event) {
+  handleSignClick(event,key) {
     let allFiltersNew = this.state.allFilters.slice();
-    if (allFiltersNew[0].sign === ">") {
-      allFiltersNew[0].sign = "<";
+    if (allFiltersNew[key].sign === ">") {
+      allFiltersNew[key].sign = "<";
     } else {
-      allFiltersNew[0].sign = ">";
+      allFiltersNew[key].sign = ">";
     }
     this.setState({allFilters: allFiltersNew});
   }
 
-  handleTypeClick(event) {
+  handleTypeClick(event,key) {
     let allFiltersNew = this.state.allFilters.slice();
-    if (allFiltersNew[0].type === "Value") {
-      allFiltersNew[0].type = "Percentile";
+    if (allFiltersNew[key].type === "Value") {
+      allFiltersNew[key].type = "Percentile";
     } else {
-      allFiltersNew[0].type = "Value";
+      allFiltersNew[key].type = "Value";
     }
     this.setState({allFilters: allFiltersNew});
     }
@@ -129,7 +129,7 @@ class FilterView extends Component {
         <div key={key}>
             <select
             value={this.state.allFilters[key].strat}
-            onChange={this.onSelectChange}
+            onChange={this.onSelectChange.bind(this,event,key)}
           >
             <option value="altmanzscore">Z-Score</option>
             <option value="assetturnover">Asset Turnover</option>
@@ -144,11 +144,11 @@ class FilterView extends Component {
             <option value="netincomegrowth">Net Income Growth</option>
             <option value="roe">Return on Equity</option>
           </select>
-          <button type = "button" className="btn btn-secondary" onClick={this.handleSignClick}> {this.state.allFilters[key].sign} </button>
+          <button type = "button" className="btn btn-secondary" onClick={this.handleSignClick.bind(this, event, key)}> {this.state.allFilters[key].sign} </button>
           <input type="text"
                  value={this.state.allFilters[key].input}
                  onChange={this.onInputChange.bind(this, event, key)} />
-          <button type = "button" className="btn btn-secondary" onClick={this.handleTypeClick}> {this.state.allFilters[key].type} </button>
+          <button type = "button" className="btn btn-secondary" onClick={this.handleTypeClick.bind(this,event,key)}> {this.state.allFilters[key].type} </button>
         </div>
       )
     })
