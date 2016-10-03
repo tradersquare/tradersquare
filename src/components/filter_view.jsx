@@ -111,12 +111,13 @@ class FilterView extends Component {
       allFiltersNew[0].type = "Value";
     }
     this.setState({allFilters: allFiltersNew});
-    console.log(this.state.allFilters);
     }
 
-  onInputChange(event) {
+  onInputChange(event,key) {
+    console.log(event.target.value, key)
+    console.log(this.state.allFilters)
     let allFiltersNew = this.state.allFilters.slice();
-    allFiltersNew[0].input = event.target.value;
+    allFiltersNew[key].input = event.target.value;
     this.setState({allFilters: allFiltersNew});
   }
 
@@ -146,7 +147,7 @@ class FilterView extends Component {
           <button type = "button" className="btn btn-secondary" onClick={this.handleSignClick}> {this.state.allFilters[key].sign} </button>
           <input type="text"
                  value={this.state.allFilters[key].input}
-                 onChange={this.onInputChange} />
+                 onChange={this.onInputChange.bind(this, event, key)} />
           <button type = "button" className="btn btn-secondary" onClick={this.handleTypeClick}> {this.state.allFilters[key].type} </button>
         </div>
       )
