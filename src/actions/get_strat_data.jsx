@@ -5,7 +5,7 @@ export const GET_STRAT_DATA = "GET_STRAT_DATA";
 
 export default function() {
 
-  let dbStock = axios.get(`/getDataDB`);;
+  let dbStock = axios.get(`/getDataDB`);
 
   return {
     type: GET_STRAT_DATA,

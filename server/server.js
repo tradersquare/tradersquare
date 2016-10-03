@@ -23,6 +23,7 @@ const getGraphData            = require('./request_handler/graph_data.js');
 //REQUEST HANDLER MODULES
 const StockData = require('./request_handler/stock_data');
 const stratData = require('./request_handler/strat_data');
+const metricData = require('./request_handler/metric_data')
 
 const app = module.exports = express();
 // const router = express.Router();
@@ -100,6 +101,11 @@ app.get('/stockDataTmp/*', function(req, res) {
   const ticker = req.url.slice(14).toUpperCase();
   stratData(ticker, res);
 });
+
+app.get('/getMetrics/*', function(req, res){
+  const ticker = req.url.slice(12).toUpperCase();
+  metricData(ticker, res)
+})
 
 app.get('/getGraphData/*', function(req, res) {
   ticker = req.url.slice(14).toUpperCase();

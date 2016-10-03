@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+  import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router';
 import Util from '../component-helpers';
 
-class PE extends Component {
+class Earnings extends Component {
   constructor(props) {
     super(props);
   }
@@ -36,4 +36,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(PE);
+export default connect(mapStateToProps)(Earnings);
