@@ -65,12 +65,13 @@ class FilterView extends Component {
   }
 
   generateNewFilter() {
+    const index = this.state.counter
     let template =  {
           strat: 'altmanzscore',
           sign: '<',
           input: 0,
           type: "Value",
-          index: this.state.counter
+          index: index
       }
     let copy = this.state.allFilters.slice();
     copy.push(template);
@@ -83,7 +84,6 @@ class FilterView extends Component {
 
   onFormSubmit(event) {
     event.preventDefault();
-    console.log(event.target);
     this.props.getDBDataFiltered(this.state.allFilters);
   }
 
@@ -115,19 +115,21 @@ class FilterView extends Component {
 
   onInputChange(event,key) {
     console.log(event.target.value, key)
-    console.log(this.state.allFilters)
+    console.log(this.state.allFilters);
+    let input = this.refs["input"+key].value;
+
     let allFiltersNew = this.state.allFilters.slice();
-    allFiltersNew[key].input = event.target.value;
+    allFiltersNew[key].input = input;
     this.setState({allFilters: allFiltersNew});
   }
 
   render() {
-
     let filterInputs = this.state.allFilters.map((obj) => {
       let key = obj.index;
       return (
         <div key={key}>
             <select
+            ref={"strat"+key}
             value={this.state.allFilters[key].strat}
             onChange={this.onSelectChange.bind(this,event,key)}
           >
@@ -144,11 +146,18 @@ class FilterView extends Component {
             <option value="netincomegrowth">Net Income Growth</option>
             <option value="roe">Return on Equity</option>
           </select>
-          <button type = "button" className="btn btn-secondary" onClick={this.handleSignClick.bind(this, event, key)}> {this.state.allFilters[key].sign} </button>
+          <button type="button"
+                  ref={"sign"+key}
+                  className="btn btn-secondary"
+                  onClick={this.handleSignClick.bind(this, event, key)}> {this.state.allFilters[key].sign} </button>
           <input type="text"
+                 ref={"input"+key}
                  value={this.state.allFilters[key].input}
                  onChange={this.onInputChange.bind(this, event, key)} />
-          <button type = "button" className="btn btn-secondary" onClick={this.handleTypeClick.bind(this,event,key)}> {this.state.allFilters[key].type} </button>
+          <button type="button"
+                  ref={"type"+key}
+                  className="btn btn-secondary"
+                  onClick={this.handleTypeClick.bind(this,event,key)}> {this.state.allFilters[key].type} </button>
         </div>
       )
     })
