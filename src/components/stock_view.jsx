@@ -31,31 +31,20 @@ class StockView extends Component {
       return (<div>Graph loading...</div>)
     }
     else {
-      // let data = [];
-      // console.log('state.graphData: ', this.props.graphData[0]);
-      // let i = 0;
-      // console.log('state.graphData.i.close: ', this.props.graphData[i].close);
-
-      // for (let i = 0; i < this.props.graphData.length; i++) {
-      //   // console.log(this.props.graphData[i]);
-      //   data.push(this.props.graphData[i].close);
-      // }
-      // console.log('100: ', data);
-
-      // console.log('chartDivRef clientwidth: ', this.refs.chartDivRef.clientWidth);
-
+      let thisWidth = (this.refs.chartDivRef) ? this.refs.chartDivRef.clientWidth : 400;
+      console.log('thisWidth', thisWidth);
       const params = {
         // width: 550,
         height: 400,
         axisMargin: 43,
         topMargin: 20,
         bottomMargin: 60,
-        fullWidth: this.refs.chartDivRef.clientWidth
+        fullWidth: thisWidth
       }
 
       return (
-        <svg width={ this.refs.chartDivRef.clientWidth } height={ params.height }>
-          <PriceChart { ...params } data={ this.props.graphData } />
+        <svg width={ thisWidth } height={ params.height }>
+          <PriceChart { ...params } data={ this.props.graphData } width={thisWidth} />
         </svg>
       )
     }
@@ -63,6 +52,16 @@ class StockView extends Component {
 
   componentDidUpdate() {
     window.addEventListener('resize', this.handleResize);
+
+    if (this.refs.chartDivRef) {
+      console.log('changemysize');
+      this.renderPrices();
+
+    }
+  }
+
+  componentDidMount() {
+    this.render()
   }
 
   handleResize(e) {
