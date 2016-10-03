@@ -28,7 +28,7 @@ class StockView extends Component {
 
   renderPrices() {
     if (this.props.graphData.length === 0) {
-      return (<div>Graph loading...</div>)
+      return (<div></div>)
     }
     else {
       let thisWidth = (this.refs.chartDivRef) ? this.refs.chartDivRef.clientWidth : 400;
@@ -50,18 +50,18 @@ class StockView extends Component {
     }
   }
 
-  componentDidUpdate() {
-    window.addEventListener('resize', this.handleResize);
-
-    if (this.refs.chartDivRef) {
-      console.log('changemysize');
-      this.renderPrices();
-
-    }
+  componentDidMount() {
+    window.addEventListener('resize', this.handleResize)
+    // if (this.refs.chartDivRef) {
+    //   console.log('changemysize');
+    //   this.renderPrices();
+    //
+    // }
+    debugger;
   }
 
-  componentDidMount() {
-    this.render()
+  componentDidUpdate() {
+    debugger;
   }
 
   handleResize(e) {
@@ -76,18 +76,32 @@ class StockView extends Component {
   }
 
   render() {
+    debugger;
     console.log('inside stock_view Render');
     console.log('this.props.stockData: ', this.props.stockData);
     console.log('this.props.graphData: ', this.props.graphData);
     console.log('this.props.percentileData: ', this.props.percentileData);
 
+
+    console.log('equal? ', this.state.chartWidth, this.refs.chartDivRef);
+    let priceChart = this.renderPrices();
+
+    let chart =
+      <div className="col-md-6" ref='chartDivRef'>
+        {priceChart}
+      </div>
+
     if(!this.props.stockData || !this.props.percentileData || !this.props.graphData){
       return (<div>
           <h1 className="centerheading landing-container">...LOADING</h1>
+          {chart}
       </div>)
     }
 
-    let priceChart = this.renderPrices();
+    // if (this.refs.chartDivRef && this.refs.chartDivRef.clientWidth !== this.state.chartWidth){
+    //   console.log('not equal: ');
+    //   priceChart = this.renderPrices();
+    // }
 
     const stockData = this.props.stockData;
     const metrics = this.props.percentileData;
@@ -118,9 +132,10 @@ class StockView extends Component {
           </div>
         </div>
         <div className="row">
-          <div className="col-md-6" ref='chartDivRef'>
+          {chart}
+          {/* <div className="col-md-6" ref='chartDivRef'>
             {priceChart}
-          </div>
+          </div> */}
           <div className="col-md-6">
             <div className="card col-md-12">
               <h3 className="centerheading">ABOUT</h3>
