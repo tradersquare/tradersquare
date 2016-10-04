@@ -65,12 +65,13 @@ class FilterView extends Component {
   }
 
   generateNewFilter() {
+    const index = this.state.counter;
     let template =  {
           strat: 'altmanzscore',
           sign: '<',
           input: 0,
           type: "Value",
-          index: this.state.counter
+          index: index
       }
     let copy = this.state.allFilters.slice();
     copy.push(template);
@@ -80,56 +81,56 @@ class FilterView extends Component {
     });
   }
 
-
   onFormSubmit(event) {
     event.preventDefault();
-    console.log(event.target);
     this.props.getDBDataFiltered(this.state.allFilters);
   }
 
-  onSelectChange(event) {
+  onSelectChange(event,key) {
     let allFiltersNew = this.state.allFilters.slice();
-    allFiltersNew[0].strat = event.target.value;
+    let input = this.refs["strat"+key].value;
+    allFiltersNew[key].strat = input;
     this.setState({allFilters: allFiltersNew});
   }
 
-  handleSignClick(event) {
+  handleSignClick(event,key) {
     let allFiltersNew = this.state.allFilters.slice();
-    if (allFiltersNew[0].sign === ">") {
-      allFiltersNew[0].sign = "<";
+    if (allFiltersNew[key].sign === ">") {
+      allFiltersNew[key].sign = "<";
     } else {
-      allFiltersNew[0].sign = ">";
+      allFiltersNew[key].sign = ">";
     }
     this.setState({allFilters: allFiltersNew});
   }
 
-  handleTypeClick(event) {
+  handleTypeClick(event,key) {
     let allFiltersNew = this.state.allFilters.slice();
-    if (allFiltersNew[0].type === "Value") {
-      allFiltersNew[0].type = "Percentile";
+    if (allFiltersNew[key].type === "Value") {
+      allFiltersNew[key].type = "Percentile";
     } else {
-      allFiltersNew[0].type = "Value";
+      allFiltersNew[key].type = "Value";
     }
     this.setState({allFilters: allFiltersNew});
     }
 
   onInputChange(event,key) {
-    console.log(event.target.value, key)
-    console.log(this.state.allFilters)
+    console.log(this.state.allFilters);
+    let input = this.refs["input"+key].value;
+
     let allFiltersNew = this.state.allFilters.slice();
-    allFiltersNew[key].input = event.target.value;
+    allFiltersNew[key].input = input;
     this.setState({allFilters: allFiltersNew});
   }
 
   render() {
-
     let filterInputs = this.state.allFilters.map((obj) => {
       let key = obj.index;
       return (
         <div key={key}>
             <select
+            ref={"strat"+key}
             value={this.state.allFilters[key].strat}
-            onChange={this.onSelectChange}
+            onChange={this.onSelectChange.bind(this,event,key)}
           >
             <option value="altmanzscore">Z-Score</option>
             <option value="assetturnover">Asset Turnover</option>
@@ -144,11 +145,16 @@ class FilterView extends Component {
             <option value="netincomegrowth">Net Income Growth</option>
             <option value="roe">Return on Equity</option>
           </select>
-          <button type = "button" className="btn btn-secondary" onClick={this.handleSignClick}> {this.state.allFilters[key].sign} </button>
+          <button type="button"
+                  className="btn btn-secondary"
+                  onClick={this.handleSignClick.bind(this, event, key)}> {this.state.allFilters[key].sign} </button>
           <input type="text"
+                 ref={"input"+key}
                  value={this.state.allFilters[key].input}
                  onChange={this.onInputChange.bind(this, event, key)} />
-          <button type = "button" className="btn btn-secondary" onClick={this.handleTypeClick}> {this.state.allFilters[key].type} </button>
+          <button type="button"
+                  className="btn btn-secondary"
+                  onClick={this.handleTypeClick.bind(this,event,key)}> {this.state.allFilters[key].type} </button>
         </div>
       )
     })
@@ -159,15 +165,21 @@ class FilterView extends Component {
       <Header />
       <div className="row">
         <div className="col-md-6 filter">
-        <h2> Filters </h2>
+         <div className="row">
+           <div className="col-md-10">
+              <h2> Filters </h2>
+           </div>
+           <div className="col-md-2">
+             <button className="btn btn-secondary" onClick={this.generateNewFilter}>+
+             </button>
+           </div>
+         </div>
         <form onSubmit={this.onFormSubmit}>
           {filterInputs}
-          <br/><br/>
+          <br/>
             <button type="submit" className="btn btn-secondary">Submit
             </button>
         </form>
-          <button className="btn btn-secondary" onClick={this.generateNewFilter}>+
-            </button>
         </div>
         <div className="col-md-6 results">
         <h2> Results </h2>

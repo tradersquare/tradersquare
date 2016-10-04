@@ -79,9 +79,9 @@ app.get('/getDataDB/', function(req, res) {
 });
 
 app.get('/getFilteredDataDB/*', function(req, res) {
-  let results = [];
+  // let results = [];
   let params = req.query.filter;
-  GrabFilteredDataDB(res, results, params);
+  GrabFilteredDataDB(res, params);
 })
 
 app.get('/getPercentile/*', function(req, res) {
