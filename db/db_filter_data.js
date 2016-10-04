@@ -1,37 +1,53 @@
 const db = require('./config.js');
 
+let counter = 0;
+module.exports = (res, params) => {
+  console.log("PARSED PARAMS: ", params);
+  let filterPromises = params.map((obj) => {
+    return new Promise((resolve, reject) => {
+      let tempResults = [];
+      let results = [];
+      let parsedParams = JSON.parse(obj);
+      if (parsedParams.type === 'Value') {
+        db.query(`select ticker, close_price, ${parsedParams.strat}
+          from productionschema.realdata
+          where ${parsedParams.strat} is distinct from 'nm'
+          and cast(${parsedParams.strat} as decimal) ${parsedParams.sign} ${parsedParams.input}
+          order by ${parsedParams.strat};`)
+          .on('row', row => {
+            results.push(row);
+          })
+          .on('end', function() {
+            resolve(results);
+          })
+      } else {
+        db.query(`select ticker, close_price, ${parsedParams.strat}, ntile(100) over (order by cast(${parsedParams.strat} as decimal)) as percentile from productionschema.realdata where ${parsedParams.strat} is distinct from 'nm';`)
+          .on('row', row => {
+            tempResults.push(row);
+          })
+          .on('end', function() {
+            const percentile = tempResults.filter((obj) => {
+              const val1 = parsedParams.sign === ">" ? obj.percentile : parsedParams.input;
+              const val2 = parsedParams.sign === "<" ? obj.percentile : parsedParams.input;
+              if (val1 > val2) {
+                return obj;
+              }
+            })
+            results.push(percentile);
 
-module.exports = (res, results, params) => {
-  let parsedParams = JSON.parse(params);
-  if (parsedParams.type === 'Value') {
-    console.log("entered value", parsedParams.type)
-    db.query(`select ticker, close_price, ${parsedParams.strat}
-      from productionschema.realdata
-      where ${parsedParams.strat} is distinct from 'nm'
-      and cast(${parsedParams.strat} as decimal) ${parsedParams.sign} ${parsedParams.input}
-      order by ${parsedParams.strat};`)
-      .on('row', row => {
-        results.push(row);
-      })
-      .on('end', function() {
-        res.send(results);
-      })
-  } else {
-    db.query(`select ticker, close_price, ${parsedParams.strat}, ntile(100) over (order by cast(${parsedParams.strat} as decimal)) as percentile from productionschema.realdata where ${parsedParams.strat} is distinct from 'nm';`)
-      .on('row', row => {
-        results.push(row);
-      })
-      .on('end', function() {
-        const percentile = results.filter((obj) => {
-          const val1 = parsedParams.sign === ">" ? obj.percentile : parsedParams.input;
-          const val2 = parsedParams.sign === "<" ? obj.percentile : parsedParams.input;
-          if (val1 > val2){
-            return obj;
-          }
-        })
-        console.log(percentile);
+            console.log("RESULTS: ", results);
 
-        res.send(percentile);
-      })
-  }
+            resolve(results[0]);
+          })
+      }
+    })
+  })
+
+  Promise.all(filterPromises)
+    .then((data) => {
+      counter++;
+      console.log("FINAL DATA: ", data);
+      console.log("COUNTER: ", counter);
+      res.send(data)
+    })
 }
