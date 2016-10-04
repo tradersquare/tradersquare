@@ -8,14 +8,14 @@ class PE extends Component {
     super(props);
   }
   render() {
-    let color = Util.cardColor(-1, 50, this.props.percentileData, "pricetoearnings")
-
+    // let color = Util.cardColor(-1, 50, this.props.percentileData, "pricetoearnings")
+    const data = Util.handleData(this.props.percentileData, "pricetoearnings", -1, 50, '0.0[00]')
+    console.log("COLOR", data.color)
     return (
-      <div className={"card " + color}>
-        <h1>{}</h1>
+      <div className={"card " + data.color}>
         <h3 className="centerheading">COST</h3>
-        <h4 className="centertext">{this.props.percentileData.pricetoearnings.value}</h4>
-        <h4 className="centertext">percentile: {this.props.percentileData.pricetoearnings.percentile}%</h4>
+        <h4 className="centertext">{data.value}</h4>
+        <h4 className="centertext">{data.percentileDisplay}</h4>
       </div>
     )
   }

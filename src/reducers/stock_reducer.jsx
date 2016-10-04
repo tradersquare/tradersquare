@@ -10,7 +10,7 @@ export default function(state = null, action) {
   switch(action.type) {
     case GET_DATA:
       console.log('reducer: stock_reducer: action.payload ', action.payload);
-      return action.payload.data.data;
+      return action.payload.data;
     default:
       return state;
   }

@@ -34,6 +34,7 @@ module.exports = (ticker, res) => {
 		
 		Promise.all(datapromises)
 			.then((data, ...rest) => {
+				console.log("REST***", rest)
 				const results = data.reduce((final, obj) => {
 					final[obj.metric] = {
 						percentile: obj.percentile,

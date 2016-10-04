@@ -11,6 +11,13 @@ import Numeral from 'numeral'
 //stock view cards
 import PE from './stock-view-components/pe'
 import Earnings from './stock-view-components/earnings'
+import Beta from './stock-view-components/beta'
+import BM from './stock-view-components/BM'
+import Credit from './stock-view-components/creditstrength'
+import Dividends from './stock-view-components/dividends'
+import Leverage from './stock-view-components/leverage'
+import Profitability from './stock-view-components/profitability'
+import Liquidity from './stock-view-components/liquidity'
 
 class StockView extends Component {
   constructor(props) {
@@ -59,17 +66,18 @@ class StockView extends Component {
     console.log('this.props.graphData: ', this.props.graphData);
     console.log('this.props.percentileData: ', this.props.percentileData);
 
-    if(!this.props.stockData || !this.props.percentileData){
+    if(!this.props.stockData || !this.props.percentileData || !this.props.graphData){
       return (<div>
         <Loading />
       </div>)
     }
 
     const stockData = this.props.stockData;
+    const metrics = this.props.percentileData;
     console.log("***STOCKDATA***", stockData)
-    const change = stockData.change > 0 ? "↑" : "↡"
-    const earningsyield = parseFloat(stockData.earningsyield);
-    const booktomarket = (parseFloat(stockData.bookvaluepershare) / parseFloat(stockData.close_price)).toFixed(3);
+    const change = stockData.change > 0 ? "↑" : "↓"
+    // const earningsyield = parseFloat(stockData.earningsyield);
+    // const booktomarket = (parseFloat(stockData.bookvaluepershare) / parseFloat(stockData.close_price)).toFixed(3);
     
     return (
       <div>
@@ -96,7 +104,7 @@ class StockView extends Component {
               <h3 className="centerheading">KEY STATISTICS</h3>
                 <h4 className="centertext">52 week high/low: {stockData['fiftytwo_week_high']}/{stockData['fiftytwo_week_low']}</h4>
                 <h4 className="centertext">Market Cap: {Numeral(parseFloat(stockData.marketcap)).format('0,0')}</h4>
-                <h4 className="centertext">Volume: {stockData.volume}</h4>
+                <h4 className="centertext">Average Volume: {stockData["average_daily_volume"]}</h4>
                 <h4 className="centertext">Open/Close: {stockData.open_price}/{stockData.close_price}</h4>
             </div>
           </div>
@@ -106,50 +114,17 @@ class StockView extends Component {
           <div className="card-deck">
               <PE />
               <Earnings />
-            <div className="card">
-              <h3 className="centerheading">DIVIDENDS</h3>
-              <h4 className="centertext">{stockData.dividendyield}</h4>
-              <p>*how much you are getting paid per share</p>
-            </div>
+              <Dividends />
           </div>
-
           <div className="card-deck">
-            <div className="card">
-              <h3 className="centerheading">CREDIT STRENGTH</h3>
-              <h4 className="centertext">Beta: {stockData.altmanzscore}</h4>
-              <p>*measures the likelihood of a company going bankrupt</p>
-            </div>
-            <div className="card">
-              <h3 className="centerheading">LIQUIDITY</h3>
-              <h4 className="centertext">current ratio: {stockData.currentratio}</h4>
-              <h4 className="centertext">quick ratio: {stockData.quickratio}</h4>
-              <p>*these two ratios measure the liquidity of a company</p>
-            </div>
-            <div className="card">
-              <h3 className="centerheading">LEVERAGE</h3>
-              <h4 className="centertext">{stockData.leverageratio}</h4>
-              <p>*measures how much capital comes from debt</p>
-            </div>
+              <Credit />
+              <Leverage />
+              <Profitability />
           </div>
-
           <div className="card-deck">
-            <div className="card">
-              <h3 className="centerheading">VOLATILITY</h3>
-              <h4 className="centertext">Beta: {stockData.beta}</h4>
-              <p>*beta less than 1 means that the stock is less volatile than the market, and vice versa for value over 1</p>
-            </div>
-            <div className="card">
-              <h3 className="centerheading">PROFITABILITY</h3>
-              <h4 className="centertext">return on invested capital: {stockData.roic}</h4>
-              <h4 className="centertext">return on asset: {stockData.roa}</h4>
-              <h4 className="centertext">return on equity: {stockData.roe}</h4>
-              <p>*</p>
-            </div>
-            <div className="card">
-              <h3 className="centerheading">VALUE</h3>
-              <h4 className="centertext">book to market ratio: {booktomarket}</h4>
-              <p>*undervalued if above 1, overvalued if below 1</p>
-            </div>
+              <Liquidity />
+              <Beta />
+              <BM />
           </div>
         </div>
 
@@ -157,6 +132,7 @@ class StockView extends Component {
     )
   }
 }
+
 
 function mapStateToProps(state) {
   return {
