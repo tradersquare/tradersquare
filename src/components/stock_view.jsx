@@ -95,7 +95,7 @@ class StockView extends Component {
       chart = <div></div>;
       return (
         <div>
-          <h1 className="centerheading landing-container">...LOADING</h1>
+          <Loading />
           {chart}
         </div>)
     }
@@ -114,15 +114,7 @@ class StockView extends Component {
 
     return (
       <div>
-        <div className="row header">
-          <h1 className="heading col-md-7"><Link to="/">TraderSquare</Link></h1>
-          <div className="col-md-3 top-padding">
-            <SearchBar/>
-          </div>
-          <div className="col-md-2 top-padding">
-            <StratNav/>
-          </div>
-        </div>
+        <Header />
 
         <div className="row">
           <div className="col-md-4">
