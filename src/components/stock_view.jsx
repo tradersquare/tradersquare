@@ -91,8 +91,8 @@ class StockView extends Component {
         {priceChart}
       </div>
 
-    if(!this.props.stockData || !this.props.percentileData || !this.props.graphData){
-      chart = <div></div>;
+    if(!this.props.stockData || !this.props.percentileData){
+      priceChart = <div></div>;
       return (
         <div>
           <Loading />
