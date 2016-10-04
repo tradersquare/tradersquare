@@ -23,20 +23,36 @@ class StrategyView extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {selectValue: 'altmanzscore', items: 10, flag: false}
+    // let initialVal = '';
+    // if(this.props.strategyData && this.props.strategyData.metric){
+    //   initialVal = this.props.strategyData.metric;
+    // }"
+    this.state = {selectValue: "", items: 10, flag: false}
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.viewMore = this.viewMore.bind(this);
-    this.componentWillMount = this.componentWillMount.bind(this);
+    // this.componentWillMount = this.componentWillMount.bind(this);
   }
 
   componentWillMount(){
-    this.props.getStratData();
-    this.setState({flag: true})
+    // this.props.getStratData();
+    // this.setState({flag: true})
+    if(this.props.strategyData && this.props.strategyData.metric && this.props.strategyData.metric !== this.state.selectValue){
+      this.setState({selectValue: this.props.strategyData.metric})
+    }
+  }
+  
+  componentWillUpdate(){
+    if(this.props.strategyData && this.props.strategyData.metric && this.props.strategyData.metric !== this.state.selectValue){
+      this.setState({selectValue: this.props.strategyData.metric})
+    }
   }
 
   handleChange(event) {
+    if(!this.props.strategyData){
+      this.props.getStrateData(this.state.selectValue)
+    }
     this.setState({selectValue: event.target.value, items: 10})
   }
 
@@ -52,6 +68,7 @@ class StrategyView extends Component {
   }
 
   render(){
+    console.log(this.state)
     if(!this.props.strategyData){
       return (
         <Loading />
@@ -61,7 +78,7 @@ class StrategyView extends Component {
     let currentStrat = this.state.selectValue + "2015";
     let filteredStocks = [];
 
-    for(let n of this.props.strategyData){
+    for(let n of this.props.strategyData.data){
       if(!isNaN(parseFloat(n[currentStrat]))){
         n[currentStrat] = parseFloat(n[currentStrat]);
         filteredStocks.push(n);
@@ -105,6 +122,7 @@ class StrategyView extends Component {
             value={this.state.selectValue}
             onChange={this.handleChange}
             >
+            <option value=""></option>
             <option value="altmanzscore">Z-Score</option>
             <option value="assetturnover">Asset Turnover</option>
             <option value="grossmargin">Gross Margin</option>
@@ -140,7 +158,8 @@ class StrategyView extends Component {
 
 function mapStateToProps(state) {
   return {
-    strategyData: state.stratData
+    strategyData: state.stratData,
+    strateMetric: state.strateMetric
   }
 }
 

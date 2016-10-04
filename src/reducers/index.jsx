@@ -12,7 +12,8 @@ const rootReducer = combineReducers({
   strat1: Strat1,
   graphData: GraphReducer,
   filterData: FilterReducer,
-  percentileData: PercentileReducer
+  percentileData: PercentileReducer,
+  stratMetric: StrategyViewReducer.metric
 });
 
 export default rootReducer;
