@@ -4,6 +4,9 @@ import {Link} from 'react-router';
 import SearchBar from './search_bar';
 import StratNav from './strategy_nav';
 import PriceChart from './price_chart';
+import Loading from './loading';
+import Header from './header';
+import Numeral from 'numeral'
 import ReactDOM from 'react-dom';
 
 //stock view cards
