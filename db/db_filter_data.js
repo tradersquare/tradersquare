@@ -45,9 +45,27 @@ module.exports = (res, params) => {
 
   Promise.all(filterPromises)
     .then((data) => {
-      counter++;
-      console.log("FINAL DATA: ", data);
-      console.log("COUNTER: ", counter);
-      res.send(data)
+      let shortest = Number.POSITIVE_INFINITY;
+      let histogram = {};
+
+      let dataConcat = [].concat.apply([], data);
+
+
+      for (let data of dataConcat) {
+        if (!histogram[data.ticker]) {
+          histogram[data.ticker] = [];
+        }
+        histogram[data.ticker].push(data);
+      }
+
+      let finalData = [];
+
+      for (let key in histogram) {
+        if (histogram[key].length === data.length) {
+          histogram[key] = Object.assign(...histogram[key]);
+          finalData.push(histogram[key]);
+        }
+      }
+      res.send(finalData);
     })
 }
