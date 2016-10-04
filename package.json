@@ -51,6 +51,7 @@
     "bluebird": "3.4.6",
     "body-parser": "1.15.2",
     "bookshelf": "0.10.1",
+    "d3": "3.5.17",
     "dotenv": "2.0.0",
     "eslint": "3.5.0",
     "eslint-config-airbnb": "11.1.0",
