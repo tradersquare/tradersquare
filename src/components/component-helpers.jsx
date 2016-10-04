@@ -20,12 +20,24 @@ export default {
 
     let value = prop[metric].value === "nm" ? "N/A" : Numeral(parseFloat(prop[metric].value)).format(format)
 
+    const customStyles = {
+      content : {
+        top                   : '50%',
+        left                  : '50%',
+        right                 : 'auto',
+        bottom                : 'auto',
+        marginRight           : '-50%',
+        transform             : 'translate(-50%, -50%)'
+      }
+    };
+
 
 
     const obj = {
       color: color,
       percentileDisplay: percentileDisplay,
-      value: value
+      value: value,
+      style: customStyles
     }
     console.log("OBJ", obj, prop)
     return obj;
