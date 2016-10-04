@@ -1,4 +1,4 @@
-import { GET_DATA } from '../actions/stock_search';
+import { GET_PERCENTILE } from '../actions/get_percentile';
 
 /**
  * [description]
@@ -8,9 +8,9 @@ import { GET_DATA } from '../actions/stock_search';
 
 export default function(state = null, action) {
   switch(action.type) {
-    case GET_DATA:
-      console.log('reducer: stock_reducer: action.payload ', action.payload);
-      return action.payload.data;
+    case GET_PERCENTILE:
+      console.log('reducer: percentile', action.payload);
+      return action.payload;
     default:
       return state;
   }

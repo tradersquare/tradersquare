@@ -17,11 +17,13 @@ const dbURL                   = process.env.DATABASE_URL;
 const callAll                 = require('./request_handler/all_companies.js');
 const GrabDataDB              = require('../db/db_grab_data.js');
 const GrabFilteredDataDB      = require('../db/db_filter_data.js');
+const getPercentile           = require('../db/percentile_query.js');
 const getGraphData            = require('./request_handler/graph_data.js');
 
 //REQUEST HANDLER MODULES
 const StockData = require('./request_handler/stock_data');
 const stratData = require('./request_handler/strat_data');
+const metricData = require('./request_handler/metric_data')
 
 const app = module.exports = express();
 // const router = express.Router();
@@ -76,9 +78,18 @@ app.get('/getDataDB/', function(req, res) {
   GrabDataDB(res, results);
 });
 
-app.get('/getFilteredDataDB', function(req, res) {
+app.get('/getFilteredDataDB/*', function(req, res) {
+  // let results = [];
+  let params = req.query.filter;
+  GrabFilteredDataDB(res, params);
+})
+
+app.get('/getPercentile/*', function(req, res) {
+  const parsed = req.url.slice(14).split("/")
+  const ticker = parsed[1].toUpperCase();
+  const metric = parsed[2];
   let results = [];
-  GrabFilteredDataDB(res, results);
+  getPercentile(res, results, ticker, metric);
 })
 
 app.get('/getAllCompany/', function(req, res) {
@@ -86,14 +97,18 @@ app.get('/getAllCompany/', function(req, res) {
   GrabDataDB(res, results);
 });
 
-app.get('/stockDataTmp/*', function(req, res) {
+app.get('/getBasicInfo/*', function(req, res) {
   const ticker = req.url.slice(14).toUpperCase();
   stratData(ticker, res);
 });
 
+app.get('/getMetrics/*', function(req, res){
+  const ticker = req.url.slice(12).toUpperCase();
+  metricData(ticker, res)
+})
+
 app.get('/getGraphData/*', function(req, res) {
   ticker = req.url.slice(14).toUpperCase();
-  console.log('sliced: ', ticker);
   getGraphData(res, ticker);
 })
 

@@ -10,10 +10,6 @@ class StratNav extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      ticker: ''
-    };
-
     this.handleClick = this.handleClick.bind(this);
   }
 

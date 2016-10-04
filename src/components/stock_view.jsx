@@ -4,6 +4,20 @@ import {Link} from 'react-router';
 import SearchBar from './search_bar';
 import StratNav from './strategy_nav';
 import PriceChart from './price_chart';
+import Loading from './loading';
+import Header from './header';
+import Numeral from 'numeral'
+
+//stock view cards
+import PE from './stock-view-components/pe'
+import Earnings from './stock-view-components/earnings'
+import Beta from './stock-view-components/beta'
+import BM from './stock-view-components/BM'
+import Credit from './stock-view-components/creditstrength'
+import Dividends from './stock-view-components/dividends'
+import Leverage from './stock-view-components/leverage'
+import Profitability from './stock-view-components/profitability'
+import Liquidity from './stock-view-components/liquidity'
 
 class StockView extends Component {
   constructor(props) {
@@ -15,22 +29,33 @@ class StockView extends Component {
   renderPrices() {
     // console.log('top of renderPrices(): ', this.props.graphData)
     if (this.props.graphData.length === 0) {
-      return (<div> no data yet</div>)
+      return (<div>Graph loading...</div>)
     }
     else {
       let data = [];
       // console.log('state.graphData: ', this.props.graphData[0]);
-      let i = 0;
+      // let i = 0;
       // console.log('state.graphData.i.close: ', this.props.graphData[i].close);
-      for (let i = 0; i < 10; i++) {
-        // console.log(this.props.graphData[i]);
-        data.push(this.props.graphData[i].close);
-      }
+
+      // for (let i = 0; i < this.props.graphData.length; i++) {
+      //   // console.log(this.props.graphData[i]);
+      //   data.push(this.props.graphData[i].close);
+      // }
       // console.log('100: ', data);
+
+      const params = {
+        // width: 550,
+        height: 400,
+        axisMargin: 43,
+        topMargin: 20,
+        bottomMargin: 60,
+        fullWidth: 550
+      }
+
       return (
-        <div>
-          <PriceChart data={data} color="#0353A4" />
-        </div>
+        <svg width={ params.fullWidth } height={ params.height }>
+          <PriceChart { ...params } data={ this.props.graphData } />
+        </svg>
       )
     }
   }
@@ -39,28 +64,24 @@ class StockView extends Component {
     console.log('inside stock_view Render');
     console.log('this.props.stockData: ', this.props.stockData);
     console.log('this.props.graphData: ', this.props.graphData);
-    if(this.props.stockData === null){
+    console.log('this.props.percentileData: ', this.props.percentileData);
+
+    if(!this.props.stockData || !this.props.percentileData || !this.props.graphData){
       return (<div>
-          <h1 className="centerheading landing-container">...LOADING</h1>
+        <Loading />
       </div>)
     }
 
     const stockData = this.props.stockData;
+    const metrics = this.props.percentileData;
     console.log("***STOCKDATA***", stockData)
-    const change = stockData.change > 0 ? "↑" : "↡"
-    const earningsyield = stockData.earningsyield;
+    const change = stockData.change > 0 ? "↑" : "↓"
+    // const earningsyield = parseFloat(stockData.earningsyield);
+    // const booktomarket = (parseFloat(stockData.bookvaluepershare) / parseFloat(stockData.close_price)).toFixed(3);
+    
     return (
       <div>
-        <div className="row header">
-          <h1 className="heading col-md-7"><Link to="/">TraderSquare</Link></h1>
-          <div className="col-md-3 top-padding">
-            <SearchBar/>
-          </div>
-          <div className="col-md-2 top-padding">
-            <StratNav/>
-          </div>
-        </div>
-
+        <Header />
         <div className="row">
           <div className="col-md-4">
             <h3>  {stockData.ticker} : {stockData.name}</h3>
@@ -71,52 +92,39 @@ class StockView extends Component {
           </div>
         </div>
         <div className="row">
-          <div className="col-md-6">        
+          <div className="col-md-6">
             {this.renderPrices()}
           </div>
           <div className="col-md-6">
             <div className="card col-md-12">
-              <h3 className="centerheading">About {stockData.name}:</h3>
+              <h3 className="centerheading">ABOUT</h3>
               <p>{stockData.short_description}</p>
             </div>
             <div className="card col-md-12">
-              <h3 className="centerheading">Key Statistics:</h3>
-                <span>52 week high/low: {stockData['fiftytwo_week_high']}/{stockData['fiftytwo_week_low']}</span><br/>
-                <span>Market Cap: {stockData.marketcap}</span><br/>
-                <span>Volume: {stockData.volume}</span><br/>
-                <span>Open/Close: {stockData.open_price}/{stockData.close_price}</span><br/>
+              <h3 className="centerheading">KEY STATISTICS</h3>
+                <h4 className="centertext">52 week high/low: {stockData['fiftytwo_week_high']}/{stockData['fiftytwo_week_low']}</h4>
+                <h4 className="centertext">Market Cap: {Numeral(parseFloat(stockData.marketcap)).format('0,0')}</h4>
+                <h4 className="centertext">Average Volume: {stockData["average_daily_volume"]}</h4>
+                <h4 className="centertext">Open/Close: {stockData.open_price}/{stockData.close_price}</h4>
             </div>
           </div>
         </div>
 
         <div className="card-deck-wrapper">
           <div className="card-deck">
-            <div className="card">
-              <h3 className="centerheading">COST</h3>
-              <h4 className="centertext">{stockData.pricetoearnings}</h4>
-              <p>*P/E ratio represents how much investors are willing to pay (market price) per dollar of earnings</p>
-            </div>
-            <div className="card">
-              <h3 className="centerheading">EARNINGS</h3>
-              <h4 className="centertext">{(earningsyield*100)}%</h4>
-              <p>*how much the stock is earning per share</p>            
-            </div>
-            <div className="card">
-              <h3 className="centerheading">DIVIDENDS</h3>
-              <h4 className="centertext">{stockData.dividendyield}</h4>
-              <p>*how much you are getting paid per share</p>            
-            </div>
+              <PE />
+              <Earnings />
+              <Dividends />
           </div>
-
           <div className="card-deck">
-            <div className="card">Market Cap: {stockData.marketcap}</div>
-            <div className="card">Volume: {stockData.volume}</div>
-            <div className="card">Open Price: {stockData.open_price}</div>
+              <Credit />
+              <Leverage />
+              <Profitability />
           </div>
-
           <div className="card-deck">
-            <div className="card">Close Price: {stockData.close_price}</div>
-            <div className="card">Beta: {stockData.beta}</div>
+              <Liquidity />
+              <Beta />
+              <BM />
           </div>
         </div>
 
@@ -125,10 +133,12 @@ class StockView extends Component {
   }
 }
 
+
 function mapStateToProps(state) {
   return {
     stockData: state.stock,
-    graphData: state.graphData
+    graphData: state.graphData,
+    percentileData: state.percentileData
   }
 }
 
