@@ -7,7 +7,7 @@ export default {
 
   handleData(prop, metric, direction, threshold, format) {
     let color = "";
-    if(prop[metric].percentile){
+    if(prop[metric].percentile !== null){
       if(prop[metric].percentile > threshold){
         color = direction === 1 ? "green" : "red"
       }
@@ -17,15 +17,18 @@ export default {
     }
 
     let percentileDisplay = prop[metric].percentile === null ? "" : `percentile: ${prop[metric].percentile}%`; 
-    
-    let value = Numeral(parseFloat(prop[metric].value) * 100).format(format);
+
+    let value = prop[metric].value === "nm" ? "N/A" : Numeral(parseFloat(prop[metric].value)).format(format)
 
 
-    return {
+
+    const obj = {
       color: color,
       percentileDisplay: percentileDisplay,
       value: value
     }
+    console.log("OBJ", obj, prop)
+    return obj;
   } 
 
 }
