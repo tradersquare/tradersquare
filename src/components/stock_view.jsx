@@ -37,6 +37,7 @@ class StockView extends Component {
     else {
       let thisWidth = (this.refs.chartDivRef) ? this.refs.chartDivRef.clientWidth : 400;
       console.log('thisWidth', thisWidth);
+
       const params = {
         // width: 550,
         height: 400,
@@ -44,6 +45,7 @@ class StockView extends Component {
         topMargin: 20,
         bottomMargin: 60,
         fullWidth: thisWidth
+
       }
 
       return (
@@ -82,7 +84,6 @@ class StockView extends Component {
     console.log('this.props.stockData: ', this.props.stockData);
     console.log('this.props.graphData: ', this.props.graphData);
     console.log('this.props.percentileData: ', this.props.percentileData);
-
     console.log('equal? ', this.state.chartWidth, this.refs.chartDivRef);
     let priceChart = this.renderPrices();
 
@@ -91,7 +92,8 @@ class StockView extends Component {
         {priceChart}
       </div>
 
-    if(!this.props.stockData || !this.props.percentileData){
+
+    if(!this.props.stockData || !this.props.percentileData || !this.props.graphData){
       priceChart = <div></div>;
       return (
         <div>
@@ -115,7 +117,6 @@ class StockView extends Component {
     return (
       <div>
         <Header />
-
         <div className="row">
           <div className="col-md-4">
             <h3>  {stockData.ticker} : {stockData.name}</h3>
