@@ -60,12 +60,10 @@ class StockView extends Component {
     //   this.renderPrices();
     //
     // }
-    debugger;
-  }
+      }
 
   componentDidUpdate() {
-    debugger;
-  }
+      }
 
   handleResize(e) {
     if (this.refs.chartDivRef) {
@@ -79,7 +77,6 @@ class StockView extends Component {
   }
 
   render() {
-    debugger;
     console.log('inside stock_view Render');
     console.log('this.props.stockData: ', this.props.stockData);
     console.log('this.props.graphData: ', this.props.graphData);
