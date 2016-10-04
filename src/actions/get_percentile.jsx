@@ -8,6 +8,7 @@ export default function (ticker) {
     .then((percentiles) => {
       console.log("PERCENTILE", percentiles.data)
       const percentileData = percentiles.data
+      
       return {
        type: GET_PERCENTILE,
        payload: percentileData
