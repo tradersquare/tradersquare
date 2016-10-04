@@ -1,37 +1,31 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router';
+import Numeral from 'numeral';
 
 export default {
-  /**
-   * { determines the color of the card based on percentile }
-   *
-   * @param      {whether above or below is a bad number, 1 or -1}  direction  The direction
-   * @param      {pass value}  x          { parameter_description }
-   * @param      {data that needs to load before evaluation}  data     The object
-   * @param      {the metric we are examining}  metric     The metric
-   */
-  cardColor(direction, x, data, metric){
-    if(data){
-      if(data[metric].percentile > x){
-        return direction === 1 ? "green" : "red"
+
+  handleData(prop, metric, direction, threshold, format) {
+    let color = "";
+    if(prop[metric].percentile){
+      if(prop[metric].percentile > threshold){
+        color = direction === 1 ? "green" : "red"
       }
       else{
-        return direction === -1 ? "green" : "red"
+        color = direction === -1 ? "green" : "red"
       }
     }
-  },
 
-  testfunc(){
-    console.log("called")
-    return (
-      <div>
-      <h1>something</h1>
-      </div>
-      )
-  }
+    let percentileDisplay = prop[metric].percentile === null ? "" : `percentile: ${prop[metric].percentile}%`; 
+    
+    let value = Numeral(parseFloat(prop[metric].value) * 100).format(format);
 
 
-
+    return {
+      color: color,
+      percentileDisplay: percentileDisplay,
+      value: value
+    }
+  } 
 
 }
