@@ -11,6 +11,13 @@ import Numeral from 'numeral'
 //stock view cards
 import PE from './stock-view-components/pe'
 import Earnings from './stock-view-components/earnings'
+import Beta from './stock-view-components/beta'
+import BM from './stock-view-components/BM'
+import Credit from './stock-view-components/creditstrength'
+import Dividends from './stock-view-components/dividends'
+import Leverage from './stock-view-components/leverage'
+import Profitability from './stock-view-components/profitability'
+import Liquidity from './stock-view-components/liquidity'
 
 class StockView extends Component {
   constructor(props) {
@@ -107,7 +114,17 @@ class StockView extends Component {
           <div className="card-deck">
               <PE />
               <Earnings />
-            
+              <Dividends />
+          </div>
+          <div className="card-deck">
+              <Credit />
+              <Leverage />
+              <Profitability />
+          </div>
+          <div className="card-deck">
+              <Liquidity />
+              <Beta />
+              <BM />
           </div>
         </div>
 
@@ -115,6 +132,7 @@ class StockView extends Component {
     )
   }
 }
+
 
 function mapStateToProps(state) {
   return {
