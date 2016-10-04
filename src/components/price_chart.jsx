@@ -1,7 +1,7 @@
 import React from 'react';
 import {Sparklines, SparklinesLine} from 'react-sparklines';
 import Axis from './axis';
-// import d3 from 'd3';
+import d3 from 'd3';
 
 export default (props) => {
   let data = props.data;
