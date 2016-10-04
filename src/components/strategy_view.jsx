@@ -32,21 +32,29 @@ class StrategyView extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.viewMore = this.viewMore.bind(this);
+    this.setMetric = this.setMetric.bind(this);
     // this.componentWillMount = this.componentWillMount.bind(this);
   }
 
   componentWillMount(){
     // this.props.getStratData();
     // this.setState({flag: true})
-    if(this.props.strategyData && this.props.strategyData.metric && this.props.strategyData.metric !== this.state.selectValue){
-      this.setState({selectValue: this.props.strategyData.metric})
-    }
+    // if(this.props.strategyData && this.props.strategyData.metric && this.props.strategyData.metric !== this.state.selectValue){
+    //   this.setState({selectValue: this.props.stratMetric})
+    // }
+    
+    
   }
   
-  componentWillUpdate(){
-    if(this.props.strategyData && this.props.strategyData.metric && this.props.strategyData.metric !== this.state.selectValue){
-      this.setState({selectValue: this.props.strategyData.metric})
+  componentDidUpdate(){
+    if(this.props.stratMetric && this.props.stratMetric !== this.state.selectValue && !this.state.flag){
+      this.setState({selectValue: this.props.stratMetric})
+      this.setState({flag: true})
     }
+  }
+
+  setMetric(){
+    this.setState({selectValue: this.props.stratMetric})
   }
 
   handleChange(event) {
@@ -118,6 +126,7 @@ class StrategyView extends Component {
         <div >
           <Header />
           <div className="col-md-3">
+          {this.setMetric}
           <select
             value={this.state.selectValue}
             onChange={this.handleChange}
@@ -159,7 +168,7 @@ class StrategyView extends Component {
 function mapStateToProps(state) {
   return {
     strategyData: state.stratData,
-    strateMetric: state.strateMetric
+    stratMetric: state.stratMetric  
   }
 }
 
