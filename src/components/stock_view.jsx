@@ -8,6 +8,7 @@ import Loading from './loading';
 import Header from './header';
 import Numeral from 'numeral'
 import ReactDOM from 'react-dom';
+import d3 from 'd3';
 
 //stock view cards
 import PE from './stock-view-components/pe'
@@ -60,12 +61,10 @@ class StockView extends Component {
     //   this.renderPrices();
     //
     // }
-    debugger;
-  }
+      }
 
   componentDidUpdate() {
-    debugger;
-  }
+      }
 
   handleResize(e) {
     if (this.refs.chartDivRef) {
@@ -79,12 +78,10 @@ class StockView extends Component {
   }
 
   render() {
-    debugger;
     console.log('inside stock_view Render');
     console.log('this.props.stockData: ', this.props.stockData);
     console.log('this.props.graphData: ', this.props.graphData);
     console.log('this.props.percentileData: ', this.props.percentileData);
-
 
     console.log('equal? ', this.state.chartWidth, this.refs.chartDivRef);
     let priceChart = this.renderPrices();
@@ -95,7 +92,7 @@ class StockView extends Component {
       </div>
 
     if(!this.props.stockData || !this.props.percentileData || !this.props.graphData){
-      priceChart = <div></div>;
+      chart = <div></div>;
       return (
         <div>
           <h1 className="centerheading landing-container">...LOADING</h1>

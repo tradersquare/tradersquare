@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
+import d3 from 'd3';
 
 export default class Axis extends Component {
   constructor(props) {
