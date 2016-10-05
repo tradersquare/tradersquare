@@ -74,10 +74,11 @@ class StockView extends Component {
     }
   }
 
-  handleAdd() {
+  handleAdd(ev) {
+    // ev.preventDefault();
     let stockData = this.props.stockData;
     console.log('handleAdd :', stockData);
-    AddStock(stockData);
+    this.props.AddStock(stockData);
   }
 
   render() {
@@ -184,4 +185,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, AddStock)(StockView);
+export default connect(mapStateToProps, {AddStock})(StockView);
