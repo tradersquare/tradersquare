@@ -22,7 +22,7 @@ class StratNav extends Component {
     return (
       <div className="">
         <Link to="/strategyview" onClick={this.handleClick} className="btn btn-secondary">
-               View Stocks By Indicator
+               Leaderboard
         </Link>
       </div>
     )

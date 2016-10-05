@@ -71,6 +71,27 @@ class StrategyView extends Component {
 
   }
 
+  renderTable(){
+    if(this.state.selectValue){
+      return (<div><table className="tablr">
+          <tbody><tr>
+            <th>Ticker</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Value</th>
+            <th>Percentile</th>
+          </tr></tbody>
+          {stratData}
+          </table>
+        <a onClick={that.viewMore}>...more</a></div>)
+    }
+    else{
+      return(
+        <p>bleh</p>
+        )
+    }
+  }
+
   viewMore(){
     this.setState({items: this.state.items + 10})
   }
@@ -121,6 +142,7 @@ class StrategyView extends Component {
       </tbody>)
     })
 
+    
     return (
         <div >
           <Header />
@@ -130,7 +152,7 @@ class StrategyView extends Component {
             value={this.state.selectValue}
             onChange={this.handleChange}
             >
-            <option value=""></option>
+            <option value="">--select metric to begin--</option>
             <option value="altmanzscore">Z-Score</option>
             <option value="assetturnover">Asset Turnover</option>
             <option value="grossmargin">Gross Margin</option>
@@ -152,17 +174,9 @@ class StrategyView extends Component {
             <option value="beta">Beta</option>
           </select>
           </div>
-            <table className="tablr">
-            <tbody><tr>
-              <th>Ticker</th>
-              <th>Name</th>
-              <th>Price</th>
-              <th>Value</th>
-              <th>Percentile</th>
-            </tr></tbody>
-            {stratData}
-            </table>
-          <a onClick={this.viewMore}>...more</a>
+            {()=>{
+              
+            }}
         </div>
 
       )
