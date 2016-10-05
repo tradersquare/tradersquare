@@ -27,12 +27,13 @@ class StrategyView extends Component {
     // if(this.props.strategyData && this.props.strategyData.metric){
     //   initialVal = this.props.strategyData.metric;
     // }"
-    this.state = {selectValue: "", items: 10, flag: false}
+    this.state = {selectValue: "", items: 10, flag: false, tableFlag: false}
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.viewMore = this.viewMore.bind(this);
     this.setMetric = this.setMetric.bind(this);
+    this.renderTable = this.renderTable.bind(this);
     // this.componentWillMount = this.componentWillMount.bind(this);
   }
 
@@ -42,13 +43,15 @@ class StrategyView extends Component {
     // if(this.props.strategyData && this.props.strategyData.metric && this.props.strategyData.metric !== this.state.selectValue){
     //   this.setState({selectValue: this.props.stratMetric})
     // }
-    
-    
+    if(this.props.strategyData){
+      this.renderTable();
+    }
   }
   
   componentDidUpdate(){
     if(this.props.stratMetric && this.props.stratMetric !== this.state.selectValue && !this.state.flag){
       this.setState({selectValue: this.props.stratMetric})
+      this.renderTable();
       this.setState({flag: true})
     }
   }
@@ -62,6 +65,8 @@ class StrategyView extends Component {
       this.props.getStrateData(this.state.selectValue)
     }
     this.setState({selectValue: event.target.value, items: 10})
+    const table = this.renderTable();
+    this.setState({table: table})
   }
 
   handleSubmit(ticker) {
@@ -72,37 +77,7 @@ class StrategyView extends Component {
   }
 
   renderTable(){
-    if(this.state.selectValue){
-      return (<div><table className="tablr">
-          <tbody><tr>
-            <th>Ticker</th>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Value</th>
-            <th>Percentile</th>
-          </tr></tbody>
-          {stratData}
-          </table>
-        <a onClick={that.viewMore}>...more</a></div>)
-    }
-    else{
-      return(
-        <p>bleh</p>
-        )
-    }
-  }
-
-  viewMore(){
-    this.setState({items: this.state.items + 10})
-  }
-
-  render(){
-    if(!this.props.strategyData){
-      return (
-        <Loading />
-        )
-    }
-    else{
+    console.log("in render table")
     let currentStrat = this.state.selectValue;
     let filteredStocks = [];
 
@@ -142,6 +117,78 @@ class StrategyView extends Component {
       </tbody>)
     })
 
+    if(this.state.selectValue){
+      console.log("table if")
+      return (<div><table className="tablr">
+          <tbody><tr>
+            <th>Ticker</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Value</th>
+            <th>Percentile</th>
+          </tr></tbody>
+          {stratData}
+          </table>
+        <a onClick={that.viewMore}>...more</a></div>)
+    }
+    else{
+      console.log("table else")
+      return(
+        <p>bleh</p>
+        )
+    }
+  }
+
+  viewMore(){
+    this.setState({items: this.state.items + 10})
+  }
+
+  render(){
+    if(!this.props.strategyData){
+      return (
+        <Loading />
+        )
+    }
+    else{
+    // let currentStrat = this.state.selectValue;
+    // let filteredStocks = [];
+
+    // for(let n of this.props.strategyData.data){
+    //   if(!isNaN(parseFloat(n[currentStrat]))){
+    //     n[currentStrat] = parseFloat(n[currentStrat]);
+    //     filteredStocks.push(n);
+    //   }
+    // }
+
+    // let stratData = filteredStocks.sort((a,b) => {
+    //   let newA = a[currentStrat];
+    //   let newB = b[currentStrat];
+    //   if(newA > newB) return -1;
+    //   if(newA < newB) return 1;
+    // })
+
+    // let stockKey = 0;
+
+    // let that = this;
+
+    // stratData = filteredStocks.map((stock) => {
+    //   if(stockKey >= that.state.items){
+    //     return;
+    //   }
+    //   stockKey++;
+    //   let val = stock[currentStrat];
+    //   return (
+    //   <tbody key={stockKey}>
+    //     <tr>
+    //         <td><Link to="/stockview" onClick={()=>{this.handleSubmit(stock.ticker)}}>{stock.ticker}</Link></td>
+    //         <td>{stock.name}</td>
+    //         <td>{stock.close_price}</td>
+    //         <td>{val}</td>
+    //         <td>{100-(Math.round((stockKey/filteredStocks.length)*100))}%</td>
+    //     </tr>
+    //   </tbody>)
+    // })
+
     
     return (
         <div >
@@ -174,9 +221,7 @@ class StrategyView extends Component {
             <option value="beta">Beta</option>
           </select>
           </div>
-            {()=>{
-              
-            }}
+            {this.state.table}
         </div>
 
       )
