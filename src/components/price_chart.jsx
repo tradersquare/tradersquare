@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Sparklines, SparklinesLine} from 'react-sparklines';
+// import {Sparklines, SparklinesLine} from 'react-sparklines';
 import Axis from './axis';
 import d3 from 'd3';
 
