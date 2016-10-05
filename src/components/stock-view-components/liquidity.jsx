@@ -25,18 +25,21 @@ class Liquidity extends Component {
   }
 
   render() {
-    const data = Util.handleData(this.props.percentileData, "beta", 1, 50, '0.0[00]')
+    const data1 = Util.handleData(this.props.percentileData, "currentratio", 1, 50, '0.0[00]')
+    const data2 = Util.handleData(this.props.percentileData, "quickratio", 1, 50, '0.0[00]')
 
     return (
-      <div className={"clickable-card card " + data.color} onClick={this.openModal}>
+      <div className={"clickable-card card " + data1.color} onClick={this.openModal}>
         <h3 className="centerheading">Liquidity</h3>
-        <h4 className="centertext">{data.value}</h4>
-        <h4 className="centertext">{data.percentileDisplay}</h4>
+        <h4 className="centertext">Current Ratio: {data1.value}</h4>
+        <h4 className="centertext">{data1.percentileDisplay}</h4>
+        <h4 className="centertext">Quick Ratio: {data2.value}</h4>
+        <h4 className="centertext">{data2.percentileDisplay}</h4>
       
       <Modal
           isOpen={this.state.modalOpen}
           onRequestClose={this.openModal}
-          style={data.style}
+          style={data1.style}
         >
           <h2>Current Ratio</h2>
           <p>say something about current ratio</p>
