@@ -1,7 +1,7 @@
 const db = require('../../db/config.js');
 const apireq = require('./api_req')
 const companies = process.env.tickersInDB;
-const metrics = ['pricetoearnings', 'earningsyield', 'dividendyield', 'altmanzscore', 'currentratio', 'quickratio', 'leverageratio', 'beta', 'roic', 'roa', 'roe'];
+const metrics = ['pricetoearnings', 'earningsyield', 'dividendyield', 'altmanzscore', 'currentratio', 'quickratio', 'leverageratio', 'beta', 'roic', 'roa', 'roe', 'pricetobook'];
 
 
 module.exports = (ticker, res) => {

@@ -7,7 +7,7 @@ export default {
 
   handleData(prop, metric, direction, threshold, format) {
     let color = "";
-    if(prop[metric].percentile !== null){
+    if(prop[metric] && (prop[metric].percentile !== null)){
       if(prop[metric].percentile > threshold){
         color = direction === 1 ? "green" : "red"
       }
@@ -16,9 +16,12 @@ export default {
       }
     }
 
-    let percentileDisplay = prop[metric].percentile === null ? "" : `percentile: ${prop[metric].percentile}%`; 
+    let percentileDisplay, value;
+    if(prop[metric]){
+      percentileDisplay = prop[metric].percentile === null ? "" : `percentile: ${prop[metric].percentile}%`; 
+      value = prop[metric].value === "nm" ? "N/A" : Numeral(parseFloat(prop[metric].value)).format(format)
+    } 
 
-    let value = prop[metric].value === "nm" ? "N/A" : Numeral(parseFloat(prop[metric].value)).format(format)
 
     const customStyles = {
       content : {

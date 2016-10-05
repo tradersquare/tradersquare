@@ -139,12 +139,16 @@ class StrategyView extends Component {
             <option value="quickratio">Quick Ratio</option>
             <option value="epsgrowth">EPS Growth</option>
             <option value="divpayoutratio">Dividend Payout Ratio</option>
+            <option value="dividendyield"> Dividend Yield</option>
             <option value="debttoequity">Debt To Equity</option>
             <option value="leverageratio">Leverage Ratio</option>
             <option value="enterprisevalue">Enterprise Value</option>
             <option value="earningsyield">Earnings Yield</option>
             <option value="netincomegrowth">Net Income Growth</option>
             <option value="roe">Return on Equity</option>
+            <option value="roa">Return on Asset</option>
+            <option value="roic">Return on Invested Capital</option>
+            <option value="pricetobook">Price to Book</option>
             <option value="beta">Beta</option>
           </select>
           </div>
