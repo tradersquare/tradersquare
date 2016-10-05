@@ -40,10 +40,10 @@ class StrategyView extends Component {
   componentWillMount(){
     // console.log("componentWillMount")
     this.props.getStratData();
-    // // this.setState({flag: true})
-    // if(this.props.strategyData && this.props.strategyData.metric && this.props.strategyData.metric !== this.state.selectValue){
-    //   this.setState({selectValue: this.props.stratMetric})
-    // }
+    if(this.props.strategyData && this.props.strategyData.metric && this.props.strategyData.metric !== this.state.selectValue){
+      this.setState({selectValue: this.props.stratMetric})
+      // this.setState({flag: true})
+    }
   
   }
 
