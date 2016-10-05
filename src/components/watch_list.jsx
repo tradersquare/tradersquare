@@ -23,7 +23,14 @@ class Watchlist extends Component {
     return (
       <div>
         <Header />
-        {this.favorites}
+        <div>
+          <div className="col-xs-12 col-md-12 col-lg-12">
+            <span className="col-md-4 col-sm-4 col-lg-4 col-xs-4">Ticker</span>
+            <span className="col-md-4 col-sm-4 col-lg-4 col-xs-4">Company Name</span>
+            <span className="col-md-4 col-sm-4 col-lg-4 col-xs-4">Closing Price</span>
+          </div>
+          {this.favorites}
+        </div>
         {/* {this.props.stockData.name} */}
       </div>
     )
