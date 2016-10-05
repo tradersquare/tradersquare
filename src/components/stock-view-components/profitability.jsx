@@ -30,7 +30,7 @@ class Profitability extends Component {
     return (
       <div className={"clickable-card card " + data.color} onClick={this.openModal}>
         <h3 className="centerheading">Profitability</h3>
-        <h4 className="centertext">roa: {data.value}</h4>
+        <h4 className="centertext">Return on Asset: {data.value}</h4>
         <h4 className="centertext">{data.percentileDisplay}</h4>
 
         <Modal
