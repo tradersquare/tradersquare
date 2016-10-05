@@ -85,23 +85,25 @@ class StockView extends Component {
     console.log('this.props.graphData: ', this.props.graphData);
     console.log('this.props.percentileData: ', this.props.percentileData);
     console.log('equal? ', this.state.chartWidth, this.refs.chartDivRef);
-    let priceChart = this.renderPrices();
-
-    let chart =
-      <div className="col-md-6" ref='chartDivRef'>
-        {priceChart}
-      </div>
+    // let priceChart = <div></div>;
 
 
     if(!this.props.stockData || !this.props.percentileData || !this.props.graphData){
-      priceChart = <div></div>;
+      console.log(this.props.stockData, this.props.percentileData, this.props.graphData)
+      // priceChart = <div></div>;
       return (
         <div>
           <Loading />
-          {chart}
-        </div>)
+          <div className="col-md-6" ref='chartDivRef'></div>
+        </div>
+      )
     }
 
+    let priceChart = this.renderPrices();
+    let chart =
+    <div className="col-md-6" ref='chartDivRef'>
+    {priceChart}
+    </div>
     // if (this.refs.chartDivRef && this.refs.chartDivRef.clientWidth !== this.state.chartWidth){
     //   console.log('not equal: ');
     //   priceChart = this.renderPrices();
