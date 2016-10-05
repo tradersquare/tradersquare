@@ -9,6 +9,7 @@ import Header from './header';
 import Numeral from 'numeral'
 import ReactDOM from 'react-dom';
 import d3 from 'd3';
+import AddStock from '../actions/add_stock';
 
 //stock view cards
 import PE from './stock-view-components/pe'
@@ -27,7 +28,10 @@ class StockView extends Component {
 
     this.renderPrices = this.renderPrices.bind(this);
     this.handleResize = this.handleResize.bind(this);
-    this.state = {chartWidth: 500}
+    this.handleAdd = this.handleAdd.bind(this);
+    this.state = {
+      chartWidth: 500
+    }
   }
 
   renderPrices() {
@@ -45,7 +49,6 @@ class StockView extends Component {
         topMargin: 20,
         bottomMargin: 60,
         fullWidth: thisWidth
-
       }
 
       return (
@@ -58,14 +61,6 @@ class StockView extends Component {
 
   componentDidMount() {
     window.addEventListener('resize', this.handleResize)
-    // if (this.refs.chartDivRef) {
-    //   console.log('changemysize');
-    //   this.renderPrices();
-    //
-    // }
-      }
-
-  componentDidUpdate() {
       }
 
   handleResize(e) {
@@ -77,6 +72,12 @@ class StockView extends Component {
         chartWidth: this.refs.chartDivRef.clientWidth
       })
     }
+  }
+
+  handleAdd() {
+    let stockData = this.props.stockData;
+    console.log('handleAdd :', stockData);
+    AddStock(stockData);
   }
 
   render() {
@@ -111,7 +112,7 @@ class StockView extends Component {
 
     const stockData = this.props.stockData;
     const metrics = this.props.percentileData;
-    // console.log("***STOCKDATA***", stockData)
+    console.log("***STOCKDATA***", stockData);
     const change = stockData.change > 0 ? "↑" : "↓"
     // const earningsyield = parseFloat(stockData.earningsyield);
     // const booktomarket = (parseFloat(stockData.bookvaluepershare) / parseFloat(stockData.close_price)).toFixed(3);
@@ -123,7 +124,11 @@ class StockView extends Component {
           <div className="col-md-4">
             <h3>  {stockData.ticker} : {stockData.name}</h3>
           </div>
-          <div className="col-md-4"></div>
+          <div className="col-md-4">
+            <Link to="/watchlist" onClick={this.handleAdd} className="btn btn-secondary">
+                  Add to Watchlist
+            </Link>
+          </div>
           <div className="col-md-4">
           <h3 className="price">${stockData.open_price}  {stockData.change}% {change}</h3>
           </div>
@@ -179,4 +184,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(StockView);
+export default connect(mapStateToProps, AddStock)(StockView);
