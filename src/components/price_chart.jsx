@@ -30,9 +30,9 @@ export default class PriceChart extends Component {
   makeLine() {
     const props = this.props;
     let data = props.data;
-    console.log('props.data', data);
+    // console.log('props.data', data);
     this.width = props.width;
-    console.log('whats my width? ', props.width);
+    // console.log('whats my width? ', props.width);
 
     //consider monentjs library for dates
 
@@ -57,9 +57,16 @@ export default class PriceChart extends Component {
       return {date, close: v.close};
     });
 
+    //format: date: "Mon Jan 04 2016 00:00:00 GMT-0800 (Pacific Standard Time)"
     let dates = dumbData.map(d => d.date);
+    var minN = d3.min(data, d =>  d.date);
+    var maxN = d3.max(data, d =>  d.date);
 
-    console.log('dumbData: ', dumbData);
+    // console.log('min/maxN: ', minN, maxN);
+
+    // console.log('dumbData: ', dumbData);
+
+    //create scales:
     let x = d3.time.scale()
     .range([ props.width - props.axisMargin, props.axisMargin ])
     .domain([ d3.max(dates), d3.min(dates) ])
@@ -85,6 +92,8 @@ export default class PriceChart extends Component {
     this.x = x;
     this.y = y;
     this.line = line(dumbData);
+    this.minX = minN;
+    this.maxX = maxN;
   }
 
   componentWillMount() {
@@ -98,6 +107,41 @@ export default class PriceChart extends Component {
   //   })
     this.makeLine();
   }
+
+/* Following for additional chart functionality, i.e. zoom/pan
+  componentDidMount() {
+    const xScale = this.x;
+    const yScale = this.y;
+    const minDate = this.minN;
+    const maxDate = this.maxN;
+    // line = this.line;
+
+    const zoom = d3.behavior.zoom()
+      .x(xScale)
+      .on('zoom', function() {
+        if (xScale.domain()[0] < minDate) {
+    	    var x = zoom.translate()[0] - xScale(minDate) + xScale.range()[0];
+          zoom.translate([x, 0]);
+        } else if (xScale.domain()[1] > maxDate) {
+    	    var x = zoom.translate()[0] - xScale(maxDate) + xScale.range()[1];
+          zoom.translate([x, 0]);
+        }
+        redrawChart();
+        updateViewportFromChart();
+      });
+
+      // function updateViewportFromChart() {
+      //   if ((xScale.domain()[0] <= minDate) && (xScale.domain()[1] >= maxDate)) {
+      //     viewport.clear();
+      //   }
+      //   else {
+      //     viewport.extent(xScale.domain());
+      //   }
+      //   navChart.select('.viewport').call(viewport);
+      // }
+
+  }
+  */
 
   render() {
     let lineChart = this.line;

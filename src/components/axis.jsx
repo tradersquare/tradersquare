@@ -71,13 +71,13 @@ export default class Axis extends Component {
     let translate;
     let classes;
     if (this.props.dates) {
-      console.log('this.props.dates');
+      // console.log('this.props.dates');
       translate = `translate(0, ${this.props.height - this.props.bottomMargin})`;
       classes = 'axis xaxis'
     }
 
     if (this.props.closingPrices) {
-      console.log('this.props.closingPrices');
+      // console.log('this.props.closingPrices');
       translate = `translate(${this.props.axisMargin}, 0)`;
       classes = 'axis'
     }
