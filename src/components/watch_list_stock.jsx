@@ -8,9 +8,15 @@ export default class Watchlist extends Component {
 
   render() {
     console.log('more props: ', this.props);
+    const stock = this.props.stock;
+    const divStyle = {
+      "borderSize": "5px"
+    }
     return (
-      <div>
-        {this.props.stock.name}
+      <div style={divStyle} className="card col-xs-12 col-md-12 col-lg-12">
+        <span className="col-md-4 col-sm-4 col-lg-4">{stock.ticker}</span>
+        <span className="col-md-4 col-sm-4 col-lg-4">{stock.name}</span>
+        <span className="col-md-4 col-sm-4 col-lg-4">{stock.close_price}</span>
       </div>
     )
   }
