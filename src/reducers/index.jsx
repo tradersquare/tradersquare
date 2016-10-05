@@ -5,6 +5,7 @@ import StrategyViewReducer from './strategy_reducer';
 import GraphReducer from './graph_reducer';
 import FilterReducer from './filter_reducer';
 import PercentileReducer from './percentile_reducer';
+import MetricReducer from './metric_reducer';
 
 const rootReducer = combineReducers({
   stock: StockReducer,
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
   strat1: Strat1,
   graphData: GraphReducer,
   filterData: FilterReducer,
-  percentileData: PercentileReducer
+  percentileData: PercentileReducer,
+  stratMetric: MetricReducer
 });
 
 export default rootReducer;

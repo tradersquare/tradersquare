@@ -69,6 +69,7 @@
     "react-bootstrap-select": "0.14.0",
     "react-dom": "15.3.2",
     "react-hot-loader": "3.0.0-beta.5",
+    "react-modal": "^1.4.0",
     "react-redux": "4.4.5",
     "react-router": "2.8.1",
     "react-sparklines": "1.6.0",

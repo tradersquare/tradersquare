@@ -23,20 +23,44 @@ class StrategyView extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {selectValue: 'altmanzscore', items: 10, flag: false}
+    // let initialVal = '';
+    // if(this.props.strategyData && this.props.strategyData.metric){
+    //   initialVal = this.props.strategyData.metric;
+    // }"
+    this.state = {selectValue: "", items: 10, flag: false}
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.viewMore = this.viewMore.bind(this);
-    this.componentWillMount = this.componentWillMount.bind(this);
+    this.setMetric = this.setMetric.bind(this);
+    // this.componentWillMount = this.componentWillMount.bind(this);
   }
 
   componentWillMount(){
-    this.props.getStratData();
-    this.setState({flag: true})
+    // this.props.getStratData();
+    // this.setState({flag: true})
+    // if(this.props.strategyData && this.props.strategyData.metric && this.props.strategyData.metric !== this.state.selectValue){
+    //   this.setState({selectValue: this.props.stratMetric})
+    // }
+    
+    
+  }
+  
+  componentDidUpdate(){
+    if(this.props.stratMetric && this.props.stratMetric !== this.state.selectValue && !this.state.flag){
+      this.setState({selectValue: this.props.stratMetric})
+      this.setState({flag: true})
+    }
+  }
+
+  setMetric(){
+    this.setState({selectValue: this.props.stratMetric})
   }
 
   handleChange(event) {
+    if(!this.props.strategyData){
+      this.props.getStrateData(this.state.selectValue)
+    }
     this.setState({selectValue: event.target.value, items: 10})
   }
 
@@ -58,10 +82,10 @@ class StrategyView extends Component {
         )
     }
     else{
-    let currentStrat = this.state.selectValue + "2015";
+    let currentStrat = this.state.selectValue;
     let filteredStocks = [];
 
-    for(let n of this.props.strategyData){
+    for(let n of this.props.strategyData.data){
       if(!isNaN(parseFloat(n[currentStrat]))){
         n[currentStrat] = parseFloat(n[currentStrat]);
         filteredStocks.push(n);
@@ -101,22 +125,31 @@ class StrategyView extends Component {
         <div >
           <Header />
           <div className="col-md-3">
+          {this.setMetric}
           <select
             value={this.state.selectValue}
             onChange={this.handleChange}
             >
+            <option value=""></option>
             <option value="altmanzscore">Z-Score</option>
             <option value="assetturnover">Asset Turnover</option>
             <option value="grossmargin">Gross Margin</option>
             <option value="pricetoearnings">P/E</option>
             <option value="currentratio">Current Ratio</option>
+            <option value="quickratio">Quick Ratio</option>
             <option value="epsgrowth">EPS Growth</option>
             <option value="divpayoutratio">Dividend Payout Ratio</option>
+            <option value="dividendyield"> Dividend Yield</option>
             <option value="debttoequity">Debt To Equity</option>
+            <option value="leverageratio">Leverage Ratio</option>
             <option value="enterprisevalue">Enterprise Value</option>
             <option value="earningsyield">Earnings Yield</option>
             <option value="netincomegrowth">Net Income Growth</option>
             <option value="roe">Return on Equity</option>
+            <option value="roa">Return on Asset</option>
+            <option value="roic">Return on Invested Capital</option>
+            <option value="pricetobook">Price to Book</option>
+            <option value="beta">Beta</option>
           </select>
           </div>
             <table className="tablr">
@@ -140,7 +173,8 @@ class StrategyView extends Component {
 
 function mapStateToProps(state) {
   return {
-    strategyData: state.stratData
+    strategyData: state.stratData,
+    stratMetric: state.stratMetric  
   }
 }
 
