@@ -7,9 +7,10 @@ export default class Watchlist extends Component {
   }
 
   render() {
+    console.log('more props: ', this.props);
     return (
       <div>
-        Google is awesome!
+        {this.props.stock.name}
       </div>
     )
   }
