@@ -30,9 +30,9 @@ export default class PriceChart extends Component {
   makeLine() {
     const props = this.props;
     let data = props.data;
-    console.log('props.data', data);
+    // console.log('props.data', data);
     this.width = props.width;
-    console.log('whats my width? ', props.width);
+    // console.log('whats my width? ', props.width);
 
     //consider monentjs library for dates
 
@@ -62,9 +62,9 @@ export default class PriceChart extends Component {
     var minN = d3.min(data, d =>  d.date);
     var maxN = d3.max(data, d =>  d.date);
 
-    console.log('min/maxN: ', minN, maxN);
+    // console.log('min/maxN: ', minN, maxN);
 
-    console.log('dumbData: ', dumbData);
+    // console.log('dumbData: ', dumbData);
 
     //create scales:
     let x = d3.time.scale()

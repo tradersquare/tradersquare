@@ -36,7 +36,7 @@ class StockView extends Component {
     }
     else {
       let thisWidth = (this.refs.chartDivRef) ? this.refs.chartDivRef.clientWidth : 400;
-      console.log('thisWidth', thisWidth);
+      // console.log('thisWidth', thisWidth);
 
       const params = {
         // width: 550,
@@ -80,16 +80,16 @@ class StockView extends Component {
   }
 
   render() {
-    console.log('inside stock_view Render');
-    console.log('this.props.stockData: ', this.props.stockData);
-    console.log('this.props.graphData: ', this.props.graphData);
-    console.log('this.props.percentileData: ', this.props.percentileData);
-    console.log('equal? ', this.state.chartWidth, this.refs.chartDivRef);
+    // console.log('inside stock_view Render');
+    // console.log('this.props.stockData: ', this.props.stockData);
+    // console.log('this.props.graphData: ', this.props.graphData);
+    // console.log('this.props.percentileData: ', this.props.percentileData);
+    // console.log('equal? ', this.state.chartWidth, this.refs.chartDivRef);
     // let priceChart = <div></div>;
 
 
     if(!this.props.stockData || !this.props.percentileData || !this.props.graphData){
-      console.log(this.props.stockData, this.props.percentileData, this.props.graphData)
+      // console.log(this.props.stockData, this.props.percentileData, this.props.graphData)
       // priceChart = <div></div>;
       return (
         <div>
@@ -111,7 +111,7 @@ class StockView extends Component {
 
     const stockData = this.props.stockData;
     const metrics = this.props.percentileData;
-    console.log("***STOCKDATA***", stockData)
+    // console.log("***STOCKDATA***", stockData)
     const change = stockData.change > 0 ? "↑" : "↓"
     // const earningsyield = parseFloat(stockData.earningsyield);
     // const booktomarket = (parseFloat(stockData.bookvaluepershare) / parseFloat(stockData.close_price)).toFixed(3);
