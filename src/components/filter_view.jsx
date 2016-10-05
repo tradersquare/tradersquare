@@ -29,7 +29,8 @@ class FilterView extends Component {
         earningsyield: 'Earnings Yield',
         netincomegrowth: 'Net Income Growth',
         roe: 'Return on Equity',
-      }
+      },
+      columns: []
     };
 
     this.onFormSubmit = this.onFormSubmit.bind(this);
@@ -50,12 +51,24 @@ class FilterView extends Component {
       let counter = 0;
       let mapFilterData = this.props.filterData.map((stock) => {
         counter++;
+        let allKeys = []
+        for (let key in stock) {
+          if (key !== "percentile" && key !== "ticker" && key !== "close_price") {
+            allKeys.push(key);
+          }
+        }
+        let columns = allKeys.map((key) => {
+          return (
+            <td key = {key}> {stock[key]} </td>
+            )
+        })
+        this.setState({columns: allKeys});
         return (
         <tbody key={counter}>
           <tr>
             <td>{stock.ticker}</td>
             <td>{stock.close_price}</td>
-            <td>{stock[this.state.allFilters[0].strat]}</td>
+            {columns}
           </tr>
         </tbody>
         )
@@ -159,6 +172,11 @@ class FilterView extends Component {
       )
     })
 
+    let columnHeaders = this.state.columns.map((val) => {
+      return (
+        <th key={val}> {this.state.values[val]} </th>
+        )
+    })
 
     return (
       <div >
@@ -187,7 +205,7 @@ class FilterView extends Component {
           <tbody><tr>
           <th>Ticker</th>
           <th>Price</th>
-          <th> </th>
+          {columnHeaders}
           </tr></tbody>
           {this.state.results}
           </table>
