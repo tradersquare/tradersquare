@@ -210,10 +210,11 @@ class StrategyView extends Component {
         h++;
         return <th key={h}>{heading}</th>
       })
-      seeMore = () =>{
+      const addButton = () => {
         return (<button className="btn btn-secondary" onClick={that.viewMore}>load more</button>)
-
       }
+      seeMore = addButton();
+
     } 
     
 
