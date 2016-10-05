@@ -66,6 +66,11 @@ module.exports = (res, params) => {
           finalData.push(histogram[key]);
         }
       }
+      console.log(data.length);
+      console.log(data);
+      console.log(histogram);
+      console.log(finalData)
+
       res.send(finalData);
     })
 }

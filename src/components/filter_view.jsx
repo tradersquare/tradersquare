@@ -46,6 +46,7 @@ class FilterView extends Component {
   }
 
   componentDidUpdate() {
+    console.log(this.props.filterData);
     if (this.state.results.length !== this.props.filterData.length){
       let counter = 0;
       let mapFilterData = this.props.filterData.map((stock) => {
@@ -55,7 +56,6 @@ class FilterView extends Component {
           <tr>
             <td>{stock.ticker}</td>
             <td>{stock.close_price}</td>
-            <td>{stock[this.state.allFilters[0].strat]}</td>
           </tr>
         </tbody>
         )
