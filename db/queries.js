@@ -78,6 +78,11 @@ module.exports.genericTableCreator = (importedCols, res) => {
   const fullQueryStr = frontQueryStr + endQueryStr;
   console.log((fullQueryStr));
 
+  db.query(fullQueryStr)
+    .on('end', function() {
+      console.log("created")
+    })
+    .catch(console.error);
 
   res.status(200).send(`end query: ${fullQueryStr}`);
 }

@@ -116,7 +116,6 @@ app.get('/getGraphData/*', function(req, res) {
   getGraphData(res, ticker);
 })
 
-<<<<<<< HEAD
 app.get('/getTwitterData/*', function(req, res) {
   handle = req.url.slice(16).toUpperCase();
   console.log('twitterslice', handle);
@@ -127,17 +126,28 @@ app.get('/createGenericTable/', function(req, res) {
   addExtraCols(4, watchListTable);
   console.log('from get endpoint: ', watchListTable);
   genericTableCreator(watchListTable, res);
-=======
+
+/**
+ * [floating endpoint for easily creating db tables]
+ * @req.url {[string]}    after localhost:3000/ type in number of extra cols
+ *                        then type in /[table-name], as stored in db_tables_store.js
+ *                        looks like: localhost:3000/[integer]/[table_name]
+ * note: table in db_tables_store.js must be created as arr as follows:
+ * [schemaName, tableName, {colTitle: title1, colType: type, optionalSize: size}, ...{}]
+ * in above, each object starting at index 2 represents a column
+ * genericTableCreator returns res.send(finalQueryString), found in queries.js
+ * addExtraCols found in server_helper.js
+ */
+>>>>>>> [docs](add explanation for table creating endpoint
 app.get('/createGenericTable/*', function(req, res) {
   const extraCols = req.url.slice(20, 21);
   const table = req.url.slice(22);
   // res.status(200).send(req.url.slice(22));
   const tableObj = tables[table];
-  console.log('inside get req:', tableObj);
+  // console.log('inside get req:', tableObj);
   addExtraCols(extraCols, tableObj);
-  console.log('modified tableObj: ', tableObj);
-  // genericTableCreator(watchListTable, res);
->>>>>>> [feature](server): seperate url string from createGenericTable req
+  // console.log('modified tableObj: ', tableObj);
+  genericTableCreator(tableObj, res);
 })
 
 app.use(function(req, res, next) {
