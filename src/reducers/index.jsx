@@ -7,6 +7,7 @@ import FilterReducer from './filter_reducer';
 import PercentileReducer from './percentile_reducer';
 import MetricReducer from './metric_reducer';
 import WatchListReducer from './watchlist_reducer';
+import AuthReducer from './auth_reducer';
 
 const rootReducer = combineReducers({
   stock: StockReducer,
@@ -16,7 +17,8 @@ const rootReducer = combineReducers({
   filterData: FilterReducer,
   percentileData: PercentileReducer,
   stratMetric: MetricReducer,
-  watchList: WatchListReducer
+  watchList: WatchListReducer,
+  auth: AuthReducer
 });
 
 export default rootReducer;

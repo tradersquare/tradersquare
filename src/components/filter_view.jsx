@@ -247,11 +247,11 @@ class FilterView extends Component {
       <div className="row">
         <div className="col-md-6 filter">
          <div className="row">
-           <div className="col-md-10">
+           <div className="col-md-8">
               <h2> Filters </h2>
            </div>
-           <div className="col-md-2">
-             <button className="btn btn-secondary" onClick={this.generateNewFilter}>+
+           <div className="col-md-4">
+             <button className="btn btn-secondary" onClick={this.generateNewFilter}>Add More Filters
              </button>
            </div>
          </div>

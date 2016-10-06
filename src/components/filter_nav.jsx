@@ -20,7 +20,7 @@ class FilterNav extends Component {
 
   render() {
     return (
-      <div className="">
+      <div>
         <Link to="/filterview" onClick={this.handleClick} className="btn btn-secondary">
                Pick Stocks
         </Link>

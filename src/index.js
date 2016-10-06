@@ -7,6 +7,7 @@ import reducers from './reducers';
 import routes from './routes';
 import reduxPromise from 'redux-promise';
 import App from './components/app';
+import firebase from 'firebase';
 
 
 const createStoreWithMiddleware = applyMiddleware(reduxPromise)(createStore);
@@ -15,4 +16,4 @@ ReactDOM.render(
   <Provider store={createStoreWithMiddleware(reducers)}>
     <Router history={browserHistory} routes={routes} />
   </Provider>
-  , document.querySelector('.container'));
+  , document.querySelector('.mainContainer'));

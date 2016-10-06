@@ -3,7 +3,8 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router';
 import SearchBar from './search_bar';
 import StratNav from './strategy_nav';
-import FilterNav from './filter_nav'
+import FilterNav from './filter_nav';
+import LoginNav from './login';
 
 export default class Header extends Component {
 
@@ -14,11 +15,24 @@ export default class Header extends Component {
           <div className="col-md-3 top-padding">
             <SearchBar/>
           </div>
-          <div className="col-md-2 top-padding">
-            <StratNav/>
+          <div className="col-md-3 top-padding">
+            <table>
+              <tbody>
+                <tr>
+                  <th>
+                    <StratNav/>
+                  </th>
+                  <th>
+                    <FilterNav/>
+                  </th>
+                </tr>
+              </tbody>
+            </table>
+
           </div>
-          <div className="col-md-2 top-padding">
-            <FilterNav/>
+
+          <div className="col-md-1 top-padding">
+            <LoginNav/>
           </div>
         </div>
     )
