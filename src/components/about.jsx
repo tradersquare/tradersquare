@@ -4,11 +4,13 @@ import {Link} from 'react-router';
 import {bindActionCreators} from 'redux';
 
 
+
 class About extends Component {
 
   render() {
     return (
       <div className="">
+      <Header />
       <h1>About Tradersquare</h1>
         <div className="row">
 
