@@ -17,15 +17,6 @@ class LoginNav extends Component {
   }
 
   componentWillMount() {
-    const firebaseConfig = {
-      apiKey: "AIzaSyA6iK01GbFJq4MNGD68ef4zhPQSRPow-I0",
-      authDomain: "tradersquare-ed7bc.firebaseapp.com",
-      databaseURL: "https://tradersquare-ed7bc.firebaseio.com",
-      storageBucket: "tradersquare-ed7bc.appspot.com",
-      messagingSenderId: "139146427287"
-    };
-
-    const firebaseApp = firebase.initializeApp(firebaseConfig);
   }
 
   openModal() {
