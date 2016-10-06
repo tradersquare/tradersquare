@@ -9,12 +9,19 @@ class About extends Component {
   render() {
     return (
       <div className="">
+      <h1>About Tradersquare</h1>
         <div className="row">
-          <div className="col-md-4"></div>
-          <div className="col-md-4 pushdown">
-            
-          </div>
-          <div className="col-md-4"></div>
+
+        </div>
+
+      <h1>Technology We Used</h1>
+        <div className="row">
+
+        </div>
+
+      <h1>The Team</h1>
+        <div className="row">
+
         </div>
       </div>
     )
