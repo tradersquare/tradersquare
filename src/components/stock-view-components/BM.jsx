@@ -12,14 +12,14 @@ class BM extends Component {
     this.openModal = this.openModal.bind(this);
     this.handleClick = this.handleClick.bind(this);
 
-    this.state = {modalOpen: false}
+    this.state = {modalOpen: false};
   }
 
   openModal() {
     this.setState({modalOpen: !this.state.modalOpen})
   }
 
-  handleClick(){
+  handleClick() {
     this.props.getStratData("pricetobook");
   }
 
@@ -51,7 +51,7 @@ class BM extends Component {
 
 }
 
-// description 
+// description
 //<p>*undervalued if above 1, overvalued if below 1</p>
 
 
