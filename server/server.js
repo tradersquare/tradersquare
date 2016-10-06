@@ -151,8 +151,8 @@ app.get('/createGenericTable/*', function(req, res) {
   genericTableCreator(tableObj, res);
 })
 
-app.get('/addToWatchlist', function(req, res) {
-
+app.post('/addToWatchlist', function(req, res) {
+  console.log('getgot');
 })
 
 app.use(function(req, res, next) {
