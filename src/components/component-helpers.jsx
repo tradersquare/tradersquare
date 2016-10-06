@@ -18,9 +18,9 @@ export default {
 
     let percentileDisplay, value;
     if(prop[metric]){
-      percentileDisplay = prop[metric].percentile === null ? "" : `percentile: ${prop[metric].percentile}%`; 
+      percentileDisplay = prop[metric].percentile === null ? "" : `percentile: ${prop[metric].percentile}%`;
       value = prop[metric].value === "nm" ? "N/A" : Numeral(parseFloat(prop[metric].value)).format(format)
-    } 
+    }
 
 
     const customStyles = {
@@ -44,6 +44,6 @@ export default {
     }
     console.log("OBJ", obj, prop)
     return obj;
-  } 
+  }
 
 }
