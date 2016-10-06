@@ -18,7 +18,7 @@ module.exports = (handle) => {
     access_token_secret: ACCESS_SECRET
   });
 
-  T.get('search/tweets', { q: `#Facebook`, count: 10 }, function(err, data, response) {
+  T.get('search/tweets', { q: `#${handle} stock`, count: 100 }, function(err, data, response) {
     const package = data.statuses;
     const allScores = package.map(function(tweet) {
       console.log(tweet.text);

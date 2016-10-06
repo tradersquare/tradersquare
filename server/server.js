@@ -116,7 +116,7 @@ app.get('/getGraphData/*', function(req, res) {
 app.get('/getTwitterData/*', function(req, res) {
   handle = req.url.slice(16).toUpperCase();
   console.log('twitterslice', handle);
-  tweetData();
+  tweetData(handle);
 })
 
 app.use(function(req, res, next) {
