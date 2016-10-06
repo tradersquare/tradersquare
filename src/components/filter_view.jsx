@@ -53,43 +53,6 @@ class FilterView extends Component {
   componentDidUpdate() {
     console.log(this.state.results.length, this.props.filterData.length)
     if (this.state.results.length !== (this.props.filterData.length / 2)){
-      console.log("updating")
-      let counter = 0;
-      let mapFilterData = this.props.filterData.map((stock) => {
-        counter++;
-        let allKeys = []
-        for (let key in stock) {
-          if (key !== "percentile" && key !== "ticker" && key !== "close_price") {
-            allKeys.push(key);
-          }
-        }
-        // let columns = allKeys.map((key) => {
-        //   return (
-        //     <td key = {key}> {stock[key]} </td>
-        //     )
-        // })
-        // this.setState({columns: allKeys});
-        // return (
-        // <tbody key={counter}>
-        //   <tr>
-        //     <td>{stock.ticker}</td>
-        //     <td>{stock.close_price}</td>
-        //     {columns}
-        //   </tr>
-        // </tbody>
-        // )
-        let metrics = allKeys.map((metric) => {
-          return (
-            <span key = {metric}>{metric}: {stock[metric]} </span>
-            )
-        })
-        return (<div  key = {counter} className="card">
-          <span>{stock.ticker}</span>
-          <span>{stock["close_price"]}</span>
-          {metrics}
-          </div>
-          )
-      })
 
       let filterResults = [];
       let allKeys = [];
@@ -275,13 +238,3 @@ function mapStateToProps({filterData}) {
 }
 
 export default connect(mapStateToProps, {getDBDataFiltered, SearchStockData, GetGraphData, getPercentile})(FilterView)
-
-
-// <table className="tablr">
-//           <tbody><tr>
-//           <th>Ticker</th>
-//           <th>Price</th>
-//           {columnHeaders}
-//           </tr></tbody>
-//           {this.state.results}
-//           </table>
