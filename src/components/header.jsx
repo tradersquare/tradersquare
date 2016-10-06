@@ -17,6 +17,7 @@ export default class Header extends Component {
           </div>
           <div className="col-md-3 top-padding">
             <table>
+            <tbody>
             <tr>
               <th>
                 <StratNav/>
@@ -25,6 +26,7 @@ export default class Header extends Component {
                 <FilterNav/>
               </th>
             </tr>
+            </tbody>
             </table>
 
           </div>

@@ -1,5 +1,11 @@
 import Constants from './firebase_constants';
 
+const initialState = {
+  currently: Constants.ANONYMOUS,
+  username: null,
+  uid: null
+}
+
 export default function(state, action) {
   switch(action.type) {
     case Constants.ATTEMPTING_LOGIN:
@@ -20,6 +26,6 @@ export default function(state, action) {
         username: action.username,
         uid: action.uid
       };
-    default: return currentstate || initialState.auth;
+    default: return state || initialState;
   }
 }
