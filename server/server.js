@@ -21,7 +21,7 @@ const getPercentile           = require('../db/percentile_query');
 const getGraphData            = require('./request_handler/graph_data');
 const {genericTableCreator}   = require('../db/queries');
 const {addExtraCols}          = require('./server_helper');
-// const {watchlistTable}        = require('./')
+const {watchListTable}        = require('../db/db_tables_store');
 
 //REQUEST HANDLER MODULES
 const StockData = require('./request_handler/stock_data');
@@ -122,10 +122,7 @@ app.get('/getTwitterData/*', function(req, res) {
   tweetData(handle);
 
 app.get('/createGenericTable/', function(req, res) {
-  console.log('inside get req');
-
-
-
+  console.log('inside get req:', watchListTable);
   addExtraCols(4, watchListTable);
   console.log('from get endpoint: ', watchListTable);
   genericTableCreator(watchListTable, res);
