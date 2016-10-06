@@ -116,6 +116,7 @@ app.get('/getGraphData/*', function(req, res) {
   getGraphData(res, ticker);
 })
 
+<<<<<<< HEAD
 app.get('/getTwitterData/*', function(req, res) {
   handle = req.url.slice(16).toUpperCase();
   console.log('twitterslice', handle);
@@ -126,6 +127,16 @@ app.get('/createGenericTable/', function(req, res) {
   addExtraCols(4, watchListTable);
   console.log('from get endpoint: ', watchListTable);
   genericTableCreator(watchListTable, res);
+=======
+app.get('/createGenericTable/*', function(req, res) {
+  const extraCols = req.url.slice(20, 22);
+  const table = req.url.slice(22);
+  // res.status(200).send(req.url.slice(22));
+  console.log('inside get req:', [table]);
+  addExtraCols(extraCols, [table]);
+  // console.log('from get endpoint: ', [table]);
+  // genericTableCreator(watchListTable, res);
+>>>>>>> [feature](server): seperate url string from createGenericTable req
 })
 
 app.use(function(req, res, next) {

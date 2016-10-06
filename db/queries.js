@@ -79,7 +79,7 @@ module.exports.genericTableCreator = (importedCols, res) => {
   console.log((fullQueryStr));
 
 
-  res.status(200).send(`end query: fullQueryStr`);
+  res.status(200).send(`end query: ${fullQueryStr}`);
 }
 
 module.exports.insertRow = (data, elements) => {
