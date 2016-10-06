@@ -245,31 +245,13 @@ class StrategyView extends Component {
 
         </div>)
       }
-      console.log(cards)
+      cards.push(<div key="dinosaur" className="col-md-12">
+        <div className="col-md-1"></div>
+        <button className="btn btn-secondary col-md-10" onClick={that.viewMore}>see more</button>
+        <div className="col-md-1"></div>
+        </div>)
     }
 
-    //   cards = filteredStocks.map((stock) => {
-
-    //   if(stockKey >= that.state.items){
-    //     return;
-    //   }
-    //   stockKey++;
-    //   let val = stock[currentStrat];
-
-
-    //   return (
-    //   <div key={stockKey} className="card">
-    //     <span><Link to="/stockview" onClick={()=>{this.handleSubmit(stock.ticker)}}>{stock.ticker}</Link></span>
-    //     <span>{stock.name}</span>
-    //     <span>{stock.close_price}</span>
-    //     <span>{val}</span>
-    //     <span>{100-(Math.round((stockKey/filteredStocks.length)*100))}%</span>
-    //   </div>
-    //   )
-    //   })
-    //  }
-
-    // console.log(Array.isArray(cards), cards)
 
     return (
         <div >

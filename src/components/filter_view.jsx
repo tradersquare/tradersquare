@@ -36,7 +36,8 @@ class FilterView extends Component {
         roe: 'Return on Equity',
       },
       columns: [],
-      modalOpen: false
+      modalOpen: false,
+      currentStocks: []
     };
 
     this.onFormSubmit = this.onFormSubmit.bind(this);
@@ -54,9 +55,13 @@ class FilterView extends Component {
   }
  
   componentDidUpdate() {
-    console.log(this.state.results.length, this.props.filterData.length)
-    if (this.state.results.length !== (this.props.filterData.length / 2)){
-
+    // if(!this.props.filterData[0]){
+    //   return;
+    // }
+    // if ( (this.state.currentStocks.length !== this.props.filterData.length || this.state.currentStocks[0] !== this.props.filterData[0].ticker)){
+    if ( this.state.currentStocks.length !== this.props.filterData.length){
+      console.log("component updating", this.props.filterData.length, this.state.currentStocks.length)
+      let currentStocks = [];
       let filterResults = [];
       let allKeys = [];
       for (let key in this.props.filterData[0]) {
@@ -70,7 +75,12 @@ class FilterView extends Component {
       for(let i = 0; i < this.props.filterData.length; i+=2){
         const stocks = [];
         for(let j =0; j < 2; j++){
+          console.log("rendering")
           let stock = this.props.filterData[i+j];
+          if(!stock){
+            break;
+          }
+          currentStocks.push(stock.ticker);
           let metrics = allKeys.map((metric) => {
           return (
             <div key = {metric} className="row">
@@ -93,7 +103,11 @@ class FilterView extends Component {
 
         </div>)
       }
-      this.setState({results: filterResults})
+      this.setState({results: filterResults, currentStocks: currentStocks})
+      console.log("after rendering...")
+      console.log(this.state.results.length)
+      console.log(this.state.currentStocks.length)
+      console.log(this.props.filterData.length)
     }
   }
 
@@ -161,10 +175,8 @@ class FilterView extends Component {
     }
 
   onInputChange(event,key) {
-    console.log(this.state.allFilters);
     let input = this.refs["input"+key].value;
     let allFiltersNew = this.state.allFilters.slice();
-    console.log(isNaN(parseFloat(input)));
     if((isNaN(parseFloat(input)) && input !== "") || (parseFloat(input).toString()) !== input){
       allFiltersNew[key].message = "please type in a valid number"
       allFiltersNew[key].input = input
