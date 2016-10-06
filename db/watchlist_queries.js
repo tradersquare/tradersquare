@@ -3,8 +3,8 @@ const db = require('./config.js');
 module.exports.watchlistInsert = (res, rowData) => {
   console.log('watchlistInsert inherited rowData:', rowData);
   const startInsertQuery = `INSERT INTO watchlistSchema.watchlistTable`;
-  const queryCols = `(userExtId, StockName, StockTicker, ClosingPrice)`
-  const queryVals = `VALUES (45, 'Facebook Inc.', 'FB', 1000)`;
+  const queryCols = `(userExtId, StockName, StockTicker, ClosingPrice)`;
+  const queryVals = `VALUES (${rowData.userExtId}, '${rowData.StockName}', '${rowData.StockTicker}', ${rowData.ClosingPrice})`;
 
   const insertQuery = `${startInsertQuery} ${queryCols} ${queryVals}`;
   console.log('final insertQuery: ', insertQuery);
