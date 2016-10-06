@@ -10,17 +10,18 @@ const path                    = require('path');
 const webpack                 = require('webpack');
 const webpackDevMiddleware    = require('webpack-dev-middleware');
 const webpackHotMiddleware    = require('webpack-hot-middleware');
-const config                  = require('../webpack.config.js');
+const config                  = require('../webpack.config');
 const db                      = require('../db/config');
 const pg                      = require('pg');
 const dbURL                   = process.env.DATABASE_URL;
-const callAll                 = require('./request_handler/all_companies.js');
-const GrabDataDB              = require('../db/db_grab_data.js');
-const GrabFilteredDataDB      = require('../db/db_filter_data.js');
-const getPercentile           = require('../db/percentile_query.js');
-const getGraphData            = require('./request_handler/graph_data.js');
+const callAll                 = require('./request_handler/all_companies');
+const GrabDataDB              = require('../db/db_grab_data');
+const GrabFilteredDataDB      = require('../db/db_filter_data');
+const getPercentile           = require('../db/percentile_query');
+const getGraphData            = require('./request_handler/graph_data');
 const {genericTableCreator}   = require('../db/queries');
-const {addExtraCols}            = require('./server_helper');
+const {addExtraCols}          = require('./server_helper');
+// const {watchlistTable}        = require('./')
 
 //REQUEST HANDLER MODULES
 const StockData = require('./request_handler/stock_data');
@@ -122,13 +123,7 @@ app.get('/getTwitterData/*', function(req, res) {
 
 app.get('/createGenericTable/', function(req, res) {
   console.log('inside get req');
-  let watchListTable =
-    ['watchlistSchema', 'watchlistTable',
-      {colTitle: 'userExtId', colType: 'int'},
-      {colTitle: 'StockName', colType: 'varchar', optionalSize: '40'},
-      {colTitle: 'StockTicker', colType: 'varchar', optionalSize: '6'},
-      {colTitle: 'ClosingPrice', colType: 'int'}];
-      let arr = [1,2,3];
+
 
 
   addExtraCols(4, watchListTable);
