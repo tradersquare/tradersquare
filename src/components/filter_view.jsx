@@ -115,7 +115,16 @@ class FilterView extends Component {
 
   onFormSubmit(event) {
     event.preventDefault();
-    this.props.getDBDataFiltered(this.state.allFilters);
+    let flag = true;
+    for(let i = 0; i < this.state.allFilters.length; i++){
+      if(this.state.allFilters[i].message){
+        flag = false;
+        alert("please enter valid inputs to search")
+      }
+    }
+    if(flag){
+      this.props.getDBDataFiltered(this.state.allFilters);
+    }
   }
 
   onSelectChange(event,key) {
