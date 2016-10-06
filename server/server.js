@@ -151,6 +151,10 @@ app.get('/createGenericTable/*', function(req, res) {
   genericTableCreator(tableObj, res);
 })
 
+app.get('/addToWatchlist', function(req, res) {
+
+})
+
 app.use(function(req, res, next) {
   res.sendFile(path.join(__dirname, '../public/index.html'));
 });
