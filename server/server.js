@@ -152,7 +152,7 @@ app.get('/createGenericTable/*', function(req, res) {
 })
 
 app.post('/addToWatchlist', function(req, res) {
-  console.log('getgot');
+  console.log(req.body);
 })
 
 app.use(function(req, res, next) {

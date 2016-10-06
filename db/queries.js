@@ -54,6 +54,7 @@ module.exports.createSchema = sortedElements => {
  * [allows entry of user defined columns]
  * @param  {array} importedCols [0: schema, 1: table, ...: cols]
  * @param  {obj} res          [for res.send]
+ * one endpoint using this func from server.js: /createGenericTable/
  */
 module.exports.genericTableCreator = (importedCols, res) => {
   console.log(importedCols);
