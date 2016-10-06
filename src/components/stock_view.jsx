@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import {Link} from 'react-router';
+import {Redirect, Link} from 'react-router';
 import SearchBar from './search_bar';
 import StratNav from './strategy_nav';
 import PriceChart from './price_chart';
@@ -101,6 +101,20 @@ class StockView extends Component {
       )
     }
 
+    if(this.props.stockData === "invalid"){
+      return (
+        <div>
+        <Header />
+        <div className="col-md-2"></div>
+        <div className="col-md-8 pushdown">
+          <h2 className="col-md-12 centerheading">please enter a valid ticker</h2>
+          <Link to="/" className="col-md-12 centertext">go back to home</Link>
+        </div>
+        <div className="col-md-2"></div>
+        </div>
+        )
+    }
+
     let priceChart = this.renderPrices();
     let chart =
     <div className="col-md-6" ref='chartDivRef'>
@@ -163,12 +177,12 @@ class StockView extends Component {
           <div className="card-deck">
               <Credit />
               <Leverage />
-              <Profitability />
+              <BM />
           </div>
           <div className="card-deck">
               <Liquidity />
               <Beta />
-              <BM />
+              <Profitability />
           </div>
         </div>
       </div>
