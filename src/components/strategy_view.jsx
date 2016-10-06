@@ -227,13 +227,13 @@ class StrategyView extends Component {
         for(let j = 0; j < 3; j++){
           let stock = filteredStocks[i+j];
           console.log("came in here", i+j, stock.ticker)
-          stocks.push(<div className="card" key={stockKey}>
-              <strong className="col-md-12">{stock.ticker}:</strong>
-              <span className="col-md-12 smallwords">{stock.name}</span>
-              <span className="col-md-12">${stock.close_price}</span>
+          stocks.push(<div className="card clickable-card" key={stockKey}><Link to="/stockview" onClick={()=>{this.handleSubmit(stock.ticker)}}>
+              <strong className="col-md-6">{stock.ticker}:</strong>
+              <span className="col-md-6 textright">${stock.close_price}</span>
+              <span className="col-md-12 smallwords centertext">{stock.name}</span>
               <span className="col-md-6">{stock[currentStrat]}</span>
-              <span className="col-md-6">{100-(Math.round((stockKey/filteredStocks.length)*100))}%</span>
-            </div>
+              <span className="col-md-6 textright">{100-(Math.round((stockKey/filteredStocks.length)*100))}%</span>
+            </Link></div>
             )
           stockKey++;
         }
