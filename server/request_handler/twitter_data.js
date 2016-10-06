@@ -26,7 +26,9 @@ module.exports = (handle) => {
       console.log(sent.score);
       return sent.score;
     })
-    console.log('in TTTTTT')
+    .reduce(function(tot, cur) {
+      return tot + cur;
+    });
     console.log('reduced: ' ,allScores);
   })
 }
