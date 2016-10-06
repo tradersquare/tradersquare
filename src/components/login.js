@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import Util from './component-helpers';
 import Modal from 'react-modal';
+import Constants from '../reducers/firebase_constants';
+import firebase from 'firebase';
 
 export default class LoginNav extends Component {
   constructor(props) {
@@ -9,6 +11,18 @@ export default class LoginNav extends Component {
 
     this.openModal = this.openModal.bind(this);
     this.state = {modalOpen: false};
+  }
+
+  componentWillMount() {
+    const firebaseConfig = {
+      apiKey: "AIzaSyA6iK01GbFJq4MNGD68ef4zhPQSRPow-I0",
+      authDomain: "tradersquare-ed7bc.firebaseapp.com",
+      databaseURL: "https://tradersquare-ed7bc.firebaseio.com",
+      storageBucket: "tradersquare-ed7bc.appspot.com",
+      messagingSenderId: "139146427287"
+    };
+
+    const firebaseApp = firebase.initializeApp(firebaseConfig);
   }
 
   openModal() {
@@ -39,6 +53,9 @@ export default class LoginNav extends Component {
             style={customStyles}
           >
             <h2> LOGIN </h2>
+            <hr />
+            <p> Please enter your username to login with your Google Account </p>
+
           </Modal>
         </div>
       )
