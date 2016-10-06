@@ -10,6 +10,7 @@ import Numeral from 'numeral'
 import ReactDOM from 'react-dom';
 import d3 from 'd3';
 import AddStock from '../actions/add_stock';
+import AddSentiment from '../actions/get_twitter_data'
 
 //stock view cards
 import PE from './stock-view-components/pe'
@@ -29,6 +30,7 @@ class StockView extends Component {
     this.renderPrices = this.renderPrices.bind(this);
     this.handleResize = this.handleResize.bind(this);
     this.handleAdd = this.handleAdd.bind(this);
+    this.renderSentiment = this.renderSentiment.bind(this);
     this.state = {
       chartWidth: 500
     }
@@ -61,6 +63,7 @@ class StockView extends Component {
 
   componentDidMount() {
     window.addEventListener('resize', this.handleResize)
+    this.props.AddSentiment('facebook');
       }
 
   handleResize(e) {
@@ -114,7 +117,7 @@ class StockView extends Component {
         </div>
         )
     }
-
+    // let sentiment = this.renderSentiment();
     let priceChart = this.renderPrices();
     let chart =
     <div className="col-md-6" ref='chartDivRef'>
@@ -124,7 +127,7 @@ class StockView extends Component {
     //   console.log('not equal: ');
     //   priceChart = this.renderPrices();
     // }
-
+    const sent = this.props.sentimentData
     const stockData = this.props.stockData;
     const metrics = this.props.percentileData;
     console.log("***STOCKDATA***", stockData);
@@ -164,6 +167,7 @@ class StockView extends Component {
                 <h4 className="centertext">Market Cap: {Numeral(parseFloat(stockData.marketcap)).format('0,0')}</h4>
                 <h4 className="centertext">Average Volume: {stockData["average_daily_volume"]}</h4>
                 <h4 className="centertext">Open/Close: {stockData.open_price}/{stockData.close_price}</h4>
+                <h4 className="sentiment">{this.props.sentimentData} </h4>
             </div>
           </div>
         </div>
@@ -195,8 +199,9 @@ function mapStateToProps(state) {
   return {
     stockData: state.stock,
     graphData: state.graphData,
-    percentileData: state.percentileData
+    percentileData: state.percentileData,
+    sentimentData: state.sentimentData
   }
 }
 
-export default connect(mapStateToProps, {AddStock})(StockView);
+export default connect(mapStateToProps, {AddStock, AddSentiment})(StockView);

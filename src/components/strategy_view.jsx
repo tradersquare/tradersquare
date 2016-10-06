@@ -44,7 +44,7 @@ class StrategyView extends Component {
       this.setState({selectValue: this.props.stratMetric})
       // this.setState({flag: true})
     }
-  
+
   }
 
   // ComponentWillReceiveProps(){
@@ -60,7 +60,7 @@ class StrategyView extends Component {
     // console.log("componentDidMount")
     // this.renderTable();
   }
-  
+
   componentDidUpdate(){
     console.log("componentDidUpdate", this.props.stratMetric)
     if(this.props.stratMetric && this.props.stratMetric !== this.state.selectValue && !this.state.flag){
@@ -215,8 +215,8 @@ class StrategyView extends Component {
     //   }
     //   seeMore = addButton();
 
-    // } 
-   
+    // }
+
    let stockKey = 0
 
     let cards = [];
@@ -249,7 +249,7 @@ class StrategyView extends Component {
     }
 
     //   cards = filteredStocks.map((stock) => {
-      
+
     //   if(stockKey >= that.state.items){
     //     return;
     //   }
@@ -319,7 +319,7 @@ class StrategyView extends Component {
 function mapStateToProps(state) {
   return {
     strategyData: state.stratData,
-    stratMetric: state.stratMetric  
+    stratMetric: state.stratMetric
   }
 }
 

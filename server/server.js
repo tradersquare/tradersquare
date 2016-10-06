@@ -155,6 +155,8 @@ app.post('/addToWatchlist', function(req, res) {
   // console.log('req.body: ', req.body);
   watchlistInsert(res, req.body);
 });
+  tweetData(handle, res);
+})
 
 app.use(function(req, res, next) {
   res.sendFile(path.join(__dirname, '../public/index.html'));
