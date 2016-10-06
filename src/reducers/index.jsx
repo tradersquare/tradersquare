@@ -19,8 +19,8 @@ const rootReducer = combineReducers({
   percentileData: PercentileReducer,
   stratMetric: MetricReducer,
   watchList: WatchListReducer,
-  auth: AuthReducer
+  auth: AuthReducer,
   sentimentData: SentimentData
-});
+})
 
 export default rootReducer;
