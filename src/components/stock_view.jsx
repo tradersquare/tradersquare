@@ -64,7 +64,19 @@ class StockView extends Component {
     window.addEventListener('resize', this.handleResize)
     this.props.AddSentiment('facebook');
     console.log('componentDidMount:::sent  ', this.props.sentimentData);
-      }
+    this.sentimentDiv = <div>loading...</div>
+
+  }
+
+  componentDidUpdate() {
+    console.log('componentDidUPDATEEEEE:::sent  ', this.props.sentimentData);
+    this.sentimentDiv = (
+      <div>
+        {this.props.sentimentData.score}
+      </div>
+    )
+  }
+
 
   handleResize(e) {
     if (this.refs.chartDivRef) {
@@ -167,7 +179,7 @@ class StockView extends Component {
                 <h4 className="centertext">Market Cap: {Numeral(parseFloat(stockData.marketcap)).format('0,0')}</h4>
                 <h4 className="centertext">Average Volume: {stockData["average_daily_volume"]}</h4>
                 <h4 className="centertext">Open/Close: {stockData.open_price}/{stockData.close_price}</h4>
-                <h4 className="sentiment">{this.props.sentimentData} </h4>
+                <h4 className="sentiment">{this.sentimentDiv} </h4>
             </div>
           </div>
         </div>
