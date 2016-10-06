@@ -23,7 +23,8 @@ const getGraphData            = require('./request_handler/graph_data.js');
 //REQUEST HANDLER MODULES
 const StockData = require('./request_handler/stock_data');
 const stratData = require('./request_handler/strat_data');
-const metricData = require('./request_handler/metric_data')
+const metricData = require('./request_handler/metric_data');
+const tweetData = require('./request_handler/twitter_data');
 
 const app = module.exports = express();
 // const router = express.Router();
@@ -113,9 +114,9 @@ app.get('/getGraphData/*', function(req, res) {
 })
 
 app.get('/getTwitterData/*', function(req, res) {
-  tweet = req.url.slice(16).toUpperCase();
-  console.log('twitterslice', ticker);
-  // getTweets(res, tweet);
+  handle = req.url.slice(16).toUpperCase();
+  console.log('twitterslice', handle);
+  tweetData();
 })
 
 app.use(function(req, res, next) {
