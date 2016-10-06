@@ -30,7 +30,6 @@ class StockView extends Component {
     this.renderPrices = this.renderPrices.bind(this);
     this.handleResize = this.handleResize.bind(this);
     this.handleAdd = this.handleAdd.bind(this);
-    this.renderSentiment = this.renderSentiment.bind(this);
     this.state = {
       chartWidth: 500
     }
@@ -64,6 +63,7 @@ class StockView extends Component {
   componentDidMount() {
     window.addEventListener('resize', this.handleResize)
     this.props.AddSentiment('facebook');
+    console.log('componentDidMount:::sent  ', this.props.sentimentData);
       }
 
   handleResize(e) {

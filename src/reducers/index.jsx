@@ -20,7 +20,7 @@ const rootReducer = combineReducers({
   stratMetric: MetricReducer,
   watchList: WatchListReducer,
   auth: AuthReducer
-  sentiment: SentimentData
+  sentimentData: SentimentData
 });
 
 export default rootReducer;
