@@ -158,7 +158,7 @@ app.get('/createGenericTable/*', function(req, res) {
  * watchListInsert found in: watchlist_queries.js
  */
 app.post('/addToWatchlist', function(req, res) {
-  console.log('req.body: ', req.body);
+  // console.log('req.body: ', req.body);
   watchlistInsert(res, req.body);
 })
 
