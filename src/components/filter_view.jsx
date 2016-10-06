@@ -9,6 +9,7 @@ import Header from './header';
 import {searchStockData as SearchStockData} from '../actions/stock_search';
 import {getGraphData as GetGraphData} from '../actions/get_graph_data';
 import getPercentile from '../actions/get_percentile';
+import Modal from 'react-modal';
 
 
 class FilterView extends Component {
@@ -35,7 +36,7 @@ class FilterView extends Component {
         roe: 'Return on Equity',
       },
       columns: [],
-      inputValid: true
+      modalOpen: false
     };
 
     this.onFormSubmit = this.onFormSubmit.bind(this);
@@ -45,6 +46,7 @@ class FilterView extends Component {
     this.onInputChange = this.onInputChange.bind(this);
     this.generateNewFilter = this.generateNewFilter.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.openModal = this.openModal.bind(this);
   }
 
   componentWillMount() {
@@ -119,12 +121,16 @@ class FilterView extends Component {
     for(let i = 0; i < this.state.allFilters.length; i++){
       if(this.state.allFilters[i].message){
         flag = false;
-        alert("please enter valid inputs to search")
+        this.openModal();
       }
     }
     if(flag){
       this.props.getDBDataFiltered(this.state.allFilters);
     }
+  }
+
+  openModal() {
+    this.setState({modalOpen: !this.state.modalOpen})
   }
 
   onSelectChange(event,key) {
@@ -179,6 +185,17 @@ class FilterView extends Component {
   }
 
   render() {
+
+    const modalStyle = {
+      content : {
+        top                   : '50%',
+        left                  : '50%',
+        right                 : '50%',
+        bottom                : 'auto',
+        marginRight           : '-50%',
+        transform             : 'translate(-50%, -50%)'
+      }
+    };
 
     let filterInputs = this.state.allFilters.map((obj) => {
 
@@ -249,6 +266,17 @@ class FilterView extends Component {
         <h2> Results </h2>
         {this.state.results}
         </div>
+
+        <Modal
+          isOpen={this.state.modalOpen}
+          onRequestClose={this.openModal}
+          style={modalStyle}
+        >
+        <h2 className="centerheading">What part of "please type in a valid number" do you not understand?</h2>
+          
+        </Modal>
+
+
       </div>
       </div>
     )
