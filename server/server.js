@@ -19,7 +19,8 @@ const GrabDataDB              = require('../db/db_grab_data.js');
 const GrabFilteredDataDB      = require('../db/db_filter_data.js');
 const getPercentile           = require('../db/percentile_query.js');
 const getGraphData            = require('./request_handler/graph_data.js');
-const {genericTableCreator}     = require('../db/queries');
+const {genericTableCreator}   = require('../db/queries');
+const addExtraCols            = require('./server_helper');
 
 //REQUEST HANDLER MODULES
 const StockData = require('./request_handler/stock_data');
@@ -127,8 +128,12 @@ app.get('/createGenericTable/', function(req, res) {
       {colTitle: 'StockName', colType: 'varchar', optionalSize: '40'},
       {colTitle: 'StockTicker', colType: 'varchar', optionalSize: '6'},
       {colTitle: 'ClosingPrice', colType: 'int'}];
+      let arr = [1,2,3];
+
+
+  addExtraCols(4)
+  console.log('from get endpoint: ', watchListTable);
   genericTableCreator(watchListTable, res);
-  // res.send('trying to create table');
 })
 
 app.use(function(req, res, next) {

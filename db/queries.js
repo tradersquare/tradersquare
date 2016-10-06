@@ -62,12 +62,23 @@ module.exports.genericTableCreator = (importedCols, res) => {
   for (let i = 2; i < importedCols.length; i++) {
     const col = importedCols[i];
     console.log('optionalSize: ', col.optionalSize);
-    const size = (col.optionalSize === undefined) ? `` : `(${col.optiionalSize})`;
-    endQueryStr = `${endQueryStr} ${col.colTitle} ${size},`
+    let size = '';
+    if (col.optionalSize) {
+      size = `(${col.optionalSize})`;
+    };
+
+    //ternary operator simply doesn't work!
+    // let size = (!col.optionalSize) ? 'r' : `(${col.optiionalSize})`;
+
+    endQueryStr = `${endQueryStr} ${col.colTitle} ${col.colType}${size},`;
   }
   // const queryStr = `${frontQueryStr} `
-  endQueryStr = `${endQueryStr})`
-  console.log(frontQueryStr, endQueryStr);
+  endQueryStr = endQueryStr.slice(0, endQueryStr.length - 1) + `)`;
+  // console.log(frontQueryStr, endQueryStr);
+  const fullQueryStr = frontQueryStr + endQueryStr;
+  console.log((fullQueryStr));
+
+
   res.status(200).send('table was maybe created?');
 }
 
