@@ -47,7 +47,10 @@ class FilterView extends Component {
   }
 
   componentDidUpdate() {
+    console.log(this.state.results.length)
     if (this.state.results.length !== this.props.filterData.length){
+      console.log("updating")
+      console.log(this.props.filterData);
       let counter = 0;
       let mapFilterData = this.props.filterData.map((stock) => {
         counter++;
@@ -57,21 +60,32 @@ class FilterView extends Component {
             allKeys.push(key);
           }
         }
-        let columns = allKeys.map((key) => {
+        // let columns = allKeys.map((key) => {
+        //   return (
+        //     <td key = {key}> {stock[key]} </td>
+        //     )
+        // })
+        // this.setState({columns: allKeys});
+        // return (
+        // <tbody key={counter}>
+        //   <tr>
+        //     <td>{stock.ticker}</td>
+        //     <td>{stock.close_price}</td>
+        //     {columns}
+        //   </tr>
+        // </tbody>
+        // )
+        let metrics = allKeys.map((metric) => {
           return (
-            <td key = {key}> {stock[key]} </td>
+            <span key = {metric}>{metric}: {stock[metric]} </span>
             )
         })
-        this.setState({columns: allKeys});
-        return (
-        <tbody key={counter}>
-          <tr>
-            <td>{stock.ticker}</td>
-            <td>{stock.close_price}</td>
-            {columns}
-          </tr>
-        </tbody>
-        )
+        return (<div  key = {counter} className="card">
+          <span>{stock.ticker}</span>
+          <span>{stock["close_price"]}</span>
+          {metrics}
+          </div>
+          )
       })
       this.setState({results: mapFilterData})
     }
@@ -201,14 +215,7 @@ class FilterView extends Component {
         </div>
         <div className="col-md-6 results">
         <h2> Results </h2>
-        <table className="tablr">
-          <tbody><tr>
-          <th>Ticker</th>
-          <th>Price</th>
-          {columnHeaders}
-          </tr></tbody>
-          {this.state.results}
-          </table>
+        {this.state.results}
         </div>
       </div>
       </div>
@@ -221,3 +228,13 @@ function mapStateToProps({filterData}) {
 }
 
 export default connect(mapStateToProps, {getDBDataFiltered})(FilterView)
+
+
+// <table className="tablr">
+//           <tbody><tr>
+//           <th>Ticker</th>
+//           <th>Price</th>
+//           {columnHeaders}
+//           </tr></tbody>
+//           {this.state.results}
+//           </table>
