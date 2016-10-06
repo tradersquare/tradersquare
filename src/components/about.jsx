@@ -4,7 +4,6 @@ import {Link} from 'react-router';
 import {bindActionCreators} from 'redux';
 import Header from './header'
 
-
 class About extends Component {
 
   render() {
