@@ -10,7 +10,7 @@ const _ = require('underscore');
 const nlp = require('nlp_compromise');
 const sentiment = require('sentiment');
 
-module.exports = (handle) => {
+module.exports = (handle, res) => {
   let T = new Twit({
     consumer_key: TWITTER_KEY,
     consumer_secret: TWITTER_SECRET,
@@ -18,7 +18,7 @@ module.exports = (handle) => {
     access_token_secret: ACCESS_SECRET
   });
 
-  T.get('search/tweets', { q: `#${handle} stock`, count: 100 }, function(err, data, response) {
+  T.get('search/tweets', { q: `#${handle} stock`, count: 30 }, function(err, data, response) {
     const package = data.statuses;
     const allScores = package.map(function(tweet) {
       console.log(tweet.text);
@@ -30,5 +30,6 @@ module.exports = (handle) => {
       return tot + cur;
     });
     console.log('reduced: ' ,allScores);
+    res.status(200).send({score: allScores})
   })
 }

@@ -121,7 +121,7 @@ app.get('/getGraphData/*', function(req, res) {
 app.get('/getTwitterData/*', function(req, res) {
   handle = req.url.slice(16).toUpperCase();
   console.log('twitterslice', handle);
-  tweetData(handle);
+  tweetData(handle, res);
 });
 
 /**
@@ -154,7 +154,7 @@ app.get('/createGenericTable/*', function(req, res) {
 app.post('/addToWatchlist', function(req, res) {
   // console.log('req.body: ', req.body);
   watchlistInsert(res, req.body);
-});
+})
 
 app.use(function(req, res, next) {
   res.sendFile(path.join(__dirname, '../public/index.html'));

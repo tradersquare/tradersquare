@@ -8,6 +8,7 @@ import PercentileReducer from './percentile_reducer';
 import MetricReducer from './metric_reducer';
 import WatchListReducer from './watchlist_reducer';
 import AuthReducer from './auth_reducer';
+import SentimentData from './twitter_reducer';
 
 const rootReducer = combineReducers({
   stock: StockReducer,
@@ -18,7 +19,8 @@ const rootReducer = combineReducers({
   percentileData: PercentileReducer,
   stratMetric: MetricReducer,
   watchList: WatchListReducer,
-  auth: AuthReducer
-});
+  auth: AuthReducer,
+  sentimentData: SentimentData
+})
 
 export default rootReducer;
