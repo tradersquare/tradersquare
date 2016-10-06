@@ -22,7 +22,7 @@ const getGraphData            = require('./request_handler/graph_data');
 const {genericTableCreator}   = require('../db/queries');
 const {addExtraCols}          = require('./server_helper');
 const {watchListTable}        = require('../db/db_tables_store');
-const {watchlistInsert}        = require('../db/watchlist_queries');
+const {watchlistInsert}       = require('../db/watchlist_queries');
 
 const tables = {watchListTable};
 //REQUEST HANDLER MODULES
@@ -45,7 +45,7 @@ app.use(webpackDevMiddleware(compiler, {
     stats: {
       colors: true
     }
-  }))
+}))
   // app.use(webpackHotMiddleware(compiler, {
   //   log: console.log
   // }))
@@ -122,12 +122,7 @@ app.get('/getTwitterData/*', function(req, res) {
   handle = req.url.slice(16).toUpperCase();
   console.log('twitterslice', handle);
   tweetData(handle);
-
-app.get('/createGenericTable/', function(req, res) {
-  console.log('inside get req:', watchListTable);
-  addExtraCols(4, watchListTable);
-  console.log('from get endpoint: ', watchListTable);
-  genericTableCreator(watchListTable, res);
+});
 
 /**
  * [floating endpoint for easily creating db tables]
@@ -141,7 +136,6 @@ app.get('/createGenericTable/', function(req, res) {
  * addExtraCols found in server_helper.js
  * note: restart server after failed attempt of making any table
  */
->>>>>>> [docs](add explanation for table creating endpoint
 app.get('/createGenericTable/*', function(req, res) {
   const extraCols = req.url.slice(20, 22);
   const table = req.url.slice(23);
@@ -151,7 +145,7 @@ app.get('/createGenericTable/*', function(req, res) {
   addExtraCols(extraCols, tableObj);
   // console.log('modified tableObj: ', tableObj);
   genericTableCreator(tableObj, res);
-})
+});
 
 /**
  * endpoint accessed by: add_stock action
@@ -160,7 +154,7 @@ app.get('/createGenericTable/*', function(req, res) {
 app.post('/addToWatchlist', function(req, res) {
   // console.log('req.body: ', req.body);
   watchlistInsert(res, req.body);
-})
+});
 
 app.use(function(req, res, next) {
   res.sendFile(path.join(__dirname, '../public/index.html'));
