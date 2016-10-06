@@ -19,13 +19,18 @@ export default function(stock, watchlistData) {
       ClosingPrice: stock.close_price
     })
       .then( () => {
-        console.log('went through, now do get req'));
-      }
+        console.log('went through, now do get req');
+        getUpdatedRows();
+      })
   }
 
-
-  return {
-    type: ADD_STOCK,
-    payload: stock
-  };
+  function getUpdatedRows() {
+    var allRows = axios.get('/getFromWatchList')
+      .then( () => {
+        return {
+          type: ADD_STOCK,
+          payload: allRows
+        }
+      })
+  }
 }
