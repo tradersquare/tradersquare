@@ -4,14 +4,15 @@ export const ADD_STOCK = "ADD_STOCK";
 
 export default function(stock, watchlistData) {
   // debugger;
-  let insideWatchlist = true;
+  let notInsideWatchlist = true;
   watchlistData.forEach( v => {
     if (v.ticker === stock.ticker) {
       insideWatchlist = false;
     }
   })
+  debugger;
 
-  if (insideWatchlist) {
+  if (notInsideWatchlist) {
     const addToDB = axios.post('/addToWatchlist', {
       userExtId: 45,
       StockTicker: stock.ticker,
@@ -19,18 +20,20 @@ export default function(stock, watchlistData) {
       ClosingPrice: stock.close_price
     })
       .then( () => {
+        debugger;
         console.log('went through, now do get req');
         getUpdatedRows();
       })
   }
 
   function getUpdatedRows() {
-    var allRows = axios.get('/getFromWatchList')
+    const allRows = axios.get('/getFromWatchList')
       .then( () => {
-        return {
-          type: ADD_STOCK,
-          payload: allRows
-        }
+        debugger;
+        // return {
+        //   type: ADD_STOCK,
+        //   payload: allRows
+        // }
       })
   }
 }

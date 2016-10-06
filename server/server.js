@@ -23,6 +23,7 @@ const {genericTableCreator}   = require('../db/queries');
 const {addExtraCols}          = require('./server_helper');
 const {watchListTable}        = require('../db/db_tables_store');
 const {watchlistInsert}       = require('../db/watchlist_queries');
+const {queryAllRowsWatchlist} = require('../db/watchlist_queries');
 
 const tables = {watchListTable};
 //REQUEST HANDLER MODULES
@@ -154,6 +155,11 @@ app.get('/createGenericTable/*', function(req, res) {
 app.post('/addToWatchlist', function(req, res) {
   // console.log('req.body: ', req.body);
   watchlistInsert(res, req.body);
+})
+
+app.use('/getFromWatchList', function(req, res) {
+  console.log('getFromWatchList endpoint reached');
+  queryAllRowsWatchlist(res);
 })
 
 app.use(function(req, res, next) {

@@ -20,8 +20,17 @@ function notInWatchlistTable() {
 
 }
 
-function queryAllRowsWatchlist() {
-
+function queryAllRowsWatchlist(res) {
+  const results = [];
+  db.query(`SELECT * FROM watchlistSchema.watchlistTable;`)
+    .on('row', row => {
+      results.push(row);
+    })
+    .on('end', function(){
+      console.log("got them rows");
+      console.log('all watchlist rows: ', results);
+      res.json(results);
+    })
 }
 
 module.exports.queryAllRowsWatchlist = queryAllRowsWatchlist;
