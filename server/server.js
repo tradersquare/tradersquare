@@ -10,16 +10,21 @@ const path                    = require('path');
 const webpack                 = require('webpack');
 const webpackDevMiddleware    = require('webpack-dev-middleware');
 const webpackHotMiddleware    = require('webpack-hot-middleware');
-const config                  = require('../webpack.config.js');
+const config                  = require('../webpack.config');
 const db                      = require('../db/config');
 const pg                      = require('pg');
 const dbURL                   = process.env.DATABASE_URL;
-const callAll                 = require('./request_handler/all_companies.js');
-const GrabDataDB              = require('../db/db_grab_data.js');
-const GrabFilteredDataDB      = require('../db/db_filter_data.js');
-const getPercentile           = require('../db/percentile_query.js');
-const getGraphData            = require('./request_handler/graph_data.js');
+const callAll                 = require('./request_handler/all_companies');
+const GrabDataDB              = require('../db/db_grab_data');
+const GrabFilteredDataDB      = require('../db/db_filter_data');
+const getPercentile           = require('../db/percentile_query');
+const getGraphData            = require('./request_handler/graph_data');
+const {genericTableCreator}   = require('../db/queries');
+const {addExtraCols}          = require('./server_helper');
+const {watchListTable}        = require('../db/db_tables_store');
+const {watchlistInsert}       = require('../db/watchlist_queries');
 
+const tables = {watchListTable};
 //REQUEST HANDLER MODULES
 const StockData = require('./request_handler/stock_data');
 const stratData = require('./request_handler/strat_data');
@@ -40,7 +45,7 @@ app.use(webpackDevMiddleware(compiler, {
     stats: {
       colors: true
     }
-  }))
+}))
   // app.use(webpackHotMiddleware(compiler, {
   //   log: console.log
   // }))
@@ -117,11 +122,44 @@ app.get('/getTwitterData/*', function(req, res) {
   handle = req.url.slice(16).toUpperCase();
   console.log('twitterslice', handle);
   tweetData(handle);
-})
+});
+
+/**
+ * [floating endpoint for easily creating db tables]
+ * @req.url {[string]}    after localhost:3000/ type in number of extra cols
+ *                        then type in /[table-name], as stored in db_tables_store.js
+ *                        looks like: localhost:3000/[integer]/[table_name]
+ * note: table in db_tables_store.js must be created as arr as follows:
+ * [schemaName, tableName, {colTitle: title1, colType: type, optionalSize: size}, ...{}]
+ * in above, each object starting at index 2 represents a column
+ * genericTableCreator returns res.send(finalQueryString), found in queries.js
+ * addExtraCols found in server_helper.js
+ * note: restart server after failed attempt of making any table
+ */
+app.get('/createGenericTable/*', function(req, res) {
+  const extraCols = req.url.slice(20, 22);
+  const table = req.url.slice(23);
+  // res.status(200).send(req.url.slice(22));
+  const tableObj = tables[table];
+  // console.log('inside get req:', tableObj);
+  addExtraCols(extraCols, tableObj);
+  // console.log('modified tableObj: ', tableObj);
+  genericTableCreator(tableObj, res);
+});
+
+/**
+ * endpoint accessed by: add_stock action
+ * watchListInsert found in: watchlist_queries.js
+ */
+app.post('/addToWatchlist', function(req, res) {
+  // console.log('req.body: ', req.body);
+  watchlistInsert(res, req.body);
+});
 
 app.use(function(req, res, next) {
   res.sendFile(path.join(__dirname, '../public/index.html'));
 });
+
 
 app.listen(process.env.PORT || 3000, function() {
   console.log('Server started, listening on port:', 3000);

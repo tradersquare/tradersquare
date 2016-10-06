@@ -50,6 +50,44 @@ module.exports.createSchema = sortedElements => {
     .catch(console.error)
 }
 
+/**
+ * [allows entry of user defined columns]
+ * @param  {array} importedCols [0: schema, 1: table, ...: cols]
+ * @param  {obj} res          [for res.send]
+ * one endpoint using this func from server.js: /createGenericTable/
+ */
+module.exports.genericTableCreator = (importedCols, res) => {
+  console.log(importedCols);
+  const frontQueryStr = `CREATE TABLE IF NOT EXISTS ${importedCols[0]}.${importedCols[1]} (id SERIAL PRIMARY KEY,`
+  let endQueryStr = ``;
+  for (let i = 2; i < importedCols.length; i++) {
+    const col = importedCols[i];
+    console.log('optionalSize: ', col.optionalSize);
+    let size = '';
+    if (col.optionalSize) {
+      size = `(${col.optionalSize})`;
+    };
+
+    //ternary operator simply doesn't work!
+    // let size = (!col.optionalSize) ? 'r' : `(${col.optiionalSize})`;
+
+    endQueryStr = `${endQueryStr} ${col.colTitle} ${col.colType}${size},`;
+  }
+  // const queryStr = `${frontQueryStr} `
+  endQueryStr = endQueryStr.slice(0, endQueryStr.length - 1) + `)`;
+  // console.log(frontQueryStr, endQueryStr);
+  const fullQueryStr = frontQueryStr + endQueryStr;
+  console.log((fullQueryStr));
+
+  db.query(fullQueryStr)
+    .on('end', function() {
+      console.log("created")
+    })
+    .catch(console.error);
+
+  res.status(200).send(`end query: ${fullQueryStr}`);
+}
+
 module.exports.insertRow = (data, elements) => {
   for (let key in elements) {
     if (data.indexOf(key) === -1) {
