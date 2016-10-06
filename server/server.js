@@ -22,7 +22,7 @@ const getGraphData            = require('./request_handler/graph_data');
 const {genericTableCreator}   = require('../db/queries');
 const {addExtraCols}          = require('./server_helper');
 const {watchListTable}        = require('../db/db_tables_store');
-
+const tables = {watchListTable};
 //REQUEST HANDLER MODULES
 const StockData = require('./request_handler/stock_data');
 const stratData = require('./request_handler/strat_data');
@@ -132,9 +132,10 @@ app.get('/createGenericTable/*', function(req, res) {
   const extraCols = req.url.slice(20, 22);
   const table = req.url.slice(22);
   // res.status(200).send(req.url.slice(22));
-  console.log('inside get req:', [table]);
-  addExtraCols(extraCols, [table]);
-  // console.log('from get endpoint: ', [table]);
+  const tableObj = tables[table];
+  console.log('inside get req:', tableObj);
+  addExtraCols(extraCols, tableObj);
+  console.log(tableObj);
   // genericTableCreator(watchListTable, res);
 >>>>>>> [feature](server): seperate url string from createGenericTable req
 })
