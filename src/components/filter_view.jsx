@@ -6,6 +6,10 @@ import SearchBar from './search_bar';
 import StratNav from './strategy_nav';
 import getDBDataFiltered from '../actions/get_db_data_filtered';
 import Header from './header';
+import {searchStockData as SearchStockData} from '../actions/stock_search';
+import {getGraphData as GetGraphData} from '../actions/get_graph_data';
+import getPercentile from '../actions/get_percentile';
+
 
 class FilterView extends Component {
   constructor(props) {
@@ -39,18 +43,17 @@ class FilterView extends Component {
     this.handleTypeClick = this.handleTypeClick.bind(this);
     this.onInputChange = this.onInputChange.bind(this);
     this.generateNewFilter = this.generateNewFilter.bind(this);
-
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentWillMount() {
     this.generateNewFilter();
   }
-
+ 
   componentDidUpdate() {
-    console.log(this.state.results.length)
-    if (this.state.results.length !== this.props.filterData.length){
+    console.log(this.state.results.length, this.props.filterData.length)
+    if (this.state.results.length !== (this.props.filterData.length / 2)){
       console.log("updating")
-      console.log(this.props.filterData);
       let counter = 0;
       let mapFilterData = this.props.filterData.map((stock) => {
         counter++;
@@ -87,7 +90,44 @@ class FilterView extends Component {
           </div>
           )
       })
-      this.setState({results: mapFilterData})
+
+      let filterResults = [];
+      let allKeys = [];
+      for (let key in this.props.filterData[0]) {
+        if (key !== "percentile" && key !== "ticker" && key !== "close_price") {
+          allKeys.push(key);
+        }
+      }
+
+      let stockKey = 0;
+
+      for(let i = 0; i < this.props.filterData.length; i+=2){
+        const stocks = [];
+        for(let j =0; j < 2; j++){
+          let stock = this.props.filterData[i+j];
+          let metrics = allKeys.map((metric) => {
+          return (
+            <div key = {metric} className="row">
+            <span className="col-md-6">{this.state.values[metric]}</span>
+            <span className="col-md-6 textright">{stock[metric]}</span>
+            </div>
+            )
+          })
+          stocks.push(<div className="card clickable-card" key={stockKey}><Link to="/stockview" onClick={()=>{this.handleSubmit(stock.ticker)}}>
+              <strong className="col-md-6">{stock.ticker}:</strong>
+              <span className="col-md-6 textright">${stock.close_price}</span>
+              <span className="col-md-12 smallwords centertext">{stock.name}</span>
+              {metrics}
+            </Link></div>)
+          stockKey++;
+        }
+        filterResults.push(<div className="card-deck" key={stockKey * 27}>
+          {stocks[0]}
+          {stocks[1]}
+
+        </div>)
+      }
+      this.setState({results: filterResults})
     }
   }
 
@@ -147,6 +187,13 @@ class FilterView extends Component {
     let allFiltersNew = this.state.allFilters.slice();
     allFiltersNew[key].input = input;
     this.setState({allFilters: allFiltersNew});
+  }
+
+  handleSubmit(ticker) {
+    this.props.SearchStockData(ticker);
+    this.props.GetGraphData(ticker);
+    this.props.getPercentile(ticker);
+
   }
 
   render() {
@@ -227,7 +274,7 @@ function mapStateToProps({filterData}) {
   return {filterData};
 }
 
-export default connect(mapStateToProps, {getDBDataFiltered})(FilterView)
+export default connect(mapStateToProps, {getDBDataFiltered, SearchStockData, GetGraphData, getPercentile})(FilterView)
 
 
 // <table className="tablr">
