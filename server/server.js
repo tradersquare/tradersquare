@@ -22,6 +22,8 @@ const getGraphData            = require('./request_handler/graph_data');
 const {genericTableCreator}   = require('../db/queries');
 const {addExtraCols}          = require('./server_helper');
 const {watchListTable}        = require('../db/db_tables_store');
+const {watchlistInsert}        = require('../db/watchlist_queries');
+
 const tables = {watchListTable};
 //REQUEST HANDLER MODULES
 const StockData = require('./request_handler/stock_data');
@@ -151,8 +153,13 @@ app.get('/createGenericTable/*', function(req, res) {
   genericTableCreator(tableObj, res);
 })
 
+/**
+ * endpoint accessed by: add_stock action
+ * watchListInsert found in: watchlist_queries.js
+ */
 app.post('/addToWatchlist', function(req, res) {
-  console.log(req.body);
+  console.log('req.body: ', req.body);
+  watchlistInsert(res, req.body);
 })
 
 app.use(function(req, res, next) {
