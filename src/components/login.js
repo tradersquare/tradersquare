@@ -24,7 +24,8 @@ export default class LoginNav extends Component {
         bottom                : 'auto',
         marginRight           : '-50%',
         transform             : 'translate(-50%, -50%)',
-        width                 : '400px'
+        width                 : '400px',
+        'font-family'         : '"Josefin Sans", sans-serif'
       }
     };
 
