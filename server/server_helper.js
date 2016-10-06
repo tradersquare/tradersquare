@@ -7,4 +7,5 @@ module.exports.addExtraCols = (numOfCols, arr) => {
     }
     arr.push(emptyCol);
   }
+  console.log('arr: ', arr);
 }

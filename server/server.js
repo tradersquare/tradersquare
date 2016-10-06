@@ -129,13 +129,13 @@ app.get('/createGenericTable/', function(req, res) {
   genericTableCreator(watchListTable, res);
 =======
 app.get('/createGenericTable/*', function(req, res) {
-  const extraCols = req.url.slice(20, 22);
+  const extraCols = req.url.slice(20, 21);
   const table = req.url.slice(22);
   // res.status(200).send(req.url.slice(22));
   const tableObj = tables[table];
   console.log('inside get req:', tableObj);
   addExtraCols(extraCols, tableObj);
-  console.log(tableObj);
+  console.log('modified tableObj: ', tableObj);
   // genericTableCreator(watchListTable, res);
 >>>>>>> [feature](server): seperate url string from createGenericTable req
 })
