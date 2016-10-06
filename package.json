@@ -78,6 +78,7 @@
     "redux": "3.6.0",
     "redux-form": "6.0.5",
     "redux-promise": "0.5.3",
+    "redux-thunk": "^2.1.0",
     "request": "2.75.0",
     "restler": "3.4.0",
     "sentiment": "^2.0.0",

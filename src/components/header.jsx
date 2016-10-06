@@ -17,16 +17,16 @@ export default class Header extends Component {
           </div>
           <div className="col-md-3 top-padding">
             <table>
-            <tbody>
-            <tr>
-              <th>
-                <StratNav/>
-              </th>
-              <th>
-                <FilterNav/>
-              </th>
-            </tr>
-            </tbody>
+              <tbody>
+                <tr>
+                  <th>
+                    <StratNav/>
+                  </th>
+                  <th>
+                    <FilterNav/>
+                  </th>
+                </tr>
+              </tbody>
             </table>
 
           </div>

@@ -17,7 +17,7 @@ const rootReducer = combineReducers({
   filterData: FilterReducer,
   percentileData: PercentileReducer,
   stratMetric: MetricReducer,
-  watchList: WatchListReducer
+  watchList: WatchListReducer,
   auth: AuthReducer
 });
 

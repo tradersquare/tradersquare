@@ -46,6 +46,8 @@ class LoginNav extends Component {
       }
     };
 
+    console.log("this.props.auth: ", this.props.auth);
+
     const p = this.props;
     const auth = p.auth;
 
@@ -63,26 +65,27 @@ class LoginNav extends Component {
           <div>
           </div>
           )
-      default: return (
-          <div>
-          <button className="btn btn-secondary" onClick={this.openModal}>
-            Login
-          </button>
+      default:
+        return (
+            <div>
+            <button className="btn btn-secondary" onClick={this.openModal}>
+              Login
+            </button>
 
-          <Modal
-            isOpen={this.state.modalOpen}
-            onRequestClose={this.openModal}
-            style={customStyles}
-          >
-            <h2> LOGIN </h2>
-            <hr />
-            <p> Please enter your username to login with your Google Account </p>
-            <center>
-              <button className="btn btn-primary"> <h3>Login with Google+</h3></button>
-            </center>
-          </Modal>
-        </div>
-        )
+            <Modal
+              isOpen={this.state.modalOpen}
+              onRequestClose={this.openModal}
+              style={customStyles}
+            >
+              <h2> LOGIN </h2>
+              <hr />
+              <p> Please enter your username to login with your Google Account </p>
+              <center>
+                <button className="btn btn-primary"> <h3>Login with Google+</h3></button>
+              </center>
+            </Modal>
+          </div>
+          )
     }
   }
 };

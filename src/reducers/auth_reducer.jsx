@@ -6,7 +6,7 @@ const initialState = {
   uid: null
 }
 
-export default function(state, action) {
+export default function(state = initialState, action) {
   switch(action.type) {
     case Constants.ATTEMPTING_LOGIN:
       return {
@@ -26,6 +26,6 @@ export default function(state, action) {
         username: action.username,
         uid: action.uid
       };
-    default: return state || initialState;
+    default: return state;
   }
 }
