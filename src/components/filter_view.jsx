@@ -74,13 +74,13 @@ class FilterView extends Component {
           let metrics = allKeys.map((metric) => {
           return (
             <div key = {metric} className="row">
-            <span className="col-md-6">{this.state.values[metric]}</span>
-            <span className="col-md-6 textright">{stock[metric]}</span>
+            <span className="col-md-6 smallwords">{this.state.values[metric]}</span>
+            <span className="col-md-6 textright smallwords">{stock[metric]}</span>
             </div>
             )
           })
           stocks.push(<div className="card clickable-card" key={stockKey}><Link to="/stockview" onClick={()=>{this.handleSubmit(stock.ticker)}}>
-              <strong className="col-md-6">{stock.ticker}:</strong>
+              <strong className="col-md-6 textleft">{stock.ticker}:</strong>
               <span className="col-md-6 textright">${stock.close_price}</span>
               <span className="col-md-12 smallwords centertext">{stock.name}</span>
               {metrics}
