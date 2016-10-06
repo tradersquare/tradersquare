@@ -6,9 +6,10 @@ export default function(stock) {
   console.log('add_stock action: ', stock);
 
   const addToDB = axios.post('/addToWatchlist', {
-      username: 'akul',
-      ticker: stock.ticker,
-      stockName: stock.name
+      userExtId: 45,
+      StockTicker: stock.ticker,
+      StockName: stock.name,
+      ClosingPrice: stock.closing
     })
     .then(console.log('went through'));
 

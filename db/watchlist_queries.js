@@ -1,6 +1,7 @@
 const db = require('./config.js');
 
-module.exports.watchlistInsert = (res, obj) => {
+module.exports.watchlistInsert = (res, rowData) => {
+  console.log('watchlistInsert inherited rowData:', rowData);
   const startInsertQuery = `INSERT INTO watchlistSchema.watchlistTable`;
   const queryCols = `(userExtId, StockName, StockTicker, ClosingPrice)`
   const queryVals = `VALUES (45, 'Facebook Inc.', 'FB', 1000)`;
@@ -9,7 +10,7 @@ module.exports.watchlistInsert = (res, obj) => {
   console.log('final insertQuery: ', insertQuery);
   db.query(insertQuery)
     .on('end', function() {
-      console.log("added")
+      console.log("added: ", insertQuery);
     })
     .catch(console.error)
   res.end();
@@ -39,5 +40,7 @@ to get all entries for this table: [SELECT * FROM watchlistSchema.watchlistTable
 to see all schemas: [\dn;]
 to see all tables in public: [\d]
 
-
+drop table: [DROP TABLE [schemaName].[tableName]]
+delete all rows in table: [DELETE FROM watchlistSchema.watchlistTable;]
+delete specific rows: https://www.postgresql.org/docs/8.2/static/sql-delete.html
 */
