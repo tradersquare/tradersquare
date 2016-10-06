@@ -10,7 +10,7 @@ export default function(state = null, action) {
   switch(action.type) {
     case GET_DATA:
       console.log('reducer: stock_reducer: action.payload ', action.payload);
-      if(action.payload.data.name !== "nm"){
+      if(action.payload.data.name !== "nm" || action.payload === "invalid"){
       	return action.payload.data;
       }
       else{
