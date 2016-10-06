@@ -312,14 +312,6 @@ class StrategyView extends Component {
       )
     }
   }
-
-// <table className="tablr">
-//   <tbody><tr>
-//     {headings}
-//   </tr></tbody>
-//   {stratData}
-// </table>
-// 
 }
 
 

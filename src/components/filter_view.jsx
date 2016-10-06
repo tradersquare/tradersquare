@@ -34,7 +34,8 @@ class FilterView extends Component {
         netincomegrowth: 'Net Income Growth',
         roe: 'Return on Equity',
       },
-      columns: []
+      columns: [],
+      inputValid: true
     };
 
     this.onFormSubmit = this.onFormSubmit.bind(this);
@@ -101,7 +102,8 @@ class FilterView extends Component {
           sign: '<',
           input: 0,
           type: "Value",
-          index: index
+          index: index,
+          message: ""
       }
     let copy = this.state.allFilters.slice();
     copy.push(template);
@@ -146,9 +148,17 @@ class FilterView extends Component {
   onInputChange(event,key) {
     console.log(this.state.allFilters);
     let input = this.refs["input"+key].value;
-
     let allFiltersNew = this.state.allFilters.slice();
-    allFiltersNew[key].input = input;
+    console.log(isNaN(parseFloat(input)));
+    if((isNaN(parseFloat(input)) && input !== "") || (parseFloat(input).toString()) !== input){
+      allFiltersNew[key].message = "please type in a valid number"
+      allFiltersNew[key].input = input
+    }
+    else{
+      allFiltersNew[key].input = input;
+      allFiltersNew[key].message = "";    
+    }
+
     this.setState({allFilters: allFiltersNew});
   }
 
@@ -160,7 +170,9 @@ class FilterView extends Component {
   }
 
   render() {
+
     let filterInputs = this.state.allFilters.map((obj) => {
+
       let key = obj.index;
       return (
         <div key={key}>
@@ -189,6 +201,7 @@ class FilterView extends Component {
                  ref={"input"+key}
                  value={this.state.allFilters[key].input}
                  onChange={this.onInputChange.bind(this, event, key)} />
+          <span>{this.state.allFilters[key].message}</span>
           <button type="button"
                   className="btn btn-secondary"
                   onClick={this.handleTypeClick.bind(this,event,key)}> {this.state.allFilters[key].type} </button>
