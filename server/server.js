@@ -19,6 +19,7 @@ const GrabDataDB              = require('../db/db_grab_data.js');
 const GrabFilteredDataDB      = require('../db/db_filter_data.js');
 const getPercentile           = require('../db/percentile_query.js');
 const getGraphData            = require('./request_handler/graph_data.js');
+const {genericTableCreator}     = require('../db/queries');
 
 //REQUEST HANDLER MODULES
 const StockData = require('./request_handler/stock_data');
@@ -117,11 +118,23 @@ app.get('/getTwitterData/*', function(req, res) {
   handle = req.url.slice(16).toUpperCase();
   console.log('twitterslice', handle);
   tweetData(handle);
+
+app.get('/createGenericTable/', function(req, res) {
+  console.log('inside get req');
+  const watchListTable =
+    ['watchlistSchema', 'watchlistTable',
+      {colTitle: 'userExtId', colType: 'int'},
+      {colTitle: 'StockName', colType: 'varchar', optionalSize: '40'},
+      {colTitle: 'StockTicker', colType: 'varchar', optionalSize: '6'},
+      {colTitle: 'ClosingPrice', colType: 'int'}];
+  genericTableCreator(watchListTable, res);
+  // res.send('trying to create table');
 })
 
 app.use(function(req, res, next) {
   res.sendFile(path.join(__dirname, '../public/index.html'));
 });
+
 
 app.listen(process.env.PORT || 3000, function() {
   console.log('Server started, listening on port:', 3000);

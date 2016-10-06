@@ -50,6 +50,27 @@ module.exports.createSchema = sortedElements => {
     .catch(console.error)
 }
 
+/**
+ * [allows entry of user defined columns]
+ * @param  {array} importedCols [0: schema, 1: table, ...: cols]
+ * @param  {obj} res          [for res.send]
+ */
+module.exports.genericTableCreator = (importedCols, res) => {
+  console.log(importedCols);
+  const frontQueryStr = `CREATE TABLE IF NOT EXISTS ${importedCols[0]}.${importedCols[1]} (id SERIAL PRIMARY KEY,`
+  let endQueryStr = ``;
+  for (let i = 2; i < importedCols.length; i++) {
+    const col = importedCols[i];
+    console.log('optionalSize: ', col.optionalSize);
+    const size = (col.optionalSize === undefined) ? `` : `(${col.optiionalSize})`;
+    endQueryStr = `${endQueryStr} ${col.colTitle} ${size},`
+  }
+  // const queryStr = `${frontQueryStr} `
+  endQueryStr = `${endQueryStr})`
+  console.log(frontQueryStr, endQueryStr);
+  res.status(200).send('table was maybe created?');
+}
+
 module.exports.insertRow = (data, elements) => {
   for (let key in elements) {
     if (data.indexOf(key) === -1) {
