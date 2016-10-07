@@ -1,3 +1,5 @@
 module.exports = {
-  start: function() { /* do stuff */ }
+  start: function() {
+      console.log('cron');
+  }
 };
