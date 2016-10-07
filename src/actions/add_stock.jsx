@@ -7,11 +7,10 @@ export default function(stock, watchlistData) {
   let notInsideWatchlist = true;
   watchlistData.forEach( v => {
     if (v.ticker === stock.ticker) {
-      insideWatchlist = false;
+      notInsideWatchlist = false;
     }
   })
-  // debugger;
-  var allRows = '';
+
   if (notInsideWatchlist) {
     var addToDB = axios.post('/addToWatchlist', {
       userExtId: 45,
@@ -20,21 +19,16 @@ export default function(stock, watchlistData) {
       ClosingPrice: stock.close_price
     })
       .then( () => {
-        debugger;
+        // debugger;
         console.log('went through, now do get req');
         return getUpdatedRows();
       })
   }
-  // getUpdatedRows();
+
   function getUpdatedRows() {
     return axios.get('/getFromWatchList')
       // .then( () => {
-      //   console.log('allRows returned: ', allRows);
       //   debugger;
-      //   // return {
-      //   //   type: ADD_STOCK,
-      //   //   payload: allRows
-      //   // }
       // })
   }
 

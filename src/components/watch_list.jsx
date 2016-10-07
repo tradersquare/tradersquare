@@ -11,15 +11,13 @@ class Watchlist extends Component {
     super(props);
   }
 
-  componentWillMount() {
-    console.log('compwillmt: ', this.props.watchList);
-    const watchList = this.props.watchList;
+  render() {
+    let watchList = this.props.watchList;
     this.favorites = watchList.map( v => {
+      debugger;
       return <Stock key={v.ticker} stock={v} />
     })
-  }
-
-  render() {
+    debugger;
     return (
       <div>
         <Header />

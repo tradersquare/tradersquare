@@ -90,7 +90,7 @@ class StockView extends Component {
   }
 
   handleAdd(ev) {
-    ev.preventDefault();
+    // ev.preventDefault();
     let stockData = this.props.stockData;
     console.log('handleAdd :', stockData);
     this.props.AddStock(stockData, this.props.watchlistData);
