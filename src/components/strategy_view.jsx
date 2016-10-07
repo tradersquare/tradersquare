@@ -183,6 +183,9 @@ class StrategyView extends Component {
     return (
         <div >
           <Header />
+          <div className="col-md-5">
+            <h1>{metricInfo.name}</h1>
+          </div>
           <div className="col-md-3">
           {this.setMetric}
           <select
@@ -210,7 +213,10 @@ class StrategyView extends Component {
             <option value="pricetobook">Price to Book</option>
             <option value="beta">Beta</option>
           </select>
-          <button className="btn btn-secondary" onClick={this.changeDirection}>click to sort {this.state.sortDirection}</button>
+          </div>
+          <div className="col-md-1"></div>
+          <div className="col-md-3">
+            <button className="btn btn-secondary" onClick={this.changeDirection}>click to sort {this.state.sortDirection}</button>
           </div>
           <br/><br/>
 
