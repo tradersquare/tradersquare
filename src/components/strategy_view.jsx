@@ -11,6 +11,7 @@ import Loading from './loading';
 import Header from './header';
 import getPercentile from '../actions/get_percentile';
 import {description} from './metric_descriptions';
+import sendTicker from '../actions/stock_view_validation';
 
 
 // import { DropdownButton } from 'react-bootstrap';
@@ -84,7 +85,7 @@ class StrategyView extends Component {
     this.props.SearchStockData(ticker);
     this.props.GetGraphData(ticker);
     this.props.getPercentile(ticker);
-
+    this.props.sendTicker(ticker);
   }
 
   sortFunc(currentStrat) {
@@ -244,4 +245,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, {SearchStockData, getStratData, GetGraphData, getPercentile})(StrategyView)
+export default connect(mapStateToProps, {SearchStockData, getStratData, GetGraphData, getPercentile, sendTicker})(StrategyView)

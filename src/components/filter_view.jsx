@@ -10,6 +10,7 @@ import {searchStockData as SearchStockData} from '../actions/stock_search';
 import {getGraphData as GetGraphData} from '../actions/get_graph_data';
 import getPercentile from '../actions/get_percentile';
 import Modal from 'react-modal';
+import sendTicker from '../actions/stock_view_validation';
 
 
 class FilterView extends Component {
@@ -192,6 +193,7 @@ class FilterView extends Component {
     this.props.SearchStockData(ticker);
     this.props.GetGraphData(ticker);
     this.props.getPercentile(ticker);
+    this.props.sendTicker(ticker);
 
   }
 
@@ -298,4 +300,4 @@ function mapStateToProps({filterData}) {
   return {filterData};
 }
 
-export default connect(mapStateToProps, {getDBDataFiltered, SearchStockData, GetGraphData, getPercentile})(FilterView)
+export default connect(mapStateToProps, {getDBDataFiltered, SearchStockData, GetGraphData, getPercentile, sendTicker})(FilterView)
