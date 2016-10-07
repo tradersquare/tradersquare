@@ -27,7 +27,7 @@ class StrategyView extends Component {
     // if(this.props.strategyData && this.props.strategyData.metric){
     //   initialVal = this.props.strategyData.metric;
     // }"
-    this.state = {selectValue: "", items: 21, flag: false, tableFlag: false, sortDirection: "descending"}
+    this.state = {selectValue: "", items: 21, flag: false, tableFlag: false, sortDirection: "ascending"}
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -135,8 +135,9 @@ class StrategyView extends Component {
 
    let stockKey = 0
 
-   let a = this.state.sortDirection === "ascending" ? 1 : -1
-   let b = this.state.sortDirection === "ascending" ? 0 : 100
+  //a and b are used in percentile calculation
+   let a = this.state.sortDirection === "descending" ? 1 : -1
+   let b = this.state.sortDirection === "descending" ? 0 : 100
 
     let cards = [];
     if(this.state.selectValue){
@@ -202,7 +203,7 @@ class StrategyView extends Component {
             <option value="pricetobook">Price to Book</option>
             <option value="beta">Beta</option>
           </select>
-          <button className="btn btn-secondary" onClick={this.changeDirection}>sort {this.state.sortDirection}</button>
+          <button className="btn btn-secondary" onClick={this.changeDirection}>click to sort {this.state.sortDirection}</button>
           </div>
           <br/><br/>
           <div className="col-md-12 card-deck-wrapper">
