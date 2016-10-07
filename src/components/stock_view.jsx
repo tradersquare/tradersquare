@@ -93,7 +93,7 @@ class StockView extends Component {
     // ev.preventDefault();
     let stockData = this.props.stockData;
     console.log('handleAdd :', stockData);
-    this.props.AddStock(stockData);
+    this.props.AddStock(stockData, this.props.watchlistData);
   }
 
   render() {
@@ -212,7 +212,8 @@ function mapStateToProps(state) {
     stockData: state.stock,
     graphData: state.graphData,
     percentileData: state.percentileData,
-    sentimentData: state.sentimentData
+    sentimentData: state.sentimentData,
+    watchlistData: state.watchList
   }
 }
 
