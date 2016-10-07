@@ -71,7 +71,7 @@ export const description = {
 	},
 	roic: {
 		name: "Return on Invested Capital",
-		des: "RIC"
+		des: "A calculation used to assess a company's efficiency at allocating the capital under its control to profitable investments. Return on invested capital gives a sense of how well a company is using its money to generate returns. Comparing a company's return on capital (ROIC) with its weighted average cost of capital (WACC) reveals whether invested capital is being used effectively."
 	},
 	pricetobook: {
 		name: "Price to Book",
