@@ -1,41 +1,64 @@
 import Constants from '../reducers/firebase_constants';
-import firebase from 'firebase';
+import * as firebase from 'firebase';
 
-const fireRef = new firebase(Constants.FIREBASE);
+const google = new firebase.auth.GoogleAuthProvider();
 
-export startListeningToAuth() => {
+// function startListeningToAuth() {
+//   return (dispatch, getState) => {
+//     firebase.onAuth((authData) => {
+//       if (authData) {
+//         dispatch({
+//           type: Constants.LOGIN_USER,
+//           uid: authData.uid,
+//           username: authData.google.displayName || authData.google.username
+//         });
+//       } else {
+//         if (getState().auth.currently !== Constants.ANONYMOUS) {
+//           dispatch({ type: Constants.LOGOUT });
+//         }
+//       }
+//     })
+//   }
+// };
+
+function attemptLogin() {
   return (dispatch, getState) => {
-    fireRef.onAuth((authData) => {
-      if (authData) {
-        dispatch({
-          type: Constants.LOGIN_USER,
-          uid: authData.uid,
-          username: authData.google.displayName || authData.google.username
-        });
-      } else {
-        if (getState().auth.currently !== Constants.ANONYMOUS) {
-          dispatch({ type: Constants.LOGOUT });
+    firebase.auth().signInWithPopup(google)
+      .then((result) => {
+        console.log(result);
+        if (result) {
+          dispatch({
+            type: Constants.LOGIN_USER,
+            uid: result.uid,
+            username: result.displayName
+          });
         }
-      }
-    }
-  }
-};
-
-export attemptLogin() => {
-  return (dispatch, getState) {
-    dispatch({ type: Constants.ATTEMPTING_LOGIN });
-    fireRef.authWithOAuthPopup("google", (error, authData) => {
-      if (error) {
-        dispatch({ type: Constants.DISPLAY_ERROR, error: `Login failed! Error: ${error}` });
-        dispatch({ type: Constants.LOGOUT });
-      }
-    });
+      })
+      .catch((error) => {
+        console.log("ERROR: ", error);
+      })
+      //   } else {
+      //   if (getState().auth.currently !== Constants.ANONYMOUS) {
+      //     dispatch({ type: Constants.LOGOUT });
+      //   }
+      // }
+      // }) (error, result) => {
+      // if (error) {
+      //   dispatch({ type: Constants.DISPLAY_ERROR, error: `Login failed! Error: ${error}` });
+      //   dispatch({ type: Constants.LOGOUT });
+      // }
   }
 }
 
-export logoutUser() => {
-  return function(dispatch, getState) {
+function logoutUser() {
+  return (dispatch, getState) => {
     dispatch({ type: Constants.LOGOUT });
-    fireRef.unauth();
+    firebase.unauth();
   }
+};
+
+module.exports = {
+  // startListeningToAuth: startListeningToAuth,
+  attemptLogin: attemptLogin,
+  logoutUser: logoutUser
 }

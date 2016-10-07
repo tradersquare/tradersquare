@@ -5,6 +5,7 @@ import Util from './component-helpers';
 import Modal from 'react-modal';
 import Constants from '../reducers/firebase_constants';
 import * as firebase from 'firebase';
+import authActions from '../actions/auth';
 
 class LoginNav extends Component {
   constructor(props) {
@@ -14,9 +15,6 @@ class LoginNav extends Component {
     this.state = {
       modalOpen: false
     };
-  }
-
-  componentWillMount() {
   }
 
   openModal() {
@@ -46,9 +44,20 @@ class LoginNav extends Component {
       case Constants.LOGGED_IN:
         return (
           <div>
-            <Link to="/watchlist" className="btn btn-secondary">
-                My Watchlist
-            </Link>
+            <table>
+              <tbody>
+                <tr>
+                  <td>
+                    <Link to="/watchlist" className="btn btn-secondary">
+                      My Watchlist
+                    </Link>
+                  </td>
+                  <td>
+                    <button className="btn btn-secondary"> Logout </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
           )
       case Constants.AWAITING_AUTH_RESPONSE:
@@ -72,7 +81,7 @@ class LoginNav extends Component {
               <hr />
               <p> Please enter your username to login with your Google Account </p>
               <center>
-                <button className="btn btn-primary"> <h3>Login with Google+</h3></button>
+                <button className="btn btn-primary" onClick={p.attemptLogin}> <h3>Login with Google+</h3></button>
               </center>
             </Modal>
           </div>
@@ -89,7 +98,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-
+    attemptLogin: function() { dispatch(authActions.attemptLogin()); },
+    logoutUser: function() { dispatch(authActions.logoutUser()); }
   }
 }
 
