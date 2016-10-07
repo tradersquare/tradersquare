@@ -105,6 +105,7 @@ app.get('/getAllCompany/', function(req, res) {
 });
 
 app.get('/getBasicInfo/*', function(req, res) {
+  console.log('inside basic info listener');
   const ticker = req.url.slice(14).toUpperCase();
   stratData(ticker, res);
 });
