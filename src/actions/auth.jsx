@@ -1,31 +1,14 @@
 import Constants from '../reducers/firebase_constants';
 import * as firebase from 'firebase';
+import { browserHistory } from 'react-router';
 
 const google = new firebase.auth.GoogleAuthProvider();
 
-// function startListeningToAuth() {
-//   return (dispatch, getState) => {
-//     firebase.onAuth((authData) => {
-//       if (authData) {
-//         dispatch({
-//           type: Constants.LOGIN_USER,
-//           uid: authData.uid,
-//           username: authData.google.displayName || authData.google.username
-//         });
-//       } else {
-//         if (getState().auth.currently !== Constants.ANONYMOUS) {
-//           dispatch({ type: Constants.LOGOUT });
-//         }
-//       }
-//     })
-//   }
-// };
-
 function attemptLogin() {
   return (dispatch, getState) => {
+    dispatch({ type: Constants.ATTEMPTING_LOGIN });
     firebase.auth().signInWithPopup(google)
       .then((result) => {
-        console.log(result);
         if (result) {
           dispatch({
             type: Constants.LOGIN_USER,
@@ -37,23 +20,18 @@ function attemptLogin() {
       .catch((error) => {
         console.log("ERROR: ", error);
       })
-      //   } else {
-      //   if (getState().auth.currently !== Constants.ANONYMOUS) {
-      //     dispatch({ type: Constants.LOGOUT });
-      //   }
-      // }
-      // }) (error, result) => {
-      // if (error) {
-      //   dispatch({ type: Constants.DISPLAY_ERROR, error: `Login failed! Error: ${error}` });
-      //   dispatch({ type: Constants.LOGOUT });
-      // }
   }
 }
 
-function logoutUser() {
+function logoutUser(path) {
   return (dispatch, getState) => {
-    dispatch({ type: Constants.LOGOUT });
-    firebase.unauth();
+    firebase.auth().signOut()
+      .then(() => {
+        dispatch({ type: Constants.LOGOUT });
+        if (path === '/watchlist'){
+          browserHistory.push('/');
+        }
+      })
   }
 };
 

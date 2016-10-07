@@ -12,12 +12,18 @@ class LoginNav extends Component {
     super(props);
 
     this.openModal = this.openModal.bind(this);
+    this.logout = this.logout.bind(this);
     this.state = {
       modalOpen: false
     };
   }
 
   openModal() {
+    this.setState({modalOpen: !this.state.modalOpen});
+  }
+
+  logout() {
+    this.props.logoutUser();
     this.setState({modalOpen: !this.state.modalOpen});
   }
 
@@ -35,8 +41,6 @@ class LoginNav extends Component {
       }
     };
 
-    console.log("this.props.auth: ", this.props.auth);
-
     const p = this.props;
     const auth = p.auth;
 
@@ -53,7 +57,7 @@ class LoginNav extends Component {
                     </Link>
                   </td>
                   <td>
-                    <button className="btn btn-secondary"> Logout </button>
+                    <button className="btn btn-secondary" onClick={this.logout}> Logout </button>
                   </td>
                 </tr>
               </tbody>
@@ -62,14 +66,9 @@ class LoginNav extends Component {
           )
       case Constants.AWAITING_AUTH_RESPONSE:
         return (
-          <div>
-          </div>
-          )
-      default:
-        return (
             <div>
             <button className="btn btn-secondary" onClick={this.openModal}>
-              Login
+              My Watchlist
             </button>
 
             <Modal
@@ -79,7 +78,28 @@ class LoginNav extends Component {
             >
               <h2> LOGIN </h2>
               <hr />
-              <p> Please enter your username to login with your Google Account </p>
+              <p> Awaiting Authorization... </p>
+              <center>
+                <button className="btn btn-secondary" onClick={this.openModal}> Cancel </button>
+              </center>
+            </Modal>
+          </div>
+          )
+      default:
+        return (
+            <div>
+            <button className="btn btn-secondary" onClick={this.openModal}>
+              My Watchlist
+            </button>
+
+            <Modal
+              isOpen={this.state.modalOpen}
+              onRequestClose={this.openModal}
+              style={customStyles}
+            >
+              <h2> LOGIN </h2>
+              <hr />
+              <p> In order to see your Watchlist, you must first signup or login below. </p>
               <center>
                 <button className="btn btn-primary" onClick={p.attemptLogin}> <h3>Login with Google+</h3></button>
               </center>
