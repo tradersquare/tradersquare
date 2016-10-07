@@ -3,12 +3,18 @@ import axios from 'axios';
 export const ADD = "ADD";
 export const GET_STRAT_DATA = "GET_STRAT_DATA";
 
-export default function() {
+export default function(metric = "") {
 
-  let dbStock = axios.get(`/getDataDB`);
+  return axios.get(`/getDataDB`).then((data) => {
+  	const results = {
+  		data: data.data,
+  		metric: metric
+  	}
+  	console.log(results)
+	  return {
+	    type: GET_STRAT_DATA,
+	    payload: results
+	  };
+  });
 
-  return {
-    type: GET_STRAT_DATA,
-    payload: dbStock
-  };
 }

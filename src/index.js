@@ -7,6 +7,7 @@ import reducers from './reducers';
 import routes from './routes';
 import reduxPromise from 'redux-promise';
 import App from './components/app';
+import firebase from 'firebase';
 
 
 const createStoreWithMiddleware = applyMiddleware(reduxPromise)(createStore);

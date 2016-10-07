@@ -6,6 +6,11 @@ import SearchBar from './search_bar';
 import StratNav from './strategy_nav';
 import getDBDataFiltered from '../actions/get_db_data_filtered';
 import Header from './header';
+import {searchStockData as SearchStockData} from '../actions/stock_search';
+import {getGraphData as GetGraphData} from '../actions/get_graph_data';
+import getPercentile from '../actions/get_percentile';
+import Modal from 'react-modal';
+
 
 class FilterView extends Component {
   constructor(props) {
@@ -29,7 +34,10 @@ class FilterView extends Component {
         earningsyield: 'Earnings Yield',
         netincomegrowth: 'Net Income Growth',
         roe: 'Return on Equity',
-      }
+      },
+      columns: [],
+      modalOpen: false,
+      currentStocks: 0
     };
 
     this.onFormSubmit = this.onFormSubmit.bind(this);
@@ -38,29 +46,67 @@ class FilterView extends Component {
     this.handleTypeClick = this.handleTypeClick.bind(this);
     this.onInputChange = this.onInputChange.bind(this);
     this.generateNewFilter = this.generateNewFilter.bind(this);
-
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.openModal = this.openModal.bind(this);
   }
 
   componentWillMount() {
     this.generateNewFilter();
   }
-
+ 
   componentDidUpdate() {
-    if (this.state.results.length !== this.props.filterData.length){
-      let counter = 0;
-      let mapFilterData = this.props.filterData.map((stock) => {
-        counter++;
-        return (
-        <tbody key={counter}>
-          <tr>
-            <td>{stock.ticker}</td>
-            <td>{stock.close_price}</td>
-            <td>{stock[this.state.allFilters[0].strat]}</td>
-          </tr>
-        </tbody>
-        )
-      })
-      this.setState({results: mapFilterData})
+    // if(!this.props.filterData[0]){
+    //   return;
+    // }
+    // if ( (this.state.currentStocks.length !== this.props.filterData.length || this.state.currentStocks[0] !== this.props.filterData[0].ticker)){
+    if ( this.state.currentStocks !== this.props.filterData.length){
+      console.log("component updating", this.props.filterData.length, this.state.currentStocks.length)
+      let filterResults = [];
+      let allKeys = [];
+      for (let key in this.props.filterData[0]) {
+        if (key !== "percentile" && key !== "ticker" && key !== "close_price") {
+          allKeys.push(key);
+        }
+      }
+
+      let stockKey = 0;
+
+      for(let i = 0; i < this.props.filterData.length; i+=3){
+        const stocks = [];
+        for(let j =0; j < 3; j++){
+          console.log("rendering")
+          let stock = this.props.filterData[i+j];
+          if(!stock){
+            break;
+          }
+          let metrics = allKeys.map((metric) => {
+          return (
+            <div key = {metric} className="row">
+            <span className="col-md-6 smallwords">{this.state.values[metric]}</span>
+            <span className="col-md-6 textright smallwords">{stock[metric]}</span>
+            </div>
+            )
+          })
+          stocks.push(<div className="card clickable-card" key={stockKey}><Link to="/stockview" onClick={()=>{this.handleSubmit(stock.ticker)}}>
+              <strong className="col-md-6 textleft">{stock.ticker}:</strong>
+              <span className="col-md-6 textright">${stock.close_price}</span>
+              <span className="col-md-12 smallwords centertext">{stock.name}</span>
+              {metrics}
+            </Link></div>)
+          stockKey++;
+        }
+        filterResults.push(<div className="card-deck" key={stockKey * 27}>
+          {stocks[0]}
+          {stocks[1]}
+          {stocks[2]}
+
+        </div>)
+      }
+      this.setState({results: filterResults, currentStocks: this.props.filterData.length})
+      console.log("after rendering...")
+      console.log(this.state.results.length)
+      console.log(this.state.currentStocks)
+      console.log(this.props.filterData.length)
     }
   }
 
@@ -71,7 +117,8 @@ class FilterView extends Component {
           sign: '<',
           input: 0,
           type: "Value",
-          index: index
+          index: index,
+          message: ""
       }
     let copy = this.state.allFilters.slice();
     copy.push(template);
@@ -83,7 +130,20 @@ class FilterView extends Component {
 
   onFormSubmit(event) {
     event.preventDefault();
-    this.props.getDBDataFiltered(this.state.allFilters);
+    let flag = true;
+    for(let i = 0; i < this.state.allFilters.length; i++){
+      if(this.state.allFilters[i].message){
+        flag = false;
+        this.openModal();
+      }
+    }
+    if(flag){
+      this.props.getDBDataFiltered(this.state.allFilters);
+    }
+  }
+
+  openModal() {
+    this.setState({modalOpen: !this.state.modalOpen})
   }
 
   onSelectChange(event,key) {
@@ -114,16 +174,42 @@ class FilterView extends Component {
     }
 
   onInputChange(event,key) {
-    console.log(this.state.allFilters);
     let input = this.refs["input"+key].value;
-
     let allFiltersNew = this.state.allFilters.slice();
-    allFiltersNew[key].input = input;
+    if((isNaN(parseFloat(input)) && input !== "") || (parseFloat(input).toString()) !== input){
+      allFiltersNew[key].message = "please type in a valid number"
+      allFiltersNew[key].input = input
+    }
+    else{
+      allFiltersNew[key].input = input;
+      allFiltersNew[key].message = "";    
+    }
+
     this.setState({allFilters: allFiltersNew});
   }
 
+  handleSubmit(ticker) {
+    this.props.SearchStockData(ticker);
+    this.props.GetGraphData(ticker);
+    this.props.getPercentile(ticker);
+
+  }
+
   render() {
+
+    const modalStyle = {
+      content : {
+        top                   : '50%',
+        left                  : '50%',
+        right                 : '50%',
+        bottom                : 'auto',
+        marginRight           : '-50%',
+        transform             : 'translate(-50%, -50%)'
+      }
+    };
+
     let filterInputs = this.state.allFilters.map((obj) => {
+
       let key = obj.index;
       return (
         <div key={key}>
@@ -152,6 +238,7 @@ class FilterView extends Component {
                  ref={"input"+key}
                  value={this.state.allFilters[key].input}
                  onChange={this.onInputChange.bind(this, event, key)} />
+          <span>{this.state.allFilters[key].message}</span>
           <button type="button"
                   className="btn btn-secondary"
                   onClick={this.handleTypeClick.bind(this,event,key)}> {this.state.allFilters[key].type} </button>
@@ -159,18 +246,23 @@ class FilterView extends Component {
       )
     })
 
+    let columnHeaders = this.state.columns.map((val) => {
+      return (
+        <th key={val}> {this.state.values[val]} </th>
+        )
+    })
 
     return (
       <div >
       <Header />
       <div className="row">
-        <div className="col-md-6 filter">
+        <div className="col-md-12 filter">
          <div className="row">
-           <div className="col-md-10">
+           <div className="col-md-8">
               <h2> Filters </h2>
            </div>
-           <div className="col-md-2">
-             <button className="btn btn-secondary" onClick={this.generateNewFilter}>+
+           <div className="col-md-4">
+             <button className="btn btn-secondary" onClick={this.generateNewFilter}>Add More Filters
              </button>
            </div>
          </div>
@@ -181,17 +273,21 @@ class FilterView extends Component {
             </button>
         </form>
         </div>
-        <div className="col-md-6 results">
+        <div className="col-md-12 results">
         <h2> Results </h2>
-        <table className="tablr">
-          <tbody><tr>
-          <th>Ticker</th>
-          <th>Price</th>
-          <th> </th>
-          </tr></tbody>
-          {this.state.results}
-          </table>
+        {this.state.results}
         </div>
+
+        <Modal
+          isOpen={this.state.modalOpen}
+          onRequestClose={this.openModal}
+          style={modalStyle}
+        >
+        <h2 className="centerheading">What part of "please type in a valid number" do you not understand?</h2>
+          
+        </Modal>
+
+
       </div>
       </div>
     )
@@ -202,4 +298,4 @@ function mapStateToProps({filterData}) {
   return {filterData};
 }
 
-export default connect(mapStateToProps, {getDBDataFiltered})(FilterView)
+export default connect(mapStateToProps, {getDBDataFiltered, SearchStockData, GetGraphData, getPercentile})(FilterView)

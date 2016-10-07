@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import {Link} from 'react-router';
+import {browserHistory, Link} from 'react-router';
 import SearchBar from './search_bar';
 import StratNav from './strategy_nav';
 import PriceChart from './price_chart';
 import Loading from './loading';
 import Header from './header';
 import Numeral from 'numeral'
+import ReactDOM from 'react-dom';
+import d3 from 'd3';
+import AddStock from '../actions/add_stock';
+import AddSentiment from '../actions/get_twitter_data';
+import Landing from './landing'
+
 
 //stock view cards
 import PE from './stock-view-components/pe'
@@ -24,24 +30,22 @@ class StockView extends Component {
     super(props);
 
     this.renderPrices = this.renderPrices.bind(this);
+    this.handleResize = this.handleResize.bind(this);
+    this.handleAdd = this.handleAdd.bind(this);
+    this.state = {
+      chartWidth: 500,
+      valid: true
+    }
+    this.routeToHome = this.routeToHome.bind(this);
   }
 
   renderPrices() {
-    // console.log('top of renderPrices(): ', this.props.graphData)
     if (this.props.graphData.length === 0) {
-      return (<div>Graph loading...</div>)
+      return (<div></div>)
     }
     else {
-      let data = [];
-      // console.log('state.graphData: ', this.props.graphData[0]);
-      // let i = 0;
-      // console.log('state.graphData.i.close: ', this.props.graphData[i].close);
-
-      // for (let i = 0; i < this.props.graphData.length; i++) {
-      //   // console.log(this.props.graphData[i]);
-      //   data.push(this.props.graphData[i].close);
-      // }
-      // console.log('100: ', data);
+      let thisWidth = (this.refs.chartDivRef) ? this.refs.chartDivRef.clientWidth : 400;
+      // console.log('thisWidth', thisWidth);
 
       const params = {
         // width: 550,
@@ -49,15 +53,59 @@ class StockView extends Component {
         axisMargin: 43,
         topMargin: 20,
         bottomMargin: 60,
-        fullWidth: 550
+        fullWidth: thisWidth
       }
 
       return (
-        <svg width={ params.fullWidth } height={ params.height }>
-          <PriceChart { ...params } data={ this.props.graphData } />
+        <svg width={ thisWidth } height={ params.height }>
+          <PriceChart { ...params } data={ this.props.graphData } width={thisWidth} />
         </svg>
       )
     }
+  }
+
+  componentDidMount() {
+    window.addEventListener('resize', this.handleResize)
+    this.props.AddSentiment('facebook');
+    console.log('componentDidMount:::sent  ', this.props.sentimentData);
+    this.sentimentDiv = <div>loading...</div>
+    // console.log(this.props.stockValidation)
+    if(!this.props.stockValidation){
+      this.setState({valid: false})
+    }
+  }
+
+  componentDidUpdate() {
+    console.log('componentDidUPDATEEEEE:::sent  ', this.props.sentimentData);
+    this.sentimentDiv = (
+      <h4 className="centertext sentiment">Sentiment Score: {this.props.sentimentData.score}</h4>
+    )
+    if(!this.state.valid){
+      this.routeToHome();
+    }
+  }
+
+
+  handleResize(e) {
+    if (this.refs.chartDivRef) {
+      // console.log('chartDivRef clientwidth: ', (this.refs.chartDivRef.clientWidth));
+      //following forces a re-render, which forces chart to reset its width
+      //the state.chartWidth is not actually used, but smt like following is needed...
+      this.setState({
+        chartWidth: this.refs.chartDivRef.clientWidth
+      })
+    }
+  }
+
+  handleAdd(ev) {
+    // ev.preventDefault();
+    let stockData = this.props.stockData;
+    console.log('handleAdd :', stockData);
+    this.props.AddStock(stockData, this.props.watchlistData);
+  }
+
+  routeToHome(){
+    browserHistory.push('/')
   }
 
   render() {
@@ -65,20 +113,57 @@ class StockView extends Component {
     console.log('this.props.stockData: ', this.props.stockData);
     console.log('this.props.graphData: ', this.props.graphData);
     console.log('this.props.percentileData: ', this.props.percentileData);
+    // console.log('equal? ', this.state.chartWidth, this.refs.chartDivRef);
+    // let priceChart = <div></div>;
+
+    // if(!this.state.valid){
+    //   <div>
+    //   {this.routeToHome()};
+    //   </div>
+    // }
 
     if(!this.props.stockData || !this.props.percentileData || !this.props.graphData){
-      return (<div>
-        <Loading />
-      </div>)
+      // console.log(this.props.stockData, this.props.percentileData, this.props.graphData)
+      // priceChart = <div></div>;
+      return (
+        <div>
+          <Loading />
+          <div className="col-md-6" ref='chartDivRef'></div>
+        </div>
+      )
     }
 
+    if(this.props.stockData === "invalid"){
+      return (
+        <div>
+        <Header />
+        <div className="col-md-2"></div>
+        <div className="col-md-8 pushdown">
+          <h2 className="col-md-12 centerheading">please enter a valid ticker</h2>
+          <Link to="/" className="col-md-12 centertext">go back to home</Link>
+        </div>
+        <div className="col-md-2"></div>
+        </div>
+        )
+    }
+    // let sentiment = this.renderSentiment();
+    let priceChart = this.renderPrices();
+    let chart =
+    <div className="col-md-6" ref='chartDivRef'>
+    {priceChart}
+    </div>
+    // if (this.refs.chartDivRef && this.refs.chartDivRef.clientWidth !== this.state.chartWidth){
+    //   console.log('not equal: ');
+    //   priceChart = this.renderPrices();
+    // }
+    const sent = this.props.sentimentData
     const stockData = this.props.stockData;
     const metrics = this.props.percentileData;
-    console.log("***STOCKDATA***", stockData)
+    console.log("***STOCKDATA***", stockData);
     const change = stockData.change > 0 ? "↑" : "↓"
     // const earningsyield = parseFloat(stockData.earningsyield);
     // const booktomarket = (parseFloat(stockData.bookvaluepershare) / parseFloat(stockData.close_price)).toFixed(3);
-    
+
     return (
       <div>
         <Header />
@@ -86,15 +171,20 @@ class StockView extends Component {
           <div className="col-md-4">
             <h3>  {stockData.ticker} : {stockData.name}</h3>
           </div>
-          <div className="col-md-4"></div>
+          <div className="col-md-4">
+            <Link to="/watchlist" onClick={this.handleAdd} className="btn btn-secondary">
+                  Add to Watchlist
+            </Link>
+          </div>
           <div className="col-md-4">
           <h3 className="price">${stockData.open_price}  {stockData.change}% {change}</h3>
           </div>
         </div>
         <div className="row">
-          <div className="col-md-6">
-            {this.renderPrices()}
-          </div>
+          {chart}
+          {/* <div className="col-md-6" ref='chartDivRef'>
+            {priceChart}
+          </div> */}
           <div className="col-md-6">
             <div className="card col-md-12">
               <h3 className="centerheading">ABOUT</h3>
@@ -106,6 +196,7 @@ class StockView extends Component {
                 <h4 className="centertext">Market Cap: {Numeral(parseFloat(stockData.marketcap)).format('0,0')}</h4>
                 <h4 className="centertext">Average Volume: {stockData["average_daily_volume"]}</h4>
                 <h4 className="centertext">Open/Close: {stockData.open_price}/{stockData.close_price}</h4>
+                {this.sentimentDiv}
             </div>
           </div>
         </div>
@@ -119,15 +210,14 @@ class StockView extends Component {
           <div className="card-deck">
               <Credit />
               <Leverage />
-              <Profitability />
+              <BM />
           </div>
           <div className="card-deck">
               <Liquidity />
               <Beta />
-              <BM />
+              <Profitability />
           </div>
         </div>
-
       </div>
     )
   }
@@ -138,8 +228,11 @@ function mapStateToProps(state) {
   return {
     stockData: state.stock,
     graphData: state.graphData,
-    percentileData: state.percentileData
+    percentileData: state.percentileData,
+    sentimentData: state.sentimentData,
+    watchlistData: state.watchList,
+    stockValidation: state.stockValidation
   }
 }
 
-export default connect(mapStateToProps)(StockView);
+export default connect(mapStateToProps, {AddStock, AddSentiment})(StockView);

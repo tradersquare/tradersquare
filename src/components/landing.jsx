@@ -4,6 +4,7 @@ import StrategyView from './strategy_view';
 import StockView from './stock_view';
 import {Link} from 'react-router';
 import StratNav from './strategy_nav';
+import FilterNav from './filter_nav';
 
 export default class Landing extends Component {
   render() {
@@ -16,6 +17,8 @@ export default class Landing extends Component {
               <SearchBar/>
               <br/>
               <StratNav/>
+              <br/>
+              <FilterNav/>
             </div>
             <div className="col-md-3"></div>
 
