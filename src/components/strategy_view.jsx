@@ -10,6 +10,7 @@ import {getGraphData as GetGraphData} from '../actions/get_graph_data';
 import Loading from './loading';
 import Header from './header';
 import getPercentile from '../actions/get_percentile';
+import {description} from './metric_descriptions';
 
 
 // import { DropdownButton } from 'react-bootstrap';
@@ -27,7 +28,12 @@ class StrategyView extends Component {
     // if(this.props.strategyData && this.props.strategyData.metric){
     //   initialVal = this.props.strategyData.metric;
     // }"
-    this.state = {selectValue: "", items: 21, flag: false, tableFlag: false, sortDirection: "ascending"}
+    this.state = {
+      selectValue: "", 
+      items: 21, 
+      flag: false, 
+      sortDirection: "ascending"
+    }
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -118,6 +124,7 @@ class StrategyView extends Component {
     }
     else{
     let currentStrat = this.state.selectValue;
+    let metricInfo = description[currentStrat] ? description[currentStrat] : {name: "", des: ""};
     let filteredStocks = [];
 
     for(let n of this.props.strategyData.data){
@@ -206,6 +213,11 @@ class StrategyView extends Component {
           <button className="btn btn-secondary" onClick={this.changeDirection}>click to sort {this.state.sortDirection}</button>
           </div>
           <br/><br/>
+
+          <div className="col-md-12">
+            <p>{metricInfo.des}</p>
+          </div>
+
           <div className="col-md-12 card-deck-wrapper">
           {cards}
           </div>
