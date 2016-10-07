@@ -212,7 +212,7 @@ function mapStateToProps(state) {
     stockData: state.stock,
     graphData: state.graphData,
     percentileData: state.percentileData,
-    sentimentData: state.sentimentData
+    sentimentData: state.sentimentData,
     watchlistData: state.watchList
   }
 }
