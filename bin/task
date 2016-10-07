@@ -1,0 +1,12 @@
+#!/usr/bin/env node
+
+const db = require('../db/config.js');
+
+    console.log('cron');
+
+  //   db.query(` INSERT INTO dummy.cron (var, numnum) VALUES ('hello', 45);`)
+  //     .on('end', function() {
+  //       console.log('check dummy yo');
+  //     })
+  // }
+// };
