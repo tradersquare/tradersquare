@@ -17,6 +17,7 @@ class Watchlist extends Component {
       debugger;
       return <Stock key={v.ticker} stock={v} />
     })
+
     debugger;
     return (
       <div>
