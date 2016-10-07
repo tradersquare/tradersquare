@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import {Redirect, Link} from 'react-router';
+import {browserHistory, Link} from 'react-router';
 import SearchBar from './search_bar';
 import StratNav from './strategy_nav';
 import PriceChart from './price_chart';
@@ -10,7 +10,9 @@ import Numeral from 'numeral'
 import ReactDOM from 'react-dom';
 import d3 from 'd3';
 import AddStock from '../actions/add_stock';
-import AddSentiment from '../actions/get_twitter_data'
+import AddSentiment from '../actions/get_twitter_data';
+import Landing from './landing'
+
 
 //stock view cards
 import PE from './stock-view-components/pe'
@@ -31,8 +33,10 @@ class StockView extends Component {
     this.handleResize = this.handleResize.bind(this);
     this.handleAdd = this.handleAdd.bind(this);
     this.state = {
-      chartWidth: 500
+      chartWidth: 500,
+      valid: true
     }
+    this.routeToHome = this.routeToHome.bind(this);
   }
 
   renderPrices() {
@@ -65,7 +69,10 @@ class StockView extends Component {
     this.props.AddSentiment('facebook');
     console.log('componentDidMount:::sent  ', this.props.sentimentData);
     this.sentimentDiv = <div>loading...</div>
-
+    // console.log(this.props.stockValidation)
+    if(!this.props.stockValidation){
+      this.setState({valid: false})
+    }
   }
 
   componentDidUpdate() {
@@ -75,6 +82,9 @@ class StockView extends Component {
         {this.props.sentimentData.score}
       </div>
     )
+    if(!this.state.valid){
+      this.routeToHome();
+    }
   }
 
 
@@ -96,14 +106,23 @@ class StockView extends Component {
     this.props.AddStock(stockData, this.props.watchlistData);
   }
 
+  routeToHome(){
+    browserHistory.push('/')
+  }
+
   render() {
-    // console.log('inside stock_view Render');
-    // console.log('this.props.stockData: ', this.props.stockData);
-    // console.log('this.props.graphData: ', this.props.graphData);
-    // console.log('this.props.percentileData: ', this.props.percentileData);
+    console.log('inside stock_view Render');
+    console.log('this.props.stockData: ', this.props.stockData);
+    console.log('this.props.graphData: ', this.props.graphData);
+    console.log('this.props.percentileData: ', this.props.percentileData);
     // console.log('equal? ', this.state.chartWidth, this.refs.chartDivRef);
     // let priceChart = <div></div>;
 
+    // if(!this.state.valid){
+    //   <div>
+    //   {this.routeToHome()};
+    //   </div>
+    // }
 
     if(!this.props.stockData || !this.props.percentileData || !this.props.graphData){
       // console.log(this.props.stockData, this.props.percentileData, this.props.graphData)
@@ -213,7 +232,8 @@ function mapStateToProps(state) {
     graphData: state.graphData,
     percentileData: state.percentileData,
     sentimentData: state.sentimentData,
-    watchlistData: state.watchList
+    watchlistData: state.watchList,
+    stockValidation: state.stockValidation
   }
 }
 

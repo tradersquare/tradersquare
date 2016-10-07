@@ -10,18 +10,12 @@ class FilterNav extends Component {
   constructor(props) {
     super(props);
 
-    this.handleClick = this.handleClick.bind(this);
-  }
-
-  handleClick(){
-    console.log('handleClick')
-    this.props.getFilterData();
   }
 
   render() {
     return (
       <div>
-        <Link to="/filterview" onClick={this.handleClick} className="btn btn-secondary">
+        <Link to="/filterview" className="btn btn-secondary">
                Pick Stocks
         </Link>
       </div>

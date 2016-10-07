@@ -36,7 +36,8 @@ class FilterView extends Component {
         roe: 'Return on Equity',
       },
       columns: [],
-      modalOpen: false
+      modalOpen: false,
+      currentStocks: 0
     };
 
     this.onFormSubmit = this.onFormSubmit.bind(this);
@@ -54,9 +55,12 @@ class FilterView extends Component {
   }
  
   componentDidUpdate() {
-    console.log(this.state.results.length, this.props.filterData.length)
-    if (this.state.results.length !== (this.props.filterData.length / 2)){
-
+    // if(!this.props.filterData[0]){
+    //   return;
+    // }
+    // if ( (this.state.currentStocks.length !== this.props.filterData.length || this.state.currentStocks[0] !== this.props.filterData[0].ticker)){
+    if ( this.state.currentStocks !== this.props.filterData.length){
+      console.log("component updating", this.props.filterData.length, this.state.currentStocks.length)
       let filterResults = [];
       let allKeys = [];
       for (let key in this.props.filterData[0]) {
@@ -67,10 +71,14 @@ class FilterView extends Component {
 
       let stockKey = 0;
 
-      for(let i = 0; i < this.props.filterData.length; i+=2){
+      for(let i = 0; i < this.props.filterData.length; i+=3){
         const stocks = [];
-        for(let j =0; j < 2; j++){
+        for(let j =0; j < 3; j++){
+          console.log("rendering")
           let stock = this.props.filterData[i+j];
+          if(!stock){
+            break;
+          }
           let metrics = allKeys.map((metric) => {
           return (
             <div key = {metric} className="row">
@@ -90,10 +98,15 @@ class FilterView extends Component {
         filterResults.push(<div className="card-deck" key={stockKey * 27}>
           {stocks[0]}
           {stocks[1]}
+          {stocks[2]}
 
         </div>)
       }
-      this.setState({results: filterResults})
+      this.setState({results: filterResults, currentStocks: this.props.filterData.length})
+      console.log("after rendering...")
+      console.log(this.state.results.length)
+      console.log(this.state.currentStocks)
+      console.log(this.props.filterData.length)
     }
   }
 
@@ -161,10 +174,8 @@ class FilterView extends Component {
     }
 
   onInputChange(event,key) {
-    console.log(this.state.allFilters);
     let input = this.refs["input"+key].value;
     let allFiltersNew = this.state.allFilters.slice();
-    console.log(isNaN(parseFloat(input)));
     if((isNaN(parseFloat(input)) && input !== "") || (parseFloat(input).toString()) !== input){
       allFiltersNew[key].message = "please type in a valid number"
       allFiltersNew[key].input = input
@@ -245,7 +256,7 @@ class FilterView extends Component {
       <div >
       <Header />
       <div className="row">
-        <div className="col-md-6 filter">
+        <div className="col-md-12 filter">
          <div className="row">
            <div className="col-md-8">
               <h2> Filters </h2>
@@ -262,7 +273,7 @@ class FilterView extends Component {
             </button>
         </form>
         </div>
-        <div className="col-md-6 results">
+        <div className="col-md-12 results">
         <h2> Results </h2>
         {this.state.results}
         </div>

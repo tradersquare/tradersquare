@@ -10,6 +10,7 @@ import {getGraphData as GetGraphData} from '../actions/get_graph_data';
 import Loading from './loading';
 import Header from './header';
 import getPercentile from '../actions/get_percentile';
+import {description} from './metric_descriptions';
 
 
 // import { DropdownButton } from 'react-bootstrap';
@@ -27,13 +28,19 @@ class StrategyView extends Component {
     // if(this.props.strategyData && this.props.strategyData.metric){
     //   initialVal = this.props.strategyData.metric;
     // }"
-    this.state = {selectValue: "", items: 21, flag: false, tableFlag: false}
+    this.state = {
+      selectValue: "", 
+      items: 21, 
+      flag: false, 
+      sortDirection: "ascending"
+    }
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.viewMore = this.viewMore.bind(this);
     this.setMetric = this.setMetric.bind(this);
-    this.renderTable = this.renderTable.bind(this);
+    this.sortFunc = this.sortFunc.bind(this);
+    this.changeDirection = this.changeDirection.bind(this);
     // this.componentWillMount = this.componentWillMount.bind(this);
   }
 
@@ -47,18 +54,9 @@ class StrategyView extends Component {
 
   }
 
-  // ComponentWillReceiveProps(){
-  //   console.log("ComponentWillReceiveProps");
-  //   if(this.props.stratMetric && this.props.stratMetric !== this.state.selectValue && !this.state.flag){
-  //     this.setState({selectValue: this.props.stratMetric})
-  //     this.renderTable();
-  //     this.setState({flag: true})
-  //   }
-  // }
 
   componentDidMount(){
-    // console.log("componentDidMount")
-    // this.renderTable();
+
   }
 
   componentDidUpdate(){
@@ -89,71 +87,33 @@ class StrategyView extends Component {
 
   }
 
-  renderTable(){
-    console.log("in render table", this.state.selectValue)
-    let currentStrat = this.state.selectValue;
-    let filteredStocks = [];
-
-    for(let n of this.props.strategyData.data){
-      if(!isNaN(parseFloat(n[currentStrat]))){
-        n[currentStrat] = parseFloat(n[currentStrat]);
-        filteredStocks.push(n);
-      }
-    }
-
-    let stratData = filteredStocks.sort((a,b) => {
+  sortFunc(currentStrat) {
+    if(this.state.sortDirection === "ascending"){
+      return (a,b) => {
       let newA = a[currentStrat];
       let newB = b[currentStrat];
       if(newA > newB) return -1;
       if(newA < newB) return 1;
-    })
-
-    let stockKey = 0;
-
-    let that = this;
-
-    stratData = filteredStocks.map((stock) => {
-      if(stockKey >= that.state.items){
-        return;
       }
-      stockKey++;
-      let val = stock[currentStrat];
-      return (
-      <tbody key={stockKey}>
-        <tr>
-            <td><Link to="/stockview" onClick={()=>{this.handleSubmit(stock.ticker)}}>{stock.ticker}</Link></td>
-            <td>{stock.name}</td>
-            <td>{stock.close_price}</td>
-            <td>{val}</td>
-            <td>{100-(Math.round((stockKey/filteredStocks.length)*100))}%</td>
-        </tr>
-      </tbody>)
-    })
-
-    if(this.state.selectValue){
-      console.log("table if")
-      return (<div><table className="tablr">
-          <tbody><tr>
-            <th>Ticker</th>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Value</th>
-            <th>Percentile</th>
-          </tr></tbody>
-          {stratData}
-          </table>
-        <a onClick={that.viewMore}>...more</a></div>)
     }
     else{
-      console.log("table else")
-      return(
-        <p>bleh</p>
-        )
+      return (a,b) => {
+      let newA = a[currentStrat];
+      let newB = b[currentStrat];
+      if(newA > newB) return 1;
+      if(newA < newB) return -1;
+      }
     }
   }
 
-  viewMore(){
+  
+  viewMore() {
     this.setState({items: this.state.items + 9})
+  }
+
+  changeDirection() {
+    let change = this.state.sortDirection === "ascending" ? "descending" : "ascending";
+    this.setState({sortDirection: change})
   }
 
   render(){
@@ -164,6 +124,7 @@ class StrategyView extends Component {
     }
     else{
     let currentStrat = this.state.selectValue;
+    let metricInfo = description[currentStrat] ? description[currentStrat] : {name: "", des: ""};
     let filteredStocks = [];
 
     for(let n of this.props.strategyData.data){
@@ -173,51 +134,17 @@ class StrategyView extends Component {
       }
     }
 
-    let stratData = filteredStocks.sort((a,b) => {
-      let newA = a[currentStrat];
-      let newB = b[currentStrat];
-      if(newA > newB) return -1;
-      if(newA < newB) return 1;
-    })
+    let stratData = filteredStocks.sort(this.sortFunc(currentStrat))
 
-    // let stockKey = 0;
 
     let that = this;
 
-    // stratData = filteredStocks.map((stock) => {
-    //   if(stockKey >= that.state.items){
-    //     return;
-    //   }
-    //   stockKey++;
-    //   let val = stock[currentStrat];
-    //   return (
-    //   <tbody key={stockKey}>
-    //     <tr>
-    //         <td><Link to="/stockview" onClick={()=>{this.handleSubmit(stock.ticker)}}>{stock.ticker}</Link></td>
-    //         <td>{stock.name}</td>
-    //         <td>{stock.close_price}</td>
-    //         <td>{val}</td>
-    //         <td>{100-(Math.round((stockKey/filteredStocks.length)*100))}%</td>
-    //     </tr>
-    //   </tbody>)
-    // })
-
-    // const headingNames = ["Ticker", "Name", "Price", "Value", "Percentile"]
-    // let h = 0
-    // let headings, seeMore;
-    // if(this.state.selectValue){
-    //   headings = headingNames.map((heading)=>{
-    //     h++;
-    //     return <th key={h}>{heading}</th>
-    //   })
-    //   const addButton = () => {
-    //     return (<button className="btn btn-secondary" onClick={that.viewMore}>load more</button>)
-    //   }
-    //   seeMore = addButton();
-
-    // }
 
    let stockKey = 0
+
+  //a and b are used in percentile calculation
+   let a = this.state.sortDirection === "descending" ? 1 : -1
+   let b = this.state.sortDirection === "descending" ? 0 : 100
 
     let cards = [];
     if(this.state.selectValue){
@@ -232,7 +159,7 @@ class StrategyView extends Component {
               <span className="col-md-6 textright">${stock.close_price}</span>
               <span className="col-md-12 smallwords centertext">{stock.name}</span>
               <span className="col-md-6">{stock[currentStrat]}</span>
-              <span className="col-md-6 textright">{100-(Math.round((stockKey/filteredStocks.length)*100))}%</span>
+              <span className="col-md-6 textright">{(a *((Math.round((stockKey/filteredStocks.length)*100)) + 1)) + b}%</span>
             </Link></div>
             )
           stockKey++;
@@ -245,35 +172,20 @@ class StrategyView extends Component {
 
         </div>)
       }
-      console.log(cards)
+      cards.push(<div key="dinosaur" className="col-md-12">
+        <div className="col-md-1"></div>
+        <button className="btn btn-secondary col-md-10" onClick={that.viewMore}>see more</button>
+        <div className="col-md-1"></div>
+        </div>)
     }
 
-    //   cards = filteredStocks.map((stock) => {
-
-    //   if(stockKey >= that.state.items){
-    //     return;
-    //   }
-    //   stockKey++;
-    //   let val = stock[currentStrat];
-
-
-    //   return (
-    //   <div key={stockKey} className="card">
-    //     <span><Link to="/stockview" onClick={()=>{this.handleSubmit(stock.ticker)}}>{stock.ticker}</Link></span>
-    //     <span>{stock.name}</span>
-    //     <span>{stock.close_price}</span>
-    //     <span>{val}</span>
-    //     <span>{100-(Math.round((stockKey/filteredStocks.length)*100))}%</span>
-    //   </div>
-    //   )
-    //   })
-    //  }
-
-    // console.log(Array.isArray(cards), cards)
 
     return (
         <div >
           <Header />
+          <div className="col-md-5">
+            <h1>{metricInfo.name}</h1>
+          </div>
           <div className="col-md-3">
           {this.setMetric}
           <select
@@ -302,7 +214,16 @@ class StrategyView extends Component {
             <option value="beta">Beta</option>
           </select>
           </div>
+          <div className="col-md-1"></div>
+          <div className="col-md-3">
+            <button className="btn btn-secondary" onClick={this.changeDirection}>click to sort {this.state.sortDirection}</button>
+          </div>
           <br/><br/>
+
+          <div className="col-md-12">
+            <p>{metricInfo.des}</p>
+          </div>
+
           <div className="col-md-12 card-deck-wrapper">
           {cards}
           </div>
