@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import {Link} from 'react-router';
+import {browserHistory, Link} from 'react-router';
 import {searchStockData as SearchStockData} from '../actions/stock_search';
 import {bindActionCreators} from 'redux';
 import getStratData from '../actions/get_strat_data';
@@ -19,14 +19,21 @@ class SearchBar extends Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.setTicker = this.setTicker.bind(this);
+    this.handleEnter = this.handleEnter.bind(this);
   }
 
   handleSubmit() {
-    console.log('i was clicked');
     this.props.SearchStockData(this.state.ticker);
     this.props.GetGraphData(this.state.ticker);
     this.props.getPercentile(this.state.ticker);
     this.props.sendTicker(this.state.ticker);
+    browserHistory.push('/stockview')
+  }
+
+  handleEnter(e) {
+    if(e.key === 'Enter'){
+      this.handleSubmit()
+    }
   }
 
   setTicker(ev) {
@@ -34,10 +41,10 @@ class SearchBar extends Component {
   }
   render() {
     return (
-      <div className="input-group">
+      <div className="input-group" onKeyPress={this.handleEnter}>
         <input className="form-control" value={this.state.ticker} onChange={this.setTicker} placeholder="Enter a Ticker here"></input>
         <span className="input-group-btn">
-          <Link to="/stockview" onClick={this.handleSubmit} className="btn btn-secondary">
+          <Link to="/stockview" onClick={this.handleSubmit} className="btn btn-secondary" >
                 Search
           </Link>
         </span>
