@@ -10,10 +10,10 @@ export default function(stock, watchlistData) {
       insideWatchlist = false;
     }
   })
-  debugger;
-
+  // debugger;
+  var allRows = '';
   if (notInsideWatchlist) {
-    const addToDB = axios.post('/addToWatchlist', {
+    var addToDB = axios.post('/addToWatchlist', {
       userExtId: 45,
       StockTicker: stock.ticker,
       StockName: stock.name,
@@ -22,18 +22,25 @@ export default function(stock, watchlistData) {
       .then( () => {
         debugger;
         console.log('went through, now do get req');
-        getUpdatedRows();
+        return getUpdatedRows();
       })
+  }
+  // getUpdatedRows();
+  function getUpdatedRows() {
+    return axios.get('/getFromWatchList')
+      // .then( () => {
+      //   console.log('allRows returned: ', allRows);
+      //   debugger;
+      //   // return {
+      //   //   type: ADD_STOCK,
+      //   //   payload: allRows
+      //   // }
+      // })
   }
 
-  function getUpdatedRows() {
-    const allRows = axios.get('/getFromWatchList')
-      .then( () => {
-        debugger;
-        // return {
-        //   type: ADD_STOCK,
-        //   payload: allRows
-        // }
-      })
+  return {
+    type: ADD_STOCK,
+    payload: addToDB
   }
+
 }
