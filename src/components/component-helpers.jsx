@@ -19,10 +19,10 @@ export default {
     let percentileDisplay, value;
     if(prop[metric]){
       percentileDisplay = prop[metric].percentile === null ? "" : `percentile: ${prop[metric].percentile}%`;
-      value = prop[metric].value === "nm" ? "N/A" : Numeral(parseFloat(prop[metric].value)).format(format)
+      value = prop[metric].value === ("nm" || null) ? "N/A" : prop[metric].value
     }
 
-
+    console.log(value, percentileDisplay)
     const customStyles = {
       content : {
         top                   : '50%',
