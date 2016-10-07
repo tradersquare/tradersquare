@@ -78,9 +78,7 @@ class StockView extends Component {
   componentDidUpdate() {
     console.log('componentDidUPDATEEEEE:::sent  ', this.props.sentimentData);
     this.sentimentDiv = (
-      <div>
-        {this.props.sentimentData.score}
-      </div>
+      <h4 className="centertext sentiment">Sentiment Score: {this.props.sentimentData.score}</h4>
     )
     if(!this.state.valid){
       this.routeToHome();
@@ -198,7 +196,7 @@ class StockView extends Component {
                 <h4 className="centertext">Market Cap: {Numeral(parseFloat(stockData.marketcap)).format('0,0')}</h4>
                 <h4 className="centertext">Average Volume: {stockData["average_daily_volume"]}</h4>
                 <h4 className="centertext">Open/Close: {stockData.open_price}/{stockData.close_price}</h4>
-                <h4 className="sentiment">{this.sentimentDiv} </h4>
+                {this.sentimentDiv}
             </div>
           </div>
         </div>
