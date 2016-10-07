@@ -28,7 +28,7 @@ class LoginNav extends Component {
   }
 
   render() {
-    const customStyles = {
+    const modalStyles = {
       content : {
         top                   : '50%',
         left                  : '50%',
@@ -40,6 +40,10 @@ class LoginNav extends Component {
         'font-family'         : '"Josefin Sans", sans-serif'
       }
     };
+
+    const buttonTextCenter = {
+        'marginTop'      : '0.5rem'
+    }
 
     const p = this.props;
     const auth = p.auth;
@@ -74,7 +78,7 @@ class LoginNav extends Component {
             <Modal
               isOpen={this.state.modalOpen}
               onRequestClose={this.openModal}
-              style={customStyles}
+              style={modalStyles}
             >
               <h2> LOGIN </h2>
               <hr />
@@ -95,13 +99,13 @@ class LoginNav extends Component {
             <Modal
               isOpen={this.state.modalOpen}
               onRequestClose={this.openModal}
-              style={customStyles}
+              style={modalStyles}
             >
               <h2> LOGIN </h2>
               <hr />
               <p> In order to see your Watchlist, you must first signup or login below. </p>
               <center>
-                <button className="btn btn-primary" onClick={p.attemptLogin}> <h3>Login with Google+</h3></button>
+                <button className="btn btn-primary" onClick={p.attemptLogin}> <h3  style={buttonTextCenter}>Login with Google+</h3></button>
               </center>
             </Modal>
           </div>

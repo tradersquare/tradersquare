@@ -18,6 +18,7 @@ function attemptLogin() {
         }
       })
       .catch((error) => {
+        dispatch({ type: Constants.LOGOUT })
         console.log("ERROR: ", error);
       })
   }
