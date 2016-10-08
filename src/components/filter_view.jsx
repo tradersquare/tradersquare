@@ -178,7 +178,9 @@ class FilterView extends Component {
     let input = this.refs["input"+key].value;
     let allFiltersNew = this.state.allFilters.slice();
     if((isNaN(parseFloat(input)) && input !== "") || (parseFloat(input).toString()) !== input){
-      allFiltersNew[key].message = "please type in a valid number"
+      allFiltersNew[key].message = (<div className="alert alert-danger" role="alert">
+        <strong>Oops!</strong> Please enter a valid number
+        </div>)
       allFiltersNew[key].input = input
     }
     else{
@@ -240,10 +242,10 @@ class FilterView extends Component {
                  ref={"input"+key}
                  value={this.state.allFilters[key].input}
                  onChange={this.onInputChange.bind(this, event, key)} />
-          <span>{this.state.allFilters[key].message}</span>
           <button type="button"
                   className="btn btn-secondary"
                   onClick={this.handleTypeClick.bind(this,event,key)}> {this.state.allFilters[key].type} </button>
+          <span>{this.state.allFilters[key].message}</span>
         </div>
       )
     })
