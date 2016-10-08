@@ -3,6 +3,7 @@ const password = process.env.INTRINIO_PASSWORD;
 const path = require('path');
 const intrinio = require(path.resolve(__dirname, "intrinio"))(username, password);
 const db = require('../../db/config.js');
+const allTickers = process.env.tickersInDB;
 
 
 module.exports = () => {
@@ -18,7 +19,7 @@ module.exports = () => {
     })
     .then(data => {
       console.log(data, 'this was the data got back');
-      db.query(`INSERT INTO dummy.cron (var, numnum) VALUES ('bye', 30);`)
+      db.query(`INSERT INTO dummy.cron (var, numnum) VALUES ('bye', 69);`)
         .on('end', function() {
           console.log('db table should be updated, run command: SELECT * FROM productionschema.realdata;');
         })
