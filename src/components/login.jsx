@@ -6,6 +6,7 @@ import Modal from 'react-modal';
 import Constants from '../reducers/firebase_constants';
 import * as firebase from 'firebase';
 import authActions from '../actions/auth';
+import LoginPopup from './login_popup';
 
 class LoginNav extends Component {
   constructor(props) {
@@ -33,6 +34,9 @@ class LoginNav extends Component {
   }
 
   render() {
+    const p = this.props;
+    const auth = p.auth;
+
     const modalStyles = {
       content : {
         top                   : '50%',
@@ -45,13 +49,6 @@ class LoginNav extends Component {
         'font-family'         : '"Josefin Sans", sans-serif'
       }
     };
-
-    const buttonTextCenter = {
-        'marginTop'      : '0.5rem'
-    }
-
-    const p = this.props;
-    const auth = p.auth;
 
     switch(auth.currently) {
       case Constants.LOGGED_IN:
@@ -100,18 +97,12 @@ class LoginNav extends Component {
             <button className="btn btn-secondary" onClick={this.openModal}>
               My Watchlist
             </button>
-
             <Modal
               isOpen={this.state.modalOpen}
               onRequestClose={this.openModal}
               style={modalStyles}
             >
-              <h2> LOGIN </h2>
-              <hr />
-              <p> In order to see your Watchlist, you must first signup or login below. </p>
-              <center>
-                <button className="btn btn-primary" onClick={p.attemptGoogleLogin}> <h3  style={buttonTextCenter}>Login with Google+</h3></button>
-              </center>
+              <LoginPopup />
             </Modal>
           </div>
           )

@@ -22,7 +22,7 @@ export default {
       value = prop[metric].value === ("nm" || null) ? "N/A" : prop[metric].value
     }
 
-    console.log(value, percentileDisplay)
+    // console.log(value, percentileDisplay)
     const customStyles = {
       content : {
         top                   : '50%',
@@ -42,7 +42,7 @@ export default {
       value: value,
       style: customStyles
     }
-    console.log("OBJ", obj, prop)
+    // console.log("OBJ", obj, prop)
     return obj;
   }
 

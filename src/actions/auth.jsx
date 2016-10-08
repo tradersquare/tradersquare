@@ -35,7 +35,6 @@ function logoutUser(path) {
 };
 
 module.exports = {
-  // startListeningToAuth: startListeningToAuth,
   attemptGoogleLogin: attemptGoogleLogin,
   logoutUser: logoutUser
 }

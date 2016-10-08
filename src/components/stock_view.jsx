@@ -11,19 +11,22 @@ import ReactDOM from 'react-dom';
 import d3 from 'd3';
 import AddStock from '../actions/add_stock';
 import AddSentiment from '../actions/get_twitter_data';
-import Landing from './landing'
-
+import Landing from './landing';
+import Constants from '../reducers/firebase_constants';
+import authActions from '../actions/auth';
+import LoginPopup from './login_popup';
+import Modal from 'react-modal';
 
 //stock view cards
-import PE from './stock-view-components/pe'
-import Earnings from './stock-view-components/earnings'
-import Beta from './stock-view-components/beta'
-import BM from './stock-view-components/BM'
-import Credit from './stock-view-components/creditstrength'
-import Dividends from './stock-view-components/dividends'
-import Leverage from './stock-view-components/leverage'
-import Profitability from './stock-view-components/profitability'
-import Liquidity from './stock-view-components/liquidity'
+import PE from './stock-view-components/pe';
+import Earnings from './stock-view-components/earnings';
+import Beta from './stock-view-components/beta';
+import BM from './stock-view-components/BM';
+import Credit from './stock-view-components/creditstrength';
+import Dividends from './stock-view-components/dividends';
+import Leverage from './stock-view-components/leverage';
+import Profitability from './stock-view-components/profitability';
+import Liquidity from './stock-view-components/liquidity';
 
 class StockView extends Component {
   constructor(props) {
@@ -32,11 +35,18 @@ class StockView extends Component {
     this.renderPrices = this.renderPrices.bind(this);
     this.handleResize = this.handleResize.bind(this);
     this.handleAdd = this.handleAdd.bind(this);
+    this.watchListButton = this.watchListButton.bind(this);
+    this.openModal = this.openModal.bind(this);
     this.state = {
       chartWidth: 500,
-      valid: true
+      valid: true,
+      modalOpen: false
     }
     this.routeToHome = this.routeToHome.bind(this);
+  }
+
+  openModal() {
+    this.setState({modalOpen: !this.state.modalOpen});
   }
 
   renderPrices() {
@@ -67,7 +77,7 @@ class StockView extends Component {
   componentDidMount() {
     window.addEventListener('resize', this.handleResize)
     this.props.AddSentiment('facebook');
-    console.log('componentDidMount:::sent  ', this.props.sentimentData);
+    // console.log('componentDidMount:::sent  ', this.props.sentimentData);
     this.sentimentDiv = <div>loading...</div>
     // console.log(this.props.stockValidation)
     if(!this.props.stockValidation){
@@ -76,7 +86,7 @@ class StockView extends Component {
   }
 
   componentDidUpdate() {
-    console.log('componentDidUPDATEEEEE:::sent  ', this.props.sentimentData);
+    // console.log('componentDidUPDATEEEEE:::sent  ', this.props.sentimentData);
     this.sentimentDiv = (
       <h4 className="centertext sentiment">Sentiment Score: {this.props.sentimentData.score}</h4>
     )
@@ -100,7 +110,7 @@ class StockView extends Component {
   handleAdd(ev) {
     // ev.preventDefault();
     let stockData = this.props.stockData;
-    console.log('handleAdd :', stockData);
+    // console.log('handleAdd :', stockData);
     this.props.AddStock(stockData, this.props.watchlistData);
   }
 
@@ -108,12 +118,75 @@ class StockView extends Component {
     browserHistory.push('/')
   }
 
-  render() {
-    console.log('inside stock_view Render');
-    console.log('this.props.stockData: ', this.props.stockData);
-    console.log('this.props.graphData: ', this.props.graphData);
-    console.log('this.props.percentileData: ', this.props.percentileData);
-    console.log('this.props.stockValidation: ', this.props.stockValidation);
+  watchListButton() {
+    const modalStyles = {
+      content : {
+        top                   : '50%',
+        left                  : '50%',
+        right                 : '50%',
+        bottom                : 'auto',
+        marginRight           : '-50%',
+        transform             : 'translate(-50%, -50%)',
+        width                 : '400px',
+        'font-family'         : '"Josefin Sans", sans-serif'
+      }
+    }
+
+    if (this.props.auth.currently === Constants.LOGGED_IN) {
+      return (
+        <div>
+          <Link to="/watchlist" onClick={this.handleAdd} className="btn btn-secondary">
+                Add to Watchlist
+          </Link>
+        </div>
+        )
+    } else {
+      switch(this.props.auth.currently) {
+        case Constants.AWAITING_AUTH_RESPONSE:
+          return (
+              <div>
+              <button className="btn btn-secondary" onClick={this.openModal}>
+                My Watchlist
+              </button>
+
+              <Modal
+                isOpen={this.state.modalOpen}
+                onRequestClose={this.openModal}
+                style={modalStyles}
+              >
+                <h2> LOGIN </h2>
+                <hr />
+                <p> Awaiting Authorization... </p>
+                <center>
+                  <button className="btn btn-secondary" onClick={this.openModal}> Cancel </button>
+                </center>
+              </Modal>
+            </div>
+            )
+        default:
+          return (
+            <div>
+              <button className="btn btn-secondary" onClick={this.openModal}>
+                Add to Watchlist
+              </button>
+              <Modal
+                  isOpen={this.state.modalOpen}
+                  onRequestClose={this.openModal}
+                  style={modalStyles}
+                >
+                  <LoginPopup />
+                </Modal>
+            </div>
+            )
+      }
+    }
+  }
+
+  render(){
+    // console.log('inside stock_view Render');
+    // console.log('this.props.stockData: ', this.props.stockData);
+    // console.log('this.props.graphData: ', this.props.graphData);
+    // console.log('this.props.percentileData: ', this.props.percentileData);
     // console.log('equal? ', this.state.chartWidth, this.refs.chartDivRef);
     // let priceChart = <div></div>;
 
@@ -150,9 +223,9 @@ class StockView extends Component {
     // let sentiment = this.renderSentiment();
     let priceChart = this.renderPrices();
     let chart =
-    <div className="col-md-6" ref='chartDivRef'>
-    {priceChart}
-    </div>
+      <div className="col-md-6" ref='chartDivRef'>
+      {priceChart}
+      </div>
     // if (this.refs.chartDivRef && this.refs.chartDivRef.clientWidth !== this.state.chartWidth){
     //   console.log('not equal: ');
     //   priceChart = this.renderPrices();
@@ -160,11 +233,10 @@ class StockView extends Component {
     const sent = this.props.sentimentData
     const stockData = this.props.stockData;
     const metrics = this.props.percentileData;
-    console.log("***STOCKDATA***", stockData);
+    // console.log("***STOCKDATA***", stockData);
     const change = stockData.change > 0 ? "↑" : "↓"
     // const earningsyield = parseFloat(stockData.earningsyield);
     // const booktomarket = (parseFloat(stockData.bookvaluepershare) / parseFloat(stockData.close_price)).toFixed(3);
-
     return (
       <div>
         <Header />
@@ -173,9 +245,7 @@ class StockView extends Component {
             <h3>  {stockData.ticker} : {stockData.name}</h3>
           </div>
           <div className="col-md-4">
-            <Link to="/watchlist" onClick={this.handleAdd} className="btn btn-secondary">
-                  Add to Watchlist
-            </Link>
+            {this.watchListButton()}
           </div>
           <div className="col-md-4">
           <h3 className="price">${stockData.open_price}  {stockData.change}% {change}</h3>
@@ -222,7 +292,9 @@ class StockView extends Component {
       </div>
     )
   }
-}
+};
+
+
 
 
 function mapStateToProps(state) {
@@ -232,7 +304,8 @@ function mapStateToProps(state) {
     percentileData: state.percentileData,
     sentimentData: state.sentimentData,
     watchlistData: state.watchList,
-    stockValidation: state.stockValidation
+    stockValidation: state.stockValidation,
+    auth: state.auth
   }
 }
 
