@@ -14,7 +14,7 @@ class About extends Component {
         <div className="">
         <p>Tradersquare was created to make stock analysis and stock picking more accessible to everyone.
         <br/>
-        blah blah add more
+        
         </p>
         </div>
 
