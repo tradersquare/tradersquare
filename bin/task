@@ -6,8 +6,8 @@ const axios = require('axios');
 
 console.log('scheduler task initiated');
 
-let apiCall = axios.get('http://localhost:3000/updateDB/FB')
-// // let apiCall = axios.get('https://tradersquare1.herokuapp.com/getBasicInfo/FB')
+// let apiCall = axios.get('http://localhost:3000/updateDB/FB')
+let apiCall = axios.get('https://tradersquare1.herokuapp.com/getBasicInfo/FB')
 //   .then( () => {
 //     console.log('success?');
 //   })
