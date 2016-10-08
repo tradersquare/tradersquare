@@ -24,10 +24,9 @@ const {addExtraCols}          = require('./server_helper');
 const {watchListTable}        = require('../db/db_tables_store');
 const {watchlistInsert}       = require('../db/watchlist_queries');
 const {queryAllRowsWatchlist} = require('../db/watchlist_queries');
+const getDataBack             = require('./request_handler/db_updater');
 // const apiReq                  = require('./request_handler/api_req');
-const username = process.env.INTRINIO_USER;
-const password = process.env.INTRINIO_PASSWORD;
-const intrinio = require(path.resolve(__dirname, "request_handler/intrinio"))(username, password);
+// const intrinio = require(path.resolve(__dirname, "request_handler/intrinio"))(username, password);
 
 const tables = {watchListTable};
 //REQUEST HANDLER MODULES
@@ -170,26 +169,7 @@ app.get('/getFromWatchList', function(req, res) {
 
 app.get('/updateDB/*', function(req, res) {
   console.log('inside get"updateDB"');
-  // console.log(intrinio);
-  function getDataBack() {
-    return new Promise( (resolve, reject) => {
-      intrinio.financials('FB')
-        .on('complete', (data, response) => {
-          resolve(data);
-        })
-        .on('error', error => {
-          console.log('follwing error from graph_details: module.exports');
-          reject(error);
-        })
-    })
-    .then(data => {
-      console.log(data);
-    })
-  }
-
   getDataBack();
-  // apiReq('financials', 'AAPL')
-  // console.log
   res.status(200).send('hello update');
 })
 
