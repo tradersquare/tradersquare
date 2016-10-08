@@ -147,7 +147,7 @@ class StockView extends Component {
         return (
             <div>
             <button className="btn btn-secondary" onClick={this.openModal}>
-              My Watchlist
+              Add to Watchlist
             </button>
 
             <Modal

@@ -162,7 +162,8 @@ app.post('/addToWatchlist', function(req, res) {
 })
 
 app.get('/getFromWatchList', function(req, res) {
-  queryAllRowsWatchlist(res, req.body);
+  console.log('req.query at getfromwatchlist ', req.query.userExtId);
+  queryAllRowsWatchlist(res, req.query.userExtId);
 })
 
 app.get('/updateDB/*', function(req, res) {

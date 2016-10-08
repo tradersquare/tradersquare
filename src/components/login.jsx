@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-import {connect} from 'react-redux';
-import {browserHistory, Link} from 'react-router';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { browserHistory, Link } from 'react-router';
 import Util from './component-helpers';
 import Modal from 'react-modal';
 import Constants from '../reducers/firebase_constants';
 import * as firebase from 'firebase';
 import authActions from '../actions/auth';
 import LoginPopup from './login_popup';
+import addStock from '../actions/add_stock';
 
 class LoginNav extends Component {
   constructor(props) {
@@ -52,6 +54,7 @@ class LoginNav extends Component {
 
     switch(auth.currently) {
       case Constants.LOGGED_IN:
+        this.props.addStock(null, this.props.watchlistData, this.props.auth.uid, true);
         return (
           <div>
             <table>
@@ -112,15 +115,18 @@ class LoginNav extends Component {
 
 function mapStateToProps(state) {
   return {
-    auth: state.auth
+    auth: state.auth,
+    watchlistData: state.watchList
   }
 }
 
 function mapDispatchToProps(dispatch) {
-  return {
-    attemptGoogleLogin: function() { dispatch(authActions.attemptGoogleLogin()); },
-    logoutUser: function() { dispatch(authActions.logoutUser()); }
-  }
-}
+  return bindActionCreators(
+  { attemptGoogleLogin: function() { dispatch(authActions.attemptGoogleLogin()) },
+    logoutUser: function() { dispatch(authActions.logoutUser()); },
+    addStock: addStock
+  },
+    dispatch
+  )};
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginNav);

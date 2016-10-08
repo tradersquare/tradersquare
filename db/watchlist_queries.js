@@ -20,9 +20,9 @@ function notInWatchlistTable() {
 
 }
 
-function queryAllRowsWatchlist(res) {
+function queryAllRowsWatchlist(res, resBody) {
   const results = [];
-  db.query(`SELECT * FROM watchlistSchema.watchlistTable;`)
+  db.query(`SELECT * FROM watchlistSchema.watchlistTable where userextid = ${resBody};`)
     .on('row', row => {
       results.push(row);
     })
