@@ -138,7 +138,7 @@ class StockView extends Component {
       case Constants.LOGGED_IN:
         return (
           <div>
-            <Link to='/watchlist' onClick={this.handleAdd} className="btn btn-secondary">
+            <Link onClick={this.handleAdd} className="btn btn-secondary">
                   Add to Watchlist
             </Link>
           </div>

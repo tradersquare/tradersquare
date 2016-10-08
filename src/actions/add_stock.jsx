@@ -10,11 +10,13 @@ export default function(stock, watchlistData, userID, initialLoad) {
   //after login, populate state using login action?
 
   let notInsideWatchlist = true;
-  watchlistData.forEach( v => {
-    if (v.ticker === stock.ticker) {
-      notInsideWatchlist = false;
-    }
-  })
+  if (stock) {
+    watchlistData.forEach( v => {
+      if (v.ticker === stock.ticker) {
+        notInsideWatchlist = false;
+      }
+    })
+  }
 
   let stringedUID = `'${userID}'`;
 

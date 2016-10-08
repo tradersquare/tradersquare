@@ -16,9 +16,15 @@ class LoginNav extends Component {
 
     this.openModal = this.openModal.bind(this);
     this.logout = this.logout.bind(this);
+    // this.loadWatchList = this.loadWatchlist.bind(this);
     this.state = {
-      modalOpen: false
+      modalOpen: false,
+      loadWatchList: true
     };
+  }
+
+  componentWillMount() {
+    this.props.addStock(null, this.props.watchlistData, this.props.auth.uid, true);
   }
 
   openModal() {
@@ -54,7 +60,6 @@ class LoginNav extends Component {
 
     switch(auth.currently) {
       case Constants.LOGGED_IN:
-        this.props.addStock(null, this.props.watchlistData, this.props.auth.uid, true);
         return (
           <div>
             <table>
