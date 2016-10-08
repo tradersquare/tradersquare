@@ -167,7 +167,7 @@ class StrategyView extends Component {
           stockKey++;
         }
 
-        cards.push(<div className="card-deck" key={stockKey * 27}>
+        cards.push(<div className="card-deck col-md-12" key={stockKey * 27}>
           {stocks[0]}
           {stocks[1]}
           {stocks[2]}
@@ -185,46 +185,44 @@ class StrategyView extends Component {
     return (
         <div >
           <Header />
-          <div className="col-md-5">
+        <div className="filterbar col-md-12 pushdown-sm">
+          <div className="col-md-6">
+          {this.setMetric}
+            <select
+              value={this.state.selectValue}
+              onChange={this.handleChange}
+              className="col-md-12"
+              >
+              <option value="">--select metric to begin--</option>
+              <option value="altmanzscore">Z-Score</option>
+              <option value="assetturnover">Asset Turnover</option>
+              <option value="grossmargin">Gross Margin</option>
+              <option value="pricetoearnings">P/E</option>
+              <option value="currentratio">Current Ratio</option>
+              <option value="quickratio">Quick Ratio</option>
+              <option value="epsgrowth">EPS Growth</option>
+              <option value="divpayoutratio">Dividend Payout Ratio</option>
+              <option value="dividendyield"> Dividend Yield</option>
+              <option value="debttoequity">Debt To Equity</option>
+              <option value="leverageratio">Leverage Ratio</option>
+              <option value="enterprisevalue">Enterprise Value</option>
+              <option value="earningsyield">Earnings Yield</option>
+              <option value="netincomegrowth">Net Income Growth</option>
+              <option value="roe">Return on Equity</option>
+              <option value="roa">Return on Asset</option>
+              <option value="roic">Return on Invested Capital</option>
+              <option value="pricetobook">Price to Book</option>
+              <option value="beta">Beta</option>
+            </select>
+          </div>
+          <div className="col-md-3"></div>
+          <div className="col-md-3">
+            <button className="col-md-12 btn btn-secondary filter-button pull-right textright" onClick={this.changeDirection}>click to sort {this.state.sortDirection}</button>
+          </div>
+        </div>
+          <div className="col-md-12">
             <h1>{metricInfo.name}</h1>
           </div>
-          <div className="col-md-3">
-          {this.setMetric}
-
-
-          <br/><br/>
-          <select
-            value={this.state.selectValue}
-            onChange={this.handleChange}
-            >
-            <option value="">--select metric to begin--</option>
-            <option value="altmanzscore">Z-Score</option>
-            <option value="assetturnover">Asset Turnover</option>
-            <option value="grossmargin">Gross Margin</option>
-            <option value="pricetoearnings">P/E</option>
-            <option value="currentratio">Current Ratio</option>
-            <option value="quickratio">Quick Ratio</option>
-            <option value="epsgrowth">EPS Growth</option>
-            <option value="divpayoutratio">Dividend Payout Ratio</option>
-            <option value="dividendyield"> Dividend Yield</option>
-            <option value="debttoequity">Debt To Equity</option>
-            <option value="leverageratio">Leverage Ratio</option>
-            <option value="enterprisevalue">Enterprise Value</option>
-            <option value="earningsyield">Earnings Yield</option>
-            <option value="netincomegrowth">Net Income Growth</option>
-            <option value="roe">Return on Equity</option>
-            <option value="roa">Return on Asset</option>
-            <option value="roic">Return on Invested Capital</option>
-            <option value="pricetobook">Price to Book</option>
-            <option value="beta">Beta</option>
-          </select>
-          </div>
-          <div className="col-md-1"></div>
-          <div className="col-md-3">
-            <button className="btn btn-secondary" onClick={this.changeDirection}>click to sort {this.state.sortDirection}</button>
-          </div>
-          <br/><br/>
-
           <div className="col-md-12">
             <p>{metricInfo.des}</p>
           </div>
