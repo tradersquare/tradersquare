@@ -1,30 +1,39 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import {Link} from 'react-router';
+import {browserHistory, Link} from 'react-router';
 import Util from './component-helpers';
 import Modal from 'react-modal';
 import Constants from '../reducers/firebase_constants';
 import * as firebase from 'firebase';
+import authActions from '../actions/auth';
 
 class LoginNav extends Component {
   constructor(props) {
     super(props);
 
     this.openModal = this.openModal.bind(this);
+    this.logout = this.logout.bind(this);
     this.state = {
       modalOpen: false
     };
-  }
-
-  componentWillMount() {
   }
 
   openModal() {
     this.setState({modalOpen: !this.state.modalOpen});
   }
 
+  logout() {
+    if (this.state.modalOpen) {
+      this.setState({modalOpen: !this.state.modalOpen});
+    }
+    this.props.logoutUser();
+    if (location.pathname === '/watchlist') {
+      browserHistory.push('/');
+    }
+  }
+
   render() {
-    const customStyles = {
+    const modalStyles = {
       content : {
         top                   : '50%',
         left                  : '50%',
@@ -37,7 +46,9 @@ class LoginNav extends Component {
       }
     };
 
-    console.log("this.props.auth: ", this.props.auth);
+    const buttonTextCenter = {
+        'marginTop'      : '0.5rem'
+    }
 
     const p = this.props;
     const auth = p.auth;
@@ -46,33 +57,60 @@ class LoginNav extends Component {
       case Constants.LOGGED_IN:
         return (
           <div>
-            <Link to="/watchlist" className="btn btn-secondary">
-                My Watchlist
-            </Link>
+            <table>
+              <tbody>
+                <tr>
+                  <td>
+                    <Link to="/watchlist" className="btn btn-secondary">
+                      My Watchlist
+                    </Link>
+                  </td>
+                  <td>
+                    <button className="btn btn-secondary" onClick={this.logout}> Logout </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
           )
       case Constants.AWAITING_AUTH_RESPONSE:
         return (
-          <div>
+            <div>
+            <button className="btn btn-secondary" onClick={this.openModal}>
+              My Watchlist
+            </button>
+
+            <Modal
+              isOpen={this.state.modalOpen}
+              onRequestClose={this.openModal}
+              style={modalStyles}
+            >
+              <h2> LOGIN </h2>
+              <hr />
+              <p> Awaiting Authorization... </p>
+              <center>
+                <button className="btn btn-secondary" onClick={this.openModal}> Cancel </button>
+              </center>
+            </Modal>
           </div>
           )
       default:
         return (
             <div>
             <button className="btn btn-secondary" onClick={this.openModal}>
-              Login
+              My Watchlist
             </button>
 
             <Modal
               isOpen={this.state.modalOpen}
               onRequestClose={this.openModal}
-              style={customStyles}
+              style={modalStyles}
             >
               <h2> LOGIN </h2>
               <hr />
-              <p> Please enter your username to login with your Google Account </p>
+              <p> In order to see your Watchlist, you must first signup or login below. </p>
               <center>
-                <button className="btn btn-primary"> <h3>Login with Google+</h3></button>
+                <button className="btn btn-primary" onClick={p.attemptGoogleLogin}> <h3  style={buttonTextCenter}>Login with Google+</h3></button>
               </center>
             </Modal>
           </div>
@@ -89,7 +127,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-
+    attemptGoogleLogin: function() { dispatch(authActions.attemptGoogleLogin()); },
+    logoutUser: function() { dispatch(authActions.logoutUser()); }
   }
 }
 
