@@ -1,20 +1,24 @@
 #!/usr/bin/env node
 
-// const db = require('../db/config.js');
-const axios = require('axios');
+const db = require('../db/config');
+// const axios = require('axios');
 
 console.log('scheduler task initiated');
 
-// let apiCall = axios.get('http://:3000/getBasicInfo/FB');
-let apiCall = axios.get('https://tradersquare1.herokuapp.com/getBasicInfo/FB')
-  .catch(console.error);
+// let apiCall = axios.get('http://localhost:3000/getBasicInfo/FB')
+// // let apiCall = axios.get('https://tradersquare1.herokuapp.com/getBasicInfo/FB')
+//   .then( () => {
+//     console.log('success?');
+//   })
+//   .catch(console.error);
 
 //find "calculations" api call
 
-console.log(apiCall);
+// console.log(apiCall);
+// console.log('after displaying api data');
 //
-// db.query(`INSERT INTO dummy.cron (var, numnum) VALUES ('bye', 100);`)
-//   .on('end', function() {
-//     console.log('db table should be updated, run command: SELECT * FROM productionschema.realdata;');
-//   })
-//   .catch(console.error)
+db.query(`INSERT INTO dummy.cron (var, numnum) VALUES ('bye', 150);`)
+  .on('end', function() {
+    console.log('db table should be updated, run command: SELECT * FROM productionschema.realdata;');
+  })
+  .catch(console.error)
