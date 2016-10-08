@@ -165,7 +165,7 @@ class StockView extends Component {
             )
         default:
           return (
-            <div>
+            <div className="pull-right">
               <button className="btn btn-secondary" onClick={this.openModal}>
                 Add to Watchlist
               </button>
@@ -235,20 +235,25 @@ class StockView extends Component {
     const metrics = this.props.percentileData;
     // console.log("***STOCKDATA***", stockData);
     const change = stockData.change > 0 ? "↑" : "↓"
+    const sign = stockData.change > 0 ? "+" : "-"
     // const earningsyield = parseFloat(stockData.earningsyield);
     // const booktomarket = (parseFloat(stockData.bookvaluepershare) / parseFloat(stockData.close_price)).toFixed(3);
     return (
       <div className="pushdown-sm">
         <Header />
         <div className="row pushdown-md">
-          <div className="col-md-4">
-            <h3>  {stockData.ticker} : {stockData.name}</h3>
+          <div className="col-md-3">
+            <h1 className="stock-header">  <strong>{stockData.ticker}</strong> : {stockData.name}</h1>
           </div>
-          <div className="col-md-4">
+
+          <div className="col-md-3">
+          <h1 className="price stock-header">${stockData.open_price}  ({sign}{stockData.change}% {change})</h1>
+          </div>
+
+          <div className="col-md-4"></div>
+
+          <div className="col-md-2 textright">
             {this.watchListButton()}
-          </div>
-          <div className="col-md-4">
-          <h3 className="price">${stockData.open_price}  {stockData.change}% {change}</h3>
           </div>
         </div>
         <div className="row">
