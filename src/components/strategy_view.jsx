@@ -128,6 +128,7 @@ class StrategyView extends Component {
     let currentStrat = this.state.selectValue;
     let metricInfo = description[currentStrat] ? description[currentStrat] : {name: "", des: ""};
     let filteredStocks = [];
+    let InvestopediaLink = metricInfo.link ? "read more on Investopedia" : ""
 
     for(let n of this.props.strategyData.data){
       if(!isNaN(parseFloat(n[currentStrat]))){
@@ -183,10 +184,10 @@ class StrategyView extends Component {
 
 
     return (
-        <div >
+        <div className="pushdown-md">
           <Header />
-        <div className="filterbar col-md-12 pushdown-sm">
-          <div className="col-md-6">
+        <div className="filterbar col-md-12">
+          <div className="col-md-6 ">
           {this.setMetric}
             <select
               value={this.state.selectValue}
@@ -225,6 +226,9 @@ class StrategyView extends Component {
           </div>
           <div className="col-md-12">
             <p>{metricInfo.des}</p>
+          </div>
+          <div className="col-md-12">
+            <p><a href={metricInfo.link} target="_blank">{InvestopediaLink}</a></p>
           </div>
 
           <div className="col-md-12 card-deck-wrapper">

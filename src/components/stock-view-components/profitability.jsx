@@ -4,6 +4,7 @@ import {Link} from 'react-router';
 import Util from '../component-helpers';
 import Modal from 'react-modal';
 import getStratData from '../../actions/get_strat_data';
+// import Des from './metric_description';
 
 
 class Profitability extends Component {
@@ -25,18 +26,24 @@ class Profitability extends Component {
   }
 
   render() {
-    const data = Util.handleData(this.props.percentileData, "roa", 1, 50, '0.0[00]')
+    const roic = Util.handleData(this.props.percentileData, "roic", 1, 50, '0.0[00]')
+    const roa = Util.handleData(this.props.percentileData, "roa", 1, 50, '0.0[00]')
+    const roe = Util.handleData(this.props.percentileData, "roe", 1, 50, '0.0[00]')
 
     return (
-      <div className={"clickable-card card " + data.color} onClick={this.openModal}>
+      <div className={"clickable-card card " + roic.color} onClick={this.openModal}>
         <h3 className="centerheading">Profitability</h3>
-        <h4 className="centertext">Return on Asset: {data.value}</h4>
-        <h4 className="centertext">{data.percentileDisplay}</h4>
+        <h4 className="centertext">Return on Asset: {roa.value}</h4>
+        <h4 className="centertext">{roa.percentileDisplay}</h4>
+        <h4 className="centertext">Return on Equity: {roe.value}</h4>
+        <h4 className="centertext">{roe.percentileDisplay}</h4>
+        <h4 className="centertext">Return on Invested Capital: {roic.value}</h4>
+        <h4 className="centertext">{roic.percentileDisplay}</h4>
 
         <Modal
           isOpen={this.state.modalOpen}
           onRequestClose={this.openModal}
-          style={data.style}
+          style={roic.style}
         >
           <h2>Return on Invested Capital (ROIC)</h2>
           <p>something about ROIC</p>
