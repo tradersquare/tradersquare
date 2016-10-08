@@ -26,6 +26,9 @@ module.exports = (ticker) => {
       compData.forEach( (v, i) => {
         let col = v.tag;
         let newValue = v.value;
+        if (col === 'marketcap') {
+          newValue = 1000000000;
+        }
         db.query(`UPDATE backup.stockdatatable SET ${col} = ${newValue} WHERE ticker = '${ticker}';`)
         .on('end', () => {
           console.log('data changed', i, ticker);
