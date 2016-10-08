@@ -12,13 +12,12 @@ export default class Header extends Component {
 
   render() {
     return (<div>
-      <nav className="navbar navbar-light bg-faded justified">
-        <h1 className="heading"><Link className="navbar-link" to="/">TraderSquare</Link></h1>
+      <nav className="navbar navbar-light bg-faded justified col-md-12">
+        <h1 className="heading col-md-12"><Link className="navbar-link" to="/">TraderSquare</Link></h1>
+        
+
         <div className="col-md-8">
-        <ul className="nav navbar-nav">
-          <li className="nav-item">
-            <Link className="nav-link" to="/">Home</Link>
-          </li>
+        <ul className="nav navbar-nav col-md-12">
           <li className="nav-item">
             <FilterNav />
           </li>

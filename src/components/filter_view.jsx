@@ -215,12 +215,13 @@ class FilterView extends Component {
     let filterInputs = this.state.allFilters.map((obj) => {
 
       let key = obj.index;
-      return (
-        <div key={key}>
+      return (<div key={key} className="col-md-12">
+        <div  className="row filterbar col-md-12">
             <select
             ref={"strat"+key}
             value={this.state.allFilters[key].strat}
             onChange={this.onSelectChange.bind(this,event,key)}
+            className="col-md-3"
           >
             <option value="altmanzscore">Z-Score</option>
             <option value="assetturnover">Asset Turnover</option>
@@ -236,15 +237,17 @@ class FilterView extends Component {
             <option value="roe">Return on Equity</option>
           </select>
           <button type="button"
-                  className="btn btn-secondary"
+                  className="btn btn-secondary filter-button col-md-3"
                   onClick={this.handleSignClick.bind(this, event, key)}> {this.state.allFilters[key].sign} </button>
           <input type="text"
                  ref={"input"+key}
                  value={this.state.allFilters[key].input}
-                 onChange={this.onInputChange.bind(this, event, key)} />
+                 onChange={this.onInputChange.bind(this, event, key)} 
+                 className="filter-button col-md-3"/>
           <button type="button"
-                  className="btn btn-secondary"
+                  className="btn btn-secondary filter-button col-md-3"
                   onClick={this.handleTypeClick.bind(this,event,key)}> {this.state.allFilters[key].type} </button>
+        </div>
           <span>{this.state.allFilters[key].message}</span>
         </div>
       )
@@ -259,26 +262,31 @@ class FilterView extends Component {
     return (
       <div >
       <Header />
+      <div className="top-padding"></div>
+
       <div className="row">
         <div className="col-md-12 filter">
-         <div className="row">
-           <div className="col-md-8">
-              <h2> Filters </h2>
+         <div className="row col-md-12">
+           <div className="col-md-12 pushdown-sm">
+              <h1> Filters </h1>
            </div>
-           <div className="col-md-4">
-             <button className="btn btn-secondary" onClick={this.generateNewFilter}>Add More Filters
-             </button>
-           </div>
+           <br/><br/>
          </div>
         <form onSubmit={this.onFormSubmit}>
           {filterInputs}
-          <br/>
-            <button type="submit" className="btn btn-secondary">Submit
+           <div className="row col-md-12">
+             <br/>
+             <button className="btn btn-secondary col-md-3 col-md-offset-2" onClick={this.generateNewFilter}>Add More Filters
+             </button>
+            <button type="submit" className="btn btn-secondary col-md-3 col-md-offset-2">Submit
             </button>
+           </div> 
         </form>
         </div>
         <div className="col-md-12 results">
-        <h2> Results </h2>
+          <div className="col-md-12 pushdown-sm">
+            <h1> Results </h1>
+          </div>
         {this.state.results}
         </div>
 
