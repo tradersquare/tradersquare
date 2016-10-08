@@ -9,6 +9,8 @@ console.log('scheduler task initiated');
 let apiCall = axios.get('https://tradersquare1.herokuapp.com/getBasicInfo/FB')
   .catch(console.error);
 
+//find "calculations" api call
+
 console.log(apiCall);
 //
 // db.query(`INSERT INTO dummy.cron (var, numnum) VALUES ('bye', 100);`)

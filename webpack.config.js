@@ -25,6 +25,7 @@ module.exports = {
   module: {
     loaders: [{
       exclude: /node_modules/,
+      preloader: 'webpack-strip?strip[]=console.log',
       loader: 'babel',
       query: {
         presets: ['react', 'es2015', 'stage-1']
