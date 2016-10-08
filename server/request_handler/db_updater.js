@@ -28,7 +28,7 @@ module.exports = (ticker) => {
         let newValue = v.value;
         db.query(`UPDATE backup.stockdatatable SET ${col} = ${newValue} WHERE ticker = '${ticker}';`)
         .on('end', () => {
-          // console.log('data changed', i, ticker);
+          console.log('data changed', i, ticker);
         })
         .catch( console.error)
       })
