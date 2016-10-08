@@ -10,12 +10,14 @@ const allTickers = ["MMM","AAPL","FB","LM","YHOO","ABT","ABBV","ACN","ATVI","MMM
 console.log('scheduler task initiated');
 
 
-allTickers.forEach( v => {
-  axios.get(`http://localhost:3000/updateDB/${v}`);
-})
+// allTickers.forEach( v => {
+//   axios.get(`http://localhost:3000/updateDB/${v}`);
+// })
 
 
-// let apiCall = axios.get('https://tradersquare1.herokuapp.com/updateDB/FB')
+axios.get('https://tradersquare1.herokuapp.com/updateDB/FB');
+
+
 //   .then( () => {
 //     console.log('success?');
 //   })

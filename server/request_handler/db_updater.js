@@ -18,7 +18,7 @@ module.exports = (ticker) => {
         })
     })
     .then(data => {
-      console.log(data, 'this was the data got back');
+      console.log(data, 'this was the data got back', ticker);
       //compData type: array
       const compData = data.data;
 
@@ -28,9 +28,9 @@ module.exports = (ticker) => {
         let newValue = v.value;
         db.query(`UPDATE backup.stockdatatable SET ${col} = ${newValue} WHERE ticker = '${ticker}';`)
         .on('end', () => {
-          console.log('data changed', i);
+          // console.log('data changed', i, ticker);
         })
-        .catch(console.error)
+        .catch( console.error)
       })
 
     })
