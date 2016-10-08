@@ -16,8 +16,8 @@ export default class Header extends Component {
         <h1 className="heading"><Link className="navbar-link" to="/">TraderSquare</Link></h1>
         <div className="col-md-8">
         <ul className="nav navbar-nav">
-          <li className="nav-item active">
-            <Link className="nav-link" to="/">Home<span className="sr-only">(current)</span></Link>
+          <li className="nav-item">
+            <Link className="nav-link" to="/">Home</Link>
           </li>
           <li className="nav-item">
             <FilterNav />
