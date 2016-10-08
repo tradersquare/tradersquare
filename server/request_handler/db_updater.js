@@ -19,10 +19,23 @@ module.exports = () => {
     })
     .then(data => {
       console.log(data, 'this was the data got back');
-      db.query(`INSERT INTO dummy.cron (var, numnum) VALUES ('bye', 69);`)
-        .on('end', function() {
-          console.log('db table should be updated, run command: SELECT * FROM productionschema.realdata;');
+      // db.query(`INSERT INTO dummy.cron (var, numnum) VALUES ('mill', 1000000);`)
+      //   .on('end', function() {
+      //     console.log('db table should be updated, run command: SELECT * FROM productionschema.realdata;');
+      //   })
+      //   .catch(console.error)
+
+      // db.query(`UPDATE dummy.cron SET varry = 'changed' WHERE numnum = 100;`)
+      //   .on('end', () => {
+      //     console.log('data changed');
+      //   })
+      //   .catch(console.error)
+
+      db.query(`UPDATE backup.stockdatatable SET revenuegrowth = .55 WHERE ticker = 'ADI';`)
+        .on('end', () => {
+          console.log('data changed');
         })
         .catch(console.error)
+
     })
   }
