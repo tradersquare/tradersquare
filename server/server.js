@@ -169,7 +169,9 @@ app.get('/getFromWatchList', function(req, res) {
 
 app.get('/updateDB/*', function(req, res) {
   console.log('inside get"updateDB"');
-  getDataBack();
+  let ticker = req.url.slice(10);
+  console.log(ticker);
+  getDataBack(ticker);
   res.status(200).send('hello update');
 })
 
