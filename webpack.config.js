@@ -24,8 +24,11 @@ module.exports = {
   },
   module: {
     loaders: [{
+      loader: 'webpack-strip?strip[]=console.log',
+      test: /\.jsx$/
+    },
+    {
       exclude: /node_modules/,
-      preloader: 'webpack-strip?strip[]=console.log',
       loader: 'babel',
       query: {
         presets: ['react', 'es2015', 'stage-1']
