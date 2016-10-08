@@ -9,7 +9,7 @@ import MetricReducer from './metric_reducer';
 import WatchListReducer from './watchlist_reducer';
 import AuthReducer from './auth_reducer';
 import SentimentData from './twitter_reducer';
-import StockValidation from './stock_view_validation_reducer'
+import StockValidation from './stock_view_validation_reducer';
 
 const rootReducer = combineReducers({
   stock: StockReducer,

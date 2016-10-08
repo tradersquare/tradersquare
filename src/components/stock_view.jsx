@@ -112,7 +112,7 @@ class StockView extends Component {
     let stockData = this.props.stockData;
     // console.log('handleAdd :', stockData);
     let userID = this.props.auth.uid;
-    console.log("HANDLEADD: ", this.props.auth.uid)
+    console.log("HANDLEADD: ", this.props.auth.uid);
     this.props.AddStock(stockData, this.props.watchlistData, userID);
   }
 
@@ -138,7 +138,7 @@ class StockView extends Component {
       case Constants.LOGGED_IN:
         return (
           <div>
-            <Link to="/watchlist" onClick={this.handleAdd} className="btn btn-secondary">
+            <Link to='/watchlist' onClick={this.handleAdd} className="btn btn-secondary">
                   Add to Watchlist
             </Link>
           </div>

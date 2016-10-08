@@ -16,23 +16,26 @@ export default function(stock, watchlistData, userID) {
     }
   })
 
+  let stringedUID = `'${userID}'`;
+
   if (notInsideWatchlist) {
-    console.log(userID);
-    // var addToDB = axios.post('/addToWatchlist', {
-    //   userExtId: userID,
-    //   StockTicker: stock.ticker,
-    //   StockName: stock.name,
-    //   ClosingPrice: stock.close_price
-    // })
-    //   .then( () => {
-    //     // debugger;
-    //     console.log('went through, now do get req');
-    //     return getUpdatedRows();
-    //   })
+    var addToDB = axios.post('/addToWatchlist', {
+      userExtId: stringedUID,
+      StockTicker: stock.ticker,
+      StockName: stock.name,
+      ClosingPrice: stock.close_price
+    })
+      .then( () => {
+        // debugger;
+        console.log('went through, now do get req');
+        return getUpdatedRows();
+      })
   }
 
   function getUpdatedRows() {
-    return axios.get('/getFromWatchList')
+    return axios.get('/getFromWatchList'. {
+      userExtId: stringedUID
+    })
       // .then( () => {
       //   debugger;
       // })
