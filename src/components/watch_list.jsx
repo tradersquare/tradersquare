@@ -20,9 +20,10 @@ class Watchlist extends Component {
 
     // debugger;
     return (
-      <div>
+      <div className="pushdown-md">
         <Header />
         <div>
+          <h2> My Watchlist </h2>
           <div className="col-xs-12 col-md-12 col-lg-12">
             <span className="col-md-4 col-sm-4 col-lg-4 col-xs-4">Ticker</span>
             <span className="col-md-4 col-sm-4 col-lg-4 col-xs-4">Company Name</span>

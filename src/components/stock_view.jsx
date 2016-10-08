@@ -181,7 +181,6 @@ class StockView extends Component {
             )
       }
     }
-  }
 
   render(){
     // console.log('inside stock_view Render');
