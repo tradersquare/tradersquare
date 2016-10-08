@@ -12,6 +12,7 @@ import Header from './header';
 import getPercentile from '../actions/get_percentile';
 import {description} from './metric_descriptions';
 import sendTicker from '../actions/stock_view_validation';
+  
 
 
 // import { DropdownButton } from 'react-bootstrap';
@@ -189,6 +190,9 @@ class StrategyView extends Component {
           </div>
           <div className="col-md-3">
           {this.setMetric}
+
+
+          <br/><br/>
           <select
             value={this.state.selectValue}
             onChange={this.handleChange}
