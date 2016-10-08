@@ -28,16 +28,36 @@ class About extends Component {
         </div>
 
       <h1>The Team</h1>
-        <div className="row">
-        <div className="col-md-3">Akul</div>
-        <div className="col-md-3">Angelina</div>
-        <div className="col-md-3">Cindy</div>
-        <div className="col-md-3">Chris</div>
+      <br/><br/>
+      <div className="row">
+
+        <div className="col-md-3">
+          <div className="col-md-12"><img src="https://scontent.fsnc1-4.fna.fbcdn.net/t31.0-8/1097031_10200347522719245_1948257329_o.jpg" className="img-circle" width="200" height="200"/></div>
+          <h4 className="centertext col-md-12">Akul Aggarwal</h4>
+        </div>
+
+        <div className="col-md-3">
+          <div className="col-md-12"><img src="https://scontent.fsnc1-4.fna.fbcdn.net/v/t1.0-0/p206x206/12004767_10205012077282135_8226365319641742061_n.jpg?oh=bcfd2da1cd903532720e0ad0ee41a29f&oe=58AD66C8" className="img-circle" width="200" height="200"/></div>
+          <h4 className="centertext col-md-12">Angelina May</h4>
 
         </div>
+
+        <div className="col-md-3">
+          <div className="col-md-12"><img src="https://scontent.fsnc1-4.fna.fbcdn.net/v/t1.0-9/1004403_10151689873841068_1415876196_n.jpg?oh=b8f29232f90f96e00511c953e4e9a47e&oe=586CC0BB" className="img-circle" width="200" height="200"/></div>
+          <h4 className="centertext col-md-12">Cindy Sun</h4>
+        </div>
+
+
+        <div className="col-md-3">
+          <div className="col-md-12"><img src="https://scontent.fsnc1-4.fna.fbcdn.net/t31.0-8/10623510_10204591370197577_6605496669023337623_o.jpg" className="img-circle" width="200" height="200"/></div>
+          <h4 className="centertext col-md-12">Chris Battenfield</h4>
+        </div>
+
+      </div>
       </div>
     )
   }
 }
 
 export default connect(null, {})(About);
+

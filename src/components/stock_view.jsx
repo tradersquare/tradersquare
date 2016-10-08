@@ -243,11 +243,11 @@ class StockView extends Component {
         <Header />
         <div className="row pushdown-md">
           <div className="col-md-3">
-            <h1 className="stock-header">  <strong>{stockData.ticker}</strong> : {stockData.name}</h1>
+            <h1 className="stock-header">  <strong>{stockData.ticker}</strong>: {stockData.name}</h1>
           </div>
 
           <div className="col-md-3">
-          <h1 className="price stock-header">${stockData.open_price}  ({sign}{stockData.change}% {change})</h1>
+          <h1 className="price stock-header">${stockData.open_price}({sign}{stockData.change}% {change})</h1>
           </div>
 
           <div className="col-md-4"></div>
