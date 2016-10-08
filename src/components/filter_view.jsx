@@ -212,6 +212,8 @@ class FilterView extends Component {
       }
     };
 
+    let resultsHeader = this.state.results.length > 0 ? "Results" : "";
+
     let filterInputs = this.state.allFilters.map((obj) => {
 
       let key = obj.index;
@@ -288,7 +290,7 @@ class FilterView extends Component {
         </div>
         <div className="col-md-12 results">
           <div className="col-md-12 pushdown-sm">
-            <h1> Results </h1>
+            <h1>{resultsHeader}</h1>
           </div>
         {this.state.results}
         </div>
