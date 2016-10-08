@@ -11,7 +11,7 @@ import LoginNav from './login';
 export default class Header extends Component {
 
   render() {
-    return (<div>
+    return (<div className="pushdown-sm">
       <nav className="navbar navbar-light bg-faded justified col-md-12">
         <h1 className="heading col-md-12"><Link className="navbar-link" to="/">TraderSquare</Link></h1>
         

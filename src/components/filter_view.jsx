@@ -279,8 +279,7 @@ class FilterView extends Component {
           {filterInputs}
            <div className="row col-md-4">
              <br/>
-            <button type="submit" className="btn btn-secondary col-md-3 col-md-offset-2">Submit
-            </button>
+            <button type="submit" className="btn btn-secondary col-md-4 centertext">Submit  </button>
            </div> 
         </form>
 
