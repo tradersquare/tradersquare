@@ -111,7 +111,9 @@ class StockView extends Component {
     // ev.preventDefault();
     let stockData = this.props.stockData;
     // console.log('handleAdd :', stockData);
-    this.props.AddStock(stockData, this.props.watchlistData);
+    let userID = this.props.auth.uid;
+    console.log("HANDLEADD: ", this.props.auth.uid)
+    this.props.AddStock(stockData, this.props.watchlistData, userID);
   }
 
   routeToHome(){
@@ -132,35 +134,34 @@ class StockView extends Component {
       }
     }
 
-    if (this.props.auth.currently === Constants.LOGGED_IN) {
-      return (
-        <div>
-          <Link to="/watchlist" onClick={this.handleAdd} className="btn btn-secondary">
-                Add to Watchlist
-          </Link>
-        </div>
-        )
-    } else {
-      switch(this.props.auth.currently) {
-        case Constants.AWAITING_AUTH_RESPONSE:
-          return (
-              <div>
-              <button className="btn btn-secondary" onClick={this.openModal}>
-                My Watchlist
-              </button>
+    switch(this.props.auth.currently) {
+      case Constants.LOGGED_IN:
+        return (
+          <div>
+            <Link to="/watchlist" onClick={this.handleAdd} className="btn btn-secondary">
+                  Add to Watchlist
+            </Link>
+          </div>
+          )
+      case Constants.AWAITING_AUTH_RESPONSE:
+        return (
+            <div>
+            <button className="btn btn-secondary" onClick={this.openModal}>
+              My Watchlist
+            </button>
 
-              <Modal
-                isOpen={this.state.modalOpen}
-                onRequestClose={this.openModal}
-                style={modalStyles}
-              >
-                <h2> LOGIN </h2>
-                <hr />
-                <p> Awaiting Authorization... </p>
-                <center>
-                  <button className="btn btn-secondary" onClick={this.openModal}> Cancel </button>
-                </center>
-              </Modal>
+            <Modal
+              isOpen={this.state.modalOpen}
+              onRequestClose={this.openModal}
+              style={modalStyles}
+            >
+              <h2> LOGIN </h2>
+              <hr />
+              <p> Awaiting Authorization... </p>
+              <center>
+                <button className="btn btn-secondary" onClick={this.openModal}> Cancel </button>
+              </center>
+            </Modal>
             </div>
             )
         default:
@@ -298,9 +299,6 @@ class StockView extends Component {
     )
   }
 };
-
-
-
 
 function mapStateToProps(state) {
   return {

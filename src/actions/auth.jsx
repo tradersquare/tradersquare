@@ -12,8 +12,8 @@ function attemptGoogleLogin() {
         if (result) {
           dispatch({
             type: Constants.LOGIN_USER,
-            uid: result.uid,
-            username: result.displayName
+            uid: result.user.uid,
+            username: result.user.displayName
           });
           browserHistory.push('/watchlist');
         }

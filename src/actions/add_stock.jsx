@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const ADD_STOCK = "ADD_STOCK";
 
-export default function(stock, watchlistData) {
+export default function(stock, watchlistData, userID) {
   // debugger;
 
   //add logic: if not logged in, take to login page
@@ -17,17 +17,18 @@ export default function(stock, watchlistData) {
   })
 
   if (notInsideWatchlist) {
-    var addToDB = axios.post('/addToWatchlist', {
-      userExtId: 45,
-      StockTicker: stock.ticker,
-      StockName: stock.name,
-      ClosingPrice: stock.close_price
-    })
-      .then( () => {
-        // debugger;
-        console.log('went through, now do get req');
-        return getUpdatedRows();
-      })
+    console.log(userID);
+    // var addToDB = axios.post('/addToWatchlist', {
+    //   userExtId: userID,
+    //   StockTicker: stock.ticker,
+    //   StockName: stock.name,
+    //   ClosingPrice: stock.close_price
+    // })
+    //   .then( () => {
+    //     // debugger;
+    //     console.log('went through, now do get req');
+    //     return getUpdatedRows();
+    //   })
   }
 
   function getUpdatedRows() {
