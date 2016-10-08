@@ -9,7 +9,7 @@ import { GET_PERCENTILE } from '../actions/get_percentile';
 export default function(state = null, action) {
   switch(action.type) {
     case GET_PERCENTILE:
-      console.log('reducer: percentile', action.payload);
+      // console.log('reducer: percentile', action.payload);
       return action.payload;
     default:
       return state;

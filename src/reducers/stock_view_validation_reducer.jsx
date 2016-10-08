@@ -10,7 +10,7 @@ import { browserHistory } from 'react-router'
 export default function(state = null, action) {
   switch(action.type) {
     case SEND_TICKER:
-      console.log('reducer: validation', action.payload);
+      // console.log('reducer: validation', action.payload);
       return action.payload;
     default:
       return state;
