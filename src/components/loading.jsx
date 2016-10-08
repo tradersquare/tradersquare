@@ -4,12 +4,14 @@ import {Link} from 'react-router';
 import {searchStockData as SearchStockData} from '../actions/stock_search';
 import {bindActionCreators} from 'redux';
 import getStratData from '../actions/get_strat_data';
+import Header from './header'
 
 class Loading extends Component {
 
   render() {
     return (
       <div className="">
+        <Header />
         <div className="row">
           <div className="col-md-4"></div>
           <div className="col-md-4 pushdown">

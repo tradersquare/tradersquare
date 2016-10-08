@@ -113,6 +113,7 @@ class StockView extends Component {
     console.log('this.props.stockData: ', this.props.stockData);
     console.log('this.props.graphData: ', this.props.graphData);
     console.log('this.props.percentileData: ', this.props.percentileData);
+    console.log('this.props.stockValidation: ', this.props.stockValidation);
     // console.log('equal? ', this.state.chartWidth, this.refs.chartDivRef);
     // let priceChart = <div></div>;
 
@@ -122,7 +123,7 @@ class StockView extends Component {
     //   </div>
     // }
 
-    if(!this.props.stockData || !this.props.percentileData || !this.props.graphData){
+    if(!this.props.stockData || !this.props.percentileData || !this.props.graphData || this.props.stockData.ticker !== this.props.stockValidation.toUpperCase()){
       // console.log(this.props.stockData, this.props.percentileData, this.props.graphData)
       // priceChart = <div></div>;
       return (

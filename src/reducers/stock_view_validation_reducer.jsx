@@ -1,4 +1,5 @@
 import { SEND_TICKER } from '../actions/stock_view_validation';
+import { browserHistory } from 'react-router'
 
 /**
  * [description]
