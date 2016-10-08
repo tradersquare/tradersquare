@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import {Link} from 'react-router';
+import {browserHistory, Link} from 'react-router';
 import Util from './component-helpers';
 import Modal from 'react-modal';
 import Constants from '../reducers/firebase_constants';
@@ -23,8 +23,13 @@ class LoginNav extends Component {
   }
 
   logout() {
+    if (this.state.modalOpen) {
+      this.setState({modalOpen: !this.state.modalOpen});
+    }
     this.props.logoutUser();
-    this.setState({modalOpen: !this.state.modalOpen});
+    if (location.pathname === '/watchlist') {
+      browserHistory.push('/');
+    }
   }
 
   render() {
@@ -105,7 +110,7 @@ class LoginNav extends Component {
               <hr />
               <p> In order to see your Watchlist, you must first signup or login below. </p>
               <center>
-                <button className="btn btn-primary" onClick={p.attemptLogin}> <h3  style={buttonTextCenter}>Login with Google+</h3></button>
+                <button className="btn btn-primary" onClick={p.attemptGoogleLogin}> <h3  style={buttonTextCenter}>Login with Google+</h3></button>
               </center>
             </Modal>
           </div>
@@ -122,7 +127,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    attemptLogin: function() { dispatch(authActions.attemptLogin()); },
+    attemptGoogleLogin: function() { dispatch(authActions.attemptGoogleLogin()); },
     logoutUser: function() { dispatch(authActions.logoutUser()); }
   }
 }

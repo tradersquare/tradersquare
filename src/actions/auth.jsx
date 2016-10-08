@@ -4,7 +4,7 @@ import { browserHistory } from 'react-router';
 
 const google = new firebase.auth.GoogleAuthProvider();
 
-function attemptLogin() {
+function attemptGoogleLogin() {
   return (dispatch, getState) => {
     dispatch({ type: Constants.ATTEMPTING_LOGIN });
     firebase.auth().signInWithPopup(google)
@@ -15,6 +15,7 @@ function attemptLogin() {
             uid: result.uid,
             username: result.displayName
           });
+          browserHistory.push('/watchlist');
         }
       })
       .catch((error) => {
@@ -29,15 +30,12 @@ function logoutUser(path) {
     firebase.auth().signOut()
       .then(() => {
         dispatch({ type: Constants.LOGOUT });
-        if (path === '/watchlist'){
-          browserHistory.push('/');
-        }
       })
   }
 };
 
 module.exports = {
   // startListeningToAuth: startListeningToAuth,
-  attemptLogin: attemptLogin,
+  attemptGoogleLogin: attemptGoogleLogin,
   logoutUser: logoutUser
 }
