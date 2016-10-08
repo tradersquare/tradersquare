@@ -14,11 +14,11 @@ class Watchlist extends Component {
   render() {
     let watchList = this.props.watchList;
     this.favorites = watchList.map( v => {
-      debugger;
+      // debugger;
       return <Stock key={v.ticker} stock={v} />
     })
 
-    debugger;
+    // debugger;
     return (
       <div>
         <Header />
