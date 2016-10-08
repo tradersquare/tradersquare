@@ -23,10 +23,7 @@ module.exports = {
     'react/lib/ReactContext': true,
   },
   module: {
-    loaders: [{
-      loader: 'webpack-strip?strip[]=console.log',
-      test: /\.jsx$/
-    },
+    loaders: [
     {
       exclude: /node_modules/,
       loader: 'babel',
