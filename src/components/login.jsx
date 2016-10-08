@@ -58,12 +58,12 @@ class LoginNav extends Component {
               <tbody>
                 <tr>
                   <td>
-                    <Link to="/watchlist" className="btn btn-secondary">
+                    <Link to="/watchlist" className="nav-link">
                       My Watchlist
                     </Link>
                   </td>
                   <td>
-                    <button className="btn btn-secondary" onClick={this.logout}> Logout </button>
+                    <a className="nav-link" onClick={this.logout}> Logout </a>
                   </td>
                 </tr>
               </tbody>
@@ -73,9 +73,9 @@ class LoginNav extends Component {
       case Constants.AWAITING_AUTH_RESPONSE:
         return (
             <div>
-            <button className="btn btn-secondary" onClick={this.openModal}>
+            <a className="nav-link" onClick={this.openModal}>
               My Watchlist
-            </button>
+            </a>
 
             <Modal
               isOpen={this.state.modalOpen}
@@ -94,9 +94,9 @@ class LoginNav extends Component {
       default:
         return (
             <div>
-            <button className="btn btn-secondary" onClick={this.openModal}>
+            <a className="nav-link" onClick={this.openModal}>
               My Watchlist
-            </button>
+            </a>
             <Modal
               isOpen={this.state.modalOpen}
               onRequestClose={this.openModal}

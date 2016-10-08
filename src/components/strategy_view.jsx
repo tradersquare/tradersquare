@@ -183,10 +183,10 @@ class StrategyView extends Component {
 
 
     return (
-        <div >
+        <div className="pushdown-md">
           <Header />
-        <div className="filterbar col-md-12 pushdown-sm">
-          <div className="col-md-6">
+        <div className="filterbar col-md-12">
+          <div className="col-md-6 ">
           {this.setMetric}
             <select
               value={this.state.selectValue}

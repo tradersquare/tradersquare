@@ -195,18 +195,6 @@ class StockView extends Component {
     //   {this.routeToHome()};
     //   </div>
     // }
-
-    if(!this.props.stockData || !this.props.percentileData || !this.props.graphData || this.props.stockData.ticker !== this.props.stockValidation.toUpperCase()){
-      // console.log(this.props.stockData, this.props.percentileData, this.props.graphData)
-      // priceChart = <div></div>;
-      return (
-        <div>
-          <Loading />
-          <div className="col-md-6" ref='chartDivRef'></div>
-        </div>
-      )
-    }
-
     if(this.props.stockData === "invalid"){
       return (
         <div>
@@ -220,6 +208,18 @@ class StockView extends Component {
         </div>
         )
     }
+
+    if(!this.props.stockData || !this.props.percentileData || !this.props.graphData || this.props.stockData.ticker !== this.props.stockValidation.toUpperCase()){
+      // console.log(this.props.stockData, this.props.percentileData, this.props.graphData)
+      // priceChart = <div></div>;
+      return (
+        <div>
+          <Loading />
+          <div className="col-md-6" ref='chartDivRef'></div>
+        </div>
+      )
+    }
+
     // let sentiment = this.renderSentiment();
     let priceChart = this.renderPrices();
     let chart =
@@ -238,9 +238,9 @@ class StockView extends Component {
     // const earningsyield = parseFloat(stockData.earningsyield);
     // const booktomarket = (parseFloat(stockData.bookvaluepershare) / parseFloat(stockData.close_price)).toFixed(3);
     return (
-      <div>
+      <div className="pushdown-sm">
         <Header />
-        <div className="row">
+        <div className="row pushdown-md">
           <div className="col-md-4">
             <h3>  {stockData.ticker} : {stockData.name}</h3>
           </div>

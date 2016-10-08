@@ -8,7 +8,7 @@ class About extends Component {
 
   render() {
     return (
-      <div className="">
+      <div className="pushdown-md">
       <Header />
       <h1>About Tradersquare</h1>
         <div className="">
