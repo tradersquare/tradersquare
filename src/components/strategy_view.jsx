@@ -215,9 +215,9 @@ class StrategyView extends Component {
               <option value="beta">Beta</option>
             </select>
           </div>
-          <div className="col-md-3"></div>
-          <div className="col-md-3">
-            <button className="col-md-12 btn btn-secondary filter-button pull-right textright" onClick={this.changeDirection}>click to sort {this.state.sortDirection}</button>
+          <div className="col-md-4"></div>
+          <div className="col-md-2">
+            <button className="col-md-12 btn btn-secondary filter-button pull-right textright nohover" onClick={this.changeDirection}>click to sort {this.state.sortDirection}</button>
           </div>
         </div>
           <div className="col-md-12">
