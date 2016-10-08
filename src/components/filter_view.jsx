@@ -221,7 +221,7 @@ class FilterView extends Component {
             ref={"strat"+key}
             value={this.state.allFilters[key].strat}
             onChange={this.onSelectChange.bind(this,event,key)}
-            className="col-md-3"
+            className="col-md-3 filterdrop"
           >
             <option value="altmanzscore">Z-Score</option>
             <option value="assetturnover">Asset Turnover</option>
@@ -248,7 +248,8 @@ class FilterView extends Component {
                   className="btn btn-secondary filter-button col-md-3"
                   onClick={this.handleTypeClick.bind(this,event,key)}> {this.state.allFilters[key].type} </button>
         </div>
-          <span>{this.state.allFilters[key].message}</span>
+        <div></div>
+          <div><span>{this.state.allFilters[key].message}</span></div>
         </div>
       )
     })
@@ -274,14 +275,16 @@ class FilterView extends Component {
          </div>
         <form onSubmit={this.onFormSubmit}>
           {filterInputs}
-           <div className="row col-md-12">
+           <div className="row col-md-4">
              <br/>
-             <button className="btn btn-secondary col-md-3 col-md-offset-2" onClick={this.generateNewFilter}>Add More Filters
-             </button>
             <button type="submit" className="btn btn-secondary col-md-3 col-md-offset-2">Submit
             </button>
            </div> 
         </form>
+
+         <button className="btn btn-secondary col-md-4 col-md-offset-2 pushdown-sm" onClick={this.generateNewFilter}>Add More Filters
+         </button>
+
         </div>
         <div className="col-md-12 results">
           <div className="col-md-12 pushdown-sm">
