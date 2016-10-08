@@ -1,5 +1,5 @@
 const db = require('./config.js');
-const callAll = require('../server/request_handler/all_companies')
+const callAll = require('../server/request_handler/all_companies');
 
 module.exports = function() {
   db.query(`INSERT INTO productionschema.stockdatatable();`)

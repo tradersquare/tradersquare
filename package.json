@@ -51,6 +51,7 @@
     "bluebird": "3.4.6",
     "body-parser": "1.15.2",
     "bookshelf": "0.10.1",
+    "cron": "^1.1.1",
     "d3": "3.5.17",
     "dotenv": "2.0.0",
     "eslint": "3.5.0",
@@ -89,6 +90,7 @@
     "webpack-dev-middleware": "1.8.1",
     "webpack-dev-server": "1.14.0",
     "webpack-env": "0.8.0",
-    "webpack-hot-middleware": "2.12.2"
+    "webpack-hot-middleware": "2.12.2",
+    "webpack-strip": "^0.1.0"
   }
 }

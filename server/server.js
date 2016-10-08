@@ -13,7 +13,7 @@ const webpackHotMiddleware    = require('webpack-hot-middleware');
 const config                  = require('../webpack.config');
 const db                      = require('../db/config');
 const pg                      = require('pg');
-const dbURL                   = process.env.DATABASE_URL;
+const dbURL                   = process.env.DATABASE_LINK;
 const callAll                 = require('./request_handler/all_companies');
 const GrabDataDB              = require('../db/db_grab_data');
 const GrabFilteredDataDB      = require('../db/db_filter_data');
@@ -45,7 +45,8 @@ app.use(webpackDevMiddleware(compiler, {
     publicPath: config.output.publicPath,
     stats: {
       colors: true
-    }
+    },
+    noInfo: true
 }))
   // app.use(webpackHotMiddleware(compiler, {
   //   log: console.log
@@ -105,6 +106,7 @@ app.get('/getAllCompany/', function(req, res) {
 });
 
 app.get('/getBasicInfo/*', function(req, res) {
+  console.log('inside basic info listener');
   const ticker = req.url.slice(14).toUpperCase();
   stratData(ticker, res);
 });
