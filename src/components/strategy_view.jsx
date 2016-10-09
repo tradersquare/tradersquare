@@ -12,7 +12,7 @@ import Header from './header';
 import getPercentile from '../actions/get_percentile';
 import {description} from './metric_descriptions';
 import sendTicker from '../actions/stock_view_validation';
-  
+
 
 
 // import { DropdownButton } from 'react-bootstrap';
@@ -31,9 +31,9 @@ class StrategyView extends Component {
     //   initialVal = this.props.strategyData.metric;
     // }"
     this.state = {
-      selectValue: "", 
-      items: 21, 
-      flag: false, 
+      selectValue: "",
+      items: 21,
+      flag: false,
       sortDirection: "ascending"
     }
 
@@ -108,7 +108,7 @@ class StrategyView extends Component {
     }
   }
 
-  
+
   viewMore() {
     this.setState({items: this.state.items + 9})
   }

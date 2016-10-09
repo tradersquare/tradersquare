@@ -14,7 +14,7 @@ export default class Watchlist extends Component {
       <div className="card col-xs-12 col-md-12 col-lg-12">
         <span className="col-md-4 col-sm-4 col-lg-4 col-xs-4">{stock.ticker}</span>
         <span className="col-md-4 col-sm-4 col-lg-4 col-xs-4">{stock.name}</span>
-        <span className="col-md-4 col-sm-4 col-lg-4 col-xs-4">{stock.close_price}</span>
+        <span className="col-md-4 col-sm-4 col-lg-4 col-xs-4">${stock.close_price}</span>
       </div>
     )
   }

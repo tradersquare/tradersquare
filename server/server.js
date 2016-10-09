@@ -158,13 +158,12 @@ app.get('/createGenericTable/*', function(req, res) {
  * watchListInsert found in: watchlist_queries.js
  */
 app.post('/addToWatchlist', function(req, res) {
-  // console.log('req.body: ', req.body);
   watchlistInsert(res, req.body);
 })
 
 app.get('/getFromWatchList', function(req, res) {
-  console.log('getFromWatchList endpoint reached');
-  queryAllRowsWatchlist(res);
+  console.log('req.querygit   at getfromwatchlist ', req.query.userExtId);
+  queryAllRowsWatchlist(res, req.query.userExtId);
 })
 
 app.get('/updateDB/*', function(req, res) {

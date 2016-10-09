@@ -9,11 +9,12 @@ function attemptGoogleLogin() {
     dispatch({ type: Constants.ATTEMPTING_LOGIN });
     firebase.auth().signInWithPopup(google)
       .then((result) => {
+        console.log(result.user.uid)
         if (result) {
           dispatch({
             type: Constants.LOGIN_USER,
-            uid: result.uid,
-            username: result.displayName
+            uid: result.user.uid,
+            username: result.user.displayName
           });
           browserHistory.push('/watchlist');
         }
@@ -30,6 +31,7 @@ function logoutUser(path) {
     firebase.auth().signOut()
       .then(() => {
         dispatch({ type: Constants.LOGOUT });
+        browserHistory.push('/');
       })
   }
 };

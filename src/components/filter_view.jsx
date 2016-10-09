@@ -54,7 +54,7 @@ class FilterView extends Component {
   componentWillMount() {
     this.generateNewFilter();
   }
- 
+
   componentDidUpdate() {
     // if(!this.props.filterData[0]){
     //   return;
@@ -89,7 +89,7 @@ class FilterView extends Component {
             )
           })
           stocks.push(<div className="card clickable-card" key={stockKey}><Link to="/stockview" onClick={()=>{this.handleSubmit(stock.ticker)}}>
-              <strong className="col-md-6 textleft">{stock.ticker}:</strong>
+              <strong className="col-md-6">{stock.ticker}:</strong>
               <span className="col-md-6 textright">${stock.close_price}</span>
               <span className="col-md-12 smallwords centertext">{stock.name}</span>
               {metrics}
@@ -185,7 +185,7 @@ class FilterView extends Component {
     }
     else{
       allFiltersNew[key].input = input;
-      allFiltersNew[key].message = "";    
+      allFiltersNew[key].message = "";
     }
 
     this.setState({allFilters: allFiltersNew});
@@ -244,7 +244,7 @@ class FilterView extends Component {
           <input type="text"
                  ref={"input"+key}
                  value={this.state.allFilters[key].input}
-                 onChange={this.onInputChange.bind(this, event, key)} 
+                 onChange={this.onInputChange.bind(this, event, key)}
                  className="filter-button col-md-3"/>
           <button type="button"
                   className="btn btn-secondary filter-button col-md-3"
@@ -278,7 +278,7 @@ class FilterView extends Component {
            <div className="row col-md-4">
              <br/>
             <button type="submit" className="btn btn-secondary col-md-4 centertext">Submit  </button>
-           </div> 
+           </div>
         </form>
 
          <button className="btn btn-secondary col-md-4 col-md-offset-2 pushdown-sm" onClick={this.generateNewFilter}>Add More Filters
@@ -298,7 +298,7 @@ class FilterView extends Component {
           style={modalStyle}
         >
         <h2 className="centerheading">What part of "please type in a valid number" do you not understand?</h2>
-          
+
         </Modal>
 
 

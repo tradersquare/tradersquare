@@ -12,7 +12,6 @@ import thunk from 'redux-thunk';
 import authActions from './actions/auth';
 
 
-
 const createStoreWithMiddleware = applyMiddleware(reduxPromise, thunk)(createStore);
 
 ReactDOM.render(
