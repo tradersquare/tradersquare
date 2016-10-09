@@ -26,4 +26,7 @@ describe('<StockView />', function() {
     const wrapper = shallow(<Provider store={store}><PE onClick={this.submit}/></Provider>);
     expect(wrapper).to.exist;
   })
+  it('check if stock data info exists', function() {
+    expect(wrapper.find('.price'))
+  })
 });
