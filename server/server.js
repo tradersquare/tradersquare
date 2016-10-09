@@ -162,7 +162,7 @@ app.post('/addToWatchlist', function(req, res) {
 })
 
 app.get('/getFromWatchList', function(req, res) {
-  console.log('req.query at getfromwatchlist ', req.query.userExtId);
+  console.log('req.querygit   at getfromwatchlist ', req.query.userExtId);
   queryAllRowsWatchlist(res, req.query.userExtId);
 })
 
