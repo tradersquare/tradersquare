@@ -31,6 +31,7 @@ function logoutUser(path) {
     firebase.auth().signOut()
       .then(() => {
         dispatch({ type: Constants.LOGOUT });
+        browserHistory.push('/');
       })
   }
 };
