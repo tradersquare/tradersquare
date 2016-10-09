@@ -71,7 +71,7 @@ class LoginNav extends Component {
                     </Link>
                   </td>
                   <td>
-                    <a className="nav-link" onClick={this.logout}> Logout </a>
+                    <a className="nav-link" onClick={this.logout}> &nbsp; &nbsp;Logout </a>
                   </td>
                 </tr>
               </tbody>
