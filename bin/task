@@ -14,6 +14,11 @@ console.log('scheduler task initiated');
 //   axios.get(`http://localhost:3000/updateDB/${v}`);
 // })
 
+// for (let i = 0; i < 10; i++) {
+//   axios.get(`http://localhost:3000/updateDB/${allTickers[i]}`);
+//
+// }
+
 allTickers.forEach( v => {
   axios.get(`https://tradersquare1.herokuapp.com/updateDB/${v}`);
 })
