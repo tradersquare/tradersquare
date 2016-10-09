@@ -14,7 +14,7 @@ export default class Header extends Component {
     return (<div className="pushdown-sm">
       <nav className="navbar navbar-fixed-top navbar-light  col-md-12" style={{"backgroundColor": "#B2DFDB"}}>
         <h1 className="heading col-md-12"><Link className="navbar-link" to="/">TraderSquare</Link></h1>
-        
+
 
         <div className="col-md-8">
         <ul className="nav navbar-nav col-md-12">

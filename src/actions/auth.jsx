@@ -9,6 +9,7 @@ function attemptGoogleLogin() {
     dispatch({ type: Constants.ATTEMPTING_LOGIN });
     firebase.auth().signInWithPopup(google)
       .then((result) => {
+        console.log(result.user.uid)
         if (result) {
           dispatch({
             type: Constants.LOGIN_USER,

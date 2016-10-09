@@ -24,7 +24,7 @@ class LoginNav extends Component {
   }
 
   componentWillMount() {
-    this.props.addStock(null, this.props.watchlistData, this.props.auth.uid, true);
+    // this.props.addStock(null, this.props.watchlistData, this.props.auth.uid, true);
   }
 
   openModal() {
@@ -128,8 +128,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(
   { attemptGoogleLogin: function() { dispatch(authActions.attemptGoogleLogin()) },
-    logoutUser: function() { dispatch(authActions.logoutUser()); },
-    addStock: addStock
+    logoutUser: function() { dispatch(authActions.logoutUser()); }
   },
     dispatch
   )};

@@ -4,11 +4,17 @@ import Header from './header';
 import Stock from './watch_list_stock';
 import {connect} from 'react-redux';
 import {Link} from 'react-router';
+import { bindActionCreators } from 'redux';
+import addStock from '../actions/add_stock';
 
 
 class Watchlist extends Component {
   constructor(props) {
     super(props);
+  }
+
+  componentWillMount() {
+    this.props.addStock(null, this.props.watchlistData, this.props.auth.uid, true);
   }
 
   render() {
@@ -40,8 +46,17 @@ class Watchlist extends Component {
 
 function mapStateToProps(state) {
   return {
-    watchList: state.watchList
+    watchList: state.watchList,
+    auth: state.auth
   }
 }
 
-export default connect(mapStateToProps)(Watchlist)
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(
+  {
+    addStock: addStock
+  },
+    dispatch
+  )};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Watchlist)
