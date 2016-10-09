@@ -24,6 +24,9 @@ const {addExtraCols}          = require('./server_helper');
 const {watchListTable}        = require('../db/db_tables_store');
 const {watchlistInsert}       = require('../db/watchlist_queries');
 const {queryAllRowsWatchlist} = require('../db/watchlist_queries');
+const getDataBack             = require('./request_handler/db_updater');
+// const apiReq                  = require('./request_handler/api_req');
+// const intrinio = require(path.resolve(__dirname, "request_handler/intrinio"))(username, password);
 
 const tables = {watchListTable};
 //REQUEST HANDLER MODULES
@@ -159,9 +162,17 @@ app.post('/addToWatchlist', function(req, res) {
   watchlistInsert(res, req.body);
 })
 
-app.use('/getFromWatchList', function(req, res) {
+app.get('/getFromWatchList', function(req, res) {
   console.log('getFromWatchList endpoint reached');
   queryAllRowsWatchlist(res);
+})
+
+app.get('/updateDB/*', function(req, res) {
+  console.log('inside get"updateDB"');
+  let ticker = req.url.slice(10);
+  console.log(ticker);
+  getDataBack(ticker);
+  res.status(200).send('hello update');
 })
 
 app.use(function(req, res, next) {
