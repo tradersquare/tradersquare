@@ -10,6 +10,7 @@ import {searchStockData as SearchStockData} from '../actions/stock_search';
 import {getGraphData as GetGraphData} from '../actions/get_graph_data';
 import getPercentile from '../actions/get_percentile';
 import Modal from 'react-modal';
+import sendTicker from '../actions/stock_view_validation';
 
 
 class FilterView extends Component {
@@ -53,7 +54,7 @@ class FilterView extends Component {
   componentWillMount() {
     this.generateNewFilter();
   }
- 
+
   componentDidUpdate() {
     // if(!this.props.filterData[0]){
     //   return;
@@ -88,7 +89,7 @@ class FilterView extends Component {
             )
           })
           stocks.push(<div className="card clickable-card" key={stockKey}><Link to="/stockview" onClick={()=>{this.handleSubmit(stock.ticker)}}>
-              <strong className="col-md-6 textleft">{stock.ticker}:</strong>
+              <strong className="col-md-6">{stock.ticker}:</strong>
               <span className="col-md-6 textright">${stock.close_price}</span>
               <span className="col-md-12 smallwords centertext">{stock.name}</span>
               {metrics}
@@ -177,12 +178,14 @@ class FilterView extends Component {
     let input = this.refs["input"+key].value;
     let allFiltersNew = this.state.allFilters.slice();
     if((isNaN(parseFloat(input)) && input !== "") || (parseFloat(input).toString()) !== input){
-      allFiltersNew[key].message = "please type in a valid number"
+      allFiltersNew[key].message = (<div className="alert alert-danger" role="alert">
+        <strong>Oops!</strong> Please enter a valid number
+        </div>)
       allFiltersNew[key].input = input
     }
     else{
       allFiltersNew[key].input = input;
-      allFiltersNew[key].message = "";    
+      allFiltersNew[key].message = "";
     }
 
     this.setState({allFilters: allFiltersNew});
@@ -192,6 +195,7 @@ class FilterView extends Component {
     this.props.SearchStockData(ticker);
     this.props.GetGraphData(ticker);
     this.props.getPercentile(ticker);
+    this.props.sendTicker(ticker);
 
   }
 
@@ -208,15 +212,18 @@ class FilterView extends Component {
       }
     };
 
+    let resultsHeader = this.state.results.length > 0 ? "Results" : "";
+
     let filterInputs = this.state.allFilters.map((obj) => {
 
       let key = obj.index;
-      return (
-        <div key={key}>
+      return (<div key={key} className="col-md-12">
+        <div  className="row filterbar col-md-12">
             <select
             ref={"strat"+key}
             value={this.state.allFilters[key].strat}
             onChange={this.onSelectChange.bind(this,event,key)}
+            className="col-md-3 filterdrop"
           >
             <option value="altmanzscore">Z-Score</option>
             <option value="assetturnover">Asset Turnover</option>
@@ -232,16 +239,19 @@ class FilterView extends Component {
             <option value="roe">Return on Equity</option>
           </select>
           <button type="button"
-                  className="btn btn-secondary"
+                  className="btn btn-secondary filter-button col-md-3"
                   onClick={this.handleSignClick.bind(this, event, key)}> {this.state.allFilters[key].sign} </button>
           <input type="text"
                  ref={"input"+key}
                  value={this.state.allFilters[key].input}
-                 onChange={this.onInputChange.bind(this, event, key)} />
-          <span>{this.state.allFilters[key].message}</span>
+                 onChange={this.onInputChange.bind(this, event, key)}
+                 className="filter-button col-md-3"/>
           <button type="button"
-                  className="btn btn-secondary"
+                  className="btn btn-secondary filter-button col-md-3"
                   onClick={this.handleTypeClick.bind(this,event,key)}> {this.state.allFilters[key].type} </button>
+        </div>
+        <div></div>
+          <div><span>{this.state.allFilters[key].message}</span></div>
         </div>
       )
     })
@@ -253,28 +263,32 @@ class FilterView extends Component {
     })
 
     return (
-      <div >
+      <div className="pushdown-md">
       <Header />
       <div className="row">
         <div className="col-md-12 filter">
-         <div className="row">
-           <div className="col-md-8">
-              <h2> Filters </h2>
+         <div className="row col-md-12">
+           <div className="col-md-12">
+              <h1> Filters </h1>
            </div>
-           <div className="col-md-4">
-             <button className="btn btn-secondary" onClick={this.generateNewFilter}>Add More Filters
-             </button>
-           </div>
+           <br/><br/>
          </div>
         <form onSubmit={this.onFormSubmit}>
           {filterInputs}
-          <br/>
-            <button type="submit" className="btn btn-secondary">Submit
-            </button>
+           <div className="row col-md-4">
+             <br/>
+            <button type="submit" className="btn btn-secondary col-md-4 centertext">Submit  </button>
+           </div>
         </form>
+
+         <button className="btn btn-secondary col-md-4 col-md-offset-2 pushdown-sm" onClick={this.generateNewFilter}>Add More Filters
+         </button>
+
         </div>
         <div className="col-md-12 results">
-        <h2> Results </h2>
+          <div className="col-md-12 pushdown-sm">
+            <h1>{resultsHeader}</h1>
+          </div>
         {this.state.results}
         </div>
 
@@ -284,7 +298,7 @@ class FilterView extends Component {
           style={modalStyle}
         >
         <h2 className="centerheading">What part of "please type in a valid number" do you not understand?</h2>
-          
+
         </Modal>
 
 
@@ -298,4 +312,4 @@ function mapStateToProps({filterData}) {
   return {filterData};
 }
 
-export default connect(mapStateToProps, {getDBDataFiltered, SearchStockData, GetGraphData, getPercentile})(FilterView)
+export default connect(mapStateToProps, {getDBDataFiltered, SearchStockData, GetGraphData, getPercentile, sendTicker})(FilterView)

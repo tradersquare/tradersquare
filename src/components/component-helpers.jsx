@@ -16,13 +16,14 @@ export default {
       }
     }
 
-    let percentileDisplay, value;
+    let percentileDisplay = ""
+    let value = "N/A";
     if(prop[metric]){
       percentileDisplay = prop[metric].percentile === null ? "" : `percentile: ${prop[metric].percentile}%`;
-      value = prop[metric].value === ("nm" || null) ? "N/A" : prop[metric].value
+      value = prop[metric].value === ("nm" || null || undefined) ? "N/A" : prop[metric].value
     }
 
-    console.log(value, percentileDisplay)
+    // console.log(value, percentileDisplay)
     const customStyles = {
       content : {
         top                   : '50%',
@@ -42,7 +43,7 @@ export default {
       value: value,
       style: customStyles
     }
-    console.log("OBJ", obj, prop)
+    console.log(metric, prop)
     return obj;
   }
 

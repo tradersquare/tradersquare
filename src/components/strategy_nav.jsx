@@ -21,7 +21,7 @@ class StratNav extends Component {
   render() {
     return (
       <div className="">
-        <Link to="/strategyview" onClick={this.handleClick} className="btn btn-secondary">
+        <Link to="/strategyview" onClick={this.handleClick} className="nav-link">
                Leaderboard
         </Link>
       </div>

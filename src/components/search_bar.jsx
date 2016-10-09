@@ -42,7 +42,7 @@ class SearchBar extends Component {
   render() {
     return (
       <div className="input-group" onKeyPress={this.handleEnter}>
-        <input className="form-control" value={this.state.ticker} onChange={this.setTicker} placeholder="Enter a Ticker here"></input>
+        <input className="form-control"  id="i5p" value={this.state.ticker} onChange={this.setTicker} placeholder="Enter a Ticker here"></input>
         <span className="input-group-btn">
           <Link to="/stockview" onClick={this.handleSubmit} className="btn btn-secondary" >
                 Search

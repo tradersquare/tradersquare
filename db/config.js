@@ -1,5 +1,5 @@
 const pg                      = require('pg');
-const db                      = require('../db/config');
+// const db                      = require('../db/config');
 
 pg.defaults.ssl = true;
 

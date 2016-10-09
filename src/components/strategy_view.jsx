@@ -11,6 +11,8 @@ import Loading from './loading';
 import Header from './header';
 import getPercentile from '../actions/get_percentile';
 import {description} from './metric_descriptions';
+import sendTicker from '../actions/stock_view_validation';
+
 
 
 // import { DropdownButton } from 'react-bootstrap';
@@ -29,9 +31,9 @@ class StrategyView extends Component {
     //   initialVal = this.props.strategyData.metric;
     // }"
     this.state = {
-      selectValue: "", 
-      items: 21, 
-      flag: false, 
+      selectValue: "",
+      items: 21,
+      flag: false,
       sortDirection: "ascending"
     }
 
@@ -84,7 +86,7 @@ class StrategyView extends Component {
     this.props.SearchStockData(ticker);
     this.props.GetGraphData(ticker);
     this.props.getPercentile(ticker);
-
+    this.props.sendTicker(ticker);
   }
 
   sortFunc(currentStrat) {
@@ -106,7 +108,7 @@ class StrategyView extends Component {
     }
   }
 
-  
+
   viewMore() {
     this.setState({items: this.state.items + 9})
   }
@@ -126,6 +128,7 @@ class StrategyView extends Component {
     let currentStrat = this.state.selectValue;
     let metricInfo = description[currentStrat] ? description[currentStrat] : {name: "", des: ""};
     let filteredStocks = [];
+    let InvestopediaLink = metricInfo.link ? "read more on Investopedia" : ""
 
     for(let n of this.props.strategyData.data){
       if(!isNaN(parseFloat(n[currentStrat]))){
@@ -165,7 +168,7 @@ class StrategyView extends Component {
           stockKey++;
         }
 
-        cards.push(<div className="card-deck" key={stockKey * 27}>
+        cards.push(<div className="card-deck col-md-12" key={stockKey * 27}>
           {stocks[0]}
           {stocks[1]}
           {stocks[2]}
@@ -181,47 +184,51 @@ class StrategyView extends Component {
 
 
     return (
-        <div >
+        <div className="pushdown-md">
           <Header />
-          <div className="col-md-5">
+        <div className="filterbar col-md-12">
+          <div className="col-md-6 ">
+          {this.setMetric}
+            <select
+              value={this.state.selectValue}
+              onChange={this.handleChange}
+              className="col-md-12"
+              >
+              <option value="">--select metric to begin--</option>
+              <option value="altmanzscore">Z-Score</option>
+              <option value="assetturnover">Asset Turnover</option>
+              <option value="grossmargin">Gross Margin</option>
+              <option value="pricetoearnings">P/E</option>
+              <option value="currentratio">Current Ratio</option>
+              <option value="quickratio">Quick Ratio</option>
+              <option value="epsgrowth">EPS Growth</option>
+              <option value="divpayoutratio">Dividend Payout Ratio</option>
+              <option value="dividendyield"> Dividend Yield</option>
+              <option value="debttoequity">Debt To Equity</option>
+              <option value="leverageratio">Leverage Ratio</option>
+              <option value="enterprisevalue">Enterprise Value</option>
+              <option value="earningsyield">Earnings Yield</option>
+              <option value="netincomegrowth">Net Income Growth</option>
+              <option value="roe">Return on Equity</option>
+              <option value="roa">Return on Asset</option>
+              <option value="roic">Return on Invested Capital</option>
+              <option value="pricetobook">Price to Book</option>
+              <option value="beta">Beta</option>
+            </select>
+          </div>
+          <div className="col-md-4"></div>
+          <div className="col-md-2">
+            <button className="col-md-12 btn btn-secondary filter-button pull-right textright nohover" onClick={this.changeDirection}>click to sort {this.state.sortDirection}</button>
+          </div>
+        </div>
+          <div className="col-md-12">
             <h1>{metricInfo.name}</h1>
           </div>
-          <div className="col-md-3">
-          {this.setMetric}
-          <select
-            value={this.state.selectValue}
-            onChange={this.handleChange}
-            >
-            <option value="">--select metric to begin--</option>
-            <option value="altmanzscore">Z-Score</option>
-            <option value="assetturnover">Asset Turnover</option>
-            <option value="grossmargin">Gross Margin</option>
-            <option value="pricetoearnings">P/E</option>
-            <option value="currentratio">Current Ratio</option>
-            <option value="quickratio">Quick Ratio</option>
-            <option value="epsgrowth">EPS Growth</option>
-            <option value="divpayoutratio">Dividend Payout Ratio</option>
-            <option value="dividendyield"> Dividend Yield</option>
-            <option value="debttoequity">Debt To Equity</option>
-            <option value="leverageratio">Leverage Ratio</option>
-            <option value="enterprisevalue">Enterprise Value</option>
-            <option value="earningsyield">Earnings Yield</option>
-            <option value="netincomegrowth">Net Income Growth</option>
-            <option value="roe">Return on Equity</option>
-            <option value="roa">Return on Asset</option>
-            <option value="roic">Return on Invested Capital</option>
-            <option value="pricetobook">Price to Book</option>
-            <option value="beta">Beta</option>
-          </select>
-          </div>
-          <div className="col-md-1"></div>
-          <div className="col-md-3">
-            <button className="btn btn-secondary" onClick={this.changeDirection}>click to sort {this.state.sortDirection}</button>
-          </div>
-          <br/><br/>
-
           <div className="col-md-12">
             <p>{metricInfo.des}</p>
+          </div>
+          <div className="col-md-12">
+            <p><a href={metricInfo.link} target="_blank">{InvestopediaLink}</a></p>
           </div>
 
           <div className="col-md-12 card-deck-wrapper">
@@ -244,4 +251,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, {SearchStockData, getStratData, GetGraphData, getPercentile})(StrategyView)
+export default connect(mapStateToProps, {SearchStockData, getStratData, GetGraphData, getPercentile, sendTicker})(StrategyView)

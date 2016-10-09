@@ -24,6 +24,9 @@ const {addExtraCols}          = require('./server_helper');
 const {watchListTable}        = require('../db/db_tables_store');
 const {watchlistInsert}       = require('../db/watchlist_queries');
 const {queryAllRowsWatchlist} = require('../db/watchlist_queries');
+const getDataBack             = require('./request_handler/db_updater');
+// const apiReq                  = require('./request_handler/api_req');
+// const intrinio = require(path.resolve(__dirname, "request_handler/intrinio"))(username, password);
 
 const tables = {watchListTable};
 //REQUEST HANDLER MODULES
@@ -45,7 +48,8 @@ app.use(webpackDevMiddleware(compiler, {
     publicPath: config.output.publicPath,
     stats: {
       colors: true
-    }
+    },
+    noInfo: true
 }))
   // app.use(webpackHotMiddleware(compiler, {
   //   log: console.log
@@ -105,6 +109,7 @@ app.get('/getAllCompany/', function(req, res) {
 });
 
 app.get('/getBasicInfo/*', function(req, res) {
+  console.log('inside basic info listener');
   const ticker = req.url.slice(14).toUpperCase();
   stratData(ticker, res);
 });
@@ -153,13 +158,20 @@ app.get('/createGenericTable/*', function(req, res) {
  * watchListInsert found in: watchlist_queries.js
  */
 app.post('/addToWatchlist', function(req, res) {
-  // console.log('req.body: ', req.body);
   watchlistInsert(res, req.body);
 })
 
-app.use('/getFromWatchList', function(req, res) {
-  console.log('getFromWatchList endpoint reached');
-  queryAllRowsWatchlist(res);
+app.get('/getFromWatchList', function(req, res) {
+  console.log('req.querygit   at getfromwatchlist ', req.query.userExtId);
+  queryAllRowsWatchlist(res, req.query.userExtId);
+})
+
+app.get('/updateDB/*', function(req, res) {
+  console.log('inside get"updateDB"');
+  let ticker = req.url.slice(10);
+  console.log(ticker);
+  getDataBack(ticker);
+  res.status(200).send('hello update');
 })
 
 app.use(function(req, res, next) {

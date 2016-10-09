@@ -1,11 +1,43 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css" />
-    <link href="https://fonts.googleapis.com/css?family=Cinzel|Cookie|Josefin+Sans|Muli|Cabin+Sketch|Buda:300|Alegreya+Sans+SC:300" rel="stylesheet" />
-    <link rel="stylesheet" href="../style/style.css" />
-    <link href="https://fonts.googleapis.com/css?family=Cinzel|Cookie|Josefin+Sans|Muli|Roboto:300,400,500" rel="stylesheet" />
+<!--     <link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css" /> -->
+    <link href="https://fonts.googleapis.com/css?family=Cinzel|Cookie|Josefin+Sans|Muli|Cabin+Sketch|Buda:300|Alegreya+Sans+SC:300|Lobster+Two" rel="stylesheet" />
+
+<!--     <link rel="stylesheet" href="../style/style.css" />
+    <link href="https://fonts.googleapis.com/css?family=Cinzel|Cookie|Josefin+Sans|Muli|Roboto:300,400,500" rel="stylesheet" /> -->
     <!-- <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script> -->
+
+
+      <!-- Material Design fonts -->
+<!--     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700"> -->
+<!--     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="https://fonts.googleapis.com/css?family=Cinzel|Cookie|Josefin+Sans|Muli|Roboto:300,400,500" rel="stylesheet" />
+    -->
+    <!-- Bootstrap -->
+<!--     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css" />
+
+
+<!--
+  <script   src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> -->
+
+
+    <!-- Compiled and minified CSS -->
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css"> -->
+
+  <!-- Compiled and minified JavaScript -->
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script> -->
+    <!-- Bootstrap Material Design -->
+<!--     <link rel="stylesheet" type="text/css" href="dist/css/bootstrap-material-design.css">
+    <link rel="stylesheet" type="text/css" href="dist/css/ripples.min.css"> -->
+<!--       <link rel="stylesheet" href="http://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css"> -->
+
+
     <style>
       body {
         background-color: white;
@@ -21,8 +53,8 @@
  /*       margin-top: 30px;
         margin-bottom: 20px;*/
         padding-left: 0px !important;
-        font-family: 'Alegreya Sans SC', cursive;
-        font-size: 60px;
+        font-family: 'Lobster Two', cursive;
+        font-size: 40px;
         color: #0494A5;
       }
       .heading a:hover {
@@ -30,7 +62,7 @@
         color: black;
       }
       .header {
-        margin-top: 30px;
+        margin-top: 5px;
         margin-bottom: 20px;
         vertical-align: 0px;
         background-color: white;
@@ -60,6 +92,11 @@
         font-family: 'Alegreya Sans SC', cursive;
         color: #0494A5;
       }
+      .stock-header {
+        font-size: 30px;
+        display: inline;
+        /*font-weight: bold;*/
+      }
       .centerheading {
         text-align: center;
         font-weight: bold;
@@ -72,15 +109,23 @@
       .card{
         background-color: #F7F7F2;
         border-radius: 0px;
+        padding: 10px;
       }
       .pushdown {
         margin-top: 200px;
       }
+      .pushdown-sm{
+        margin-top: 30px;
+        margin-bottom: 30px;
+      }
+      .pushdown-md{
+        margin-top: 150px;
+      }
       .red {
-        background-color: #FFA69E;
+        color: #D81B60;
       }
       .green {
-        background-color: #B6EFD4;
+        color: #00C853;
       }
       .clickable-card:hover {
         background-color: #B9D6F2;
@@ -90,6 +135,8 @@
       }
       .smallwords {
         font-size: 15px;
+        padding-right: 30px;
+        padding-left: 30px;
       }
       .textright {
         text-align: right;
@@ -98,13 +145,55 @@
       .textleft {
         text-align: left;
         margin-left: 0px;
+      };
+      .navbar {
+        background-color: #00ACC1;
       }
+      select {
+        border: 0px;
+        outline: 0px;
+      }
+      .page-header {
+        color: #061A40;
+        font-size: 30px;
+        font-family: 'Josefin Sans', sans-serif;
+        margin-bottom: 50px;
 
+      }
+      .filter-button {
+        border: 0px;
+        outline: 0px;
+        background: rgba(76, 175, 80, 0)
+      }
+      .filterbar {
+        /*background-color: blue;*/
+        border-bottom: 3px solid #0494A5;
+        margin-bottom: 10px;
+        background: rgba(76, 175, 80, 0);
+
+      }
+      .filterdrop {
+        background: rgba(76, 175, 80, 0);
+      }
+      .nohover button:hover{
+        background-color: white;
+      }
+      .photo {
+        border-radius: 100%;
+        width: 200px;
+        height:200px;
+        border: 3px solid #0494A5;
+
+      }
 
     </style>
   </head>
   <body>
+  <!-- <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>  -->
     <div class="container"></div>
+
   </body>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>  -->
+
   <script src="./bundle.js"></script>
 </html>

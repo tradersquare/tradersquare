@@ -15,7 +15,7 @@ class FilterNav extends Component {
   render() {
     return (
       <div>
-        <Link to="/filterview" className="btn btn-secondary">
+        <Link to="/filterview" className="nav-link">
                Pick Stocks
         </Link>
       </div>
