@@ -16,5 +16,11 @@ describe('Server testing', () => {
         done();
       });
     });
+    it('Should be a 200 code from getTwitterData', (done) => {
+      http.get('http://localhost:3000/getTwitterData/yahoo', (res) => {
+        assert.equal(200, res.statusCode);
+        done();
+      })
+    })
   });
 });
