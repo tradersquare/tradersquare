@@ -62,3 +62,35 @@ allTickers.forEach( v => {
 
 //Update table val: UPDATE dummy.cron   SET numnum      =      99        WHERE var = 'foot';
 //                       schema.table       col to change=new val             col  =  old val;
+
+
+
+/* INSTRUCTIONS FOR DB DROPPING AND COPYING AND STUFF
+backup: stockdatatable
+  -messed up table due to DB insertion testing
+
+storage: allData
+  -copy of good production table
+
+commit: allData
+  -copy of good production table
+
+watchlistschema: ...
+  -user stored stocks
+
+productionschema: realdata
+  -connected to code, also being updated
+
+
+
+
+
+
+select * into [new schema.table name] from [where you want to copy from (schema.tablename)];
+
+[6:15]
+make sure to create new schema first, no need to create the table inside that schema though
+
+[6:16]
+select * into storage.alldata from productionschema.realdata;
+ */
