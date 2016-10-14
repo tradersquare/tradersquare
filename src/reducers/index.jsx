@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux';
+  import { combineReducers } from 'redux';
 import StockReducer from './stock_reducer';
 import Strat1 from './strategyF_reducer';
 import StrategyViewReducer from './strategy_reducer';
