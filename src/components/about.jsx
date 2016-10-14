@@ -8,22 +8,22 @@ class About extends Component {
 
   render() {
     return (
-      <div className="pushdown-md">
+      <div className="">
       <Header />
       <h1>About Tradersquare</h1>
         <div className="">
-        <p>Tradersquare was created to make stock analysis and stock picking more accessible to everyone.
+        <p>Tradersquare was created to make stock analysis and stock picking more accessible to everyone. Pick stocks based on different metrics.
         <br/>
-        
+        Disclaimer: We are not making any investment recommendations, please invest at your own risk.
         </p>
         </div>
 
       <h1>Technology We Used</h1>
         <div className="row">
 
-        <img className="react col-md-2" src="https://camo.githubusercontent.com/de1aee8ba4b47ab028766f2fd83b777715b88c3b/68747470733a2f2f73332d75732d776573742d312e616d617a6f6e6177732e636f6d2f7374616e6c65796379616e672d76322f72656163742d6f7074692e706e672d31373337633838616364656463643366623531336466623866333338623634656634356364313561" />
+        <img className="react col-md-2 img-responsive" src="/images/react_logo.png" />
 
-        <img className="redux col-md-2" src="https://raw.githubusercontent.com/reactjs/redux/master/logo/logo-title-dark.png"/>
+        <img className="redux col-md-2 img-responsive" src="/images/redux_logo.png"/>
 
         </div>
 
