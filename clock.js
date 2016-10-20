@@ -2,7 +2,7 @@ var CronJob = require('cron').CronJob;
 var bot = require('./bot.js');
 
 new CronJob({
-  cronTime: "59 9,11,16,20,22 * * *", // everyday, 9:13, 11:13, 4:13, 8:13,
+  cronTime: "59 4 * * *",
   onTick: bot.start(),
   start: true,
   timeZone: "America/Los_Angeles"

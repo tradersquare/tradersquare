@@ -24,12 +24,10 @@ module.exports = (ticker) => {
       compData.forEach( (v, i) => {
         let col = v.tag;
         let newValue = v.value;
-        // if (col === 'marketcap') {
-        //   // newValue = 1000000000;
-        // }
         db.query(`UPDATE productionschema.realdata SET marketcap = ${newValue} WHERE ticker = '${ticker}';`)
-        // db.query(`UPDATE productionschema.realdata SET ${col} = ${newValue} WHERE ticker = '${ticker}';`)
         .on('end', () => {
+          //while useful, following line slows down process significantly
+          //only use for debugging purposes
           // console.log('data changed', i, ticker);
         })
         .catch( console.error)
