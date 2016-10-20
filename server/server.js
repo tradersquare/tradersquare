@@ -80,6 +80,9 @@ app.get('/schema/', function(req, res) {
   callAll.getReq(res);
 });
 
+/**
+ * not used in production
+ */
 app.get('/populate/', function(req, res) {
   callAll.populate(res);
 });
@@ -90,7 +93,6 @@ app.get('/getDataDB/', function(req, res) {
 });
 
 app.get('/getFilteredDataDB/*', function(req, res) {
-  // let results = [];
   let params = req.query.filter;
   GrabFilteredDataDB(res, params);
 })
@@ -114,11 +116,22 @@ app.get('/getBasicInfo/*', function(req, res) {
   stratData(ticker, res);
 });
 
+/**
+ * endpoint accessed by action: get_percentile.jsx
+ * used and called by component: strategy_view.jsx
+ * metricData: request_handler/metric_data.js
+ **/
 app.get('/getMetrics/*', function(req, res){
   const ticker = req.url.slice(12).toUpperCase();
   metricData(ticker, res)
 })
 
+/**
+ * endpoint accessed by action: get_graph_data.jsx
+ * action called by: components/search_bar.jsx
+ * used by component: stock_view.jsx
+ * getGraphData: request_handler/graph_data.js
+ */
 app.get('/getGraphData/*', function(req, res) {
   ticker = req.url.slice(14).toUpperCase();
   getGraphData(res, ticker);

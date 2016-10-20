@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const GET_GRAPH = 'GET_GRAPH';
 
-
+// used by: components:/search_bar.jsx
 export function getGraphData(ticker) {
 
   let graphReq = axios.get(`/getGraphData/${ticker}`);
