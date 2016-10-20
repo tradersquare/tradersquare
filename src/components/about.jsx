@@ -5,12 +5,19 @@ import {bindActionCreators} from 'redux';
 import Header from './header'
 
 class About extends Component {
-
+/**
+ * TODO:
+ * Add hyperlinks for each team member, point to: blog/linkedin/personal-website/github/etc.
+ * Add short description for ea. team member
+ * Populate tech stack
+ * Make mobile responsive: maybe using bootstrap cards?
+ * Make text wrap to window width
+ */
   render() {
     return (
       <div className="">
       <Header />
-      <h1>About Tradersquare</h1>
+      <h1>About TraderSquare</h1>
         <div className="">
         <p>When it comes to investment strategies for the everyday user, it can quickly become very cumbersome to cut
         through the noise. Often, you need an investment advisor with years of experience, who will end up taking
@@ -33,7 +40,6 @@ class About extends Component {
         <img className="react col-md-2 img-responsive" src="/images/react_logo.png" />
 
         <img className="redux col-md-2 img-responsive" src="/images/redux_logo.png"/>
-
         </div>
 
       <h1>The Team</h1>
@@ -56,10 +62,15 @@ class About extends Component {
           <h4 className="centertext col-md-12">Cindy Sun</h4>
         </div>
 
-
         <div className="col-md-3">
           <div className="col-md-12"><img src="https://scontent.fsnc1-4.fna.fbcdn.net/t31.0-8/10623510_10204591370197577_6605496669023337623_o.jpg" className="photo"/></div>
           <h4 className="centertext col-md-12">Chris Battenfield</h4>
+        </div>
+
+        <h1>Technologies Implemented</h1>
+        <div className="row">
+        <img className="react col-md-2" src="https://camo.githubusercontent.com/de1aee8ba4b47ab028766f2fd83b777715b88c3b/68747470733a2f2f73332d75732d776573742d312e616d617a6f6e6177732e636f6d2f7374616e6c65796379616e672d76322f72656163742d6f7074692e706e672d31373337633838616364656463643366623531336466623866333338623634656634356364313561" />
+        <img className="redux col-md-2" src="https://raw.githubusercontent.com/reactjs/redux/master/logo/logo-title-dark.png"/>
         </div>
 
       </div>
