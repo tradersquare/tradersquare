@@ -12,9 +12,18 @@ class About extends Component {
       <Header />
       <h1>About Tradersquare</h1>
         <div className="">
-        <p>Tradersquare was created to make stock analysis and stock picking more accessible to everyone. Pick stocks based on different metrics.
+        <p>When it comes to investment strategies for the everyday user, it can quickly become very cumbersome to cut
+        through the noise. Often, you need an investment advisor with years of experience, who will end up taking
+        a hefty cut of your investment. For those more financially savvy, very complicated, custom excel spread-
+        sheets become the norm to assess information based on real-time data.
         <br/>
+        We've created a service which simplifies certain aspects of the process. TraderSquare gives the user the
+        functionality to filter stocks based on their own preferences, and order stocks based on different financial
+        criterea, all without even logging in. Currently, these two services are limited to stocks in the S&P 500, but
+        users can also find current financial data for any stock provided by the Intrinio API and store that information
+        in their TraderSquare account.
         Disclaimer: We are not making any investment recommendations, please invest at your own risk.
+        <br/>
         </p>
         </div>
 
@@ -60,4 +69,3 @@ class About extends Component {
 }
 
 export default connect(null, {})(About);
-
