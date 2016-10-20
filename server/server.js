@@ -124,6 +124,7 @@ app.get('/getGraphData/*', function(req, res) {
   getGraphData(res, ticker);
 })
 
+// used for sentiment
 app.get('/getTwitterData/*', function(req, res) {
   handle = req.url.slice(16).toUpperCase();
   console.log('twitterslice', handle);
@@ -154,18 +155,28 @@ app.get('/createGenericTable/*', function(req, res) {
 });
 
 /**
- * endpoint accessed by: add_stock action
- * watchListInsert found in: watchlist_queries.js
+ * endpoint accessed by: add_stock.jsx action
+ * watchListInsert found in: db/watchlist_queries.js
+ * used by component: watch_list.jsx
  */
 app.post('/addToWatchlist', function(req, res) {
   watchlistInsert(res, req.body);
 })
 
+/**
+ * endpoint accessed by: add_stock.jsx action
+ * watchListInsert found in: db/watchlist_queries.js
+ * used by component: watch_list.jsx
+ */
 app.get('/getFromWatchList', function(req, res) {
   console.log('req.querygit   at getfromwatchlist ', req.query.userExtId);
   queryAllRowsWatchlist(res, req.query.userExtId);
 })
 
+/**
+ * endpoint accessed by: bin/task
+ * getDataBack found in: request_handler/db_updater.js
+ */
 app.get('/updateDB/*', function(req, res) {
   console.log('inside get"updateDB"');
   let ticker = req.url.slice(10);
