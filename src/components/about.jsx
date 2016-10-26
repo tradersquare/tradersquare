@@ -33,15 +33,7 @@ class About extends Component {
         <br/>
         </p>
         </div>
-
-      <h1>Technology We Used</h1>
-        <div className="row">
-
-        <img className="react col-md-2 img-responsive" src="/images/react_logo.png" />
-
-        <img className="redux col-md-2 img-responsive" src="/images/redux_logo.png"/>
-        </div>
-
+        
       <h1>The Team</h1>
       <br/><br/>
       <div className="row">
