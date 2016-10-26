@@ -3,11 +3,6 @@ import axios from 'axios';
 export const ADD_STOCK = "ADD_STOCK";
 
 export default function(stock, watchlistData, userID, initialLoad) {
-  // debugger;
-
-  //add logic: if not logged in, take to login page
-  //otherwise, do below stuff
-  //after login, populate state using login action?
 
   let notInsideWatchlist = true;
   if (stock) {

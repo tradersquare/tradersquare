@@ -272,7 +272,7 @@ class StockView extends Component {
                 <h4 className="centertext">Market Cap: {Numeral(parseFloat(stockData.marketcap)).format('0,0')}</h4>
                 <h4 className="centertext">Average Volume: {stockData["average_daily_volume"]}</h4>
                 <h4 className="centertext">Open/Close: {stockData.open_price}/{stockData.close_price}</h4>
-                {this.sentimentDiv}
+                {/* {this.sentimentDiv} */}
             </div>
           </div>
         </div>
