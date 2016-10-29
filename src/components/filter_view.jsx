@@ -263,7 +263,7 @@ class FilterView extends Component {
     })
 
     return (
-      <div className="pushdown-md">
+      <div className="">
       <Header />
       <div className="row">
         <div className="col-md-12 filter">

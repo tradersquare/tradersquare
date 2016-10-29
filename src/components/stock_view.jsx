@@ -239,9 +239,9 @@ class StockView extends Component {
     // const earningsyield = parseFloat(stockData.earningsyield);
     // const booktomarket = (parseFloat(stockData.bookvaluepershare) / parseFloat(stockData.close_price)).toFixed(3);
     return (
-      <div className="pushdown-sm">
+      <div className="">
         <Header />
-        <div className="row pushdown-md">
+        <div className="row">
           <div className="col-md-3">
             <h1 className="stock-header">  <strong>{stockData.ticker}</strong>: {stockData.name}</h1>
           </div>
