@@ -27,7 +27,7 @@ class Watchlist extends Component {
 
     if (this.props.auth.currently === Constants.LOGGED_IN) {
       return (
-        <div className="pushdown-md">
+        <div className="">
           <Header />
           <div>
             <h2> My Watchlist </h2>
@@ -45,7 +45,9 @@ class Watchlist extends Component {
     return (
         <div>
           <center>
+          <Header/>
           <h2> Please login to view this page </h2>
+
           </center>
         </div>
       )

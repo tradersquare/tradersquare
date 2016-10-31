@@ -184,7 +184,7 @@ class StrategyView extends Component {
 
 
     return (
-        <div className="pushdown-md">
+        <div className="">
           <Header />
         <div className="filterbar col-md-12">
           <div className="col-md-6 ">

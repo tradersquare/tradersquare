@@ -80,6 +80,9 @@ app.get('/schema/', function(req, res) {
   callAll.getReq(res);
 });
 
+/**
+ * not used in production
+ */
 app.get('/populate/', function(req, res) {
   callAll.populate(res);
 });
@@ -90,7 +93,6 @@ app.get('/getDataDB/', function(req, res) {
 });
 
 app.get('/getFilteredDataDB/*', function(req, res) {
-  // let results = [];
   let params = req.query.filter;
   GrabFilteredDataDB(res, params);
 })
@@ -114,16 +116,28 @@ app.get('/getBasicInfo/*', function(req, res) {
   stratData(ticker, res);
 });
 
+/**
+ * endpoint accessed by action: get_percentile.jsx
+ * used and called by component: strategy_view.jsx
+ * metricData: request_handler/metric_data.js
+ **/
 app.get('/getMetrics/*', function(req, res){
   const ticker = req.url.slice(12).toUpperCase();
   metricData(ticker, res)
 })
 
+/**
+ * endpoint accessed by action: get_graph_data.jsx
+ * action called by: components/search_bar.jsx
+ * used by component: stock_view.jsx
+ * getGraphData: request_handler/graph_data.js
+ */
 app.get('/getGraphData/*', function(req, res) {
   ticker = req.url.slice(14).toUpperCase();
   getGraphData(res, ticker);
 })
 
+// used for sentiment
 app.get('/getTwitterData/*', function(req, res) {
   handle = req.url.slice(16).toUpperCase();
   console.log('twitterslice', handle);
@@ -154,18 +168,28 @@ app.get('/createGenericTable/*', function(req, res) {
 });
 
 /**
- * endpoint accessed by: add_stock action
- * watchListInsert found in: watchlist_queries.js
+ * endpoint accessed by: add_stock.jsx action
+ * watchListInsert found in: db/watchlist_queries.js
+ * used by component: watch_list.jsx
  */
 app.post('/addToWatchlist', function(req, res) {
   watchlistInsert(res, req.body);
 })
 
+/**
+ * endpoint accessed by: add_stock.jsx action
+ * watchListInsert found in: db/watchlist_queries.js
+ * used by component: watch_list.jsx
+ */
 app.get('/getFromWatchList', function(req, res) {
   console.log('req.querygit   at getfromwatchlist ', req.query.userExtId);
   queryAllRowsWatchlist(res, req.query.userExtId);
 })
 
+/**
+ * endpoint accessed by: bin/task
+ * getDataBack found in: request_handler/db_updater.js
+ */
 app.get('/updateDB/*', function(req, res) {
   console.log('inside get"updateDB"');
   let ticker = req.url.slice(10);

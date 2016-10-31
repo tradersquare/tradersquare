@@ -14,7 +14,4 @@ export default function (ticker) {
        payload: percentileData
      }
     })
-
-
-
 }

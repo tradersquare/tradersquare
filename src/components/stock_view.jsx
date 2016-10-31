@@ -239,9 +239,9 @@ class StockView extends Component {
     // const earningsyield = parseFloat(stockData.earningsyield);
     // const booktomarket = (parseFloat(stockData.bookvaluepershare) / parseFloat(stockData.close_price)).toFixed(3);
     return (
-      <div className="pushdown-sm">
+      <div className="">
         <Header />
-        <div className="row pushdown-md">
+        <div className="row">
           <div className="col-md-3">
             <h1 className="stock-header">  <strong>{stockData.ticker}</strong>: {stockData.name}</h1>
           </div>
@@ -272,7 +272,7 @@ class StockView extends Component {
                 <h4 className="centertext">Market Cap: {Numeral(parseFloat(stockData.marketcap)).format('0,0')}</h4>
                 <h4 className="centertext">Average Volume: {stockData["average_daily_volume"]}</h4>
                 <h4 className="centertext">Open/Close: {stockData.open_price}/{stockData.close_price}</h4>
-                {this.sentimentDiv}
+                {/* {this.sentimentDiv} */}
             </div>
           </div>
         </div>

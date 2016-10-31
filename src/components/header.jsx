@@ -11,10 +11,10 @@ import LoginNav from './login';
 export default class Header extends Component {
 
   render() {
-    return (<div className="pushdown-sm">
-      <nav className="navbar navbar-fixed-top navbar-light  col-md-12" style={{"backgroundColor": "#B2DFDB"}}>
+    return (<div className="">
+      <nav className="navbar navbar-light  col-md-12" style={{"backgroundColor": "#B2DFDB"}}>
         <h1 className="heading col-md-9"><Link className="navbar-link" to="/">TraderSquare</Link></h1>
-        <h4 className="col-md-3"><span className="top-padding">powered by </span><a className="navbar-link" href="https://intrinio.com/"><img src="http://9304-presscdn-0-32.pagely.netdna-cdn.com/wp-content/uploads/2015/08/Logo.png" height="50"/></a></h4>
+        <p className="col-md-3"><span className="top-padding">powered by </span><a className="navbar-link" href="https://intrinio.com/"><img src="http://9304-presscdn-0-32.pagely.netdna-cdn.com/wp-content/uploads/2015/08/Logo.png" height="30"/></a></p>
 
         <div className="col-md-8">
         <ul className="nav navbar-nav col-md-12">
