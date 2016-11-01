@@ -18,7 +18,7 @@ class About extends Component {
       <div className="">
       <Header />
       <h1>About TraderSquare</h1>
-        <div className="">
+        <div>
         <p>When it comes to investment strategies for the everyday user, it can quickly become very cumbersome to cut
         through the noise. Often, you need an investment advisor with years of experience, who will end up taking
         a hefty cut of your investment. For those more financially savvy, very complicated, custom excel spread-
@@ -33,10 +33,11 @@ class About extends Component {
         <br/>
         </p>
         </div>
-        
-      <h1>The Team</h1>
-      <br/><br/>
-      <div className="row">
+      <br/>
+
+      <h1><p/>The Team</h1>
+      <br/>
+        <div className="row">
 
         <div className="col-md-3">
           <div className="col-md-12"><img src="https://scontent.fsnc1-4.fna.fbcdn.net/t31.0-8/1097031_10200347522719245_1948257329_o.jpg" className="photo"/></div>
@@ -57,14 +58,27 @@ class About extends Component {
         <div className="col-md-3">
           <div className="col-md-12"><img src="https://scontent.fsnc1-4.fna.fbcdn.net/t31.0-8/10623510_10204591370197577_6605496669023337623_o.jpg" className="photo"/></div>
           <h4 className="centertext col-md-12">Chris Battenfield</h4>
-        </div>
+          <br/><br/>
 
+        </div>
+        <p/>
         <h1>Technologies Implemented</h1>
         <div className="row">
-        <img className="react col-md-2" src="https://camo.githubusercontent.com/de1aee8ba4b47ab028766f2fd83b777715b88c3b/68747470733a2f2f73332d75732d776573742d312e616d617a6f6e6177732e636f6d2f7374616e6c65796379616e672d76322f72656163742d6f7074692e706e672d31373337633838616364656463643366623531336466623866333338623634656634356364313561" />
-        <img className="redux col-md-2" src="https://raw.githubusercontent.com/reactjs/redux/master/logo/logo-title-dark.png"/>
+        <img className="col-md-2" src="/images/nodejs_logo.png"/>
+        <img className="col-md-2" src="/images/express_logo.png"/>
+        <img className="react col-md-2" src="/images/react_logo.png" />
+        <img className="redux col-md-2" src="/images/redux_logo.png"/>
+        <img className="col-md-1" src="/images/d3_logo.png"/>
+        <img className="col-md-2" src="/images/postgres_logo.png"/>
         </div>
-
+        <p/>
+        <div className="row">
+        <div className="col-md-2"></div>
+        <img className="col-md-2" src="/images/bootstrap_logo.png"/>
+        <img className="col-md-2" src="/images/heroku_logo.jpg"/>
+        <img className="col-md-2" src="/images/webpack_logo.png"/>
+        </div>
+        <br/><br/>
       </div>
       </div>
     )
