@@ -35,6 +35,13 @@ class FilterView extends Component {
         earningsyield: 'Earnings Yield',
         netincomegrowth: 'Net Income Growth',
         roe: 'Return on Equity',
+        quickratio: 'Quick Ratio',
+        dividendyield: 'Dividend Yield',
+        leverageratio: 'Leverage Ratio',
+        roa: 'Return on Asset',
+        roic: 'Return on Invested Capital',
+        pricetobook: 'Price to Book',
+        beta: 'Beta'
       },
       columns: [],
       modalOpen: false,
@@ -225,18 +232,26 @@ class FilterView extends Component {
             onChange={this.onSelectChange.bind(this,event,key)}
             className="col-md-3 filterdrop"
           >
-            <option value="altmanzscore">Z-Score</option>
-            <option value="assetturnover">Asset Turnover</option>
-            <option value="grossmargin">Gross Margin</option>
-            <option value="pricetoearnings">P/E</option>
-            <option value="currentratio">Current Ratio</option>
-            <option value="epsgrowth">EPS Growth</option>
-            <option value="divpayoutratio">Dividend Payout Ratio</option>
-            <option value="debttoequity">Debt To Equity</option>
-            <option value="enterprisevalue">Enterprise Value</option>
-            <option value="earningsyield">Earnings Yield</option>
-            <option value="netincomegrowth">Net Income Growth</option>
-            <option value="roe">Return on Equity</option>
+            <option value="">--select metric to begin--</option>
+              <option value="altmanzscore">Z-Score</option>
+              <option value="assetturnover">Asset Turnover</option>
+              <option value="grossmargin">Gross Margin</option>
+              <option value="pricetoearnings">P/E</option>
+              <option value="currentratio">Current Ratio</option>
+              <option value="quickratio">Quick Ratio</option>
+              <option value="epsgrowth">EPS Growth</option>
+              <option value="divpayoutratio">Dividend Payout Ratio</option>
+              <option value="dividendyield"> Dividend Yield</option>
+              <option value="debttoequity">Debt To Equity</option>
+              <option value="leverageratio">Leverage Ratio</option>
+              <option value="enterprisevalue">Enterprise Value</option>
+              <option value="earningsyield">Earnings Yield</option>
+              <option value="netincomegrowth">Net Income Growth</option>
+              <option value="roe">Return on Equity</option>
+              <option value="roa">Return on Asset</option>
+              <option value="roic">Return on Invested Capital</option>
+              <option value="pricetobook">Price to Book</option>
+              <option value="beta">Beta</option>
           </select>
           <button type="button"
                   className="btn btn-secondary filter-button col-md-3"
