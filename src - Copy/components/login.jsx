@@ -54,11 +54,9 @@ class LoginNav extends Component {
         marginRight           : '-50%',
         transform             : 'translate(-50%, -50%)',
         width                 : '400px',
-        'fontFamily'         : '"Josefin Sans", sans-serif'
+        'font-family'         : '"Josefin Sans", sans-serif'
       }
     };
-
-    console.log(auth.currently)
 
     switch(auth.currently) {
       case Constants.LOGGED_IN:
@@ -68,12 +66,12 @@ class LoginNav extends Component {
               <tbody>
                 <tr>
                   <td>
-                    <Link to="/watchlist" className="mdl-navigation__link">
+                    <Link to="/watchlist" className="nav-link">
                       My Watchlist
                     </Link>
                   </td>
                   <td>
-                    <a className="mdl-navigation__link" onClick={this.logout}> &nbsp; &nbsp;Logout </a>
+                    <a className="nav-link" onClick={this.logout}> &nbsp; &nbsp;Logout </a>
                   </td>
                 </tr>
               </tbody>
@@ -83,7 +81,7 @@ class LoginNav extends Component {
       case Constants.AWAITING_AUTH_RESPONSE:
         return (
             <div>
-            <a className="mdl-navigation__link" onClick={this.openModal}>
+            <a className="nav-link" onClick={this.openModal}>
               My Watchlist
             </a>
 
@@ -103,8 +101,8 @@ class LoginNav extends Component {
           )
       default:
         return (
-          <div>
-            <a className="mdl-navigation__link" onClick={this.openModal}>
+            <div>
+            <a className="nav-link" onClick={this.openModal}>
               My Watchlist
             </a>
             <Modal

@@ -15,7 +15,7 @@ class FilterNav extends Component {
   render() {
     return (
       <div>
-        <Link to="/filterview" className="mdl-navigation__link">
+        <Link to="/filterview" className="nav-link">
                Pick Stocks
         </Link>
       </div>

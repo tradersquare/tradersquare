@@ -5,7 +5,6 @@ import { browserHistory } from 'react-router';
 const google = new firebase.auth.GoogleAuthProvider();
 
 function attemptGoogleLogin() {
-  console.log("logging in")
   return (dispatch, getState) => {
     dispatch({ type: Constants.ATTEMPTING_LOGIN });
     firebase.auth().signInWithPopup(google)

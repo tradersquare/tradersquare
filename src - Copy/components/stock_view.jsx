@@ -198,14 +198,13 @@ class StockView extends Component {
     if(this.props.stockData === "invalid"){
       return (
         <div>
-          <Header>
-            <div className="col-md-2"></div>
-            <div className="col-md-8 pushdown">
-              <h2 className="col-md-12 centerheading">please enter a valid ticker</h2>
-              <Link to="/" className="col-md-12 centertext">go back to home</Link>
-            </div>
-            <div className="col-md-2"></div>
-          </Header>
+        <Header />
+        <div className="col-md-2"></div>
+        <div className="col-md-8 pushdown">
+          <h2 className="col-md-12 centerheading">please enter a valid ticker</h2>
+          <Link to="/" className="col-md-12 centertext">go back to home</Link>
+        </div>
+        <div className="col-md-2"></div>
         </div>
         )
     }
@@ -215,10 +214,8 @@ class StockView extends Component {
       // priceChart = <div></div>;
       return (
         <div>
-          <Header>
-            <Loading />
-            <div className="col-md-6" ref='chartDivRef'></div>
-          </Header>
+          <Loading />
+          <div className="col-md-6" ref='chartDivRef'></div>
         </div>
       )
     }
@@ -243,7 +240,7 @@ class StockView extends Component {
     // const booktomarket = (parseFloat(stockData.bookvaluepershare) / parseFloat(stockData.close_price)).toFixed(3);
     return (
       <div className="">
-        <Header>
+        <Header />
         <div className="row">
           <div className="col-md-3">
             <h1 className="stock-header">  <strong>{stockData.ticker}</strong>: {stockData.name}</h1>
@@ -297,7 +294,6 @@ class StockView extends Component {
               <Profitability />
           </div>
         </div>
-        </Header>
       </div>
     )
   }
