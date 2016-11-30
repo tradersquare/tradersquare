@@ -20,7 +20,6 @@ class FilterView extends Component {
     this.state = {
       allFilters: [
           ],
-      counter: 0,
       results: [],
       values: {
         altmanzscore: 'Z-Score',
@@ -56,6 +55,7 @@ class FilterView extends Component {
     this.generateNewFilter = this.generateNewFilter.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.openModal = this.openModal.bind(this);
+    this.deleteExistingFilter = this.deleteExistingFilter.bind(this);
   }
 
   componentWillMount() {
@@ -119,7 +119,7 @@ class FilterView extends Component {
   }
 
   generateNewFilter() {
-    const index = this.state.counter;
+    const index = this.state.allFilters.length;
     let template =  {
           strat: 'altmanzscore',
           sign: '<',
@@ -131,8 +131,7 @@ class FilterView extends Component {
     let copy = this.state.allFilters.slice();
     copy.push(template);
     this.setState({
-      allFilters: copy,
-      counter: this.state.counter + 1
+      allFilters: copy
     });
   }
 
@@ -146,16 +145,10 @@ class FilterView extends Component {
         newAllFilters.push(copy[i]);
       }
 
-      this.setState({
-        allFilters: newAllFilters
-      });
+      this.setState({allFilters: newAllFilters});
 
       console.log(newAllFilters)
-    } else {
-      return;
     }
-
-
   }
 
   onFormSubmit(event) {
@@ -244,7 +237,7 @@ class FilterView extends Component {
     let resultsHeader = this.state.results.length > 0 ? "Results" : "";
 
     let filterInputs = this.state.allFilters.map((obj) => {
-
+      console.log("FILTERS IN RENDER: ", this.state.allFilters)
       let key = obj.index;
       return (<div key={key} className="col-md-12">
         <div  className="row filterbar col-md-12">
