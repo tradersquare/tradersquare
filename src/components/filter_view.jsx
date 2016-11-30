@@ -20,7 +20,6 @@ class FilterView extends Component {
     this.state = {
       allFilters: [
           ],
-      counter: 0,
       results: [],
       values: {
         altmanzscore: 'Z-Score',
@@ -56,6 +55,7 @@ class FilterView extends Component {
     this.generateNewFilter = this.generateNewFilter.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.openModal = this.openModal.bind(this);
+    this.deleteExistingFilter = this.deleteExistingFilter.bind(this);
   }
 
   componentWillMount() {
@@ -119,7 +119,7 @@ class FilterView extends Component {
   }
 
   generateNewFilter() {
-    const index = this.state.counter;
+    const index = this.state.allFilters.length;
     let template =  {
           strat: 'altmanzscore',
           sign: '<',
@@ -131,9 +131,24 @@ class FilterView extends Component {
     let copy = this.state.allFilters.slice();
     copy.push(template);
     this.setState({
-      allFilters: copy,
-      counter: this.state.counter + 1
+      allFilters: copy
     });
+  }
+
+  deleteExistingFilter(event, key) {
+    if (this.state.allFilters.length !== 1) {
+      let copy = this.state.allFilters.slice();
+      copy.splice(key, 1);
+      let newAllFilters = [];
+      for (let i = 0; i < copy.length; i++) {
+        copy[i].index = i;
+        newAllFilters.push(copy[i]);
+      }
+
+      this.setState({allFilters: newAllFilters});
+
+      console.log(newAllFilters)
+    }
   }
 
   onFormSubmit(event) {
@@ -222,7 +237,7 @@ class FilterView extends Component {
     let resultsHeader = this.state.results.length > 0 ? "Results" : "";
 
     let filterInputs = this.state.allFilters.map((obj) => {
-
+      console.log("FILTERS IN RENDER: ", this.state.allFilters)
       let key = obj.index;
       return (<div key={key} className="col-md-12">
         <div  className="row filterbar col-md-12">
@@ -254,16 +269,19 @@ class FilterView extends Component {
               <option value="beta">Beta</option>
           </select>
           <button type="button"
-                  className="btn btn-secondary filter-button col-md-3"
+                  className="btn btn-secondary filter-button col-md-2"
                   onClick={this.handleSignClick.bind(this, event, key)}> {this.state.allFilters[key].sign} </button>
           <input type="text"
                  ref={"input"+key}
                  value={this.state.allFilters[key].input}
                  onChange={this.onInputChange.bind(this, event, key)}
-                 className="filter-button col-md-3"/>
+                 className="filter-button col-md-2"/>
           <button type="button"
                   className="btn btn-secondary filter-button col-md-3"
-                  onClick={this.handleTypeClick.bind(this,event,key)}> {this.state.allFilters[key].type} </button>
+                  onClick={this.handleTypeClick.bind(this, event, key)}> {this.state.allFilters[key].type} </button>
+          <button type="button"
+                  className="btn btn-secondary filter-button col-md-2"
+                  onClick={this.deleteExistingFilter.bind(this, event, key)}> Remove</button>
         </div>
         <div></div>
           <div><span>{this.state.allFilters[key].message}</span></div>
