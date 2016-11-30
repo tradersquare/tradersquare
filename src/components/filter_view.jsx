@@ -136,7 +136,25 @@ class FilterView extends Component {
     });
   }
 
-  deleteExistingFilter() {
+  deleteExistingFilter(event, key) {
+    if (this.state.allFilters.length !== 1) {
+      let copy = this.state.allFilters.slice();
+      copy.splice(key, 1);
+      let newAllFilters = [];
+      for (let i = 0; i < copy.length; i++) {
+        copy[i].index = i;
+        newAllFilters.push(copy[i]);
+      }
+
+      this.setState({
+        allFilters: newAllFilters
+      });
+
+      console.log(newAllFilters)
+    } else {
+      return;
+    }
+
 
   }
 
@@ -267,7 +285,7 @@ class FilterView extends Component {
                  className="filter-button col-md-2"/>
           <button type="button"
                   className="btn btn-secondary filter-button col-md-3"
-                  onClick={this.handleTypeClick.bind(this,event,key)}> {this.state.allFilters[key].type} </button>
+                  onClick={this.handleTypeClick.bind(this, event, key)}> {this.state.allFilters[key].type} </button>
           <button type="button"
                   className="btn btn-secondary filter-button col-md-2"
                   onClick={this.deleteExistingFilter.bind(this, event, key)}> Remove</button>
