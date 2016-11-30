@@ -136,6 +136,10 @@ class FilterView extends Component {
     });
   }
 
+  deleteExistingFilter() {
+
+  }
+
   onFormSubmit(event) {
     event.preventDefault();
     let flag = true;
@@ -254,16 +258,19 @@ class FilterView extends Component {
               <option value="beta">Beta</option>
           </select>
           <button type="button"
-                  className="btn btn-secondary filter-button col-md-3"
+                  className="btn btn-secondary filter-button col-md-2"
                   onClick={this.handleSignClick.bind(this, event, key)}> {this.state.allFilters[key].sign} </button>
           <input type="text"
                  ref={"input"+key}
                  value={this.state.allFilters[key].input}
                  onChange={this.onInputChange.bind(this, event, key)}
-                 className="filter-button col-md-3"/>
+                 className="filter-button col-md-2"/>
           <button type="button"
                   className="btn btn-secondary filter-button col-md-3"
                   onClick={this.handleTypeClick.bind(this,event,key)}> {this.state.allFilters[key].type} </button>
+          <button type="button"
+                  className="btn btn-secondary filter-button col-md-2"
+                  onClick={this.deleteExistingFilter.bind(this, event, key)}> Remove</button>
         </div>
         <div></div>
           <div><span>{this.state.allFilters[key].message}</span></div>
