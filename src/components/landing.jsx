@@ -8,20 +8,21 @@ import FilterNav from './filter_nav';
 import Header from './header'
 
 export default class Landing extends Component {
+
   render() {
     return (
       <div className="landing">
-      <div className=" row landing-container">
+      <div className=" ">
 
-          <div className="landing-input">
-          <h1 className="">picking stocks has never been easier</h1>
+          <div className="mdl-grid">
 
-            <div className="col-md-3"></div>
-            <div className="col-md-6">
+            <div className="mdl-cell"></div>
+            <div className="mdl-cell">
+               <h1 className="">TraderSquare</h1>
               <br/>
               <br/>
             </div>
-            <div className="col-md-3"></div>
+            <div className="mdl-cell"></div>
 
           </div>
 
