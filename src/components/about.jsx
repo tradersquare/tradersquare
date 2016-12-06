@@ -16,7 +16,7 @@ class About extends Component {
   render() {
     return (
       <div className="">
-      <Header />
+      <Header>
       <h1>About TraderSquare</h1>
         <div>
         <p>When it comes to investment strategies for the everyday user, it can quickly become very cumbersome to cut
@@ -80,6 +80,7 @@ class About extends Component {
         </div>
         <br/><br/>
       </div>
+      </Header>
       </div>
     )
   }

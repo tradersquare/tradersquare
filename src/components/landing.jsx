@@ -11,26 +11,14 @@ export default class Landing extends Component {
 
   render() {
     return (
-      <div className="landing">
-      <div className=" ">
-
-          <div className="mdl-grid">
-
-            <div className="mdl-cell"></div>
-            <div className="mdl-cell">
-               <h1 className="">TraderSquare</h1>
-              <br/>
-              <br/>
-            </div>
-            <div className="mdl-cell"></div>
-
-          </div>
-
+    <div className="landing">
+      <div className="mdl-grid">
+        <h1 className="landing-title">TraderSquare</h1>
       </div>
 
-      <div className="row">
+      <div className="mdl-grid">
 
-        <div className="col-md-4">
+        <div className="mdl-cell">
           <h2 className="centerheading">SEARCH STOCKS</h2>
 
           <div className="col-md-12"><p className="col-md-12 centertext">Enter any stock ticker to see it's most common metrics and breif descriptions for each metric.</p></div>
@@ -45,7 +33,7 @@ export default class Landing extends Component {
 
         </div>
 
-        <div className="col-md-4">
+        <div className="mdl-cell">
           <h2 className="centerheading">EXPLORE BY METRIC</h2>
 
           <div className="col-md-12"><p className="col-md-12 centertext">See the best performing stocks in the S&P 500 based on your favorite metrics.</p></div>
@@ -60,7 +48,7 @@ export default class Landing extends Component {
 
         </div>
 
-        <div className="col-md-4">
+        <div className="mdl-cell">
           <h2 className="centerheading">PICK STOCKS</h2>
           <div className="col-md-12"><p className="col-md-12 centertext">Pick stocks with your own set of criteria, with data from the S&P 500.</p></div>
 
