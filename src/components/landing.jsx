@@ -10,8 +10,7 @@ import Header from './header'
 export default class Landing extends Component {
   render() {
     return (
-      <div>
-      <Header>
+      <div className="landing">
       <div className=" row landing-container">
 
           <div className="landing-input">
@@ -75,7 +74,6 @@ export default class Landing extends Component {
         </div>
 
       </div>
-      </Header>
       </div>
 
     );
