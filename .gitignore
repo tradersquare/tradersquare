@@ -39,6 +39,9 @@ jspm_packages
 #env
 .env
 
+#images
+landingpage.psd
+
 public/bundle.js
 
 db/spCompanies.js
