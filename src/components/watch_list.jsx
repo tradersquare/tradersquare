@@ -28,7 +28,7 @@ class Watchlist extends Component {
     if (this.props.auth.currently === Constants.LOGGED_IN) {
       return (
         <div className="">
-          <Header />
+          <Header >
           <div>
             <h2> My Watchlist </h2>
             <div className="col-xs-12 col-md-12 col-lg-12">
@@ -39,15 +39,16 @@ class Watchlist extends Component {
             {this.favorites}
           </div>
           {/* {this.props.stockData.name} */}
+          </Header>
         </div>
       )
    } else {
     return (
         <div>
           <center>
-          <Header/>
+          <Header>
           <h2> Please login to view this page </h2>
-
+          </Header>
           </center>
         </div>
       )

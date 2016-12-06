@@ -185,7 +185,7 @@ class StrategyView extends Component {
 
     return (
         <div className="">
-          <Header />
+          <Header>
         <div className="filterbar col-md-12">
           <div className="col-md-6 ">
           {this.setMetric}
@@ -235,6 +235,7 @@ class StrategyView extends Component {
           {cards}
           </div>
           <div>{}</div>
+          </Header>
         </div>
 
       )

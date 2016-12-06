@@ -297,7 +297,7 @@ class FilterView extends Component {
 
     return (
       <div className="">
-      <Header />
+      <Header>
       <div className="row">
         <div className="col-md-12 filter">
          <div className="row col-md-12">
@@ -336,6 +336,7 @@ class FilterView extends Component {
 
 
       </div>
+      </Header>
       </div>
     )
   }

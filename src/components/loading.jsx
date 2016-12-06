@@ -11,7 +11,7 @@ class Loading extends Component {
   render() {
     return (
       <div className="">
-        <Header />
+        <Header>
         <div className="row">
           <div className="col-md-4"></div>
           <div className="col-md-4 pushdown">
@@ -21,6 +21,7 @@ class Loading extends Component {
           </div>
           <div className="col-md-4"></div>
         </div>
+        </Header>
       </div>
     )
   }
