@@ -33,19 +33,23 @@ export const description = {
 	},
 	epsgrowth: {
 		name: "EPS Growth",
-		des: "EPSG"
+		des: "Earnings per share (EPS) is the portion of a company's profit allocated to each outstanding share of common stock. Earnings per share serves as an indicator of a company's profitability. Earnings per share is generally considered to be the single most important variable in determining a share's price. It is also a major component used to calculate the price-to-earnings valuation ratio. For example, assume that a company has a net income of $25 million. If the company pays out $1 million in preferred dividends and has 10 million shares for half of the year and 15 million shares for the other half, the EPS would be $1.92 (24/12.5). First, the $1 million is deducted from the net income to get $24 million, then a weighted average is taken to find the number of shares outstanding (0.5 x 10M+ 0.5 x 15M = 12.5M).",
+		link:"http://www.investopedia.com/terms/e/eps.asp#ixzz4PoWRW14q"
 	},
 	divpayoutratio: {
 		name: "Dividend Payout Ratio",
-		des: "DPR"
+		des: "The dividend payout ratio is the percentage of earnings paid to shareholders in dividends. The dividend payout ratio provides an indication of how much money a company is returning to shareholders, versus how much money it is keeping on hand to reinvest in growth, pay off debt or add to cash reserves. This latter portion is known as retained earnings. A number of considerations go into interpreting the dividend payout ratio, most importantly the company's level of maturity. A new, growth-oriented company that aims to expand, develop new products and move into new markets would be expected to reinvest most or all of its earnings and could be forgiven for having a low or even zero payout ratio. On the other hand, an older, established company that returns a pittance to shareholders would test investors' patience and could tempt activists to intervene. Apple (AAPL) began to pay a dividend for the first time in nearly twenty years in 2012, when the new CEO felt the company's enormous cash flow made a 0% payout ratio difficult to justify. Because it implies that a company has moved past its initial growth stage, a high payout ratio means share prices are unlikely to appreciate rapidly.",
+		link: "http://www.investopedia.com/terms/d/dividendpayoutratio.asp#ixzz4PoX8C4sm"
 	},
 	dividendyield: {
 		name: "Dividend Yield",
-		des: "DY"
+		des: 'A financial ratio that indicates how much a company pays out in dividends each year relative to its share price. Dividend yield is represented as a percentage and can be calculated by dividing the dollar value of dividends paid in a given year per share of stock held by the dollar value of one share of stock. Dividend yield is a way to measure how much cash flow you are getting for each dollar invested in an equity position. In other words, it measures how much "bang for your buck" you are getting from dividends. In the absence of any capital gains, the dividend yield is effectively the return on investment for a stock.',
+		link: "http://www.investopedia.com/terms/d/dividendyield.asp#ixzz4PoZt0Qph"
 	},
 	debttoequity: {
 		name: "Debt To Equity",
-		des: "DE"
+		des: "Debt/Equity Ratio is a debt ratio used to measure a company's financial leverage, calculated by dividing a company’s total liabilities by its stockholders' equity. The D/E ratio indicates how much debt a company is using to finance its assets relative to the amount of value represented in shareholders’ equity. This ratio can be applied to personal financial statements as well as corporate ones, in which case it is also known as the Personal Debt/Equity Ratio. Here, “equity” refers not to the value of stakeholders’ shares but rather to the difference between the total value of a corporation or individual’s assets and that corporation or individual’s liabilities. Given that the debt/equity ratio measures a company’s debt relative to the total value of its stock, it is most often used to gauge the extent to which a company is taking on debts as a means of leveraging (attempting to increase its value by using borrowed money to fund various projects). A high debt/equity ratio generally means that a company has been aggressive in financing its growth with debt. Aggressive leveraging practices are often associated with high levels of risk. This may result in volatile earnings as a result of the additional interest expense.",
+		link: "http://www.investopedia.com/terms/d/debtequityratio.asp#ixzz4PoaWb2ER" 
 	},
 	leverageratio: {
 		name: "Leverage Ratio",
