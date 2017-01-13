@@ -15,7 +15,7 @@ export default class Landing extends Component {
       <div className=" row landing-container">
 
           <div className="landing-input">
-          <h1 className="landing-header">TraderSquare</h1>
+          <h1 className="landing-header">TRADERSQUARE</h1>
           <h1 className="">picking stocks has never been easier</h1>
 
             <div className="col-md-3"></div>
