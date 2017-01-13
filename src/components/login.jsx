@@ -62,20 +62,9 @@ class LoginNav extends Component {
       case Constants.LOGGED_IN:
         return (
           <div>
-            <table>
-              <tbody>
-                <tr>
-                  <td>
-                    <Link to="/watchlist" className="nav-link">
-                      My Watchlist
-                    </Link>
-                  </td>
-                  <td>
-                    <a className="nav-link" onClick={this.logout}> &nbsp; &nbsp;Logout </a>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+            <Link to="/watchlist" className="nav-link">
+              My Watchlist
+            </Link>
           </div>
           )
       case Constants.AWAITING_AUTH_RESPONSE:
