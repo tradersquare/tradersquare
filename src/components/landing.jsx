@@ -12,45 +12,35 @@ export default class Landing extends Component {
     return (
       <div>
       {/*<Header />*/}
-      <div className=" row landing-container">
+      <div className="row landing-container">
 
           <div className="landing-input">
           <h1 className="landing-header">TRADERSQUARE</h1>
-          <h1 className="">picking stocks has never been easier</h1>
-
-            <div className="col-md-3"></div>
-            <div className="col-md-6">
-              <br/>
-              <br/>
+          <h1>picking stocks has never been easier</h1>
+            <div className="row landing-search">
+              <div className="col-md-3"></div>
+              <div className="col-md-6"><SearchBar/></div>
+              <div className="col-md-3"></div>
             </div>
-            <div className="col-md-3"></div>
-
           </div>
-
       </div>
+
 
       <div className="row">
 
         <div className="col-md-4">
-          <h2 className="centerheading">SEARCH STOCKS</h2>
+          <h2 className="centerheading"><Link to="/strategyview">EXPLORE BY METRIC</Link></h2>
           
-          <div className="row col-md-12">
-            <div className="col-md-1"></div>
-            <div className="col-md-10">
-              <SearchBar/>
-            </div>
-            <div className="col-md-1"></div>
-          </div>
 
-          <div className="col-md-12"><p className="col-md-12 centertext">Enter any stock ticker to see it's most common metrics and breif descriptions for each metric.</p></div>
+          <div className="col-md-12"><p className="col-md-12 centertext">Explore common investment metrics and see the best performing stocks in the S&P 500 based on these metrics.</p></div>
 
 
         </div>
 
         <div className="col-md-4">
-          <h2 className="centerheading"><Link to="/strategyview">EXPLORE BY METRIC</Link></h2>
+          <h2 className="centerheading"><Link to="/filterview">PICK STOCKS</Link></h2>
 
-          <div className="col-md-12"><p className="col-md-12 centertext">Explore common investment metrics and see the best performing stocks in the S&P 500 based on these metrics.</p></div>
+          <div className="col-md-12"><p className="col-md-12 centertext">Already know what you are looking for? Pick stocks from the S&P 500 with your own set of criteria.</p></div>
 
 {/*          <div className="row col-md-12">
             <div className="col-md-4"></div>
