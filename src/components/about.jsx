@@ -40,25 +40,30 @@ class About extends Component {
         <div className="row">
 
         <div className="col-md-3">
-          <div className="col-md-12"><img src="https://scontent.fsnc1-4.fna.fbcdn.net/t31.0-8/1097031_10200347522719245_1948257329_o.jpg" className="photo"/></div>
-          <h4 className="centertext col-md-12">Akul Aggarwal</h4>
+          <div className="centertext"><img src="/images/about_akul.jpg" className="photo"/></div>
+          <h4 className="centertext col-md-12 boldtext">Akul Aggarwal</h4>
+          <p className="centertext">With a background in both hardware and software; now fully focused on web-dev. </p>
+          <p className="centertext"><i>“Never, never, never give up.”</i><br/> ― Winston Churchill</p>
+          
         </div>
 
         <div className="col-md-3">
-          <div className="col-md-12"><img src="https://scontent.fsnc1-4.fna.fbcdn.net/v/t1.0-0/p206x206/12004767_10205012077282135_8226365319641742061_n.jpg?oh=bcfd2da1cd903532720e0ad0ee41a29f&oe=58AD66C8" className="photo"/></div>
-          <h4 className="centertext col-md-12">Angelina May</h4>
+          <div className="centertext"><img src="https://scontent.fsnc1-4.fna.fbcdn.net/v/t1.0-0/p206x206/12004767_10205012077282135_8226365319641742061_n.jpg?oh=bcfd2da1cd903532720e0ad0ee41a29f&oe=58AD66C8" className="photo"/></div>
+          <h4 className="centertext col-md-12 boldtext">Angelina May</h4>
+          <p className ="centertext">Not only a web-developer, but also the brains behind our algorithms and stock-strategies.</p>
 
+        </div>
+        <div className="col-md-3">
+          <div className="centertext"><img src="/images/about_cindy.jpg" className="photo" /></div>
+          <h4 className="centertext col-md-12 boldtext">Cindy Sun</h4>
+          <p className="centertext">Has years of experience in the gaming industry, now working full time as a Software Engineer.</p>
         </div>
 
         <div className="col-md-3">
-          <div className="col-md-12"><img src="https://scontent.fsnc1-4.fna.fbcdn.net/v/t1.0-9/1004403_10151689873841068_1415876196_n.jpg?oh=b8f29232f90f96e00511c953e4e9a47e&oe=586CC0BB" className="photo" /></div>
-          <h4 className="centertext col-md-12">Cindy Sun</h4>
-        </div>
-
-        <div className="col-md-3">
-          <div className="col-md-12"><img src="https://scontent.fsnc1-4.fna.fbcdn.net/t31.0-8/10623510_10204591370197577_6605496669023337623_o.jpg" className="photo"/></div>
-          <h4 className="centertext col-md-12">Chris Battenfield</h4>
-          <br/><br/>
+          <div className="centertext"><img src="/images/about_chris.jpg" className="photo"/></div>
+          <h4 className="centertext col-md-12 boldtext">Chris Battenfield</h4>
+          <p className="centertext">Brings strategic analysis from years as a professional poker player to the web-dev world.</p>
+          <br/>
 
         </div>
         <p/>
