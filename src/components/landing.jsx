@@ -12,8 +12,9 @@ export default class Landing extends Component {
     return (
       <div>
         <div className="landing-background">
-          <div className="landing-title">
-              <div className="landing-input">
+          <div className="intrinio-logo"><img src="/images/intrinio.png"/></div>
+          <div className="landing-top">
+              <div className="landing-title">
                 <h1 className="landing-header">TRADERSQUARE</h1>
                 <h1 className="landing-tagline">picking stocks has never been easier</h1>
                   <div className="row landing-search">
@@ -26,7 +27,7 @@ export default class Landing extends Component {
         </div> 
 
 
-        <div className="row ">
+        <div className="row landing-bottom">
 
           <div className="col-md-4 no-padding">
             <h2 className="centerheading"><Link to="/strategyview">VIEW BY METRIC</Link></h2>

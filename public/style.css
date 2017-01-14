@@ -93,18 +93,19 @@ select {
 /*
 * === LANDING PAGE STYLING ===
 */
-.landing-title {
-  padding-top: 10%;
+.landing-top {
+  padding-top: 7%;
   display: table;
-  width: 100%;
-  height: 100%;
+  width: 75%;
+  height: 75%;
+  margin: auto;
 }
 
 .landing-background {
   background-image: url('/images/landingpage.jpg');
 }
 
-.landing-input {
+.landing-title {
   display: table-cell;
   text-align: center;
   vertical-align: middle;
@@ -124,11 +125,18 @@ select {
 
 .landing-search {
   margin-top: 5%;
-  margin-bottom: 5%;
+  margin-bottom: 8%;
 }
 
 .landing-bottom {
-  margin-bottom: 10%;
+  margin-top: 5%;
+  width: 75%;
+  margin-left: auto;  
+  margin-right: auto; 
+}
+
+.intrinio-logo {
+  text-align: right;
 }
 
 /*
@@ -165,6 +173,7 @@ select {
   color: #1689E5;
   margin-top: 10px;
 }
+
 /*
 * === ABOUT PAGE STYLING ===
 */
@@ -183,7 +192,6 @@ select {
 /*
 * === SEARCH BAR PLACEHOLDER TEXT STYLING ===
 */
-
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
   color: #9f9f9f !important;
   opacity: 1 !important;
