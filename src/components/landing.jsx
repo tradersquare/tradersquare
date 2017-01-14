@@ -26,7 +26,7 @@ export default class Landing extends Component {
         </div> 
 
 
-        <div className="row">
+        <div className="row ">
 
           <div className="col-md-4 no-padding">
             <h2 className="centerheading"><Link to="/strategyview">VIEW BY METRIC</Link></h2>

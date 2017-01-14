@@ -240,12 +240,12 @@ class FilterView extends Component {
       console.log("FILTERS IN RENDER: ", this.state.allFilters)
       let key = obj.index;
       return (<div key={key} className="col-md-12">
-        <div  className="row filterbar col-md-12">
+        <div  className="row filter-bar col-md-12">
             <select
             ref={"strat"+key}
             value={this.state.allFilters[key].strat}
             onChange={this.onSelectChange.bind(this,event,key)}
-            className="col-md-3 filterdrop"
+            className="col-md-3 filter-drop"
           >
             <option value="">--select metric to begin--</option>
               <option value="altmanzscore">Z-Score</option>

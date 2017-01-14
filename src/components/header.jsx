@@ -14,7 +14,6 @@ export default class Header extends Component {
     return (<div className="">
       <nav className="navbar navbar-toggleable-md navbar-light  col-md-12" >
         <h1 className="heading col-md-3"><Link className="navbar-link" to="/">TRADERSQUARE</Link></h1>
-        {/*<p className="col-md-3"><span className="top-padding">powered by </span><a className="navbar-link" href="https://intrinio.com/"><img src="http://9304-presscdn-0-32.pagely.netdna-cdn.com/wp-content/uploads/2015/08/Logo.png" height="30"/></a></p>*/}
 
         <div className="col-md-6">
           <ul className="nav navbar-nav col-md-12">
@@ -38,45 +37,6 @@ export default class Header extends Component {
         </div>
       </nav>
 </div>)
-    // return (
-    //   <div className="">
-    //      <div className="row header">
-    //       <h1 className="heading col-md-5"><Link to="/">TraderSquare</Link></h1>
-    //      </div>
-    //     <ul className="nav nav-tabs">
-    //       <li role="presentation" className="active"><Link to="/">TraderSquare</Link></li>
-    //       <li role="presentation"><Link to="/filterview">Pick Stocks</Link></li>
-    //       <li role="presentation"><a href="#">Messages</a></li>
-    //     </ul>
-    //   </div>)
-
-    // return (
-    //     <div className="row header">
-    //       <h1 className="heading col-md-5"><Link to="/">TraderSquare</Link></h1>
-    //       <div className="col-md-3 top-padding">
-    //         <SearchBar/>
-    //       </div>
-    //       <div className="col-md-3 top-padding">
-    //         <table>
-    //           <tbody>
-    //             <tr>
-    //               <th>
-    //                 <StratNav/>
-    //               </th>
-    //               <th>
-    //                 <FilterNav/>
-    //               </th>
-    //             </tr>
-    //           </tbody>
-    //         </table>
-
-    //       </div>
-
-    //       <div className="col-md-1 top-padding">
-    //         <LoginNav/>
-    //       </div>
-    //     </div>
-    // )
   }
 
 }
