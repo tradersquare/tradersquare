@@ -11,9 +11,12 @@ import LoginNav from './login';
 export default class Header extends Component {
 
   render() {
-    return (<div className="">
-      <nav className="navbar navbar-toggleable-md navbar-light  col-md-12" >
-        <h1 className="heading col-md-3"><Link className="navbar-link" to="/">TRADERSQUARE</Link></h1>
+    return (
+    <div className="navbar">
+      <nav className="navbar-toggleable-md navbar-light row" >
+        <div className="col-md-3">
+          <h1 className="heading"><Link className="navbar-link" to="/">TRADERSQUARE</Link></h1>
+        </div>
 
         <div className="col-md-6">
           <ul className="nav navbar-nav col-md-12">
@@ -32,11 +35,11 @@ export default class Header extends Component {
           </ul>
         </div>
 
-        <div className="col-md-3">
+        <div className="col-md-3 align-right">
           <SearchBar />
         </div>
       </nav>
-</div>)
+    </div>)
   }
 
 }

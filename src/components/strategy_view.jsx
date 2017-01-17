@@ -186,7 +186,7 @@ class StrategyView extends Component {
     return (
         <div className="">
           <Header />
-        <div className="filter-bar col-md-12">
+        <div className="page-container filter-bar col-md-12">
           <div className="col-md-6 ">
           {this.setMetric}
             <select

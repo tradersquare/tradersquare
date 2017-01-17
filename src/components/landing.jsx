@@ -40,7 +40,7 @@ export default class Landing extends Component {
           </div>
 
           <div className="col-md-4 no-padding">
-            <h2 className="centerheading"><Link to="/filterview">ABOUT US</Link></h2>
+            <h2 className="centerheading"><Link to="/about">ABOUT US</Link></h2>
             <div className="col-md-12"><p className="col-md-12 centertext">Learn more about us and what technologies were used to create TraderSquare.</p></div>
           </div>
 
