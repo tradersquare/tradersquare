@@ -157,6 +157,10 @@ select {
   margin-right: auto; 
 }
 
+.landing-bottom p{
+  font-size: 1em !important;
+}
+
 .intrinio-logo {
   text-align: right;
 }
