@@ -46,7 +46,8 @@ Type       |  Description
 feat       | New feature for the user, not a new feature for build script
 bug-fix    | Bug fix for the user, not a fix to a build script
 docs       | Changes to the documentation
-style      | Formatting, styling, refactoring code for efficiency purposes, etc; 
+style      | Formatting, styling, fixing code indentations, etc.
+refactor   | Adjusting functions to make code more efficient/easy to read
 test       | Adding missing tests, refactoring tests; no production code change
 chore      | Updating compiler tasks etc; no production code change
 deploy     | Testing or updating deployment configuration
