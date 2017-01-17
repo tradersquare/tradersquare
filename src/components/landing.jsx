@@ -11,72 +11,40 @@ export default class Landing extends Component {
   render() {
     return (
       <div>
-      {/*<Header />*/}
-      <div className=" row landing-container">
+        <div className="landing-background">
+          <div className="intrinio-logo"><img src="/images/intrinio.png"/></div>
+          <div className="landing-top">
+              <div className="landing-title">
+                <h1 className="landing-header">TRADERSQUARE</h1>
+                <h1 className="landing-tagline">picking stocks has never been easier</h1>
+                  <div className="row landing-search">
+                    <div className="col-md-3"></div>
+                    <div className="col-md-6"><SearchBar/></div>
+                    <div className="col-md-3"></div>
+                  </div>
+              </div>
+          </div>
+        </div> 
 
-          <div className="landing-input">
-          <h1 className="landing-header">TraderSquare</h1>
-          <h1 className="">picking stocks has never been easier</h1>
 
-            <div className="col-md-3"></div>
-            <div className="col-md-6">
-              <br/>
-              <br/>
-            </div>
-            <div className="col-md-3"></div>
+        <div className="row landing-bottom">
 
+          <div className="col-md-4 no-padding">
+            <h2 className="centerheading"><Link to="/strategyview">VIEW BY METRIC</Link></h2>
+            <div className="col-md-12"><p className="col-md-12 centertext">Explore common investment metrics and view the best performing stocks in the S&P 500.</p></div>
           </div>
 
-      </div>
-
-      <div className="row">
-
-        <div className="col-md-4">
-          <h2 className="centerheading">SEARCH STOCKS</h2>
-          
-          <div className="row col-md-12">
-            <div className="col-md-1"></div>
-            <div className="col-md-10">
-              <SearchBar/>
-            </div>
-            <div className="col-md-1"></div>
+          <div className="col-md-4 no-padding">
+            <h2 className="centerheading"><Link to="/filterview">PICK STOCKS</Link></h2>
+            <div className="col-md-12"><p className="col-md-12 centertext">Know what you are looking for? Find stocks from the S&P 500 that fulfill specified criterias.</p></div>
           </div>
 
-          <div className="col-md-12"><p className="col-md-12 centertext">Enter any stock ticker to see it's most common metrics and breif descriptions for each metric.</p></div>
-
-
-        </div>
-
-        <div className="col-md-4">
-          <h2 className="centerheading"><Link to="/strategyview">EXPLORE BY METRIC</Link></h2>
-
-          <div className="col-md-12"><p className="col-md-12 centertext">Explore common investment metrics and see the best performing stocks in the S&P 500 based on these metrics.</p></div>
-
-{/*          <div className="row col-md-12">
-            <div className="col-md-4"></div>
-            <div className="col-md-4">
-              <button className="btn btn-secondary"><StratNav/></button>
-            </div>
-            <div className="col-md-4"></div>
-          </div>*/}
+          <div className="col-md-4 no-padding">
+            <h2 className="centerheading"><Link to="/about">ABOUT US</Link></h2>
+            <div className="col-md-12"><p className="col-md-12 centertext">Learn more about us and what technologies were used to create TraderSquare.</p></div>
+          </div>
 
         </div>
-
-        <div className="col-md-4">
-          <h2 className="centerheading"><Link to="/filterview">PICK STOCKS</Link></h2>
-          <div className="col-md-12"><p className="col-md-12 centertext">Already know what you are looking for? Pick stocks from the S&P 500 with your own set of criteria.</p></div>
-
-          {/*<div className="row col-md-12">
-                      <div className="col-md-4"></div>
-                      <div className="col-md-4">
-                        <button className="btn btn-secondary"><FilterNav/></button>
-                      </div>
-                      <div className="col-md-4"></div>
-                    </div>*/}
-
-        </div>
-
-      </div>
       </div>
 
     );

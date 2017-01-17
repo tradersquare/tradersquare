@@ -15,72 +15,82 @@ class About extends Component {
  */
   render() {
     return (
-      <div className="">
+    <div>
       <Header />
-      <h1>About TraderSquare</h1>
-        <div>
-        <p>When it comes to investment strategies for the everyday user, it can quickly become very cumbersome to cut
-        through the noise. Often, you need an investment advisor with years of experience, who will end up taking
-        a hefty cut of your investment. For those more financially savvy, very complicated, custom excel spread-
-        sheets become the norm to assess information based on real-time data.
-        <br/>
-        We've created a service which simplifies certain aspects of the process. TraderSquare gives the user the
-        functionality to filter stocks based on their own preferences, and order stocks based on different financial
-        criterea, all without even logging in. Currently, these two services are limited to stocks in the S&P 500, but
-        users can also find current financial data for any stock provided by the Intrinio API and store that information
-        in their TraderSquare account.
-        Disclaimer: We are not making any investment recommendations, please invest at your own risk.
-        <br/>
-        </p>
-        </div>
-      <br/>
-
-      <h1><p/>The Team</h1>
-      <br/>
-        <div className="row">
-
-        <div className="col-md-3">
-          <div className="col-md-12"><img src="https://scontent.fsnc1-4.fna.fbcdn.net/t31.0-8/1097031_10200347522719245_1948257329_o.jpg" className="photo"/></div>
-          <h4 className="centertext col-md-12">Akul Aggarwal</h4>
-        </div>
-
-        <div className="col-md-3">
-          <div className="col-md-12"><img src="https://scontent.fsnc1-4.fna.fbcdn.net/v/t1.0-0/p206x206/12004767_10205012077282135_8226365319641742061_n.jpg?oh=bcfd2da1cd903532720e0ad0ee41a29f&oe=58AD66C8" className="photo"/></div>
-          <h4 className="centertext col-md-12">Angelina May</h4>
-
-        </div>
-
-        <div className="col-md-3">
-          <div className="col-md-12"><img src="https://scontent.fsnc1-4.fna.fbcdn.net/v/t1.0-9/1004403_10151689873841068_1415876196_n.jpg?oh=b8f29232f90f96e00511c953e4e9a47e&oe=586CC0BB" className="photo" /></div>
-          <h4 className="centertext col-md-12">Cindy Sun</h4>
-        </div>
-
-        <div className="col-md-3">
-          <div className="col-md-12"><img src="https://scontent.fsnc1-4.fna.fbcdn.net/t31.0-8/10623510_10204591370197577_6605496669023337623_o.jpg" className="photo"/></div>
-          <h4 className="centertext col-md-12">Chris Battenfield</h4>
+      <div className="page-container">
+        <h1>About TraderSquare</h1>
+          <p>When it comes to investment strategies for the everyday user, it can quickly become very cumbersome to cut
+          through the noise. Often, you need an investment advisor with years of experience, who will end up taking
+          a hefty cut of your investment. For those more financially savvy, very complicated, custom excel spread-
+          sheets become the norm to assess information based on real-time data.
           <br/><br/>
+          We've created a service which simplifies certain aspects of the process. TraderSquare gives the user the
+          functionality to filter stocks based on their own preferences, and order stocks based on different financial
+          criterea, all without even logging in. Currently, these two services are limited to stocks in the S&P 500, but
+          users can also find current financial data for any stock provided by the Intrinio API and store that information
+          in their TraderSquare account.
+          <br/><br/>
+          <i>Disclaimer: We are not making any investment recommendations, please invest at your own risk.</i>
+          <br/>
+          </p>
+        <br/>
+        <h1>The Team</h1>
+        <br/>
+        <div className="row">
 
+          <div className="col-md-3">
+            <div className="centertext"><img src="/images/about_akul.jpg" className="photo"/></div>
+            <h4 className="centertext col-md-12 boldtext">Akul Aggarwal</h4>
+            <p className="centertext">With a background in both hardware and software; now fully focused on web-dev. </p>
+            <p className="centertext"><i>“Never, never, never give up.”</i><br/> ― Winston Churchill</p>   
+          </div>
+
+          <div className="col-md-3">
+            <div className="centertext"><img src="https://scontent.fsnc1-4.fna.fbcdn.net/v/t1.0-0/p206x206/12004767_10205012077282135_8226365319641742061_n.jpg?oh=bcfd2da1cd903532720e0ad0ee41a29f&oe=58AD66C8" className="photo"/></div>
+            <h4 className="centertext col-md-12 boldtext">Angelina May</h4>
+            <p className ="centertext">Not only a web-developer, but also the brains behind our algorithms and stock-strategies.</p>
+          </div>
+
+          <div className="col-md-3">
+            <div className="centertext"><img src="/images/about_cindy.jpg" className="photo" /></div>
+            <h4 className="centertext col-md-12 boldtext">Cindy Sun</h4>
+            <p className="centertext">Has years of experience in the gaming industry, now working full time as a Software Engineer.</p>
+            <p className="centertext"><i>“Do or do not. There is no try.”</i><br/> ― Master Yoda</p>   
+          </div>
+
+          <div className="col-md-3">
+            <div className="centertext"><img src="/images/about_chris.jpg" className="photo"/></div>
+            <h4 className="centertext col-md-12 boldtext">Chris Battenfield</h4>
+            <p className="centertext">Brings strategic analysis from years as a professional poker player to the web-dev world.</p>
+          </div>
         </div>
-        <p/>
+          
+        <br/>
         <h1>Technologies Implemented</h1>
-        <div className="row">
-        <img className="col-md-2" src="/images/nodejs_logo.png"/>
-        <img className="col-md-2" src="/images/express_logo.png"/>
-        <img className="react col-md-2" src="/images/react_logo.png" />
-        <img className="redux col-md-2" src="/images/redux_logo.png"/>
-        <img className="col-md-1" src="/images/d3_logo.png"/>
-        <img className="col-md-2" src="/images/postgres_logo.png"/>
+        <div className="row justify-content-center">
+          <div className="col-md-12">
+            <img className="tech-image" src="/images/nodejs_logo.png"/>
+            <img className="tech-image" src="/images/express_logo.png"/>
+            <img className="tech-image" src="/images/react_logo.png" />      
+            <img className="tech-image" src="/images/redux_logo.png"/>
+            <img className="tech-image" src="/images/postgres_logo.png"/>
+            <img className="tech-image" src="/images/webpack_logo.png"/>
+          </div>
         </div>
         <p/>
         <div className="row">
-        <div className="col-md-2"></div>
-        <img className="col-md-2" src="/images/bootstrap_logo.png"/>
-        <img className="col-md-2" src="/images/heroku_logo.jpg"/>
-        <img className="col-md-2" src="/images/webpack_logo.png"/>
+          <div className="col-md-12">
+            <center>
+              <img className="d3-image" src="/images/d3_logo.png"/>
+              <img className="tech-image" src="/images/firebase_logo.png"/>
+              <img className="tech-image" src="/images/bootstrap_logo.png"/>
+              <img className="tech-image" src="/images/heroku_logo.jpg"/>
+            </center>
+          </div> 
         </div>
         <br/><br/>
       </div>
-      </div>
+    </div>
     )
   }
 }
