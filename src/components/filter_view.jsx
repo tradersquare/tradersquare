@@ -240,7 +240,7 @@ class FilterView extends Component {
       console.log("FILTERS IN RENDER: ", this.state.allFilters)
       let key = obj.index;
       return (<div key={key} className="col-md-12">
-        <div  className="row filter-bar col-md-12">
+        <div  className="row page-line-bar col-md-12">
             <select
             ref={"strat"+key}
             value={this.state.allFilters[key].strat}
@@ -299,7 +299,7 @@ class FilterView extends Component {
       <div className="">
       <Header />
         <div className="row page-container">
-          <div className="col-md-12 filter">
+          <div className="col-md-12">
           <div className="row col-md-12">
             <div className="col-md-12">
                 <h1> Filters </h1>

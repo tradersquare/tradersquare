@@ -50,7 +50,7 @@ class About extends Component {
             <h4 className="centertext col-md-12 boldtext">Angelina May</h4>
             <p className ="centertext">Not only a web-developer, but also the brains behind our algorithms and stock-strategies.</p>
           </div>
-          
+
           <div className="col-md-3">
             <div className="centertext"><img src="/images/about_cindy.jpg" className="photo" /></div>
             <h4 className="centertext col-md-12 boldtext">Cindy Sun</h4>
@@ -67,22 +67,26 @@ class About extends Component {
           
         <br/>
         <h1>Technologies Implemented</h1>
-        <div className="row">
+        <div className="row justify-content-center">
           <div className="col-md-12">
-            <img src="/images/nodejs_logo.png"/>
-            <img src="/images/express_logo.png"/>
-            <img src="/images/react_logo.png" />
-            <img src="/images/redux_logo.png"/>
-            <img src="/images/d3_logo.png"/>
+            <img className="tech-image" src="/images/nodejs_logo.png"/>
+            <img className="tech-image" src="/images/express_logo.png"/>
+            <img className="tech-image" src="/images/react_logo.png" />      
+            <img className="tech-image" src="/images/redux_logo.png"/>
+            <img className="tech-image" src="/images/postgres_logo.png"/>
+            <img className="tech-image" src="/images/webpack_logo.png"/>
           </div>
         </div>
         <p/>
         <div className="row">
-          <div className="col-md-2"></div>
-          <img src="/images/postgres_logo.png"/>
-          <img className="col-md-2" src="/images/bootstrap_logo.png"/>
-          <img className="col-md-2" src="/images/heroku_logo.jpg"/>
-          <img className="col-md-2" src="/images/webpack_logo.png"/>
+          <div className="col-md-12">
+            <center>
+              <img className="d3-image" src="/images/d3_logo.png"/>
+              <img className="tech-image" src="/images/firebase_logo.png"/>
+              <img className="tech-image" src="/images/bootstrap_logo.png"/>
+              <img className="tech-image" src="/images/heroku_logo.jpg"/>
+            </center>
+          </div> 
         </div>
         <br/><br/>
       </div>

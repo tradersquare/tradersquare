@@ -53,6 +53,12 @@ select {
   padding: 35px 15% 0 15%;
 }
 
+.page-line-bar {
+  border-bottom: 3px solid #1689E5;
+  margin-bottom: 10px;
+  background: rgba(76, 175, 80, 0);
+}
+
 
 /*
 * === NAVBAR STYLING ===
@@ -92,6 +98,7 @@ select {
   /*font-weight: bold;*/
 }
 
+
 /*
 * === FILTER PAGE STYLING ===
 */
@@ -100,12 +107,7 @@ select {
   outline: 0px;
   background: rgba(76, 175, 80, 0)
 }
-.filter-bar {
-  border-bottom: 3px solid #0494A5;
-  margin-bottom: 10px;
-  background: rgba(76, 175, 80, 0);
 
-}
 .filter-drop {
   background: rgba(76, 175, 80, 0);
 }
@@ -207,6 +209,16 @@ select {
 
 .boldtext {
   font-weight: bold;
+}
+
+.tech-image {
+  padding: 15px 20px 0 0;
+  text-align: center;
+  width: 185px;
+}
+
+.d3-image {
+  padding: 15px 30px 0 0;
 }
 
 /*
