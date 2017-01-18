@@ -240,12 +240,12 @@ class FilterView extends Component {
       console.log("FILTERS IN RENDER: ", this.state.allFilters)
       let key = obj.index;
       return (<div key={key} className="col-md-12">
-        <div  className="row filterbar col-md-12">
+        <div  className="row page-line-bar col-md-12">
             <select
             ref={"strat"+key}
             value={this.state.allFilters[key].strat}
             onChange={this.onSelectChange.bind(this,event,key)}
-            className="col-md-3 filterdrop"
+            className="col-md-3 filter-drop"
           >
             <option value="">--select metric to begin--</option>
               <option value="altmanzscore">Z-Score</option>
@@ -298,44 +298,44 @@ class FilterView extends Component {
     return (
       <div className="">
       <Header />
-      <div className="row">
-        <div className="col-md-12 filter">
-         <div className="row col-md-12">
-           <div className="col-md-12">
-              <h1> Filters </h1>
-           </div>
-           <br/><br/>
-         </div>
-        <form onSubmit={this.onFormSubmit}>
-          {filterInputs}
-           <div className="row col-md-4">
-             <br/>
-            <button type="submit" className="btn btn-secondary col-md-4 centertext">Submit  </button>
-           </div>
-        </form>
-
-         <button className="btn btn-secondary col-md-4 col-md-offset-2 pushdown-sm" onClick={this.generateNewFilter}>Add More Filters
-         </button>
-
-        </div>
-        <div className="col-md-12 results">
-          <div className="col-md-12 pushdown-sm">
-            <h1>{resultsHeader}</h1>
+        <div className="row page-container">
+          <div className="col-md-12">
+          <div className="row col-md-12">
+            <div className="col-md-12">
+                <h1> Filters </h1>
+            </div>
+            <br/><br/>
           </div>
-        {this.state.results}
+          <form onSubmit={this.onFormSubmit}>
+            {filterInputs}
+            <div className="row col-md-4">
+              <br/>
+              <button type="submit" className="btn btn-secondary col-md-4 centertext">Submit  </button>
+            </div>
+          </form>
+
+          <button className="btn btn-secondary col-md-4 col-md-offset-2 pushdown-sm" onClick={this.generateNewFilter}>Add More Filters
+          </button>
+
+          </div>
+          <div className="col-md-12 results">
+            <div className="col-md-12 pushdown-sm">
+              <h1>{resultsHeader}</h1>
+            </div>
+          {this.state.results}
+          </div>
+
+          <Modal
+            isOpen={this.state.modalOpen}
+            onRequestClose={this.openModal}
+            style={modalStyle}
+          >
+          <h2 className="centerheading">What part of "please type in a valid number" do you not understand?</h2>
+
+          </Modal>
+
+
         </div>
-
-        <Modal
-          isOpen={this.state.modalOpen}
-          onRequestClose={this.openModal}
-          style={modalStyle}
-        >
-        <h2 className="centerheading">What part of "please type in a valid number" do you not understand?</h2>
-
-        </Modal>
-
-
-      </div>
       </div>
     )
   }

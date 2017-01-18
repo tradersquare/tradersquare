@@ -184,11 +184,12 @@ class StrategyView extends Component {
 
 
     return (
-        <div className="">
-          <Header />
-        <div className="filterbar col-md-12">
+    <div className="">
+      <Header />
+      <div className="page-container">
+        <div className="page-line-bar col-md-12">
           <div className="col-md-6 ">
-          {this.setMetric}
+            {this.setMetric}
             <select
               value={this.state.selectValue}
               onChange={this.handleChange}
@@ -217,25 +218,26 @@ class StrategyView extends Component {
             </select>
           </div>
           <div className="col-md-4"></div>
-          <div className="col-md-2">
+          <div className="col-md-2  ">
             <button className="col-md-12 btn btn-secondary filter-button pull-right textright nohover" onClick={this.changeDirection}>click to sort {this.state.sortDirection}</button>
           </div>
         </div>
-          <div className="col-md-12">
-            <h1>{metricInfo.name}</h1>
-          </div>
-          <div className="col-md-12">
-            <p>{metricInfo.des}</p>
-          </div>
-          <div className="col-md-12">
-            <p><a href={metricInfo.link} target="_blank">{InvestopediaLink}</a></p>
-          </div>
-
-          <div className="col-md-12 card-deck-wrapper">
-          {cards}
-          </div>
-          <div>{}</div>
+        <div className="col-md-12">
+          <h1>{metricInfo.name}</h1>
         </div>
+        <div className="col-md-12">
+          <p>{metricInfo.des}</p>
+        </div>
+        <div className="col-md-12">
+          <p><a href={metricInfo.link} target="_blank">{InvestopediaLink}</a></p>
+        </div>
+
+        <div className="col-md-12 card-deck-wrapper">
+        {cards}
+        </div>
+      <div>{}</div>
+      </div>
+    </div>
 
       )
     }
